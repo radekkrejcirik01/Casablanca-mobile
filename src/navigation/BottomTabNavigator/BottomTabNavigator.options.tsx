@@ -9,11 +9,9 @@ export const BottomTabNavigatorOptions: BottomTabNavigationOptions = {
     headerShown: false,
     tabBarStyle: {
         backgroundColor: COLORS.MAIN_BLUE,
-        borderTopColor: COLORS.TRANSPARENT
-    }
-};
-
-export const TabOptions: BottomTabNavigationOptions = {
+        borderTopColor: COLORS.TRANSPARENT,
+        paddingHorizontal: 15
+    },
     tabBarLabelStyle: {
         color: COLORS.WHITE,
         fontWeight: 'bold',
@@ -22,51 +20,47 @@ export const TabOptions: BottomTabNavigationOptions = {
 };
 
 export const ProfileTabOptions: BottomTabNavigationOptions = {
-    ...TabOptions,
     tabBarLabel: 'Profile',
     tabBarIcon: ({ focused }) => (
         <Icon
             name={IconEnum.PROFILE_FILLED3}
-            size={focused ? 30 : 26}
+            size={focused ? 30 : 28}
             style={!focused && BottomTabNavigatorStyle.iconOpacity}
         />
     )
 };
 
 export const MatchTabOptions: BottomTabNavigationOptions = {
-    ...TabOptions,
     tabBarLabel: 'Match',
     tabBarIcon: ({ focused }) => (
         <Icon
             name={IconEnum.FLASH_FILLED}
-            size={focused ? 30 : 26}
+            size={focused ? 30 : 28}
             style={!focused && BottomTabNavigatorStyle.iconOpacity}
         />
     )
 };
 
 export const ChatTabOptions: BottomTabNavigationOptions = {
-    ...TabOptions,
     tabBarLabel: 'Chat',
     tabBarIcon: ({ focused }) => (
         <Icon
             name={IconEnum.CHAT_FILLED}
-            size={focused ? 30 : 26}
+            size={focused ? 30 : 28}
             style={!focused && BottomTabNavigatorStyle.iconOpacity}
         />
     )
 };
 
 export const EventsTabOptions: BottomTabNavigationOptions = {
-    ...TabOptions,
-    tabBarLabel: 'Events',
+    tabBarLabel: 'Close friends',
     tabBarIcon: ({ focused }) =>
         focused ? (
-            <Icon name={IconEnum.FOOD_FILLED} size={focused ? 30 : 26} />
+            <Icon name={IconEnum.UNLOCK} size={focused ? 30 : 26} />
         ) : (
             <Icon
-                name={IconEnum.FOOD_FILLED2}
-                size={focused ? 30 : 26}
+                name={IconEnum.LOCK}
+                size={focused ? 30 : 28}
                 style={BottomTabNavigatorStyle.iconOpacity}
             />
         )
