@@ -1,2 +1,2 @@
 # Casablanca
-react-native
+React-native frontend for Casablanca
