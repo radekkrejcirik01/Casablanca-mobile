@@ -15,30 +15,39 @@ export const BottomTabNavigatorOptions: BottomTabNavigationOptions = {
 export const TabOptions: BottomTabNavigationOptions = {
     tabBarLabelStyle: {
         color: COLORS.WHITE,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginTop: 10
     }
 };
 
 export const ProfileTabOptions: BottomTabNavigationOptions = {
     ...TabOptions,
     tabBarLabel: 'Profile',
-    tabBarIcon: () => <Icon name={IconEnum.PROFILE_FILLED3} />
+    tabBarIcon: ({ focused }) => (
+        <Icon name={IconEnum.PROFILE_FILLED3} size={focused ? 30 : 26} />
+    )
 };
 
 export const MatchTabOptions: BottomTabNavigationOptions = {
     ...TabOptions,
     tabBarLabel: 'Match',
-    tabBarIcon: () => <Icon name={IconEnum.FLASH_FILLED} />
+    tabBarIcon: ({ focused }) => (
+        <Icon name={IconEnum.FLASH_FILLED} size={focused ? 30 : 26} />
+    )
 };
 
 export const ChatTabOptions: BottomTabNavigationOptions = {
     ...TabOptions,
     tabBarLabel: 'Chat',
-    tabBarIcon: () => <Icon name={IconEnum.CHAT_FILLED} />
+    tabBarIcon: ({ focused }) => (
+        <Icon name={IconEnum.CHAT_FILLED} size={focused ? 30 : 26} />
+    )
 };
 
 export const EventsTabOptions: BottomTabNavigationOptions = {
     ...TabOptions,
     tabBarLabel: 'Events',
-    tabBarIcon: () => <Icon name={IconEnum.FOOD_FILLED} />
+    tabBarIcon: ({ focused }) => (
+        <Icon name={IconEnum.FOOD_FILLED} size={focused ? 30 : 26} />
+    )
 };
