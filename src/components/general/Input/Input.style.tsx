@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import Colors from '@constants/Colors';
+import COLORS from '@constants/COLORS';
 
 export const InputStyle = StyleSheet.create({
     container: {
@@ -9,11 +9,11 @@ export const InputStyle = StyleSheet.create({
         paddingHorizontal: 15,
         borderRadius: 30,
         borderWidth: 2,
-        borderColor: Colors.WHITE
+        borderColor: COLORS.WHITE
     },
     input: {
         flex: 1,
-        color: Colors.WHITE,
+        color: COLORS.WHITE,
         fontWeight: '700',
         fontSize: 16
     }

@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
-import Colors from '@constants/Colors';
+import COLORS from '@constants/COLORS';
 
 export const NavigationStyle = StyleSheet.create({
     header: {
-        backgroundColor: Colors.MAIN_RED,
+        backgroundColor: COLORS.MAIN_RED,
         shadowOpacity: 0
     },
     headerTitle: {

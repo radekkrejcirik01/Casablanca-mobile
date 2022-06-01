@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import Colors from '@constants/Colors';
+import COLORS from '@constants/COLORS';
 
 export const ContinueStyle = StyleSheet.create({
     container: {
@@ -7,7 +7,7 @@ export const ContinueStyle = StyleSheet.create({
         marginTop: '25%'
     },
     text: {
-        color: Colors.WHITE,
+        color: COLORS.WHITE,
         fontSize: 18,
         fontWeight: 'bold',
         alignSelf: 'center'

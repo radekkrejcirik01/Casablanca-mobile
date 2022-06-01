@@ -1,12 +1,11 @@
 import React from 'react';
-import Colors from '@constants/Colors';
+import COLORS from '@constants/COLORS';
 import { Header } from '@components/general/Header/Header';
 import {
     HeaderStyleInterpolators,
     StackNavigationOptions
 } from '@react-navigation/stack';
 import { HeaderLeft } from '@components/registration/HeaderLeft/HeaderLeft';
-import { View } from 'react-native';
 import { transitionConfig } from './navigation.config';
 import { NavigationStyle } from './navigation.style';
 
@@ -14,7 +13,7 @@ export const NavigatorScreenOptions: StackNavigationOptions = {
     headerShown: true,
     headerBackTitleVisible: false,
     headerTitleAllowFontScaling: true,
-    headerTintColor: Colors.WHITE,
+    headerTintColor: COLORS.WHITE,
     headerStyle: {
         ...NavigationStyle.header
     },

@@ -1,11 +1,11 @@
 import { StyleSheet } from 'react-native';
-import Colors from '@constants/Colors';
+import COLORS from '@constants/COLORS';
 
 export const BirthdayInputStyle = StyleSheet.create({
     container: {
         width: 250,
         height: 50,
-        borderColor: Colors.WHITE,
+        borderColor: COLORS.WHITE,
         borderWidth: 2,
         borderRadius: 30,
         alignSelf: 'center',
@@ -28,7 +28,7 @@ export const BirthdayInputStyle = StyleSheet.create({
     slash: {
         fontSize: 24,
         fontWeight: '400',
-        color: Colors.WHITE,
+        color: COLORS.WHITE,
         paddingBottom: 5
     }
 });
