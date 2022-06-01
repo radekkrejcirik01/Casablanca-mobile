@@ -60,11 +60,14 @@ export const ChatTabOptions: BottomTabNavigationOptions = {
 export const EventsTabOptions: BottomTabNavigationOptions = {
     ...TabOptions,
     tabBarLabel: 'Events',
-    tabBarIcon: ({ focused }) => (
-        <Icon
-            name={IconEnum.FOOD_FILLED}
-            size={focused ? 30 : 26}
-            style={!focused && BottomTabNavigatorStyle.iconOpacity}
-        />
-    )
+    tabBarIcon: ({ focused }) =>
+        focused ? (
+            <Icon name={IconEnum.FOOD_FILLED} size={focused ? 30 : 26} />
+        ) : (
+            <Icon
+                name={IconEnum.FOOD_FILLED2}
+                size={focused ? 30 : 26}
+                style={BottomTabNavigatorStyle.iconOpacity}
+            />
+        )
 };
