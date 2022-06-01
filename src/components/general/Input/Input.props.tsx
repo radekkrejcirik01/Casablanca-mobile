@@ -1,6 +1,6 @@
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import { StyleProp, TextInputProps, TextStyle, ViewStyle } from 'react-native';
-import Colors from '@constants/Colors';
+import COLORS from '@constants/COLORS';
 
 export interface InputProps extends Omit<TextInputProps, 'onChange'> {
     placeholder?: string;
@@ -19,7 +19,7 @@ export const InputDefaultProps: Omit<InputProps, 'onChange' | 'inputType'> = {
     value: '',
     viewStyle: {},
     inputStyle: {},
-    selectionColor: Colors.WHITE,
-    placeholderTextColor: Colors.WHITE,
+    selectionColor: COLORS.WHITE,
+    placeholderTextColor: COLORS.WHITE,
     iconRight: undefined
 };

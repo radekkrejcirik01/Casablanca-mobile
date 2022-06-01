@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import Colors from '@constants/Colors';
+import COLORS from '@constants/COLORS';
 
 export const HeaderStyle = StyleSheet.create({
     container: {
@@ -14,7 +14,7 @@ export const HeaderStyle = StyleSheet.create({
     },
     text: {
         marginLeft: 5,
-        color: Colors.WHITE,
+        color: COLORS.WHITE,
         fontSize: 25,
         fontWeight: 'bold'
     }

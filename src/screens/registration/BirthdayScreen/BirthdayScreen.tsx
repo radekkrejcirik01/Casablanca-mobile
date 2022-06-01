@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
-import Colors from '@constants/Colors';
+import COLORS from '@constants/COLORS';
 import { Continue } from '@components/registration/Continue/Continue';
 import { RegisterNavigatorScreens } from '@navigation/navigation.enum';
 import { Title } from '@components/registration/Title/Title';
@@ -37,7 +37,7 @@ export const BirthdayScreen = (): JSX.Element => {
     return (
         <SafeAreaProvider>
             <LinearGradient
-                colors={[Colors.MAIN_RED, Colors.MAIN_BLUE]}
+                colors={[COLORS.MAIN_RED, COLORS.MAIN_BLUE]}
                 locations={[0.15, 0.9]}
                 style={BirthdayScreenStyle.container}
             >

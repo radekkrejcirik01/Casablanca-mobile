@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import Colors from '@constants/Colors';
+import COLORS from '@constants/COLORS';
 
 export const LoginScreenStyle = StyleSheet.create({
     container: {
@@ -13,14 +13,14 @@ export const LoginScreenStyle = StyleSheet.create({
     },
     loginText: {
         marginTop: '20%',
-        color: Colors.WHITE,
+        color: COLORS.WHITE,
         alignSelf: 'center',
         fontSize: 20,
         fontWeight: 'bold'
     },
     registerText: {
         marginTop: 100,
-        color: Colors.WHITE,
+        color: COLORS.WHITE,
         alignSelf: 'center',
         fontSize: 18,
         fontWeight: 'bold'
