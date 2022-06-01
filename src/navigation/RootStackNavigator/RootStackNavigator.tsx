@@ -12,15 +12,18 @@ import { GenderScreen } from '@screens/registration/GenderScreen/GenderScreen';
 import { WhoShowScreen } from '@screens/registration/WhoShowScreen/WhoShowScreen';
 import { ReducerProps } from '@store/index.props';
 import { PasswordScreen } from '@screens/registration/PasswordScreen/PasswordScreen';
+import { BottomTabNavigator } from '@navigation/BottomTabNavigator/BottomTabNavigator';
 import {
     LoginNavigatorScreens,
-    RegisterNavigatorScreens
+    RegisterNavigatorScreens,
+    TabBarScreens
 } from '../navigation.enum';
 import {
     ForFade,
     ForNoAnimation,
     LoginScreenOptions,
     NavigatorScreenOptions,
+    NoHeader,
     RegistrationScreenOptions
 } from '../navigation.options';
 
@@ -34,7 +37,13 @@ export const RootStackNavigator = (): JSX.Element => {
             <Root.Navigator
                 initialRouteName={LoginNavigatorScreens.LoginScreen}
             >
-                <Root.Group />
+                <Root.Group>
+                    <Root.Screen
+                        name={TabBarScreens.BottomTabBar}
+                        component={BottomTabNavigator}
+                        options={NoHeader}
+                    />
+                </Root.Group>
             </Root.Navigator>
         );
     }

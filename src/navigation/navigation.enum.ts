@@ -12,3 +12,7 @@ export enum RegisterNavigatorScreens {
     WhoShowScreen = 'WhoShowScreen',
     PasswordScreen = 'PasswordScreen'
 }
+
+export enum TabBarScreens {
+    BottomTabBar = 'BottomTabBar'
+}

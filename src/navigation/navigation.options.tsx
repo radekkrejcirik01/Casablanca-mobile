@@ -48,3 +48,7 @@ export const ForNoAnimation: StackNavigationOptions = {
 export const ForFade: StackNavigationOptions = {
     headerStyleInterpolator: HeaderStyleInterpolators.forFade
 };
+
+export const NoHeader: StackNavigationOptions = {
+    headerShown: false
+};
