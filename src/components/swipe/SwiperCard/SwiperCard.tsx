@@ -19,7 +19,7 @@ export const SwiperCard = ({ card }: SwiperCardProps): JSX.Element => {
         }
     };
 
-    const removeLike = () => {
+    const onRemoveLike = () => {
         lottieRef.current.reset(0);
     };
 
@@ -30,15 +30,17 @@ export const SwiperCard = ({ card }: SwiperCardProps): JSX.Element => {
                     source={{ uri: card.image }}
                     style={SwiperCardStyle.image}
                     resizeMode="stretch"
-                />
-                <TouchableWithoutFeedback onPress={removeLike}>
-                    <LottieView
-                        ref={lottieRef}
-                        source={require('../../../assets/animations/like.json')}
-                        autoPlay={false}
-                        loop={false}
-                    />
-                </TouchableWithoutFeedback>
+                >
+                    <TouchableWithoutFeedback onPress={onRemoveLike}>
+                        <LottieView
+                            ref={lottieRef}
+                            source={require('../../../assets/animations/like.json')}
+                            autoPlay={false}
+                            loop={false}
+                            style={SwiperCardStyle.lottieView}
+                        />
+                    </TouchableWithoutFeedback>
+                </FastImage>
             </View>
         </TapGestureHandler>
     );
