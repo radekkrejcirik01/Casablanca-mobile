@@ -1,21 +1,20 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
+import { Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import LinearGradient from 'react-native-linear-gradient';
-import { LoginScreenStyle } from '@screens/login/Login/LoginScreen.style';
-import COLORS from '@constants/COLORS';
-import { Title } from '@components/registration/Title/Title';
+import { ProfileScreenStyle } from '@screens/tab/ProfileScreen/ProfileScreen.style';
+import { ProfileImageView } from '@components/profile/ProfileImageView';
+import { PlaceTags } from '@components/registration/PlaceTags/PlaceTags';
 
 export const ProfileScreen = (): JSX.Element => (
-    <SafeAreaProvider>
-        <LinearGradient
-            colors={[COLORS.MAIN_RED, COLORS.MAIN_BLUE]}
-            locations={[0.15, 0.9]}
-            style={LoginScreenStyle.container}
-        >
-            <SafeAreaView>
-                <Title title="Profile" />
-            </SafeAreaView>
-        </LinearGradient>
+    <SafeAreaProvider style={ProfileScreenStyle.container}>
+        <ProfileImageView source="a">
+            <View style={ProfileScreenStyle.bottomContainer}>
+                <Text style={ProfileScreenStyle.firstname}>firstname</Text>
+                <Text style={ProfileScreenStyle.age}>20</Text>
+                <View style={ProfileScreenStyle.tagsView}>
+                    <PlaceTags />
+                </View>
+            </View>
+        </ProfileImageView>
     </SafeAreaProvider>
 );

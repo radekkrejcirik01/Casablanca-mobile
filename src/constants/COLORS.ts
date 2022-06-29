@@ -4,5 +4,6 @@ export default {
     WHITE: '#ffffff',
     GRAY_800: '#b3b3b3',
     LIGHTGRAY: '#a6a6a6',
-    TRANSPARENT: 'transparent'
+    TRANSPARENT: 'transparent',
+    BLACK: '#fffff'
 };

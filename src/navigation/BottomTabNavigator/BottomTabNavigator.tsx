@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomTabNavigatorEnum } from '@navigation/BottomTabNavigator/BottomTabNavigator.enum';
 import { ProfileScreen } from '@screens/tab/ProfileScreen/ProfileScreen';
-import { MatchScreen } from '@screens/tab/MatchScreen/MatchScreen';
+import { SwipeScreen } from '@screens/tab/SwipeScreen/SwipeScreen';
 import { ChatScreen } from '@screens/tab/ChatScreen/ChatScreen';
 import { EventsScreen } from '@screens/tab/EventsScreen/EventsScreen';
 import {
@@ -28,7 +28,7 @@ export const BottomTabNavigator = (): JSX.Element => {
             />
             <TabBar.Screen
                 name={BottomTabNavigatorEnum.MatchTab}
-                component={MatchScreen}
+                component={SwipeScreen}
                 options={MatchTabOptions}
             />
             <TabBar.Screen
