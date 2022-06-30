@@ -30,8 +30,8 @@ export const ProfileTabOptions: BottomTabNavigationOptions = {
     )
 };
 
-export const MatchTabOptions: BottomTabNavigationOptions = {
-    tabBarLabel: 'Match',
+export const SwipeTabOptions: BottomTabNavigationOptions = {
+    tabBarLabel: 'Swipe',
     tabBarIcon: ({ focused }) => (
         <Icon
             name={IconEnum.FLASH_FILLED}

@@ -9,8 +9,8 @@ import {
     BottomTabNavigatorOptions,
     ChatTabOptions,
     EventsTabOptions,
-    MatchTabOptions,
-    ProfileTabOptions
+    ProfileTabOptions,
+    SwipeTabOptions
 } from '@navigation/BottomTabNavigator/BottomTabNavigator.options';
 
 export const BottomTabNavigator = (): JSX.Element => {
@@ -29,7 +29,7 @@ export const BottomTabNavigator = (): JSX.Element => {
             <TabBar.Screen
                 name={BottomTabNavigatorEnum.MatchTab}
                 component={SwipeScreen}
-                options={MatchTabOptions}
+                options={SwipeTabOptions}
             />
             <TabBar.Screen
                 name={BottomTabNavigatorEnum.ChatTab}

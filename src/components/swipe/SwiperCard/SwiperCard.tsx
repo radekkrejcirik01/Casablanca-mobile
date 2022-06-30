@@ -9,10 +9,14 @@ import {
 } from '@components/swipe/SwiperCard/SwiperCard.props';
 import { SwiperCardStyle } from '@components/swipe/SwiperCard/SwiperCard.style';
 
-export const SwiperCard = ({ card }: SwiperCardProps): JSX.Element => {
+export const SwiperCard = ({
+    card,
+    cardStyle
+}: SwiperCardProps): JSX.Element => {
     const lottieRef = useRef<AnimatedLottieViewInterface>(null);
 
     const onDoubleTap = (event) => {
+        // Trigger like event
         if (event.nativeEvent.state === State.ACTIVE) {
             lottieRef.current.reset(0);
             lottieRef.current.play(2, 75);
@@ -25,10 +29,10 @@ export const SwiperCard = ({ card }: SwiperCardProps): JSX.Element => {
 
     return (
         <TapGestureHandler onHandlerStateChange={onDoubleTap} numberOfTaps={2}>
-            <View>
+            <View style={[{ backgroundColor: card.color }, cardStyle]}>
                 <FastImage
                     source={{ uri: card.image }}
-                    style={SwiperCardStyle.image}
+                    style={[SwiperCardStyle.image, cardStyle]}
                     resizeMode="stretch"
                 >
                     <TouchableWithoutFeedback onPress={onRemoveLike}>
