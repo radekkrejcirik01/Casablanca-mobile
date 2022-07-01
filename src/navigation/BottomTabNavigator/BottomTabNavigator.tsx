@@ -18,7 +18,7 @@ export const BottomTabNavigator = (): JSX.Element => {
 
     return (
         <TabBar.Navigator
-            initialRouteName={BottomTabNavigatorEnum.MatchTab}
+            initialRouteName={BottomTabNavigatorEnum.SwipeTab}
             screenOptions={BottomTabNavigatorOptions}
         >
             <TabBar.Screen
@@ -27,7 +27,7 @@ export const BottomTabNavigator = (): JSX.Element => {
                 options={ProfileTabOptions}
             />
             <TabBar.Screen
-                name={BottomTabNavigatorEnum.MatchTab}
+                name={BottomTabNavigatorEnum.SwipeTab}
                 component={SwipeScreen}
                 options={SwipeTabOptions}
             />
