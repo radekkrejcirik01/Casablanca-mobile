@@ -1,10 +1,10 @@
 import { StyleProp } from 'react-native';
-import { CardDataInterface } from '@components/swipe/Swiper/Swiper.props';
 import LottieView from 'lottie-react-native';
 import { ImageStyle } from 'react-native-fast-image';
+import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 
 export interface SwiperCardProps {
-    card: CardDataInterface;
+    card: CardDataProps;
     cardStyle?: StyleProp<ImageStyle>;
 }
 

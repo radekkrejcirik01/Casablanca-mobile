@@ -1,6 +1,10 @@
 import { StyleSheet } from 'react-native';
+import COLORS from '@constants/COLORS';
 
 export const SwiperCardStyle = StyleSheet.create({
+    view: {
+        backgroundColor: COLORS.GRAY_300
+    },
     image: {
         width: '100%',
         height: '100%',

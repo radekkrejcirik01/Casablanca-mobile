@@ -1,6 +1,10 @@
 import React, { useRef } from 'react';
 import { TouchableWithoutFeedback, View } from 'react-native';
-import { State, TapGestureHandler } from 'react-native-gesture-handler';
+import {
+    State,
+    TapGestureHandler,
+    TapGestureHandlerGestureEvent
+} from 'react-native-gesture-handler';
 import LottieView from 'lottie-react-native';
 import FastImage from 'react-native-fast-image';
 import {
@@ -15,7 +19,7 @@ export const SwiperCard = ({
 }: SwiperCardProps): JSX.Element => {
     const lottieRef = useRef<AnimatedLottieViewInterface>(null);
 
-    const onDoubleTap = (event) => {
+    const onDoubleTap = (event: TapGestureHandlerGestureEvent) => {
         // Trigger like event
         if (event.nativeEvent.state === State.ACTIVE) {
             lottieRef.current.reset(0);
@@ -29,11 +33,11 @@ export const SwiperCard = ({
 
     return (
         <TapGestureHandler onHandlerStateChange={onDoubleTap} numberOfTaps={2}>
-            <View style={[{ backgroundColor: card.color }, cardStyle]}>
+            <View style={[SwiperCardStyle.view, cardStyle]}>
                 <FastImage
                     source={{ uri: card.image }}
                     style={[SwiperCardStyle.image, cardStyle]}
-                    resizeMode="stretch"
+                    resizeMode="contain"
                 >
                     <TouchableWithoutFeedback onPress={onRemoveLike}>
                         <LottieView

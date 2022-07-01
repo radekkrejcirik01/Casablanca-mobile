@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const SwiperScreenStyle = StyleSheet.create({
     safeArea: {
-        backgroundColor: COLORS.MAIN_BLUE
+        backgroundColor: COLORS.BLACK
     },
     container: {
         flex: 1,

@@ -16,8 +16,15 @@ export const SwiperStyle = StyleSheet.create({
         width: '100%',
         height: '100%'
     },
+    borderRadius: {
+        borderRadius: 20
+    },
     borderTopRadius: {
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20
+    },
+    borderBottomRadius: {
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20
     }
 });

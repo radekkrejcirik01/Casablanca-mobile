@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { SafeAreaView, ScrollView } from 'react-native';
+import React, { useEffect, useMemo, useState } from 'react';
+import { SafeAreaView, ScrollView, StyleProp } from 'react-native';
 import ViewPager, {
     PageScrollStateChangedNativeEvent,
     ViewPagerOnPageScrollEvent,
     ViewPagerOnPageSelectedEvent
 } from '@react-native-community/viewpager';
 import * as Animatable from 'react-native-animatable';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import { SwiperCard } from '@components/swipe/SwiperCard/SwiperCard';
 import {
     CardDataProps,
@@ -14,29 +15,64 @@ import {
 import { SwiperStyle } from '@components/swipe/Swiper/Swiper.style';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { Icon } from '@components/icon/Icon';
+import { ImageStyle } from 'react-native-fast-image';
 
 export const Swiper = ({ data }: SwiperProps): JSX.Element => {
-    const [scrollOffset, setScrollOffset] = useState<number>();
+    const [scrollOffset, setScrollOffset] = useState<number>(0);
     const [scrollState, setScrollState] = useState<string>(null);
     const [scrollPage, setScrollPage] = useState<number>(0);
+    const [isScrollDown, setIsScrollDown] = useState<boolean>(false);
     const [isAnimation, setIsAnimation] = useState<boolean>(false);
+
+    const hapticOptions = useMemo(
+        (): ReactNativeHapticFeedback.HapticOptions => ({
+            enableVibrateFallback: true,
+            ignoreAndroidSystemSettings: false
+        }),
+        []
+    );
 
     useEffect(() => {
         if (
             scrollOffset < 0.95 &&
             scrollOffset > 0.9 &&
             scrollPage === 0 &&
+            !isScrollDown &&
             !isAnimation
         ) {
+            ReactNativeHapticFeedback.trigger('impactLight', hapticOptions);
             setIsAnimation(true);
         }
-    }, [scrollOffset, scrollPage, isAnimation]);
+    }, [scrollOffset, scrollPage, isScrollDown, isAnimation, hapticOptions]);
 
     useEffect(() => {
         if (scrollState === 'idle') {
             setIsAnimation(false);
         }
     }, [scrollState]);
+
+    useEffect(() => {
+        if (scrollPage === 0) {
+            setIsScrollDown(false);
+        }
+    }, [scrollPage]);
+
+    const onPageScroll = (event: ViewPagerOnPageScrollEvent) => {
+        if (event.nativeEvent.offset < 0.4 && event.nativeEvent.offset > 0.3) {
+            setIsScrollDown(true);
+        }
+        setScrollOffset(event.nativeEvent.offset);
+    };
+
+    const onPageScrollStateChanged = (
+        event: PageScrollStateChangedNativeEvent
+    ) => {
+        setScrollState(event.nativeEvent.pageScrollState);
+    };
+
+    const onPageSelected = (event: ViewPagerOnPageSelectedEvent) => {
+        setScrollPage(event.nativeEvent.position);
+    };
 
     return (
         <SafeAreaView style={SwiperStyle.container}>
@@ -49,37 +85,35 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
                 </Animatable.View>
             )}
             <ScrollView
-                style={[SwiperStyle.container, SwiperStyle.borderTopRadius]}
                 scrollEnabled={false}
                 showsVerticalScrollIndicator={false}
+                style={[SwiperStyle.container, SwiperStyle.borderRadius]}
                 contentContainerStyle={SwiperStyle.contentContainer}
             >
                 <ViewPager
                     orientation="vertical"
                     initialPage={0}
+                    onPageScroll={onPageScroll}
+                    onPageScrollStateChanged={onPageScrollStateChanged}
+                    onPageSelected={onPageSelected}
                     style={SwiperStyle.viewPager}
-                    onPageScroll={(event: ViewPagerOnPageScrollEvent) => {
-                        setScrollOffset(event.nativeEvent.offset);
-                    }}
-                    onPageScrollStateChanged={(
-                        event: PageScrollStateChangedNativeEvent
-                    ) => {
-                        setScrollState(event.nativeEvent.pageScrollState);
-                    }}
-                    onPageSelected={(event: ViewPagerOnPageSelectedEvent) => {
-                        setScrollPage(event.nativeEvent.position);
-                    }}
                 >
-                    {data.map((source: CardDataProps) => (
-                        <SwiperCard
-                            key={source.name}
-                            card={source}
-                            cardStyle={
-                                data[0]?.name === source.name &&
-                                SwiperStyle.borderTopRadius
-                            }
-                        />
-                    ))}
+                    {data.map((source: CardDataProps) => {
+                        const cardStyle: StyleProp<ImageStyle> = [];
+                        if (data[0]?.name === source.name) {
+                            cardStyle.push(SwiperStyle.borderTopRadius);
+                        }
+                        if (data[data?.length - 1]?.name === source.name) {
+                            cardStyle.push(SwiperStyle.borderBottomRadius);
+                        }
+                        return (
+                            <SwiperCard
+                                key={source.name}
+                                card={source}
+                                cardStyle={cardStyle}
+                            />
+                        );
+                    })}
                 </ViewPager>
             </ScrollView>
         </SafeAreaView>
