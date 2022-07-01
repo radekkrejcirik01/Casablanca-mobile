@@ -1,12 +1,11 @@
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import LinearGradient from 'react-native-linear-gradient';
 import { Swiper } from '@components/swipe/Swiper/Swiper';
 import { SwiperScreenStyle } from '@screens/tab/SwipeScreen/SwipeScreen.style';
 import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
-import { View } from 'react-native';
 import COLORS from '@constants/COLORS';
 import { LoginScreenStyle } from '@screens/login/Login/LoginScreen.style';
-import LinearGradient from 'react-native-linear-gradient';
 
 export const SwipeScreen = (): JSX.Element => {
     const data: Array<CardDataProps> = [

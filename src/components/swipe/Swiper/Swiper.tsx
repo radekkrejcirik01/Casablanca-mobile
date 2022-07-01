@@ -7,6 +7,7 @@ import ViewPager, {
 } from '@react-native-community/viewpager';
 import * as Animatable from 'react-native-animatable';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import { ImageStyle } from 'react-native-fast-image';
 import { SwiperCard } from '@components/swipe/SwiperCard/SwiperCard';
 import {
     CardDataProps,
@@ -15,7 +16,6 @@ import {
 import { SwiperStyle } from '@components/swipe/Swiper/Swiper.style';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { Icon } from '@components/icon/Icon';
-import { ImageStyle } from 'react-native-fast-image';
 
 export const Swiper = ({ data }: SwiperProps): JSX.Element => {
     const [scrollOffset, setScrollOffset] = useState<number>(0);
