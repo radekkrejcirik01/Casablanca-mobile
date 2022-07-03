@@ -34,14 +34,14 @@ export const usePullToRefresh = (
     );
 
     const onRefresh = useCallback(() => {
-        ReactNativeHapticFeedback.trigger('impactHeavy', hapticOptions);
+        ReactNativeHapticFeedback.trigger('impactMedium', hapticOptions);
     }, [hapticOptions]);
 
     useEffect(() => {
         if (
             touchIndex === index &&
             scrollPage === 0 &&
-            scrollOffset < 0.9 &&
+            scrollOffset < 0.87 &&
             scrollOffset > 0.85 &&
             !isScrollDown &&
             !isAnimation
