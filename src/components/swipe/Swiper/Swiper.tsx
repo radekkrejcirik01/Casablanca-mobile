@@ -1,8 +1,8 @@
-import React from 'react';
-import { SafeAreaView, ScrollView, StyleProp } from 'react-native';
+import React, { useMemo } from 'react';
+import { StyleProp, View, ViewStyle } from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
 import * as Animatable from 'react-native-animatable';
-import { ImageStyle } from 'react-native-fast-image';
+import DeviceInfo from 'react-native-device-info';
 import { SwiperCard } from '@components/swipe/SwiperCard/SwiperCard';
 import {
     CardDataProps,
@@ -14,55 +14,49 @@ import { Icon } from '@components/icon/Icon';
 import { usePullToRefresh } from '@hooks/usePullToRefresh';
 
 export const Swiper = ({ data }: SwiperProps): JSX.Element => {
+    const { name } = data[0];
+
     const {
         isAnimation,
         onPageScroll,
         onPageScrollStateChanged,
-        onPageSelected
-    } = usePullToRefresh();
+        onPageSelected,
+        onCardTouch
+    } = usePullToRefresh(name);
+
+    const animatableViewStyle = useMemo((): StyleProp<ViewStyle> => {
+        if (DeviceInfo.hasNotch) {
+            return [SwiperStyle.animatableView, SwiperStyle.animatableViewTop];
+        }
+        return SwiperStyle.animatableView;
+    }, []);
 
     return (
-        <SafeAreaView style={SwiperStyle.container}>
+        <View style={SwiperStyle.container}>
             {isAnimation && (
                 <Animatable.View
                     animation="bounceIn"
-                    style={SwiperStyle.animatableView}
+                    style={animatableViewStyle}
                 >
                     <Icon name={IconEnum.FLASH_FILLED} size={38} />
                 </Animatable.View>
             )}
-            <ScrollView
-                scrollEnabled={false}
-                showsVerticalScrollIndicator={false}
-                style={[SwiperStyle.container, SwiperStyle.borderRadius]}
-                contentContainerStyle={SwiperStyle.contentContainer}
+            <ViewPager
+                orientation="vertical"
+                initialPage={0}
+                onPageScroll={onPageScroll}
+                onPageScrollStateChanged={onPageScrollStateChanged}
+                onPageSelected={onPageSelected}
+                style={SwiperStyle.viewPager}
             >
-                <ViewPager
-                    orientation="vertical"
-                    initialPage={0}
-                    onPageScroll={onPageScroll}
-                    onPageScrollStateChanged={onPageScrollStateChanged}
-                    onPageSelected={onPageSelected}
-                    style={SwiperStyle.viewPager}
-                >
-                    {data.map((source: CardDataProps) => {
-                        const cardStyle: StyleProp<ImageStyle> = [];
-                        if (data[0]?.name === source.name) {
-                            cardStyle.push(SwiperStyle.borderTopRadius);
-                        }
-                        if (data[data?.length - 1]?.name === source.name) {
-                            cardStyle.push(SwiperStyle.borderBottomRadius);
-                        }
-                        return (
-                            <SwiperCard
-                                key={source.name}
-                                card={source}
-                                cardStyle={cardStyle}
-                            />
-                        );
-                    })}
-                </ViewPager>
-            </ScrollView>
-        </SafeAreaView>
+                {data.map((source: CardDataProps) => (
+                    <SwiperCard
+                        key={source.name}
+                        card={source}
+                        onCardTouch={onCardTouch}
+                    />
+                ))}
+            </ViewPager>
+        </View>
     );
 };

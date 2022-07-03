@@ -1,11 +1,9 @@
-import { StyleProp } from 'react-native';
 import LottieView from 'lottie-react-native';
-import { ImageStyle } from 'react-native-fast-image';
 import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 
 export interface SwiperCardProps {
     card: CardDataProps;
-    cardStyle?: StyleProp<ImageStyle>;
+    onCardTouch: (name: string) => void;
 }
 
 export interface AnimatedLottieViewInterface extends LottieView {

@@ -15,11 +15,12 @@ import { SwiperCardStyle } from '@components/swipe/SwiperCard/SwiperCard.style';
 
 export const SwiperCard = ({
     card,
-    cardStyle
+    onCardTouch
 }: SwiperCardProps): JSX.Element => {
     const lottieRef = useRef<AnimatedLottieViewInterface>(null);
 
     const onDoubleTap = (event: TapGestureHandlerGestureEvent) => {
+        onCardTouch(card.name);
         // Trigger like event
         if (event.nativeEvent.state === State.ACTIVE) {
             lottieRef.current.reset(0);
@@ -33,11 +34,11 @@ export const SwiperCard = ({
 
     return (
         <TapGestureHandler onHandlerStateChange={onDoubleTap} numberOfTaps={2}>
-            <View style={[SwiperCardStyle.view, cardStyle]}>
+            <View style={SwiperCardStyle.view}>
                 <FastImage
                     source={{ uri: card.image }}
-                    style={[SwiperCardStyle.image, cardStyle]}
-                    resizeMode="contain"
+                    style={SwiperCardStyle.image}
+                    resizeMode="cover"
                 >
                     <TouchableWithoutFeedback onPress={onRemoveLike}>
                         <LottieView

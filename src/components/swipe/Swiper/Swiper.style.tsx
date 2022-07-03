@@ -6,25 +6,13 @@ export const SwiperStyle = StyleSheet.create({
     },
     animatableView: {
         position: 'absolute',
-        top: '8%',
         alignSelf: 'center'
     },
-    contentContainer: {
-        flexGrow: 1
+    animatableViewTop: {
+        top: '6%'
     },
     viewPager: {
         width: '100%',
         height: '100%'
-    },
-    borderRadius: {
-        borderRadius: 20
-    },
-    borderTopRadius: {
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20
-    },
-    borderBottomRadius: {
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20
     }
 });

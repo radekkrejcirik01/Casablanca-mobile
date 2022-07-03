@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
     PageScrollStateChangedNativeEvent,
     ViewPagerOnPageScrollEvent,
@@ -6,19 +6,24 @@ import {
 } from '@react-native-community/viewpager';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
-export const usePullToRefresh = (): {
+export const usePullToRefresh = (
+    index: string
+): {
     isAnimation: boolean;
     onPageScroll: (event: ViewPagerOnPageScrollEvent) => void;
     onPageScrollStateChanged: (
         event: PageScrollStateChangedNativeEvent
     ) => void;
     onPageSelected: (event: ViewPagerOnPageSelectedEvent) => void;
+    onCardTouch: (name: string) => void;
 } => {
     const [scrollOffset, setScrollOffset] = useState<number>(0);
-    const [scrollState, setScrollState] = useState<string>(null);
+    const [scrollState, setScrollState] = useState<string>();
     const [scrollPage, setScrollPage] = useState<number>(0);
     const [isScrollDown, setIsScrollDown] = useState<boolean>(false);
     const [isAnimation, setIsAnimation] = useState<boolean>(false);
+
+    const [touchIndex, setTouchIndex] = useState<string>();
 
     const hapticOptions = useMemo(
         (): ReactNativeHapticFeedback.HapticOptions => ({
@@ -28,22 +33,37 @@ export const usePullToRefresh = (): {
         []
     );
 
+    const onRefresh = useCallback(() => {
+        ReactNativeHapticFeedback.trigger('impactHeavy', hapticOptions);
+    }, [hapticOptions]);
+
     useEffect(() => {
         if (
-            scrollOffset < 0.95 &&
-            scrollOffset > 0.9 &&
+            touchIndex === index &&
             scrollPage === 0 &&
+            scrollOffset < 0.9 &&
+            scrollOffset > 0.85 &&
             !isScrollDown &&
             !isAnimation
         ) {
-            ReactNativeHapticFeedback.trigger('impactLight', hapticOptions);
+            onRefresh();
             setIsAnimation(true);
+            setIsScrollDown(false);
         }
-    }, [scrollOffset, scrollPage, isScrollDown, isAnimation, hapticOptions]);
+    }, [
+        index,
+        touchIndex,
+        scrollOffset,
+        scrollPage,
+        isScrollDown,
+        isAnimation,
+        onRefresh
+    ]);
 
     useEffect(() => {
         if (scrollState === 'idle') {
             setIsAnimation(false);
+            setIsScrollDown(false);
         }
     }, [scrollState]);
 
@@ -54,10 +74,14 @@ export const usePullToRefresh = (): {
     }, [scrollPage]);
 
     const onPageScroll = (event: ViewPagerOnPageScrollEvent) => {
-        if (event.nativeEvent.offset < 0.4 && event.nativeEvent.offset > 0.3) {
+        setScrollOffset(event.nativeEvent.offset);
+
+        if (event.nativeEvent.offset > 0.9) {
+            setIsScrollDown(false);
+        }
+        if (event.nativeEvent.offset < 0.4 && event.nativeEvent.offset > 0) {
             setIsScrollDown(true);
         }
-        setScrollOffset(event.nativeEvent.offset);
     };
 
     const onPageScrollStateChanged = (
@@ -70,10 +94,15 @@ export const usePullToRefresh = (): {
         setScrollPage(event.nativeEvent.position);
     };
 
+    const onCardTouch = (name: string) => {
+        setTouchIndex(name);
+    };
+
     return {
         isAnimation,
         onPageScroll,
         onPageScrollStateChanged,
-        onPageSelected
+        onPageSelected,
+        onCardTouch
     };
 };
