@@ -7,7 +7,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import COLORS from '@constants/COLORS';
 import { Continue } from '@components/registration/Continue/Continue';
 import { RegisterNavigatorScreens } from '@navigation/navigation.enum';
-import { Title } from '@components/registration/Title/Title';
+import { Title } from '@components/general/Title/Title';
 import { BirthdayScreenStyle } from '@screens/registration/BirthdayScreen/BirthdayScreen.style';
 import { BirthdayInput } from '@components/registration/BirthdayInput/BirthdayInput';
 import { getAge } from '@functions/getAge';

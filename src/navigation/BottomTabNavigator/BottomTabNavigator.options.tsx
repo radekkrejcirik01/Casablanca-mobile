@@ -26,7 +26,7 @@ export const ProfileTabOptions: BottomTabNavigationOptions = {
 };
 
 export const SwipeTabOptions: BottomTabNavigationOptions = {
-    tabBarLabel: 'Match',
+    tabBarLabel: 'ChatList',
     tabBarIcon: ({ focused }) => (
         <Text style={{ fontSize: focused ? 25 : 20 }}>🔍</Text>
     )

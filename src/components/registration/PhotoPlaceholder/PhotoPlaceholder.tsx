@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
+import { useSelector } from 'react-redux';
 import { PhotoPlaceholderStyle } from '@components/registration/PhotoPlaceholder/PhotoPlaceholder.style';
 import { PhotoPlaceholderCard } from '@components/registration/PhotoPlaceholderCard/PhotoPlaceholderCard';
-import { useSelector } from 'react-redux';
 import { ReducerProps } from '@store/index.props';
 
 export const PhotoPlaceholder = (): JSX.Element => {

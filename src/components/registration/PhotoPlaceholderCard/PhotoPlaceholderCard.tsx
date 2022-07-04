@@ -1,5 +1,6 @@
-import React, { forwardRef, useImperativeHandle, useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
+import { useDispatch } from 'react-redux';
 import ImagePicker, { ImageOrVideo } from 'react-native-image-crop-picker';
 import FastImage from 'react-native-fast-image';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
@@ -7,7 +8,6 @@ import { PhotoPlaceholderCardStyle } from '@components/registration/PhotoPlaceho
 import { Icon } from '@components/icon/Icon';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { PhotoPlaceholderCardProps } from '@components/registration/PhotoPlaceholderCard/PhotoPlaceholderCard.props';
-import { useDispatch } from 'react-redux';
 import { addPhotoAction, removePhotoAction } from '@store/RegistrationReducer';
 
 export const PhotoPlaceholderCard = ({

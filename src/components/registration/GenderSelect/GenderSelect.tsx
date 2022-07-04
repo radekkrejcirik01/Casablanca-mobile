@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import CheckBox from '@react-native-community/checkbox';
 import { GenderSelectStyle } from '@components/registration/GenderSelect/GenderSelect.style';
 import COLORS from '@constants/COLORS';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
 import { GenderSelectEnum } from '@components/registration/GenderSelect/GenderSelect.enum';
-import { useDispatch, useSelector } from 'react-redux';
 import { ReducerProps } from '@store/index.props';
 import { setGenderAction } from '@store/RegistrationReducer';
 

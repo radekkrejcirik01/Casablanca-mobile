@@ -11,7 +11,7 @@ import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import { Input } from '@components/general/Input/Input';
 import { Continue } from '@components/registration/Continue/Continue';
 import { RegisterNavigatorScreens } from '@navigation/navigation.enum';
-import { Title } from '@components/registration/Title/Title';
+import { Title } from '@components/general/Title/Title';
 import { setPasswordAction } from '@store/RegistrationReducer';
 import { ReducerProps } from '@store/index.props';
 import { PasswordScreenStyle } from '@screens/registration/PasswordScreen/PasswordScreen.style';

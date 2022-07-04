@@ -6,7 +6,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import COLORS from '@constants/COLORS';
 import { Continue } from '@components/registration/Continue/Continue';
 import { RegisterNavigatorScreens } from '@navigation/navigation.enum';
-import { Title } from '@components/registration/Title/Title';
+import { Title } from '@components/general/Title/Title';
 import { PlaceTags } from '@components/registration/PlaceTags/PlaceTags';
 import { TagsScreenStyle } from '@screens/registration/TagsScreen/TagsScreen.style';
 

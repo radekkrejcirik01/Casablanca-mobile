@@ -5,7 +5,7 @@ import COLORS from '@constants/COLORS';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import { Continue } from '@components/registration/Continue/Continue';
-import { Title } from '@components/registration/Title/Title';
+import { Title } from '@components/general/Title/Title';
 import { PhotosScreenStyle } from '@screens/registration/PhotosScreen/PhotosScreen.style';
 import { PhotoPlaceholder } from '@components/registration/PhotoPlaceholder/PhotoPlaceholder';
 import { RegisterNavigatorScreens } from '@navigation/navigation.enum';

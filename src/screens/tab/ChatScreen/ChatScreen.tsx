@@ -1,21 +1,45 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import LinearGradient from 'react-native-linear-gradient';
-import { LoginScreenStyle } from '@screens/login/Login/LoginScreen.style';
-import COLORS from '@constants/COLORS';
-import { Title } from '@components/registration/Title/Title';
+import { SafeAreaView, Text, View } from 'react-native';
+import { Title } from '@components/general/Title/Title';
+import { MatchList } from '@components/chat/MatchList/MatchList';
+import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
+import { ChatScreenStyle } from '@screens/tab/ChatScreen/ChatScreen.style';
+import { ChatList } from '@components/chat/ChatList/ChatList';
 
-export const ChatScreen = (): JSX.Element => (
-    <SafeAreaProvider>
-        <LinearGradient
-            colors={[COLORS.MAIN_RED, COLORS.MAIN_BLUE]}
-            locations={[0.15, 0.9]}
-            style={LoginScreenStyle.container}
-        >
-            <SafeAreaView>
-                <Title title="Chat" />
-            </SafeAreaView>
-        </LinearGradient>
-    </SafeAreaProvider>
-);
+export const ChatScreen = (): JSX.Element => {
+    const data: Array<CardDataProps> = [
+        {
+            image: 'https://static.onecms.io/wp-content/uploads/sites/6/2019/07/st3-production-still-4-2000.jpg',
+            name: 'Zuzana',
+            age: '34',
+            tags: ['Theatre', 'Cafe'],
+            color: 'blue'
+        },
+        {
+            image: 'https://variety.com/wp-content/uploads/2020/05/fyseetv_st_mayahawke_yt_thumbnail.jpg',
+            name: 'Ade',
+            age: '34',
+            tags: ['Theatre', 'Cafe'],
+            color: 'green'
+        },
+        {
+            image: 'https://static.onecms.io/wp-content/uploads/sites/6/2019/07/st3-production-still-4-2000.jpg',
+            name: 'Radek',
+            age: '34',
+            tags: ['Theatre', 'Cafe'],
+            color: 'blue'
+        }
+    ];
+    return (
+        <SafeAreaView>
+            <Title title="Chat" style={ChatScreenStyle.title} />
+            <View style={ChatScreenStyle.view}>
+                <MatchList data={data} />
+            </View>
+            <Text style={ChatScreenStyle.text}>Messages</Text>
+            <View style={ChatScreenStyle.view}>
+                <ChatList data={data} />
+            </View>
+        </SafeAreaView>
+    );
+};

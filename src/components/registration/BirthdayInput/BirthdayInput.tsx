@@ -1,10 +1,10 @@
 import React, { createRef } from 'react';
 import { Text, TextInput, View } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { Input } from '@components/general/Input/Input';
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import { BirthdayInputStyle } from '@components/registration/BirthdayInput/BirthdayInput.style';
 import { BirthdayInputProps } from '@components/registration/BirthdayInput/BirthdayInput.props';
-import { useDispatch } from 'react-redux';
 import {
     setBirthdayDayAction,
     setBirthdayMonthAction,

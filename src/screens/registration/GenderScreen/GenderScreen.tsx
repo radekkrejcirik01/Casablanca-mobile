@@ -7,7 +7,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import COLORS from '@constants/COLORS';
 import { Continue } from '@components/registration/Continue/Continue';
 import { RegisterNavigatorScreens } from '@navigation/navigation.enum';
-import { Title } from '@components/registration/Title/Title';
+import { Title } from '@components/general/Title/Title';
 import { GenderScreenStyle } from '@screens/registration/GenderScreen/GenderScreen.style';
 import { GenderSelect } from '@components/registration/GenderSelect/GenderSelect';
 import { ReducerProps } from '@store/index.props';

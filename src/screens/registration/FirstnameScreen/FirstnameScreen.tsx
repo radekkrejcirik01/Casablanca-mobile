@@ -12,7 +12,7 @@ import { Input } from '@components/general/Input/Input';
 import { FirstnameScreenStyle } from '@screens/registration/FirstnameScreen/FirstnameScreen.style';
 import { Continue } from '@components/registration/Continue/Continue';
 import { RegisterNavigatorScreens } from '@navigation/navigation.enum';
-import { Title } from '@components/registration/Title/Title';
+import { Title } from '@components/general/Title/Title';
 import { setFirstnameAction } from '@store/RegistrationReducer';
 import { ReducerProps } from '@store/index.props';
 

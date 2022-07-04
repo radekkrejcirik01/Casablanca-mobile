@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { PLACE_TAGS } from '@components/registration/PlaceTags/PlaceTags.const';
 import { PlaceTag } from '@components/general/PlaceTag/PlaceTag';
 import { PlaceTagsStyle } from '@components/registration/PlaceTags/PlaceTags.style';
-import { useDispatch, useSelector } from 'react-redux';
 import { ReducerProps } from '@store/index.props';
 import { addTagAction, removeTagAction } from '@store/RegistrationReducer';
 

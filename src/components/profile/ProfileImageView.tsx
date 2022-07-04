@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Animated, Dimensions, View } from 'react-native';
-import { ProfileImageViewProps } from '@components/profile/ProfileImageView.props';
 import FastImage from 'react-native-fast-image';
+import { ProfileImageViewProps } from '@components/profile/ProfileImageView.props';
 import { ProfileImageViewStyle } from '@components/profile/ProfileImageView.style';
 
 export const ProfileImageView = ({

@@ -4,7 +4,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import { LoginScreenStyle } from '@screens/login/Login/LoginScreen.style';
 import COLORS from '@constants/COLORS';
-import { Title } from '@components/registration/Title/Title';
+import { Title } from '@components/general/Title/Title';
 
 export const EventsScreen = (): JSX.Element => (
     <SafeAreaProvider>
