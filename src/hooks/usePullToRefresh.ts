@@ -41,8 +41,8 @@ export const usePullToRefresh = (
         if (
             touchIndex === index &&
             scrollPage === 0 &&
-            scrollOffset < 0.87 &&
-            scrollOffset > 0.85 &&
+            scrollOffset < 0.95 &&
+            scrollOffset > 0.3 &&
             !isScrollDown &&
             !isAnimation
         ) {
@@ -70,13 +70,14 @@ export const usePullToRefresh = (
     useEffect(() => {
         if (scrollPage === 0) {
             setIsScrollDown(false);
+            setIsScrollDown(false);
         }
     }, [scrollPage]);
 
     const onPageScroll = (event: ViewPagerOnPageScrollEvent) => {
         setScrollOffset(event.nativeEvent.offset);
 
-        if (event.nativeEvent.offset > 0.9) {
+        if (event.nativeEvent.offset > 0.95) {
             setIsScrollDown(false);
         }
         if (event.nativeEvent.offset < 0.4 && event.nativeEvent.offset > 0) {

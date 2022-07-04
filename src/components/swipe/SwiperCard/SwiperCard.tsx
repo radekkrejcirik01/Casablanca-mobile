@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { TouchableWithoutFeedback, View } from 'react-native';
+import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import {
     State,
     TapGestureHandler,
@@ -12,6 +12,8 @@ import {
     SwiperCardProps
 } from '@components/swipe/SwiperCard/SwiperCard.props';
 import { SwiperCardStyle } from '@components/swipe/SwiperCard/SwiperCard.style';
+import { PLACE_TAGS } from '@components/registration/PlaceTags/PlaceTags.const';
+import { PLACE_EMOJIS } from '@components/general/PlaceTag/PlaceTag.const';
 
 export const SwiperCard = ({
     card,
@@ -34,7 +36,7 @@ export const SwiperCard = ({
 
     return (
         <TapGestureHandler onHandlerStateChange={onDoubleTap} numberOfTaps={2}>
-            <View style={SwiperCardStyle.view}>
+            <View style={SwiperCardStyle.container}>
                 <FastImage
                     source={{ uri: card.image }}
                     style={SwiperCardStyle.image}
@@ -49,6 +51,40 @@ export const SwiperCard = ({
                             style={SwiperCardStyle.lottieView}
                         />
                     </TouchableWithoutFeedback>
+                    <View style={SwiperCardStyle.tagView}>
+                        <View style={SwiperCardStyle.tagInfoView}>
+                            <Text
+                                style={[
+                                    SwiperCardStyle.tagText,
+                                    { fontSize: 14 }
+                                ]}
+                            >
+                                {card.name}, {card.age}
+                            </Text>
+                        </View>
+                        {PLACE_TAGS.map((value) => (
+                            <View
+                                key={value}
+                                style={SwiperCardStyle.tagInfoView}
+                            >
+                                <Text
+                                    style={{
+                                        paddingRight: 3,
+                                        fontSize: 12
+                                    }}
+                                >
+                                    {
+                                        PLACE_EMOJIS[
+                                            value as keyof typeof PLACE_EMOJIS
+                                        ]
+                                    }
+                                </Text>
+                                <Text style={SwiperCardStyle.tagText}>
+                                    {value}
+                                </Text>
+                            </View>
+                        ))}
+                    </View>
                 </FastImage>
             </View>
         </TapGestureHandler>

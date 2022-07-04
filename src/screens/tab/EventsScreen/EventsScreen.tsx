@@ -14,7 +14,7 @@ export const EventsScreen = (): JSX.Element => (
             style={LoginScreenStyle.container}
         >
             <SafeAreaView>
-                <Title title="Events" />
+                <Title title="Close friends" />
             </SafeAreaView>
         </LinearGradient>
     </SafeAreaProvider>

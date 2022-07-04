@@ -6,10 +6,8 @@ export const SwiperStyle = StyleSheet.create({
     },
     animatableView: {
         position: 'absolute',
-        alignSelf: 'center'
-    },
-    animatableViewTop: {
-        top: '6%'
+        alignSelf: 'center',
+        paddingTop: 10
     },
     viewPager: {
         width: '100%',

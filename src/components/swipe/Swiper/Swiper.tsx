@@ -1,8 +1,7 @@
-import React, { useMemo } from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
+import React from 'react';
+import { SafeAreaView } from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
 import * as Animatable from 'react-native-animatable';
-import DeviceInfo from 'react-native-device-info';
 import { SwiperCard } from '@components/swipe/SwiperCard/SwiperCard';
 import {
     CardDataProps,
@@ -24,19 +23,12 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
         onCardTouch
     } = usePullToRefresh(name);
 
-    const animatableViewStyle = useMemo((): StyleProp<ViewStyle> => {
-        if (DeviceInfo.hasNotch) {
-            return [SwiperStyle.animatableView, SwiperStyle.animatableViewTop];
-        }
-        return SwiperStyle.animatableView;
-    }, []);
-
     return (
-        <View style={SwiperStyle.container}>
+        <SafeAreaView style={SwiperStyle.container}>
             {isAnimation && (
                 <Animatable.View
                     animation="bounceIn"
-                    style={animatableViewStyle}
+                    style={SwiperStyle.animatableView}
                 >
                     <Icon name={IconEnum.FLASH_FILLED} size={38} />
                 </Animatable.View>
@@ -57,6 +49,6 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
                     />
                 ))}
             </ViewPager>
-        </View>
+        </SafeAreaView>
     );
 };
