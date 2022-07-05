@@ -8,7 +8,7 @@ export const MatchItemStyle = StyleSheet.create({
     },
     image: {
         borderRadius: 50,
-        padding: 45
+        padding: 35
     },
     text: {
         fontSize: 12,

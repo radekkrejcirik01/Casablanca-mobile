@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export const ChatListStyle = StyleSheet.create({
-    flatList: {}
+    flatList: {
+        height: '100%'
+    }
 });

@@ -11,14 +11,20 @@ export const ChatItem = ({ item, onPress }: ChatItemProps): JSX.Element => {
     };
     return (
         <TouchableOpacity onPress={onPressItem} style={ChatItemStyle.container}>
-            <View style={ChatItemStyle.view}>
-                <FastImage
-                    source={{ uri: item.image }}
-                    style={ChatItemStyle.image}
-                />
-                <Text style={ChatItemStyle.text}>
-                    {`${item.name}, ${item.age}`}
-                </Text>
+            <View style={ChatItemStyle.row}>
+                <View>
+                    <FastImage
+                        source={{ uri: item.image }}
+                        style={ChatItemStyle.image}
+                    />
+                </View>
+                <View style={ChatItemStyle.box}>
+                    <View style={ChatItemStyle.firstRow}>
+                        <Text style={ChatItemStyle.name}>{item.name}</Text>
+                        <Text style={ChatItemStyle.name}>Monday</Text>
+                    </View>
+                    <Text style={ChatItemStyle.message}>message</Text>
+                </View>
             </View>
         </TouchableOpacity>
     );

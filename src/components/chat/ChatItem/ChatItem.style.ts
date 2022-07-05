@@ -4,21 +4,36 @@ import COLORS from '@constants/COLORS';
 export const ChatItemStyle = StyleSheet.create({
     container: {
         alignItems: 'flex-start',
-        marginLeft: 15,
-        paddingVertical: 5
+        marginBottom: 15
     },
-    view: {
-        alignItems: 'center'
+    row: {
+        flexDirection: 'row'
     },
     image: {
         borderRadius: 50,
-        height: 75,
-        width: 75
+        height: 55,
+        width: 55
     },
-    text: {
-        fontSize: 12,
+    box: {
+        flex: 1,
+        borderBottomWidth: 0.3,
+        borderBottomColor: COLORS.LIGHTGRAY_100,
+        paddingBottom: 25,
+        paddingHorizontal: 10
+    },
+    firstRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    name: {
+        fontSize: 14,
         color: COLORS.WHITE,
         fontWeight: 'bold',
-        paddingTop: 5
+        paddingBottom: 5
+    },
+    message: {
+        fontSize: 12,
+        color: COLORS.WHITE,
+        fontWeight: '600'
     }
 });

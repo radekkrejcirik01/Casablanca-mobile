@@ -31,13 +31,13 @@ export const ChatScreen = (): JSX.Element => {
         }
     ];
     return (
-        <SafeAreaView>
+        <SafeAreaView style={ChatScreenStyle.container}>
             <Title title="Chat" style={ChatScreenStyle.title} />
-            <View style={ChatScreenStyle.view}>
+            <View style={ChatScreenStyle.matchView}>
                 <MatchList data={data} />
             </View>
             <Text style={ChatScreenStyle.text}>Messages</Text>
-            <View style={ChatScreenStyle.view}>
+            <View style={ChatScreenStyle.chatView}>
                 <ChatList data={data} />
             </View>
         </SafeAreaView>
