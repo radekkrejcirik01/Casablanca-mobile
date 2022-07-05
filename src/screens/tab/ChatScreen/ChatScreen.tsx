@@ -1,10 +1,10 @@
 import React from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
-import { Title } from '@components/general/Title/Title';
+import { SafeAreaView } from 'react-native';
 import { MatchList } from '@components/chat/MatchList/MatchList';
 import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 import { ChatScreenStyle } from '@screens/tab/ChatScreen/ChatScreen.style';
 import { ChatList } from '@components/chat/ChatList/ChatList';
+import { ChatHeader } from '@components/chat/ChatHeader/ChatHeader';
 
 export const ChatScreen = (): JSX.Element => {
     const data: Array<CardDataProps> = [
@@ -30,16 +30,12 @@ export const ChatScreen = (): JSX.Element => {
             color: 'blue'
         }
     ];
+
     return (
         <SafeAreaView style={ChatScreenStyle.container}>
-            <Title title="Chat" style={ChatScreenStyle.title} />
-            <View style={ChatScreenStyle.matchView}>
-                <MatchList data={data} />
-            </View>
-            <Text style={ChatScreenStyle.text}>Messages</Text>
-            <View style={ChatScreenStyle.chatView}>
-                <ChatList data={data} />
-            </View>
+            <ChatHeader />
+            <MatchList data={data} />
+            <ChatList data={data} />
         </SafeAreaView>
     );
 };

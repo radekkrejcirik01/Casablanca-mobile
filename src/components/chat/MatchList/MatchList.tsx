@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, ListRenderItemInfo } from 'react-native';
 import { MatchListProps } from '@components/chat/MatchList/MatchList.props';
 import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 import { MatchListStyle } from '@components/chat/MatchList/MatchList.style';
@@ -12,7 +12,7 @@ export const MatchList = ({ data }: MatchListProps): JSX.Element => {
     return (
         <FlatList
             data={data}
-            renderItem={(item) => (
+            renderItem={(item: ListRenderItemInfo<CardDataProps>) => (
                 <MatchItem
                     key={item.item.name}
                     item={item.item}

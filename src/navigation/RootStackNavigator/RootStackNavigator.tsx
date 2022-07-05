@@ -1,8 +1,8 @@
 import React from 'react';
 import { ParamListBase } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
-import { FirstnameScreen } from '@screens/registration/FirstnameScreen/FirstnameScreen';
 import { createStackNavigator } from '@react-navigation/stack';
+import { FirstnameScreen } from '@screens/registration/FirstnameScreen/FirstnameScreen';
 import { EmailScreen } from '@screens/registration/EmailScreen/EmailScreen';
 import { LoginScreen } from '@screens/login/Login/LoginScreen';
 import { BirthdayScreen } from '@screens/registration/BirthdayScreen/BirthdayScreen';
@@ -13,6 +13,8 @@ import { WhoShowScreen } from '@screens/registration/WhoShowScreen/WhoShowScreen
 import { ReducerProps } from '@store/index.props';
 import { PasswordScreen } from '@screens/registration/PasswordScreen/PasswordScreen';
 import { BottomTabNavigator } from '@navigation/BottomTabNavigator/BottomTabNavigator';
+import { NotificationScreen } from '@screens/general/NotificationScreen/NotificationScreen';
+import { ConversationScreen } from '@screens/general/ConversationScreen/ConversationScreen';
 import {
     LoginNavigatorScreens,
     RegisterNavigatorScreens,
@@ -42,6 +44,14 @@ export const RootStackNavigator = (): JSX.Element => {
                         name={TabBarScreens.BottomTabBar}
                         component={BottomTabNavigator}
                         options={NoHeader}
+                    />
+                    <Root.Screen
+                        name={TabBarScreens.NavigationScreen}
+                        component={NotificationScreen}
+                    />
+                    <Root.Screen
+                        name={TabBarScreens.ConversationScreen}
+                        component={ConversationScreen}
                     />
                 </Root.Group>
             </Root.Navigator>

@@ -7,13 +7,13 @@ export const MatchItemStyle = StyleSheet.create({
         alignItems: 'center'
     },
     image: {
-        borderRadius: 50,
-        padding: 35
+        padding: 35,
+        borderRadius: 50
     },
     text: {
+        paddingTop: 5,
         fontSize: 12,
         color: COLORS.WHITE,
-        fontWeight: 'bold',
-        paddingTop: 5
+        fontWeight: 'bold'
     }
 });
