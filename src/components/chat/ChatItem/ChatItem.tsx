@@ -20,8 +20,12 @@ export const ChatItem = ({ item, onPress }: ChatItemProps): JSX.Element => {
                 </View>
                 <View style={ChatItemStyle.box}>
                     <View style={ChatItemStyle.firstRow}>
-                        <Text style={ChatItemStyle.name}>{item.name}</Text>
-                        <Text style={ChatItemStyle.name}>Monday</Text>
+                        <Text style={ChatItemStyle.text}>{item.name}</Text>
+                        <Text
+                            style={[ChatItemStyle.text, ChatItemStyle.opacity]}
+                        >
+                            Monday
+                        </Text>
                     </View>
                     <Text style={ChatItemStyle.message}>message</Text>
                 </View>

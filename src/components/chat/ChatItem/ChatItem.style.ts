@@ -25,11 +25,14 @@ export const ChatItemStyle = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
-    name: {
+    text: {
         fontSize: 14,
         color: COLORS.WHITE,
         fontWeight: 'bold',
         paddingBottom: 5
+    },
+    opacity: {
+        opacity: 0.75
     },
     message: {
         fontSize: 12,
