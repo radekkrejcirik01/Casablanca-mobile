@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const ChatHeaderStyle = StyleSheet.create({
+export const MessagesHeaderStyle = StyleSheet.create({
     container: {
         marginTop: 15,
         paddingRight: 20,

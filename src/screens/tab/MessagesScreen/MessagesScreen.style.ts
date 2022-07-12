@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const ChatScreenStyle = StyleSheet.create({
+export const MessagesScreenStyle = StyleSheet.create({
     container: {
         marginLeft: 15
     }

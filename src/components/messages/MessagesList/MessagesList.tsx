@@ -1,21 +1,21 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
     FlatList,
     ListRenderItemInfo,
     RefreshControl,
     Text
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
-import { ChatItem } from '@components/chat/ChatItem/ChatItem';
-import { ChatListStyle } from '@components/chat/ChatList/ChatList.style';
+import { MessagesItem } from '@components/messages/MessagesItem/MessagesItem';
+import { MessagesListStyle } from '@components/messages/MessagesList/MessagesList.style';
 import { TabBarScreens } from '@navigation/navigation.enum';
-import { ChatListProps } from '@components/chat/ChatList/ChatList.props';
+import { MessagesListProps } from '@components/messages/MessagesList/MessagesList.props';
+import { useNavigation } from '@hooks/useNavigation';
 
-export const ChatList = ({ data }: ChatListProps): JSX.Element => {
-    const [refreshing, setRefreshing] = React.useState(false);
+export const MessagesList = ({ data }: MessagesListProps): JSX.Element => {
+    const [refreshing, setRefreshing] = useState(false);
 
-    const navigation = useNavigation();
+    const { navigateTo } = useNavigation();
 
     const onRefresh = useCallback(() => {
         setRefreshing(true);
@@ -25,16 +25,16 @@ export const ChatList = ({ data }: ChatListProps): JSX.Element => {
     }, []);
 
     const onPress = (item: CardDataProps) => {
-        navigation.navigate(TabBarScreens.ConversationScreen);
+        navigateTo(TabBarScreens.ChatScreen);
     };
 
     return (
         <>
-            <Text style={ChatListStyle.title}>Messages</Text>
+            <Text style={MessagesListStyle.title}>Messages</Text>
             <FlatList
                 data={data}
                 renderItem={(item: ListRenderItemInfo<CardDataProps>) => (
-                    <ChatItem
+                    <MessagesItem
                         key={item.item.name}
                         item={item.item}
                         onPress={onPress}
@@ -48,8 +48,8 @@ export const ChatList = ({ data }: ChatListProps): JSX.Element => {
                     />
                 }
                 showsVerticalScrollIndicator={false}
-                style={ChatListStyle.flatList}
-                contentContainerStyle={ChatListStyle.container}
+                style={MessagesListStyle.flatList}
+                contentContainerStyle={MessagesListStyle.container}
             />
         </>
     );

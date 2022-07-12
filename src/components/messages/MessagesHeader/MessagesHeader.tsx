@@ -1,23 +1,23 @@
 import React from 'react';
 import { View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { Title } from '@components/general/Title/Title';
 import { Icon } from '@components/icon/Icon';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
 import { TabBarScreens } from '@navigation/navigation.enum';
-import { ChatHeaderStyle } from '@components/chat/ChatHeader/ChatHeader.style';
+import { MessagesHeaderStyle } from '@components/messages/MessagesHeader/MessagesHeader.style';
+import { useNavigation } from '@hooks/useNavigation';
 
-export const ChatHeader = (): JSX.Element => {
-    const navigation = useNavigation();
+export const MessagesHeader = (): JSX.Element => {
+    const { navigateTo } = useNavigation();
 
     const openNotificationScreen = () => {
-        navigation.navigate(TabBarScreens.NavigationScreen);
+        navigateTo(TabBarScreens.NavigationScreen);
     };
 
     return (
-        <View style={ChatHeaderStyle.container}>
-            <Title title="Chat" style={ChatHeaderStyle.title} />
+        <View style={MessagesHeaderStyle.container}>
+            <Title title="Chat" style={MessagesHeaderStyle.title} />
             <TouchableOpacity onPress={openNotificationScreen}>
                 <Icon name={IconEnum.BELL} size={24} />
             </TouchableOpacity>

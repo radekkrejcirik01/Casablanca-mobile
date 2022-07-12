@@ -3,11 +3,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomTabNavigatorEnum } from '@navigation/BottomTabNavigator/BottomTabNavigator.enum';
 import { ProfileScreen } from '@screens/tab/ProfileScreen/ProfileScreen';
 import { SwipeScreen } from '@screens/tab/SwipeScreen/SwipeScreen';
-import { ChatScreen } from '@screens/tab/ChatScreen/ChatScreen';
+import { MessagesScreen } from '@screens/tab/MessagesScreen/MessagesScreen';
 import { EventsScreen } from '@screens/tab/EventsScreen/EventsScreen';
 import {
     BottomTabNavigatorOptions,
-    ChatTabOptions,
+    MessagesTabOptions,
     EventsTabOptions,
     ProfileTabOptions,
     SwipeTabOptions
@@ -32,9 +32,9 @@ export const BottomTabNavigator = (): JSX.Element => {
                 options={SwipeTabOptions}
             />
             <TabBar.Screen
-                name={BottomTabNavigatorEnum.ChatTab}
-                component={ChatScreen}
-                options={ChatTabOptions}
+                name={BottomTabNavigatorEnum.MessagesTab}
+                component={MessagesScreen}
+                options={MessagesTabOptions}
             />
             <TabBar.Screen
                 name={BottomTabNavigatorEnum.EventsTab}

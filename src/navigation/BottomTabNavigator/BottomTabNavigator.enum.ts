@@ -1,6 +1,6 @@
 export enum BottomTabNavigatorEnum {
     ProfileTab = 'ProfileTab',
     SwipeTab = 'SwipeTab',
-    ChatTab = 'ChatTab',
+    MessagesTab = 'MessagesTab',
     EventsTab = 'EventsTab'
 }

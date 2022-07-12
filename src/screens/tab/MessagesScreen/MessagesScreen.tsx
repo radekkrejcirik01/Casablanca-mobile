@@ -1,12 +1,12 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
-import { MatchList } from '@components/chat/MatchList/MatchList';
+import { MatchList } from '@components/messages/MatchList/MatchList';
 import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
-import { ChatScreenStyle } from '@screens/tab/ChatScreen/ChatScreen.style';
-import { ChatList } from '@components/chat/ChatList/ChatList';
-import { ChatHeader } from '@components/chat/ChatHeader/ChatHeader';
+import { MessagesScreenStyle } from '@screens/tab/MessagesScreen/MessagesScreen.style';
+import { MessagesList } from '@components/messages/MessagesList/MessagesList';
+import { MessagesHeader } from '@components/messages/MessagesHeader/MessagesHeader';
 
-export const ChatScreen = (): JSX.Element => {
+export const MessagesScreen = (): JSX.Element => {
     const data: Array<CardDataProps> = [
         {
             image: 'https://static.onecms.io/wp-content/uploads/sites/6/2019/07/st3-production-still-4-2000.jpg',
@@ -32,10 +32,10 @@ export const ChatScreen = (): JSX.Element => {
     ];
 
     return (
-        <SafeAreaView style={ChatScreenStyle.container}>
-            <ChatHeader />
+        <SafeAreaView style={MessagesScreenStyle.container}>
+            <MessagesHeader />
             <MatchList data={data} />
-            <ChatList data={data} />
+            <MessagesList data={data} />
         </SafeAreaView>
     );
 };

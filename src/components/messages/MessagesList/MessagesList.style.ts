@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const ChatListStyle = StyleSheet.create({
+export const MessagesListStyle = StyleSheet.create({
     flatList: {
         paddingBottom: '100%'
     },

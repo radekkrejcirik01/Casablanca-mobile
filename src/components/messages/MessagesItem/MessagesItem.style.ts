@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const ChatItemStyle = StyleSheet.create({
+export const MessagesItemStyle = StyleSheet.create({
     container: {
         alignItems: 'flex-start',
         marginBottom: 15

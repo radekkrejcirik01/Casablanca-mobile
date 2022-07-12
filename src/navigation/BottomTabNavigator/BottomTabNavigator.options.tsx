@@ -32,7 +32,7 @@ export const SwipeTabOptions: BottomTabNavigationOptions = {
     )
 };
 
-export const ChatTabOptions: BottomTabNavigationOptions = {
+export const MessagesTabOptions: BottomTabNavigationOptions = {
     tabBarLabel: 'Chat',
     tabBarIcon: ({ focused }) => (
         <Text style={{ fontSize: focused ? 25 : 20 }}>💬</Text>

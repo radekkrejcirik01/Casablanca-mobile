@@ -14,7 +14,7 @@ import { ReducerProps } from '@store/index.props';
 import { PasswordScreen } from '@screens/registration/PasswordScreen/PasswordScreen';
 import { BottomTabNavigator } from '@navigation/BottomTabNavigator/BottomTabNavigator';
 import { NotificationScreen } from '@screens/general/NotificationScreen/NotificationScreen';
-import { ConversationScreen } from '@screens/general/ConversationScreen/ConversationScreen';
+import { ChatScreen } from '@screens/general/ChatScreen/ChatScreen';
 import {
     LoginNavigatorScreens,
     RegisterNavigatorScreens,
@@ -50,8 +50,8 @@ export const RootStackNavigator = (): JSX.Element => {
                         component={NotificationScreen}
                     />
                     <Root.Screen
-                        name={TabBarScreens.ConversationScreen}
-                        component={ConversationScreen}
+                        name={TabBarScreens.ChatScreen}
+                        component={ChatScreen}
                     />
                 </Root.Group>
             </Root.Navigator>
