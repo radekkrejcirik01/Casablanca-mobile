@@ -1,16 +1,11 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const HeaderStyle = StyleSheet.create({
+export const LoginHeaderStyle = StyleSheet.create({
     container: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center'
-    },
-    image: {
-        width: 30,
-        height: 30,
-        backgroundColor: 'blue'
     },
     text: {
         marginLeft: 5,

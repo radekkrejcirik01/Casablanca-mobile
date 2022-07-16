@@ -21,6 +21,7 @@ import {
     TabBarScreens
 } from '../navigation.enum';
 import {
+    ChatScreenHeader,
     ForFade,
     ForNoAnimation,
     LoginScreenOptions,
@@ -36,9 +37,7 @@ export const RootStackNavigator = (): JSX.Element => {
 
     if (token) {
         return (
-            <Root.Navigator
-                initialRouteName={LoginNavigatorScreens.LoginScreen}
-            >
+            <Root.Navigator initialRouteName={TabBarScreens.BottomTabBar}>
                 <Root.Group>
                     <Root.Screen
                         name={TabBarScreens.BottomTabBar}
@@ -48,10 +47,12 @@ export const RootStackNavigator = (): JSX.Element => {
                     <Root.Screen
                         name={TabBarScreens.NavigationScreen}
                         component={NotificationScreen}
+                        options={NoHeader}
                     />
                     <Root.Screen
                         name={TabBarScreens.ChatScreen}
                         component={ChatScreen}
+                        options={ChatScreenHeader}
                     />
                 </Root.Group>
             </Root.Navigator>

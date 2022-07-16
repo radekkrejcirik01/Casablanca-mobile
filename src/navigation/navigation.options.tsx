@@ -1,11 +1,12 @@
 import React from 'react';
 import COLORS from '@constants/COLORS';
-import { Header } from '@components/general/Header/Header';
+import { LoginHeader } from '@components/general/LoginHeader/LoginHeader';
 import {
     HeaderStyleInterpolators,
     StackNavigationOptions
 } from '@react-navigation/stack';
 import { HeaderLeft } from '@components/registration/HeaderLeft/HeaderLeft';
+import { ChatHeader } from '@components/chat/ChatHeader/ChatHeader';
 import { transitionConfig } from './navigation.config';
 import { NavigationStyle } from './navigation.style';
 
@@ -30,7 +31,7 @@ export const NavigatorScreenOptions: StackNavigationOptions = {
 };
 
 export const LoginScreenOptions: StackNavigationOptions = {
-    headerTitle: () => <Header />,
+    headerTitle: () => <LoginHeader />,
     headerLeftContainerStyle: {
         ...NavigationStyle.loginScreenHeaderLeft
     }
@@ -51,4 +52,8 @@ export const ForFade: StackNavigationOptions = {
 
 export const NoHeader: StackNavigationOptions = {
     headerShown: false
+};
+
+export const ChatScreenHeader: StackNavigationOptions = {
+    header: () => <ChatHeader />
 };

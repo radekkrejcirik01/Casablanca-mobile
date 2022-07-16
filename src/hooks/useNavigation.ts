@@ -4,6 +4,7 @@ import { TabBarScreens } from '@navigation/navigation.enum';
 
 export const useNavigation = (): {
     navigateTo: (screen: TabBarScreens) => void;
+    navigateBack: () => void;
 } => {
     const navigation = useNavigationModule();
 
@@ -14,5 +15,9 @@ export const useNavigation = (): {
         [navigation]
     );
 
-    return { navigateTo };
+    const navigateBack = useCallback(() => {
+        navigation.goBack();
+    }, [navigation]);
+
+    return { navigateTo, navigateBack };
 };
