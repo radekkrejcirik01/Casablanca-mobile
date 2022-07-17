@@ -49,7 +49,7 @@ export const ChatList = ({ data, style }: ChatListProps): JSX.Element => {
             showsVerticalScrollIndicator={false}
             getItem={getItem}
             getItemCount={getItemCount}
-            keyExtractor={(item, index) => item.name + index}
+            keyExtractor={(item, index) => item.name + index} // TODO: change to item's ID
             inverted
             keyboardShouldPersistTaps="handled"
             onScrollBeginDrag={Keyboard.dismiss}

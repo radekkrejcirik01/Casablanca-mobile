@@ -3,11 +3,11 @@ import {
     KeyboardAvoidingView as KeyboardAvoidingViewDefault,
     Platform
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
     KeyboardAvoidingViewDefaultProps,
     KeyboardAvoidingViewProps
 } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView.props';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const KeyboardAvoidingView = ({
     keyboardVerticalOffset,
