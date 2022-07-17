@@ -10,7 +10,7 @@ export const ChatInputStyle = StyleSheet.create({
         borderColor: COLORS.WHITE,
         borderWidth: 1,
         backgroundColor: COLORS.MAIN_BLUE,
-        marginTop: -25,
+        marginTop: -25, // to match input's layout with chat list items
         marginBottom: 5
     },
     input: {
