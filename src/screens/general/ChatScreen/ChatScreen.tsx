@@ -1,8 +1,9 @@
 import React from 'react';
-import { KeyboardAvoidingView, SafeAreaView } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { ChatScreenStyle } from '@screens/general/ChatScreen/ChatScreen.style';
 import { ChatList } from '@components/chat/ChatList/ChatList';
 import { ChatInput } from '@components/chat/ChatInput/ChatInput';
+import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';
 
 export const ChatScreen = (): JSX.Element => {
     const data = [
@@ -48,10 +49,10 @@ export const ChatScreen = (): JSX.Element => {
     ];
 
     return (
-        <SafeAreaView style={ChatScreenStyle.container}>
-            <ChatList data={data} />
-            <KeyboardAvoidingView behavior="padding">
-                <ChatInput />
+        <SafeAreaView>
+            <KeyboardAvoidingView keyboardVerticalOffset={44}>
+                <ChatList data={data} style={ChatScreenStyle.chatList} />
+                <ChatInput style={ChatScreenStyle.chatInput} />
             </KeyboardAvoidingView>
         </SafeAreaView>
     );

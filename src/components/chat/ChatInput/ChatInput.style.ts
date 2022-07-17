@@ -9,7 +9,9 @@ export const ChatInputStyle = StyleSheet.create({
         borderRadius: 20,
         borderColor: COLORS.WHITE,
         borderWidth: 1,
-        backgroundColor: COLORS.MAIN_BLUE
+        backgroundColor: COLORS.MAIN_BLUE,
+        marginTop: -25,
+        marginBottom: 5
     },
     input: {
         fontSize: 15,

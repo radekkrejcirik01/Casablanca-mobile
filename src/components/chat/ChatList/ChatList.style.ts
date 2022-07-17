@@ -4,7 +4,7 @@ import COLORS from '@constants/COLORS';
 export const ChatListStyle = StyleSheet.create({
     contentContainer: {
         marginHorizontal: 10,
-        paddingBottom: 40
+        paddingTop: 40
     },
     item: {
         alignSelf: 'flex-start',

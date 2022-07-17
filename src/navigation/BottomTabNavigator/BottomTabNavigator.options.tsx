@@ -1,21 +1,12 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
-import COLORS from '@constants/COLORS';
+import { BottomTabNavigatorStyle } from '@navigation/BottomTabNavigator/BottomTabNavigator.style';
 
 export const BottomTabNavigatorOptions: BottomTabNavigationOptions = {
     headerShown: false,
-    tabBarStyle: {
-        backgroundColor: COLORS.MAIN_BLUE,
-        borderTopWidth: 0,
-        paddingHorizontal: 15,
-        marginTop: 10
-    },
-    tabBarLabelStyle: {
-        color: COLORS.WHITE,
-        fontWeight: 'bold',
-        fontSize: 9
-    }
+    tabBarStyle: BottomTabNavigatorStyle.tabBar,
+    tabBarLabelStyle: BottomTabNavigatorStyle.tabBarLabel
 };
 
 export const ProfileTabOptions: BottomTabNavigationOptions = {
