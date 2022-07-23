@@ -1,34 +1,12 @@
 import React from 'react';
-import {
-    Keyboard,
-    ListRenderItemInfo,
-    Text,
-    View,
-    VirtualizedList
-} from 'react-native';
-import {
-    TabListDataProps,
-    TabListProps
-} from '@components/closeFriends/TabList/TabList.props';
-import { Tab } from '@components/closeFriends/Tab/Tab';
+import { Keyboard, VirtualizedList } from 'react-native';
+import { TabListProps } from '@components/closeFriends/TabList/TabList.props';
+import { TabListStyle } from '@components/closeFriends/TabList/TabList.style';
+import { useTabListRenders } from '@hooks/useTabListRenders';
 
 export const TabList = ({ data }: TabListProps): JSX.Element => {
-    const getItem = (
-        listData: Array<TabListDataProps>,
-        index: number
-    ): TabListDataProps => listData[index];
-
-    const renderItem = ({
-        item
-    }: ListRenderItemInfo<TabListDataProps>): JSX.Element => (
-        <Tab item={item} />
-    );
-
-    const getItemCount = (): number => data.length;
-
-    // TODO: change to item's ID
-    const keyExtractor = (item: TabListDataProps, index: number): string =>
-        item.name + index;
+    const { getItem, renderItem, getItemCount, keyExtractor } =
+        useTabListRenders(data);
 
     return (
         <VirtualizedList
@@ -41,6 +19,7 @@ export const TabList = ({ data }: TabListProps): JSX.Element => {
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="handled"
             onScrollBeginDrag={Keyboard.dismiss}
+            style={TabListStyle.tabList}
         />
     );
 };

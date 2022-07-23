@@ -5,7 +5,7 @@ import { CloseFriendsScreenStyle } from '@screens/tab/CloseFriendsScreen/CloseFr
 import { TabList } from '@components/closeFriends/TabList/TabList';
 
 export const CloseFriendsScreen = (): JSX.Element => {
-    const data = [{ name: 'radek' }];
+    const data = [{ name: 'radek' }, { name: 'zuzka' }];
 
     return (
         <SafeAreaView style={CloseFriendsScreenStyle.container}>
