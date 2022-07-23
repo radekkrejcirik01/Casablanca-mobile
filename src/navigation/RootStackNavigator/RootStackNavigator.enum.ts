@@ -23,5 +23,6 @@ export enum MessagesScreens {
 }
 
 export enum ProfileScreens {
-    SettingsScreen = 'SettingsScreen'
+    SettingsScreen = 'SettingsScreen',
+    DistanceScreen = 'DistanceScreen'
 }

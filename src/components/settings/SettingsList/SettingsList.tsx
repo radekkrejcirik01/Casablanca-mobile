@@ -1,15 +1,20 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
 import { SettingsListItem } from '@components/settings/SettingsListItem/SettingsListItem';
-import COLORS from '@constants/COLORS';
 import { SettingsListStyle } from '@components/settings/SettingsList/SettingsList.style';
+import { useNavigation } from '@hooks/useNavigation';
+import { ProfileScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
 
 export const SettingsList = (): JSX.Element => {
+    const { navigateTo } = useNavigation();
+
     const openAboutScreen = () => {};
 
     const toggleSwitch = (value: boolean) => {};
 
-    const openDistanceScreen = () => {};
+    const openDistanceScreen = () => {
+        navigateTo(ProfileScreens.DistanceScreen);
+    };
 
     const openHelpCenterScreen = () => {};
 

@@ -69,3 +69,7 @@ export const NotificationsTitle: StackNavigationOptions = {
 export const SettingsTitle: StackNavigationOptions = {
     headerTitle: 'Settings'
 };
+
+export const DistanceTitle: StackNavigationOptions = {
+    headerTitle: 'Distance'
+};

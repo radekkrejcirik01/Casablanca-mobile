@@ -23,8 +23,10 @@ import {
     RegistrationScreens,
     RootStackNavigatorEnum
 } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
+import { DistanceScreen } from '@screens/profile/DistanceScreen/DistanceScreeen';
 import {
     ChatScreenHeader,
+    DistanceTitle,
     ForFade,
     ForNoAnimation,
     LoginScreenOptions,
@@ -70,6 +72,14 @@ export const RootStackNavigator = (): JSX.Element => {
                         options={{
                             ...NavigationScreenHeader,
                             ...SettingsTitle
+                        }}
+                    />
+                    <Root.Screen
+                        name={ProfileScreens.DistanceScreen}
+                        component={DistanceScreen}
+                        options={{
+                            ...NavigationScreenHeader,
+                            ...DistanceTitle
                         }}
                     />
                 </Root.Group>
