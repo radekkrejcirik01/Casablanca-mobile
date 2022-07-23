@@ -1,13 +1,19 @@
 import React, { useRef } from 'react';
-import { Animated, Dimensions, View } from 'react-native';
+import { Animated, Dimensions } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { ProfileImageViewProps } from '@components/profile/ProfileImageView.props';
 import { ProfileImageViewStyle } from '@components/profile/ProfileImageView.style';
+import { IconEnum } from '@components/icon/Icon.enum';
+import { IconButton } from '@components/general/IconButton/IconButton';
+import { useNavigation } from '@hooks/useNavigation';
+import { TabBarScreens } from '@navigation/navigation.enum';
 
 export const ProfileImageView = ({
     source,
     children
 }: ProfileImageViewProps): JSX.Element => {
+    const { navigateTo } = useNavigation();
+
     const window = Dimensions.get('window');
 
     const HEADER_HEIGHT_EXPANDED = 35;
@@ -16,6 +22,10 @@ export const ProfileImageView = ({
     const AnimatedImageBackground = Animated.createAnimatedComponent(FastImage);
 
     const scrollY = useRef(new Animated.Value(0)).current;
+
+    const openSettings = () => {
+        navigateTo(TabBarScreens.SettingsScreen);
+    };
 
     return (
         <Animated.ScrollView
@@ -50,7 +60,12 @@ export const ProfileImageView = ({
                     }
                 ]}
             >
-                <View style={ProfileImageViewStyle.animatedImageOpacity} />
+                <IconButton
+                    icon={IconEnum.SETTINGS}
+                    onPress={openSettings}
+                    size={24}
+                    style={ProfileImageViewStyle.settingsIcon}
+                />
             </AnimatedImageBackground>
             {children}
         </Animated.ScrollView>

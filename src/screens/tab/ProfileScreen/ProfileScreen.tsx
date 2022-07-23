@@ -7,7 +7,7 @@ import { PlaceTags } from '@components/registration/PlaceTags/PlaceTags';
 
 export const ProfileScreen = (): JSX.Element => (
     <SafeAreaProvider style={ProfileScreenStyle.container}>
-        <ProfileImageView source="a">
+        <ProfileImageView source="">
             <View style={ProfileScreenStyle.bottomContainer}>
                 <Text style={ProfileScreenStyle.firstname}>firstname</Text>
                 <Text style={ProfileScreenStyle.age}>20</Text>

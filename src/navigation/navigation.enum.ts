@@ -15,6 +15,7 @@ export enum RegisterNavigatorScreens {
 
 export enum TabBarScreens {
     BottomTabBar = 'BottomTabBar',
-    NavigationScreen = 'NavigationScreen',
-    ChatScreen = 'ChatScreen'
+    NotificationScreen = 'NotificationScreen',
+    ChatScreen = 'ChatScreen',
+    SettingsScreen = 'SettingsScreen'
 }

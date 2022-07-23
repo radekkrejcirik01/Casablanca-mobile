@@ -15,6 +15,7 @@ import { PasswordScreen } from '@screens/registration/PasswordScreen/PasswordScr
 import { BottomTabNavigator } from '@navigation/BottomTabNavigator/BottomTabNavigator';
 import { NotificationScreen } from '@screens/general/NotificationScreen/NotificationScreen';
 import { ChatScreen } from '@screens/general/ChatScreen/ChatScreen';
+import { SettingsScreen } from '@screens/general/SettigsScreen/SettingsScreen';
 import {
     LoginNavigatorScreens,
     RegisterNavigatorScreens,
@@ -25,9 +26,13 @@ import {
     ForFade,
     ForNoAnimation,
     LoginScreenOptions,
+    MainRed,
+    NavigationScreenHeader,
     NavigatorScreenOptions,
     NoHeader,
-    RegistrationScreenOptions
+    NotificationsTitle,
+    RegistrationScreenOptions,
+    SettingsTitle
 } from '../navigation.options';
 
 const Root = createStackNavigator<ParamListBase>();
@@ -37,7 +42,10 @@ export const RootStackNavigator = (): JSX.Element => {
 
     if (token) {
         return (
-            <Root.Navigator initialRouteName={TabBarScreens.BottomTabBar}>
+            <Root.Navigator
+                initialRouteName={TabBarScreens.BottomTabBar}
+                screenOptions={NavigatorScreenOptions}
+            >
                 <Root.Group>
                     <Root.Screen
                         name={TabBarScreens.BottomTabBar}
@@ -45,14 +53,25 @@ export const RootStackNavigator = (): JSX.Element => {
                         options={NoHeader}
                     />
                     <Root.Screen
-                        name={TabBarScreens.NavigationScreen}
+                        name={TabBarScreens.NotificationScreen}
                         component={NotificationScreen}
-                        options={NoHeader}
+                        options={{
+                            ...NavigationScreenHeader,
+                            ...NotificationsTitle
+                        }}
                     />
                     <Root.Screen
                         name={TabBarScreens.ChatScreen}
                         component={ChatScreen}
                         options={ChatScreenHeader}
+                    />
+                    <Root.Screen
+                        name={TabBarScreens.SettingsScreen}
+                        component={SettingsScreen}
+                        options={{
+                            ...NavigationScreenHeader,
+                            ...SettingsTitle
+                        }}
                     />
                 </Root.Group>
             </Root.Navigator>
@@ -61,7 +80,7 @@ export const RootStackNavigator = (): JSX.Element => {
     return (
         <Root.Navigator
             initialRouteName={LoginNavigatorScreens.LoginScreen}
-            screenOptions={NavigatorScreenOptions}
+            screenOptions={{ ...NavigatorScreenOptions, ...MainRed }}
         >
             <Root.Group>
                 <Root.Screen

@@ -7,9 +7,8 @@ export const ProfileImageViewStyle = StyleSheet.create({
         borderBottomRightRadius: 30,
         backgroundColor: COLORS.LIGHTGRAY_100
     },
-    animatedImageOpacity: {
-        flex: 1,
-        backgroundColor: COLORS.BLACK,
-        opacity: 0.15
+    settingsIcon: {
+        marginTop: 50,
+        marginLeft: 30
     }
 });

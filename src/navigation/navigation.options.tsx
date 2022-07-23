@@ -11,19 +11,6 @@ import { transitionConfig } from './navigation.config';
 import { NavigationStyle } from './navigation.style';
 
 export const NavigatorScreenOptions: StackNavigationOptions = {
-    headerShown: true,
-    headerBackTitleVisible: false,
-    headerTitleAllowFontScaling: true,
-    headerTintColor: COLORS.WHITE,
-    headerStyle: {
-        ...NavigationStyle.header
-    },
-    headerTitleStyle: {
-        ...NavigationStyle.headerTitle
-    },
-    headerLeftContainerStyle: {
-        ...NavigationStyle.headerLeftContainer
-    },
     transitionSpec: {
         open: transitionConfig(800),
         close: transitionConfig(1000)
@@ -39,7 +26,16 @@ export const LoginScreenOptions: StackNavigationOptions = {
 
 export const RegistrationScreenOptions: StackNavigationOptions = {
     headerTitle: '',
-    headerLeft: () => <HeaderLeft />
+    headerLeft: () => <HeaderLeft />,
+    headerLeftContainerStyle: {
+        ...NavigationStyle.registrationLeftContainer
+    }
+};
+
+export const MainRed: StackNavigationOptions = {
+    headerStyle: {
+        ...NavigationStyle.mainRed
+    }
 };
 
 export const ForNoAnimation: StackNavigationOptions = {
@@ -56,4 +52,20 @@ export const NoHeader: StackNavigationOptions = {
 
 export const ChatScreenHeader: StackNavigationOptions = {
     header: () => <ChatHeader />
+};
+
+export const NavigationScreenHeader: StackNavigationOptions = {
+    headerTintColor: COLORS.WHITE,
+    headerStyle: {
+        ...NavigationStyle.navigationScreen
+    },
+    headerBackTitle: 'Back'
+};
+
+export const NotificationsTitle: StackNavigationOptions = {
+    headerTitle: 'Notifications'
+};
+
+export const SettingsTitle: StackNavigationOptions = {
+    headerTitle: 'Settings'
 };
