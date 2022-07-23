@@ -10,8 +10,8 @@ import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import { Icon } from '@components/icon/Icon';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { useNavigation } from '@react-navigation/native';
-import { RegisterNavigatorScreens } from '@navigation/navigation.enum';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
+import { RegistrationScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
 
 export const LoginScreen = (): JSX.Element => {
     const [username, setUsername] = useState<string>();
@@ -22,7 +22,7 @@ export const LoginScreen = (): JSX.Element => {
 
     const loginPressed = () => {};
     const registerPressed = () => {
-        navigation.navigate(RegisterNavigatorScreens.FirstnameScreen);
+        navigation.navigate(RegistrationScreens.FirstnameScreen);
     };
 
     return (

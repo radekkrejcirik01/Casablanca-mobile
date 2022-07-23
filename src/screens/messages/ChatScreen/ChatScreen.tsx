@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
-import { ChatScreenStyle } from '@screens/general/ChatScreen/ChatScreen.style';
+import { ChatScreenStyle } from '@screens/messages/ChatScreen/ChatScreen.style';
 import { ChatList } from '@components/chat/ChatList/ChatList';
 import { ChatInput } from '@components/chat/ChatInput/ChatInput';
 import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';

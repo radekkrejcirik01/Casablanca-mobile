@@ -6,11 +6,11 @@ import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import COLORS from '@constants/COLORS';
 import { Continue } from '@components/registration/Continue/Continue';
-import { RegisterNavigatorScreens } from '@navigation/navigation.enum';
 import { Title } from '@components/general/Title/Title';
 import { WhoShowScreenStyle } from '@screens/registration/WhoShowScreen/WhoShowScreen.style';
 import { WhoShowSelect } from '@components/registration/WhoShowSelect/WhoShowSelect';
 import { ReducerProps } from '@store/index.props';
+import { RegistrationScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
 
 export const WhoShowScreen = (): JSX.Element => {
     const whoShow = useSelector(
@@ -21,7 +21,7 @@ export const WhoShowScreen = (): JSX.Element => {
 
     const continuePressed = () => {
         if (whoShow) {
-            navigation.navigate(RegisterNavigatorScreens.PasswordScreen);
+            navigation.navigate(RegistrationScreens.PasswordScreen);
         } else {
             Alert.alert('Please select option');
         }

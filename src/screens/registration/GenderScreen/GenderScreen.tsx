@@ -6,11 +6,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import COLORS from '@constants/COLORS';
 import { Continue } from '@components/registration/Continue/Continue';
-import { RegisterNavigatorScreens } from '@navigation/navigation.enum';
 import { Title } from '@components/general/Title/Title';
 import { GenderScreenStyle } from '@screens/registration/GenderScreen/GenderScreen.style';
 import { GenderSelect } from '@components/registration/GenderSelect/GenderSelect';
 import { ReducerProps } from '@store/index.props';
+import { RegistrationScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
 
 export const GenderScreen = (): JSX.Element => {
     const gender = useSelector(
@@ -21,7 +21,7 @@ export const GenderScreen = (): JSX.Element => {
 
     const continuePressed = () => {
         if (gender) {
-            navigation.navigate(RegisterNavigatorScreens.WhoShowScreen);
+            navigation.navigate(RegistrationScreens.WhoShowScreen);
         } else {
             Alert.alert('Please select option');
         }

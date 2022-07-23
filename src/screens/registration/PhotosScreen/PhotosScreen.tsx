@@ -8,13 +8,13 @@ import { Continue } from '@components/registration/Continue/Continue';
 import { Title } from '@components/general/Title/Title';
 import { PhotosScreenStyle } from '@screens/registration/PhotosScreen/PhotosScreen.style';
 import { PhotoPlaceholder } from '@components/registration/PhotoPlaceholder/PhotoPlaceholder';
-import { RegisterNavigatorScreens } from '@navigation/navigation.enum';
+import { RegistrationScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
 
 export const PhotosScreen = (): JSX.Element => {
     const navigation = useNavigation();
 
     const continuePressed = () => {
-        navigation.navigate(RegisterNavigatorScreens.FavePlacesScreen);
+        navigation.navigate(RegistrationScreens.FavePlacesScreen);
     };
 
     return (

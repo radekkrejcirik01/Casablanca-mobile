@@ -5,16 +5,16 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import COLORS from '@constants/COLORS';
 import { Continue } from '@components/registration/Continue/Continue';
-import { RegisterNavigatorScreens } from '@navigation/navigation.enum';
 import { Title } from '@components/general/Title/Title';
 import { PlaceTags } from '@components/registration/PlaceTags/PlaceTags';
 import { TagsScreenStyle } from '@screens/registration/TagsScreen/TagsScreen.style';
+import { RegistrationScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
 
 export const TagsScreen = (): JSX.Element => {
     const navigation = useNavigation();
 
     const continuePressed = () => {
-        navigation.navigate(RegisterNavigatorScreens.GenderScreen);
+        navigation.navigate(RegistrationScreens.GenderScreen);
     };
 
     return (

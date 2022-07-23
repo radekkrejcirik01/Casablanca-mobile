@@ -10,11 +10,11 @@ import { IconEnum } from '@components/icon/Icon.enum';
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import { Input } from '@components/general/Input/Input';
 import { Continue } from '@components/registration/Continue/Continue';
-import { RegisterNavigatorScreens } from '@navigation/navigation.enum';
 import { Title } from '@components/general/Title/Title';
 import { setPasswordAction } from '@store/RegistrationReducer';
 import { ReducerProps } from '@store/index.props';
 import { PasswordScreenStyle } from '@screens/registration/PasswordScreen/PasswordScreen.style';
+import { RegistrationScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
 
 export const PasswordScreen = (): JSX.Element => {
     const password = useSelector(
@@ -35,7 +35,7 @@ export const PasswordScreen = (): JSX.Element => {
 
     const continuePressed = () => {
         if (password) {
-            navigation.navigate(RegisterNavigatorScreens.EmailScreen);
+            navigation.navigate(RegistrationScreens.EmailScreen);
         } else {
             Alert.alert('Please type password');
         }

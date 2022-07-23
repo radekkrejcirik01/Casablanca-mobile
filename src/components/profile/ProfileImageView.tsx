@@ -6,7 +6,7 @@ import { ProfileImageViewStyle } from '@components/profile/ProfileImageView.styl
 import { IconEnum } from '@components/icon/Icon.enum';
 import { IconButton } from '@components/general/IconButton/IconButton';
 import { useNavigation } from '@hooks/useNavigation';
-import { TabBarScreens } from '@navigation/navigation.enum';
+import { ProfileScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
 
 export const ProfileImageView = ({
     source,
@@ -24,7 +24,7 @@ export const ProfileImageView = ({
     const scrollY = useRef(new Animated.Value(0)).current;
 
     const openSettings = () => {
-        navigateTo(TabBarScreens.SettingsScreen);
+        navigateTo(ProfileScreens.SettingsScreen);
     };
 
     return (

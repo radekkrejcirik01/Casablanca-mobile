@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const NavigationStyle = StyleSheet.create({
+export const RootStackNavigatorStyle = StyleSheet.create({
     mainRed: {
         backgroundColor: COLORS.MAIN_RED,
         shadowOpacity: 0

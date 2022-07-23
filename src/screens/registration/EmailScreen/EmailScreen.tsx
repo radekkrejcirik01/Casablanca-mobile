@@ -10,11 +10,11 @@ import { IconEnum } from '@components/icon/Icon.enum';
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import { Input } from '@components/general/Input/Input';
 import { Continue } from '@components/registration/Continue/Continue';
-import { RegisterNavigatorScreens } from '@navigation/navigation.enum';
 import { Title } from '@components/general/Title/Title';
 import { EmailScreenStyle } from '@screens/registration/EmailScreen/EmailScreen.style';
 import { setEmailAction } from '@store/RegistrationReducer';
 import { ReducerProps } from '@store/index.props';
+import { RegistrationScreens } from "@navigation/RootStackNavigator/RootStackNavigator.enum";
 
 export const EmailScreen = (): JSX.Element => {
     const email = useSelector(
@@ -35,7 +35,7 @@ export const EmailScreen = (): JSX.Element => {
 
     const continuePressed = () => {
         if (email && email.includes('@')) {
-            navigation.navigate(RegisterNavigatorScreens.BirthdayScreen);
+            navigation.navigate(RegistrationScreens.BirthdayScreen);
         } else if (email) {
             Alert.alert('Please select email address');
         }

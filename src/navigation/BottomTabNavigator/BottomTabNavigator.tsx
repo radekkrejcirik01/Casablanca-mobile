@@ -1,10 +1,10 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { BottomTabNavigatorEnum } from '@navigation/BottomTabNavigator/BottomTabNavigator.enum';
-import { ProfileScreen } from '@screens/tab/ProfileScreen/ProfileScreen';
-import { SwipeScreen } from '@screens/tab/SwipeScreen/SwipeScreen';
-import { MessagesScreen } from '@screens/tab/MessagesScreen/MessagesScreen';
-import { CloseFriendsScreen } from '@screens/tab/CloseFriendsScreen/CloseFriendsScreen';
+import { ProfileScreen } from '@screens/profile/ProfileScreen/ProfileScreen';
+import { SwipeScreen } from '@screens/swipe/SwipeScreen/SwipeScreen';
+import { MessagesScreen } from '@screens/messages/MessagesScreen/MessagesScreen';
+import { CloseFriendsScreen } from '@screens/closeFriends/CloseFriendsScreen/CloseFriendsScreen';
 import {
     BottomTabNavigatorOptions,
     MessagesTabOptions,

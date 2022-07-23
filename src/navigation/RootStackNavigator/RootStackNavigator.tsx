@@ -13,14 +13,16 @@ import { WhoShowScreen } from '@screens/registration/WhoShowScreen/WhoShowScreen
 import { ReducerProps } from '@store/index.props';
 import { PasswordScreen } from '@screens/registration/PasswordScreen/PasswordScreen';
 import { BottomTabNavigator } from '@navigation/BottomTabNavigator/BottomTabNavigator';
-import { NotificationScreen } from '@screens/general/NotificationScreen/NotificationScreen';
-import { ChatScreen } from '@screens/general/ChatScreen/ChatScreen';
-import { SettingsScreen } from '@screens/general/SettigsScreen/SettingsScreen';
+import { NotificationScreen } from '@screens/messages/NotificationScreen/NotificationScreen';
+import { ChatScreen } from '@screens/messages/ChatScreen/ChatScreen';
+import { SettingsScreen } from '@screens/profile/SettigsScreen/SettingsScreen';
 import {
-    LoginNavigatorScreens,
-    RegisterNavigatorScreens,
-    TabBarScreens
-} from '../navigation.enum';
+    LoginScreens,
+    MessagesScreens,
+    ProfileScreens,
+    RegistrationScreens,
+    RootStackNavigatorEnum
+} from '@navigation/RootStackNavigator/RootStackNavigator.enum';
 import {
     ChatScreenHeader,
     ForFade,
@@ -33,7 +35,7 @@ import {
     NotificationsTitle,
     RegistrationScreenOptions,
     SettingsTitle
-} from '../navigation.options';
+} from './RootStackNavigator.options';
 
 const Root = createStackNavigator<ParamListBase>();
 
@@ -42,18 +44,15 @@ export const RootStackNavigator = (): JSX.Element => {
 
     if (token) {
         return (
-            <Root.Navigator
-                initialRouteName={TabBarScreens.BottomTabBar}
-                screenOptions={NavigatorScreenOptions}
-            >
+            <Root.Navigator screenOptions={NavigatorScreenOptions}>
                 <Root.Group>
                     <Root.Screen
-                        name={TabBarScreens.BottomTabBar}
+                        name={RootStackNavigatorEnum.BottomTabBar}
                         component={BottomTabNavigator}
                         options={NoHeader}
                     />
                     <Root.Screen
-                        name={TabBarScreens.NotificationScreen}
+                        name={MessagesScreens.NotificationScreen}
                         component={NotificationScreen}
                         options={{
                             ...NavigationScreenHeader,
@@ -61,12 +60,12 @@ export const RootStackNavigator = (): JSX.Element => {
                         }}
                     />
                     <Root.Screen
-                        name={TabBarScreens.ChatScreen}
+                        name={MessagesScreens.ChatScreen}
                         component={ChatScreen}
                         options={ChatScreenHeader}
                     />
                     <Root.Screen
-                        name={TabBarScreens.SettingsScreen}
+                        name={ProfileScreens.SettingsScreen}
                         component={SettingsScreen}
                         options={{
                             ...NavigationScreenHeader,
@@ -79,22 +78,21 @@ export const RootStackNavigator = (): JSX.Element => {
     }
     return (
         <Root.Navigator
-            initialRouteName={LoginNavigatorScreens.LoginScreen}
             screenOptions={{ ...NavigatorScreenOptions, ...MainRed }}
         >
             <Root.Group>
                 <Root.Screen
-                    name={LoginNavigatorScreens.LoginScreen}
+                    name={LoginScreens.LoginScreen}
                     component={LoginScreen}
                     options={LoginScreenOptions}
                 />
                 <Root.Screen
-                    name={RegisterNavigatorScreens.FirstnameScreen}
+                    name={RegistrationScreens.FirstnameScreen}
                     component={FirstnameScreen}
                     options={{ ...RegistrationScreenOptions, ...ForFade }}
                 />
                 <Root.Screen
-                    name={RegisterNavigatorScreens.EmailScreen}
+                    name={RegistrationScreens.EmailScreen}
                     component={EmailScreen}
                     options={{
                         ...RegistrationScreenOptions,
@@ -102,7 +100,7 @@ export const RootStackNavigator = (): JSX.Element => {
                     }}
                 />
                 <Root.Screen
-                    name={RegisterNavigatorScreens.BirthdayScreen}
+                    name={RegistrationScreens.BirthdayScreen}
                     component={BirthdayScreen}
                     options={{
                         ...RegistrationScreenOptions,
@@ -110,7 +108,7 @@ export const RootStackNavigator = (): JSX.Element => {
                     }}
                 />
                 <Root.Screen
-                    name={RegisterNavigatorScreens.PhotosScreen}
+                    name={RegistrationScreens.PhotosScreen}
                     component={PhotosScreen}
                     options={{
                         ...RegistrationScreenOptions,
@@ -118,7 +116,7 @@ export const RootStackNavigator = (): JSX.Element => {
                     }}
                 />
                 <Root.Screen
-                    name={RegisterNavigatorScreens.FavePlacesScreen}
+                    name={RegistrationScreens.FavePlacesScreen}
                     component={TagsScreen}
                     options={{
                         ...RegistrationScreenOptions,
@@ -126,7 +124,7 @@ export const RootStackNavigator = (): JSX.Element => {
                     }}
                 />
                 <Root.Screen
-                    name={RegisterNavigatorScreens.GenderScreen}
+                    name={RegistrationScreens.GenderScreen}
                     component={GenderScreen}
                     options={{
                         ...RegistrationScreenOptions,
@@ -134,7 +132,7 @@ export const RootStackNavigator = (): JSX.Element => {
                     }}
                 />
                 <Root.Screen
-                    name={RegisterNavigatorScreens.WhoShowScreen}
+                    name={RegistrationScreens.WhoShowScreen}
                     component={WhoShowScreen}
                     options={{
                         ...RegistrationScreenOptions,
@@ -142,7 +140,7 @@ export const RootStackNavigator = (): JSX.Element => {
                     }}
                 />
                 <Root.Screen
-                    name={RegisterNavigatorScreens.PasswordScreen}
+                    name={RegistrationScreens.PasswordScreen}
                     component={PasswordScreen}
                     options={{
                         ...RegistrationScreenOptions,

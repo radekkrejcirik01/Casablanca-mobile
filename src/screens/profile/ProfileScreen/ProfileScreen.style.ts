@@ -2,9 +2,6 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const ProfileScreenStyle = StyleSheet.create({
-    container: {
-        backgroundColor: COLORS.MAIN_BLUE
-    },
     bottomContainer: {
         height: '100%',
         paddingTop: 20,

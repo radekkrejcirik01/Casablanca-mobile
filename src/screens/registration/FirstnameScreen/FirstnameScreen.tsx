@@ -11,10 +11,10 @@ import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import { Input } from '@components/general/Input/Input';
 import { FirstnameScreenStyle } from '@screens/registration/FirstnameScreen/FirstnameScreen.style';
 import { Continue } from '@components/registration/Continue/Continue';
-import { RegisterNavigatorScreens } from '@navigation/navigation.enum';
 import { Title } from '@components/general/Title/Title';
 import { setFirstnameAction } from '@store/RegistrationReducer';
 import { ReducerProps } from '@store/index.props';
+import { RegistrationScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
 
 export const FirstnameScreen = (): JSX.Element => {
     const firstname = useSelector(
@@ -35,7 +35,7 @@ export const FirstnameScreen = (): JSX.Element => {
 
     const continuePressed = () => {
         if (firstname) {
-            navigation.navigate(RegisterNavigatorScreens.EmailScreen);
+            navigation.navigate(RegistrationScreens.EmailScreen);
         } else {
             Alert.alert('Please select firstname');
         }

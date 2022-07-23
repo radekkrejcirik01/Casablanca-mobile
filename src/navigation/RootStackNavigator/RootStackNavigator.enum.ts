@@ -1,8 +1,8 @@
-export enum LoginNavigatorScreens {
+export enum LoginScreens {
     LoginScreen = 'LoginScreen'
 }
 
-export enum RegisterNavigatorScreens {
+export enum RegistrationScreens {
     FirstnameScreen = 'FirstnameScreen',
     EmailScreen = 'EmailScreen',
     BirthdayScreen = 'BirthdayScreen',
@@ -13,9 +13,15 @@ export enum RegisterNavigatorScreens {
     PasswordScreen = 'PasswordScreen'
 }
 
-export enum TabBarScreens {
-    BottomTabBar = 'BottomTabBar',
+export enum RootStackNavigatorEnum {
+    BottomTabBar = 'BottomTabBar'
+}
+
+export enum MessagesScreens {
     NotificationScreen = 'NotificationScreen',
-    ChatScreen = 'ChatScreen',
+    ChatScreen = 'ChatScreen'
+}
+
+export enum ProfileScreens {
     SettingsScreen = 'SettingsScreen'
 }

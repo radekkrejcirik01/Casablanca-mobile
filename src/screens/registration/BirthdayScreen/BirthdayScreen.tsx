@@ -6,12 +6,12 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import COLORS from '@constants/COLORS';
 import { Continue } from '@components/registration/Continue/Continue';
-import { RegisterNavigatorScreens } from '@navigation/navigation.enum';
 import { Title } from '@components/general/Title/Title';
 import { BirthdayScreenStyle } from '@screens/registration/BirthdayScreen/BirthdayScreen.style';
 import { BirthdayInput } from '@components/registration/BirthdayInput/BirthdayInput';
 import { getAge } from '@functions/getAge';
 import { ReducerProps } from '@store/index.props';
+import { RegistrationScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
 
 export const BirthdayScreen = (): JSX.Element => {
     const birthday = useSelector(
@@ -24,7 +24,7 @@ export const BirthdayScreen = (): JSX.Element => {
         const birthdayValue = `${birthday.year}/${birthday.month}/${birthday.day}`;
 
         if (getAge(birthdayValue) >= 18) {
-            navigation.navigate(RegisterNavigatorScreens.PhotosScreen);
+            navigation.navigate(RegistrationScreens.PhotosScreen);
         }
         if (getAge(birthdayValue) < 18) {
             Alert.alert('Sorry, Casablanca is only for people older 18');

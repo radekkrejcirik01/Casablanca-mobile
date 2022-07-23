@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 import { Title } from '@components/general/Title/Title';
-import { CloseFriendsScreenStyle } from '@screens/tab/CloseFriendsScreen/CloseFriendsScreen.style';
+import { CloseFriendsScreenStyle } from '@screens/closeFriends/CloseFriendsScreen/CloseFriendsScreen.style';
 import { TabList } from '@components/closeFriends/TabList/TabList';
 
 export const CloseFriendsScreen = (): JSX.Element => {
