@@ -1,4 +1,4 @@
 import React from 'react';
-import { View } from 'react-native';
+import { SettingsList } from '@components/settings/SettingsList/SettingsList';
 
-export const SettingsScreen = (): JSX.Element => <View />;
+export const SettingsScreen = (): JSX.Element => <SettingsList />;

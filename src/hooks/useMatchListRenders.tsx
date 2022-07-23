@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { ListRenderItemInfo } from 'react-native';
 import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 import { MatchItem } from '@components/messages/MatchItem/MatchItem';
@@ -23,7 +23,7 @@ export const useMatchListRenders = (
         <MatchItem key={item.name} item={item} onPress={onItemPress} />
     );
 
-    const getItemCount = (): number => data?.length;
+    const getItemCount = useCallback((): number => data?.length, [data]);
 
     // TODO: change to item's ID
     const keyExtractor = (item: CardDataProps, index: number): string =>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { ListRenderItemInfo } from 'react-native';
 import { TabListDataProps } from '@components/closeFriends/TabList/TabList.props';
 import { Tab } from '@components/closeFriends/Tab/Tab';
@@ -25,7 +25,7 @@ export const useTabListRenders = (
         <Tab item={item} />
     );
 
-    const getItemCount = (): number => data?.length;
+    const getItemCount = useCallback((): number => data?.length, [data]);
 
     // TODO: change to item's ID
     const keyExtractor = (item: TabListDataProps, index: number): string =>

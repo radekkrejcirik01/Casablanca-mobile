@@ -33,7 +33,7 @@ export const useMessagesListRenders = (
         <MessagesItem key={item.name} item={item} onPress={onItemPress} />
     );
 
-    const getItemCount = (): number => data?.length;
+    const getItemCount = useCallback((): number => data?.length, [data]);
 
     // TODO: change to item's ID
     const keyExtractor = (item: CardDataProps, index: number): string =>
