@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react';
 import {
-    FlatList,
     ListRenderItemInfo,
     RefreshControl,
-    Text
+    Text,
+    VirtualizedList
 } from 'react-native';
 import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 import { MessagesItem } from '@components/messages/MessagesItem/MessagesItem';
@@ -28,25 +28,41 @@ export const MessagesList = ({ data }: MessagesListProps): JSX.Element => {
         navigateTo(TabBarScreens.ChatScreen);
     };
 
+    const getItem = (
+        listData: Array<CardDataProps>,
+        index: number
+    ): CardDataProps => listData[index];
+
+    const renderItem = ({
+        item
+    }: ListRenderItemInfo<CardDataProps>): JSX.Element => (
+        <MessagesItem key={item.name} item={item} onPress={onPress} />
+    );
+
+    const getItemCount = (): number => data.length;
+
+    // TODO: change to item's ID
+    const keyExtractor = (item: CardDataProps, index: number) =>
+        item.name + index;
+
+    const refreshControl = (
+        <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor="white"
+        />
+    );
+
     return (
         <>
             <Text style={MessagesListStyle.title}>Messages</Text>
-            <FlatList
+            <VirtualizedList
                 data={data}
-                renderItem={(item: ListRenderItemInfo<CardDataProps>) => (
-                    <MessagesItem
-                        key={item.item.name}
-                        item={item.item}
-                        onPress={onPress}
-                    />
-                )}
-                refreshControl={
-                    <RefreshControl
-                        refreshing={refreshing}
-                        onRefresh={onRefresh}
-                        tintColor="white"
-                    />
-                }
+                getItem={getItem}
+                renderItem={renderItem}
+                getItemCount={getItemCount}
+                keyExtractor={keyExtractor}
+                refreshControl={refreshControl}
                 showsVerticalScrollIndicator={false}
                 style={MessagesListStyle.flatList}
                 contentContainerStyle={MessagesListStyle.container}

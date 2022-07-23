@@ -14,6 +14,11 @@ import {
 import { ChatListStyle } from '@components/chat/ChatList/ChatList.style';
 
 export const ChatList = ({ data, style }: ChatListProps): JSX.Element => {
+    const getItem = (
+        listData: Array<ChatDataProps>,
+        index: number
+    ): ChatDataProps => listData[index];
+
     const renderItem = ({
         item
     }: ListRenderItemInfo<ChatDataProps>): JSX.Element => {
@@ -33,27 +38,26 @@ export const ChatList = ({ data, style }: ChatListProps): JSX.Element => {
         );
     };
 
-    const getItem = (
-        listData: Array<ChatDataProps>,
-        index: number
-    ): ChatDataProps => listData[index];
-
     const getItemCount = (): number => data.length;
+
+    // TODO: change to item's ID
+    const keyExtractor = (item: ChatDataProps, index: number): string =>
+        item.name + index;
 
     return (
         <VirtualizedList
             data={data}
-            renderItem={renderItem}
-            initialNumToRender={40}
-            contentContainerStyle={ChatListStyle.contentContainer}
-            showsVerticalScrollIndicator={false}
             getItem={getItem}
+            renderItem={renderItem}
             getItemCount={getItemCount}
-            keyExtractor={(item, index) => item.name + index} // TODO: change to item's ID
+            keyExtractor={keyExtractor}
+            initialNumToRender={40}
+            showsVerticalScrollIndicator={false}
             inverted
             keyboardShouldPersistTaps="handled"
             onScrollBeginDrag={Keyboard.dismiss}
             style={style}
+            contentContainerStyle={ChatListStyle.contentContainer}
         />
     );
 };
