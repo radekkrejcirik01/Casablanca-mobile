@@ -64,7 +64,6 @@ export const MessagesList = ({ data }: MessagesListProps): JSX.Element => {
                 keyExtractor={keyExtractor}
                 refreshControl={refreshControl}
                 showsVerticalScrollIndicator={false}
-                style={MessagesListStyle.flatList}
                 contentContainerStyle={MessagesListStyle.container}
             />
         </>

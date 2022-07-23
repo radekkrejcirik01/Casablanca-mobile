@@ -30,7 +30,7 @@ export const MessagesTabOptions: BottomTabNavigationOptions = {
     )
 };
 
-export const EventsTabOptions: BottomTabNavigationOptions = {
+export const CloseFriendsTabOptions: BottomTabNavigationOptions = {
     tabBarLabel: 'Close friends',
     tabBarIcon: ({ focused }) => (
         <Text style={{ fontSize: focused ? 25 : 20 }}>🎉</Text>

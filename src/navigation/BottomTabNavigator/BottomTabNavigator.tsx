@@ -4,13 +4,13 @@ import { BottomTabNavigatorEnum } from '@navigation/BottomTabNavigator/BottomTab
 import { ProfileScreen } from '@screens/tab/ProfileScreen/ProfileScreen';
 import { SwipeScreen } from '@screens/tab/SwipeScreen/SwipeScreen';
 import { MessagesScreen } from '@screens/tab/MessagesScreen/MessagesScreen';
-import { EventsScreen } from '@screens/tab/EventsScreen/EventsScreen';
+import { CloseFriendsScreen } from '@screens/tab/CloseFriendsScreen/CloseFriendsScreen';
 import {
     BottomTabNavigatorOptions,
     MessagesTabOptions,
-    EventsTabOptions,
     ProfileTabOptions,
-    SwipeTabOptions
+    SwipeTabOptions,
+    CloseFriendsTabOptions
 } from '@navigation/BottomTabNavigator/BottomTabNavigator.options';
 
 export const BottomTabNavigator = (): JSX.Element => {
@@ -37,9 +37,9 @@ export const BottomTabNavigator = (): JSX.Element => {
                 options={MessagesTabOptions}
             />
             <TabBar.Screen
-                name={BottomTabNavigatorEnum.EventsTab}
-                component={EventsScreen}
-                options={EventsTabOptions}
+                name={BottomTabNavigatorEnum.CloseFriendsTab}
+                component={CloseFriendsScreen}
+                options={CloseFriendsTabOptions}
             />
         </TabBar.Navigator>
     );
