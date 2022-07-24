@@ -8,9 +8,6 @@ import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavig
 import { ProfileStackNavigator } from '@navigation/StackNavigators/profile/ProfileStackNavigator';
 import { MessagesStackNavigator } from '@navigation/StackNavigators/messages/MessagesStackNavigator';
 import { RegistrationStackNavigator } from '@navigation/StackNavigators/registration/RegistrationStackNavigator';
-import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
-import { LoginScreen } from '@screens/login/Login/LoginScreen';
-import { LoginScreenOptions } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.options';
 import { LoginStackNavigator } from '@navigation/StackNavigators/login/LoginStackNavigator';
 import { NavigatorScreenOptions, NoHeader } from './RootStackNavigator.options';
 
