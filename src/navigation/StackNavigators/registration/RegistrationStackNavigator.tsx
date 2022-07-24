@@ -16,16 +16,16 @@ import { GenderScreen } from '@screens/registration/GenderScreen/GenderScreen';
 import { WhoShowScreen } from '@screens/registration/WhoShowScreen/WhoShowScreen';
 import { PasswordScreen } from '@screens/registration/PasswordScreen/PasswordScreen';
 
-const Signing = createStackNavigator<ParamListBase>();
+const Registration = createStackNavigator<ParamListBase>();
 
 export const RegistrationStackNavigator = (): JSX.Element => (
-    <Signing.Navigator>
-        <Signing.Screen
+    <Registration.Navigator>
+        <Registration.Screen
             name={RegistrationStackNavigatorEnum.FirstnameScreen}
             component={FirstnameScreen}
             options={{ ...RegistrationScreenOptions, ...ForFade }}
         />
-        <Signing.Screen
+        <Registration.Screen
             name={RegistrationStackNavigatorEnum.EmailScreen}
             component={EmailScreen}
             options={{
@@ -33,7 +33,7 @@ export const RegistrationStackNavigator = (): JSX.Element => (
                 ...ForNoAnimation
             }}
         />
-        <Signing.Screen
+        <Registration.Screen
             name={RegistrationStackNavigatorEnum.BirthdayScreen}
             component={BirthdayScreen}
             options={{
@@ -41,7 +41,7 @@ export const RegistrationStackNavigator = (): JSX.Element => (
                 ...ForNoAnimation
             }}
         />
-        <Signing.Screen
+        <Registration.Screen
             name={RegistrationStackNavigatorEnum.PhotosScreen}
             component={PhotosScreen}
             options={{
@@ -49,7 +49,7 @@ export const RegistrationStackNavigator = (): JSX.Element => (
                 ...ForNoAnimation
             }}
         />
-        <Signing.Screen
+        <Registration.Screen
             name={RegistrationStackNavigatorEnum.FavePlacesScreen}
             component={TagsScreen}
             options={{
@@ -57,7 +57,7 @@ export const RegistrationStackNavigator = (): JSX.Element => (
                 ...ForNoAnimation
             }}
         />
-        <Signing.Screen
+        <Registration.Screen
             name={RegistrationStackNavigatorEnum.GenderScreen}
             component={GenderScreen}
             options={{
@@ -65,7 +65,7 @@ export const RegistrationStackNavigator = (): JSX.Element => (
                 ...ForNoAnimation
             }}
         />
-        <Signing.Screen
+        <Registration.Screen
             name={RegistrationStackNavigatorEnum.WhoShowScreen}
             component={WhoShowScreen}
             options={{
@@ -73,7 +73,7 @@ export const RegistrationStackNavigator = (): JSX.Element => (
                 ...ForNoAnimation
             }}
         />
-        <Signing.Screen
+        <Registration.Screen
             name={RegistrationStackNavigatorEnum.PasswordScreen}
             component={PasswordScreen}
             options={{
@@ -81,5 +81,5 @@ export const RegistrationStackNavigator = (): JSX.Element => (
                 ...ForNoAnimation
             }}
         />
-    </Signing.Navigator>
+    </Registration.Navigator>
 );
