@@ -6,13 +6,13 @@ import { ProfileImageViewStyle } from '@components/profile/ProfileImageView.styl
 import { IconEnum } from '@components/icon/Icon.enum';
 import { IconButton } from '@components/general/IconButton/IconButton';
 import { useNavigation } from '@hooks/useNavigation';
-import { ProfileScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 
 export const ProfileImageView = ({
     source,
     children
 }: ProfileImageViewProps): JSX.Element => {
-    const { navigateTo } = useNavigation();
+    const { navigateTo } = useNavigation(RootStackNavigatorEnum.ProfileStack);
 
     const window = Dimensions.get('window');
 
@@ -24,7 +24,7 @@ export const ProfileImageView = ({
     const scrollY = useRef(new Animated.Value(0)).current;
 
     const openSettings = () => {
-        navigateTo(ProfileScreens.SettingsScreen);
+        navigateTo(RootStackNavigatorEnum.ProfileStack);
     };
 
     return (

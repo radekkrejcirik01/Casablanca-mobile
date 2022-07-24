@@ -1,6 +1,5 @@
 import React from 'react';
 import { View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import COLORS from '@constants/COLORS';
@@ -8,13 +7,17 @@ import { Continue } from '@components/registration/Continue/Continue';
 import { Title } from '@components/general/Title/Title';
 import { PlaceTags } from '@components/registration/PlaceTags/PlaceTags';
 import { TagsScreenStyle } from '@screens/registration/TagsScreen/TagsScreen.style';
-import { RegistrationScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
+import { useNavigation } from '@hooks/useNavigation';
+import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
 
 export const TagsScreen = (): JSX.Element => {
-    const navigation = useNavigation();
+    const { navigateTo } = useNavigation(
+        RootStackNavigatorEnum.RegistrationStack
+    );
 
     const continuePressed = () => {
-        navigation.navigate(RegistrationScreens.GenderScreen);
+        navigateTo(RegistrationStackNavigatorEnum.GenderScreen);
     };
 
     return (

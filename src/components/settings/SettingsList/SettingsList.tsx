@@ -3,26 +3,39 @@ import { ScrollView } from 'react-native';
 import { SettingsListItem } from '@components/settings/SettingsListItem/SettingsListItem';
 import { SettingsListStyle } from '@components/settings/SettingsList/SettingsList.style';
 import { useNavigation } from '@hooks/useNavigation';
-import { ProfileScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
+import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/ProfileStackNavigator.enum';
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 
 export const SettingsList = (): JSX.Element => {
-    const { navigateTo } = useNavigation();
+    const { navigateTo } = useNavigation(RootStackNavigatorEnum.ProfileStack);
 
-    const openAboutScreen = () => {};
-
-    const toggleSwitch = (value: boolean) => {};
-
-    const openDistanceScreen = () => {
-        navigateTo(ProfileScreens.DistanceScreen);
+    const openAboutScreen = () => {
+        navigateTo(ProfileStackNavigatorEnum.AboutScreen);
     };
 
-    const openHelpCenterScreen = () => {};
+    const toggleSwitch = (value: boolean) => {
+        console.log(JSON.stringify(value));
+    };
 
-    const openCommunityRulesScreen = () => {};
+    const openDistanceScreen = () => {
+        navigateTo(ProfileStackNavigatorEnum.DistanceScreen);
+    };
 
-    const openPrivacyPolicyScreen = () => {};
+    const openHelpCenterScreen = () => {
+        navigateTo(ProfileStackNavigatorEnum.HelpCenterScreen);
+    };
 
-    const openAccountScreen = () => {};
+    const openCommunityRulesScreen = () => {
+        navigateTo(ProfileStackNavigatorEnum.CommunityRulesScreen);
+    };
+
+    const openPrivacyPolicyScreen = () => {
+        navigateTo(ProfileStackNavigatorEnum.PrivacyPolicyScreen);
+    };
+
+    const openAccountScreen = () => {
+        navigateTo(ProfileStackNavigatorEnum.AccountScreen);
+    };
 
     const LogOut = () => {};
 

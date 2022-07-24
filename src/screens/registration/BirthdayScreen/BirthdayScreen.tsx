@@ -1,7 +1,6 @@
 import React from 'react';
 import { Alert, View } from 'react-native';
 import { useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import COLORS from '@constants/COLORS';
@@ -11,20 +10,24 @@ import { BirthdayScreenStyle } from '@screens/registration/BirthdayScreen/Birthd
 import { BirthdayInput } from '@components/registration/BirthdayInput/BirthdayInput';
 import { getAge } from '@functions/getAge';
 import { ReducerProps } from '@store/index.props';
-import { RegistrationScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
+import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
+import { useNavigation } from '@hooks/useNavigation';
 
 export const BirthdayScreen = (): JSX.Element => {
     const birthday = useSelector(
         (state: ReducerProps) => state.registration.birthday
     );
 
-    const navigation = useNavigation();
+    const { navigateTo } = useNavigation(
+        RootStackNavigatorEnum.RegistrationStack
+    );
 
     const continuePressed = () => {
         const birthdayValue = `${birthday.year}/${birthday.month}/${birthday.day}`;
 
         if (getAge(birthdayValue) >= 18) {
-            navigation.navigate(RegistrationScreens.PhotosScreen);
+            navigateTo(RegistrationStackNavigatorEnum.PhotosScreen);
         }
         if (getAge(birthdayValue) < 18) {
             Alert.alert('Sorry, Casablanca is only for people older 18');

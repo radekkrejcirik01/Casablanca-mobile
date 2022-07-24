@@ -1,6 +1,5 @@
 import React from 'react';
 import { View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import COLORS from '@constants/COLORS';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
@@ -8,13 +7,17 @@ import { Continue } from '@components/registration/Continue/Continue';
 import { Title } from '@components/general/Title/Title';
 import { PhotosScreenStyle } from '@screens/registration/PhotosScreen/PhotosScreen.style';
 import { PhotoPlaceholder } from '@components/registration/PhotoPlaceholder/PhotoPlaceholder';
-import { RegistrationScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
+import { useNavigation } from '@hooks/useNavigation';
+import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
 
 export const PhotosScreen = (): JSX.Element => {
-    const navigation = useNavigation();
+    const { navigateTo } = useNavigation(
+        RootStackNavigatorEnum.RegistrationStack
+    );
 
     const continuePressed = () => {
-        navigation.navigate(RegistrationScreens.FavePlacesScreen);
+        navigateTo(RegistrationStackNavigatorEnum.FavePlacesScreen);
     };
 
     return (

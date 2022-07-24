@@ -1,18 +1,29 @@
 import { useCallback } from 'react';
 import { useNavigation as useNavigationModule } from '@react-navigation/native';
-import { TabBarScreens } from '@navigation/navigation.enum';
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
+import { MessagesStackNavigatorEnum } from '@navigation/StackNavigators/messages/MessagesStackNavigator.enum';
+import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/ProfileStackNavigator.enum';
+import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
 
-export const useNavigation = (): {
-    navigateTo: (screen: TabBarScreens) => void;
+export const useNavigation = (
+    stack: RootStackNavigatorEnum
+): {
+    navigateTo: (
+        screen:
+            | RootStackNavigatorEnum
+            | MessagesStackNavigatorEnum
+            | ProfileStackNavigatorEnum
+            | RegistrationStackNavigatorEnum
+    ) => void;
     navigateBack: () => void;
 } => {
     const navigation = useNavigationModule();
 
     const navigateTo = useCallback(
-        (screen: TabBarScreens) => {
-            navigation.navigate(screen as never);
+        (screen: string) => {
+            navigation.navigate(stack as never, { screen } as never);
         },
-        [navigation]
+        [navigation, stack]
     );
 
     const navigateBack = useCallback(() => {

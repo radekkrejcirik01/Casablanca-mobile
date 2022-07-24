@@ -1,7 +1,7 @@
 import React, { createRef, useEffect } from 'react';
 import { Alert, TextInput, View } from 'react-native';
+import { useNavigation as useNavigationModule } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import COLORS from '@constants/COLORS';
@@ -14,15 +14,20 @@ import { Continue } from '@components/registration/Continue/Continue';
 import { Title } from '@components/general/Title/Title';
 import { setFirstnameAction } from '@store/RegistrationReducer';
 import { ReducerProps } from '@store/index.props';
-import { RegistrationScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
+import { useNavigation } from '@hooks/useNavigation';
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
+import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
 
 export const FirstnameScreen = (): JSX.Element => {
     const firstname = useSelector(
         (state: ReducerProps) => state.registration.firstname
     );
 
+    const navigation = useNavigationModule();
+    const { navigateTo } = useNavigation(
+        RootStackNavigatorEnum.RegistrationStack
+    );
     const dispatch = useDispatch();
-    const navigation = useNavigation();
 
     const input = createRef<TextInput>();
 
@@ -35,7 +40,7 @@ export const FirstnameScreen = (): JSX.Element => {
 
     const continuePressed = () => {
         if (firstname) {
-            navigation.navigate(RegistrationScreens.EmailScreen);
+            navigateTo(RegistrationStackNavigatorEnum.EmailScreen);
         } else {
             Alert.alert('Please select firstname');
         }

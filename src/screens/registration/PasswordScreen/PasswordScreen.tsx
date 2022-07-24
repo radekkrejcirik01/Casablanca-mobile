@@ -1,7 +1,7 @@
 import React, { createRef, useEffect } from 'react';
 import { Alert, TextInput, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation as useNavigationModule } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import COLORS from '@constants/COLORS';
@@ -14,15 +14,20 @@ import { Title } from '@components/general/Title/Title';
 import { setPasswordAction } from '@store/RegistrationReducer';
 import { ReducerProps } from '@store/index.props';
 import { PasswordScreenStyle } from '@screens/registration/PasswordScreen/PasswordScreen.style';
-import { RegistrationScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
+import { useNavigation } from '@hooks/useNavigation';
+import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
 
 export const PasswordScreen = (): JSX.Element => {
     const password = useSelector(
         (state: ReducerProps) => state.registration.password
     );
 
+    const navigation = useNavigationModule();
+    const { navigateTo } = useNavigation(
+        RootStackNavigatorEnum.RegistrationStack
+    );
     const dispatch = useDispatch();
-    const navigation = useNavigation();
 
     const input = createRef<TextInput>();
 
@@ -35,7 +40,7 @@ export const PasswordScreen = (): JSX.Element => {
 
     const continuePressed = () => {
         if (password) {
-            navigation.navigate(RegistrationScreens.EmailScreen);
+            navigateTo(RegistrationStackNavigatorEnum.EmailScreen);
         } else {
             Alert.alert('Please type password');
         }

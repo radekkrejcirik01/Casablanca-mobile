@@ -1,7 +1,7 @@
 import React, { createRef, useEffect } from 'react';
 import { Alert, TextInput, View } from 'react-native';
+import { useNavigation as useNavigationModule } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import COLORS from '@constants/COLORS';
@@ -14,15 +14,20 @@ import { Title } from '@components/general/Title/Title';
 import { EmailScreenStyle } from '@screens/registration/EmailScreen/EmailScreen.style';
 import { setEmailAction } from '@store/RegistrationReducer';
 import { ReducerProps } from '@store/index.props';
-import { RegistrationScreens } from "@navigation/RootStackNavigator/RootStackNavigator.enum";
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
+import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
+import { useNavigation } from '@hooks/useNavigation';
 
 export const EmailScreen = (): JSX.Element => {
     const email = useSelector(
         (state: ReducerProps) => state.registration.email
     );
 
+    const navigation = useNavigationModule();
+    const { navigateTo } = useNavigation(
+        RootStackNavigatorEnum.RegistrationStack
+    );
     const dispatch = useDispatch();
-    const navigation = useNavigation();
 
     const input = createRef<TextInput>();
 
@@ -35,7 +40,7 @@ export const EmailScreen = (): JSX.Element => {
 
     const continuePressed = () => {
         if (email && email.includes('@')) {
-            navigation.navigate(RegistrationScreens.BirthdayScreen);
+            navigateTo(RegistrationStackNavigatorEnum.BirthdayScreen);
         } else if (email) {
             Alert.alert('Please select email address');
         }

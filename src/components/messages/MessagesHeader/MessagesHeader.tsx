@@ -3,15 +3,16 @@ import { View } from 'react-native';
 import { Title } from '@components/general/Title/Title';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { MessagesHeaderStyle } from '@components/messages/MessagesHeader/MessagesHeader.style';
-import { useNavigation } from '@hooks/useNavigation';
 import { IconButton } from '@components/general/IconButton/IconButton';
-import { MessagesScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
+import { MessagesStackNavigatorEnum } from '@navigation/StackNavigators/messages/MessagesStackNavigator.enum';
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
+import { useNavigation } from '@hooks/useNavigation';
 
 export const MessagesHeader = (): JSX.Element => {
-    const { navigateTo } = useNavigation();
+    const { navigateTo } = useNavigation(RootStackNavigatorEnum.MessagesStack);
 
     const openNotificationScreen = () => {
-        navigateTo(MessagesScreens.NotificationScreen);
+        navigateTo(MessagesStackNavigatorEnum.NotificationScreen);
     };
 
     return (

@@ -9,20 +9,23 @@ import { Input } from '@components/general/Input/Input';
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import { Icon } from '@components/icon/Icon';
 import { IconEnum } from '@components/icon/Icon.enum';
-import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
-import { RegistrationScreens } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
+import { useNavigation } from '@hooks/useNavigation';
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
+import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
 
 export const LoginScreen = (): JSX.Element => {
     const [username, setUsername] = useState<string>();
     const [password, setPassword] = useState<string>();
 
     const dispatch = useDispatch();
-    const navigation = useNavigation();
+    const { navigateTo } = useNavigation(
+        RootStackNavigatorEnum.RegistrationStack
+    );
 
     const loginPressed = () => {};
     const registerPressed = () => {
-        navigation.navigate(RegistrationScreens.FirstnameScreen);
+        navigateTo(RegistrationStackNavigatorEnum.FirstnameScreen);
     };
 
     return (
