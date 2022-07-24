@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { SafeAreaView } from 'react-native';
 import { Title } from '@components/general/Title/Title';
-import { CloseFriendsScreenStyle } from '@screens/closeFriends/CloseFriendsScreen/CloseFriendsScreen.style';
+import { CloseFriendsScreenStyle } from '@screens/tab/CloseFriendsScreen/CloseFriendsScreen.style';
 import { TabList } from '@components/closeFriends/TabList/TabList';
 import { useModal } from '@hooks/useModal';
 import { InfoModal } from '@components/general/InfoModal/InfoModal';

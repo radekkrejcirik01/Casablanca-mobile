@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { ProfileScreenStyle } from '@screens/profile/ProfileScreen/ProfileScreen.style';
+import { ProfileScreenStyle } from '@screens/tab/ProfileScreen/ProfileScreen.style';
 import { ProfileImageView } from '@components/profile/ProfileImageView';
 import { PlaceTags } from '@components/registration/PlaceTags/PlaceTags';
 

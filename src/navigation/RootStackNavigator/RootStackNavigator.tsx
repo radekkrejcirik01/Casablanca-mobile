@@ -15,7 +15,7 @@ import { PasswordScreen } from '@screens/registration/PasswordScreen/PasswordScr
 import { BottomTabNavigator } from '@navigation/BottomTabNavigator/BottomTabNavigator';
 import { NotificationScreen } from '@screens/messages/NotificationScreen/NotificationScreen';
 import { ChatScreen } from '@screens/messages/ChatScreen/ChatScreen';
-import { SettingsScreen } from '@screens/profile/SettigsScreen/SettingsScreen';
+import { SettingsScreen } from '@screens/settings/SettigsScreen/SettingsScreen';
 import {
     LoginScreens,
     MessagesScreens,
@@ -23,7 +23,7 @@ import {
     RegistrationScreens,
     RootStackNavigatorEnum
 } from '@navigation/RootStackNavigator/RootStackNavigator.enum';
-import { DistanceScreen } from '@screens/profile/DistanceScreen/DistanceScreeen';
+import { DistanceScreen } from '@screens/settings/DistanceScreen/DistanceScreeen';
 import {
     ChatScreenHeader,
     DistanceTitle,
