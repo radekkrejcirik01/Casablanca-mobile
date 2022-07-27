@@ -3,7 +3,7 @@ import COLORS from '@constants/COLORS';
 
 export const SettingsListStyle = StyleSheet.create({
     container: {
-        paddingTop: 20
+        paddingTop: 10
     },
     lastItem: {
         marginTop: 150,

@@ -16,7 +16,7 @@ const Root = createStackNavigator<ParamListBase>();
 export const RootStackNavigator = (): JSX.Element => {
     const token = useSelector((state: ReducerProps) => state.user.token);
 
-    if (!token) {
+    if (token) {
         return (
             <Root.Navigator screenOptions={NavigatorScreenOptions}>
                 <Root.Group>

@@ -20,10 +20,14 @@ export const CommunityRulesTitle: StackNavigationOptions = {
     headerTitle: 'Community Rules'
 };
 
-export const PrivacyPolicyTitle: StackNavigationOptions = {
-    headerTitle: 'Privacy Policy'
-};
-
 export const AccountTitle: StackNavigationOptions = {
     headerTitle: 'Account'
+};
+
+export const ChangePasswordTitle: StackNavigationOptions = {
+    headerTitle: 'Change password'
+};
+
+export const DeleteAccountTitle: StackNavigationOptions = {
+    headerTitle: 'Delete account'
 };

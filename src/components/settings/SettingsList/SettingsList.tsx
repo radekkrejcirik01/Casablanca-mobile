@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { Linking, View } from 'react-native';
 import { SettingsListItem } from '@components/settings/SettingsListItem/SettingsListItem';
 import { SettingsListStyle } from '@components/settings/SettingsList/SettingsList.style';
 import { useNavigation } from '@hooks/useNavigation';
@@ -30,7 +30,9 @@ export const SettingsList = (): JSX.Element => {
     };
 
     const openPrivacyPolicyScreen = () => {
-        navigateTo(ProfileStackNavigatorEnum.PrivacyPolicyScreen);
+        Linking.openURL(
+            'https://www.termsfeed.com/live/c0485039-5d23-4ad7-a4b9-0970911f8ec1'
+        );
     };
 
     const openAccountScreen = () => {
@@ -40,10 +42,9 @@ export const SettingsList = (): JSX.Element => {
     const LogOut = () => {};
 
     return (
-        <ScrollView style={SettingsListStyle.container}>
+        <View style={SettingsListStyle.container}>
             <SettingsListItem
                 title="About Casablanca"
-                description="Description"
                 hasArrow
                 onPress={openAboutScreen}
             />
@@ -84,6 +85,6 @@ export const SettingsList = (): JSX.Element => {
                 onPress={LogOut}
                 style={SettingsListStyle.lastItem}
             />
-        </ScrollView>
+        </View>
     );
 };

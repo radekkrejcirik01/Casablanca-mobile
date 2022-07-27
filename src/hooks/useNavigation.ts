@@ -6,7 +6,7 @@ import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/P
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
 
 export const useNavigation = (
-    stack: RootStackNavigatorEnum
+    stack?: RootStackNavigatorEnum
 ): {
     navigateTo: (
         screen:

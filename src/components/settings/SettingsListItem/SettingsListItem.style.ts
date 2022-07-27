@@ -9,7 +9,6 @@ export const SettingsListItemStyle = StyleSheet.create({
     touchableOpacity: {
         paddingLeft: 10,
         paddingRight: 20,
-        flex: 1,
         alignItems: 'center',
         flexDirection: 'row'
     },

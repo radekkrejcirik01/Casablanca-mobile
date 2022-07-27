@@ -4,6 +4,7 @@ export enum ProfileStackNavigatorEnum {
     DistanceScreen = 'DistanceScreen',
     HelpCenterScreen = 'HelpCenterScreen',
     CommunityRulesScreen = 'CommunityRulesScreen',
-    PrivacyPolicyScreen = 'PrivacyPolicyScreen',
-    AccountScreen = 'AccountScreen'
+    AccountScreen = 'AccountScreen',
+    ChangePasswordScreen = 'ChangePasswordScreen',
+    DeleteAccountScreen = 'DeleteAccountScreen'
 }

@@ -8,17 +8,19 @@ import { DistanceScreen } from '@screens/settings/DistanceScreen/DistanceScreeen
 import {
     AboutTitle,
     AccountTitle,
+    ChangePasswordTitle,
     CommunityRulesTitle,
+    DeleteAccountTitle,
     DistanceTitle,
     HelpCenterTitle,
-    PrivacyPolicyTitle,
     SettingsTitle
 } from '@navigation/StackNavigators/profile/ProfileStackNavigator.options';
 import { AboutScreen } from '@screens/settings/AboutScreen/AboutScreen';
 import { HelpCenterScreen } from '@screens/settings/HelpCenterScreen/HelpCenterScreen';
 import { CommunityRulesScreen } from '@screens/settings/CommunityRulesScreen/CommunityRulesScreen';
-import { PrivacyPolicyScreen } from '@screens/settings/PrivacyPolicyScreen/PrivacyPolicyScreen';
 import { AccountScreen } from '@screens/settings/AccountScreen/AccountScreen';
+import { ChangePasswordScreen } from '@screens/settings/ChangePasswordScreen/ChangePasswordScreen';
+import { DeleteAccountScreen } from '@screens/settings/DeleteAccountScreen/DeleteAccountScreen';
 
 const Profile = createStackNavigator<ParamListBase>();
 
@@ -50,14 +52,19 @@ export const ProfileStackNavigator = (): JSX.Element => (
             options={{ ...NavigationScreenHeader, ...CommunityRulesTitle }}
         />
         <Profile.Screen
-            name={ProfileStackNavigatorEnum.PrivacyPolicyScreen}
-            component={PrivacyPolicyScreen}
-            options={{ ...NavigationScreenHeader, ...PrivacyPolicyTitle }}
-        />
-        <Profile.Screen
             name={ProfileStackNavigatorEnum.AccountScreen}
             component={AccountScreen}
             options={{ ...NavigationScreenHeader, ...AccountTitle }}
+        />
+        <Profile.Screen
+            name={ProfileStackNavigatorEnum.ChangePasswordScreen}
+            component={ChangePasswordScreen}
+            options={{ ...NavigationScreenHeader, ...ChangePasswordTitle }}
+        />
+        <Profile.Screen
+            name={ProfileStackNavigatorEnum.DeleteAccountScreen}
+            component={DeleteAccountScreen}
+            options={{ ...NavigationScreenHeader, ...DeleteAccountTitle }}
         />
     </Profile.Navigator>
 );

@@ -17,7 +17,9 @@ export const KeyboardAvoidingView = ({
     return (
         <KeyboardAvoidingViewDefault
             behavior={Platform.OS === 'ios' ? 'position' : 'padding'}
-            keyboardVerticalOffset={keyboardVerticalOffset + top}
+            keyboardVerticalOffset={
+                keyboardVerticalOffset && keyboardVerticalOffset + top
+            }
             {...props}
         />
     );
