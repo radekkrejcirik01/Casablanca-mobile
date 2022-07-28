@@ -4,6 +4,10 @@ export const SettingsTitle: StackNavigationOptions = {
     headerTitle: 'Settings'
 };
 
+export const EditTitle: StackNavigationOptions = {
+    headerTitle: 'Edit'
+};
+
 export const AboutTitle: StackNavigationOptions = {
     headerTitle: 'About'
 };

@@ -8,10 +8,15 @@ export const ProfileScreenStyle = StyleSheet.create({
         backgroundColor: COLORS.MAIN_BLUE,
         borderRadius: 30
     },
+    view: {
+        marginHorizontal: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
     firstname: {
         color: 'white',
         fontSize: 30,
-        textAlign: 'center',
         fontWeight: 'bold'
     },
     age: {

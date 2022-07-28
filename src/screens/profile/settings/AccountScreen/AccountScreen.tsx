@@ -1,7 +1,7 @@
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { SettingsListItem } from '@components/settings/SettingsListItem/SettingsListItem';
-import { AccountScreenStyle } from '@screens/settings/AccountScreen/AccountScreen.style';
+import { AccountScreenStyle } from '@screens/profile/settings/AccountScreen/AccountScreen.style';
 import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/ProfileStackNavigator.enum';

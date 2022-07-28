@@ -1,5 +1,6 @@
 export enum ProfileStackNavigatorEnum {
     SettingsScreen = 'SettingsScreen',
+    EditScreen = 'EditScreen',
     AboutScreen = 'AboutScreen',
     DistanceScreen = 'DistanceScreen',
     HelpCenterScreen = 'HelpCenterScreen',

@@ -3,7 +3,7 @@ import { Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Input } from '@components/general/Input/Input';
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
-import { ChangePasswordScreenStyle } from '@screens/settings/ChangePasswordScreen/ChangePasswordScreen.style';
+import { ChangePasswordScreenStyle } from '@screens/profile/settings/ChangePasswordScreen/ChangePasswordScreen.style';
 import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
 

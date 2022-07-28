@@ -6,9 +6,5 @@ export const ProfileImageViewStyle = StyleSheet.create({
         borderBottomLeftRadius: 30,
         borderBottomRightRadius: 30,
         backgroundColor: COLORS.LIGHTGRAY_100
-    },
-    settingsIcon: {
-        marginTop: 50,
-        marginLeft: 30
     }
 });

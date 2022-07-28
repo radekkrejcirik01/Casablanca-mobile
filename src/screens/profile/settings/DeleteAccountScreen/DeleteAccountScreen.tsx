@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { DeleteAccountScreenStyle } from '@screens/settings/DeleteAccountScreen/DeleteAccountScreen.style';
+import { DeleteAccountScreenStyle } from '@screens/profile/settings/DeleteAccountScreen/DeleteAccountScreen.style';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
 import { useNavigation } from '@hooks/useNavigation';
 

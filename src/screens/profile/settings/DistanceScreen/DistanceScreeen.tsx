@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
-import { DistanceScreenStyle } from '@screens/settings/DistanceScreen/DistanceScreen.style';
+import { DistanceScreenStyle } from '@screens/profile/settings/DistanceScreen/DistanceScreen.style';
 
 export const DistanceScreen = (): JSX.Element => {
     const [distance, setDistance] = useState<number>(100);
