@@ -5,18 +5,22 @@ import { CloseFriendsScreenStyle } from '@screens/tab/CloseFriendsScreen/CloseFr
 import { CardList } from '@components/closeFriends/CardList/CardList';
 import { useModal } from '@hooks/useModal';
 import { InfoModal } from '@components/general/InfoModal/InfoModal';
+import {
+    DESCRIPTION,
+    TITLE
+} from '@screens/tab/CloseFriendsScreen/CloseFriendsScreen.const';
 
 export const CloseFriendsScreen = (): JSX.Element => {
     const data = [
-        { name: 'Radek', description: 'Stavovské divadlo', date: '28. 7.' },
-        { name: 'Tomas', description: 'Národní divadlo', date: '28. 7.' }
+        {
+            name: 'Radek',
+            description: 'Stavovské divadlo',
+            date: '28. 7. 19:00'
+        },
+        { name: 'Tomas', description: 'Národní divadlo', date: '28. 7. 19:00' }
     ];
 
     const { modalVisible, showModal, hideModal } = useModal();
-
-    const title = 'Welcome to close friends! 🎉';
-    const description =
-        'Here you can check your friends upcoming activities. You can share new  We also recommend sharing your new plans with new people with your closest friends for safety policy';
 
     useEffect(() => {
         showModal();
@@ -30,8 +34,8 @@ export const CloseFriendsScreen = (): JSX.Element => {
             />
             <CardList data={data} />
             <InfoModal
-                title={title}
-                description={description}
+                title={TITLE}
+                description={DESCRIPTION}
                 isVisible={modalVisible}
                 onClose={hideModal}
             />

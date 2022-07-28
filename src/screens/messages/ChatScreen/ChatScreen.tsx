@@ -48,11 +48,15 @@ export const ChatScreen = (): JSX.Element => {
         { sender: 'zuzka@gmail.com', name: 'zuzka', message: 'posledni zprava' }
     ];
 
+    const onSend = (value: string) => {
+        console.log(value);
+    };
+
     return (
         <SafeAreaView>
             <KeyboardAvoidingView keyboardVerticalOffset={44}>
                 <ChatList data={data} style={ChatScreenStyle.chatList} />
-                <ChatInput style={ChatScreenStyle.chatInput} />
+                <ChatInput onSend={onSend} style={ChatScreenStyle.chatInput} />
             </KeyboardAvoidingView>
         </SafeAreaView>
     );
