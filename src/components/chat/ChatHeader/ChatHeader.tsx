@@ -1,5 +1,6 @@
 import React from 'react';
-import { Image, SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
+import FastImage from 'react-native-fast-image';
 import { Icon } from '@components/icon/Icon';
 import { ChatHeaderStyle } from '@components/chat/ChatHeader/ChatHeader.style';
 import { IconEnum } from '@components/icon/Icon.enum';
@@ -21,7 +22,7 @@ export const ChatHeader = (): JSX.Element => {
                     onPress={openProfile}
                     style={ChatHeaderStyle.profileContainer}
                 >
-                    <Image
+                    <FastImage
                         source={require('../../../assets/images/profilovka.png')}
                         style={ChatHeaderStyle.image}
                     />

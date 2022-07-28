@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react';
-import { ListRenderItemInfo } from 'react-native';
-import { TabListDataProps } from '@components/closeFriends/TabList/TabList.props';
-import { Tab } from '@components/closeFriends/Tab/Tab';
+import React, { useCallback, useState } from 'react';
+import { ListRenderItemInfo, RefreshControl } from 'react-native';
+import { TabListDataProps } from '@components/closeFriends/CardList/CardList.props';
+import { Card } from '@components/closeFriends/Card/Card';
 
 export const useTabListRenders = (
     data: Array<TabListDataProps>
@@ -13,7 +13,17 @@ export const useTabListRenders = (
     renderItem: ({ item }: ListRenderItemInfo<TabListDataProps>) => JSX.Element;
     getItemCount: () => number;
     keyExtractor: (item: TabListDataProps, index: number) => string;
+    refreshControl: JSX.Element;
 } => {
+    const [refreshing, setRefreshing] = useState(false);
+
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        setTimeout(() => {
+            setRefreshing(false);
+        }, 1000);
+    }, []);
+
     const getItem = (
         listData: Array<TabListDataProps>,
         index: number
@@ -22,7 +32,7 @@ export const useTabListRenders = (
     const renderItem = ({
         item
     }: ListRenderItemInfo<TabListDataProps>): JSX.Element => (
-        <Tab item={item} />
+        <Card item={item} />
     );
 
     const getItemCount = useCallback((): number => data?.length, [data]);
@@ -31,5 +41,13 @@ export const useTabListRenders = (
     const keyExtractor = (item: TabListDataProps, index: number): string =>
         item.name + index;
 
-    return { getItem, renderItem, getItemCount, keyExtractor };
+    const refreshControl = (
+        <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor="white"
+        />
+    );
+
+    return { getItem, renderItem, getItemCount, keyExtractor, refreshControl };
 };
