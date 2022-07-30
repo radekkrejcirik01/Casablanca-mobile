@@ -7,6 +7,7 @@ export const SwiperScreenStyle = StyleSheet.create({
     view: {
         flex: 1,
         overflow: 'hidden',
-        borderRadius: 20
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20
     }
 });

@@ -35,7 +35,7 @@ export const usePullToRefresh = (
         if (
             touchIndex === index &&
             scrollPage === 0 &&
-            scrollOffset < 0.93 &&
+            scrollOffset < 0.92 &&
             scrollOffset > 0.3 &&
             !isScrollDown &&
             !isAnimation
@@ -72,7 +72,7 @@ export const usePullToRefresh = (
     const onPageScroll = (event: ViewPagerOnPageScrollEvent) => {
         setScrollOffset(event.nativeEvent.offset);
 
-        if (event.nativeEvent.offset > 0.93) {
+        if (event.nativeEvent.offset > 0.92) {
             setIsScrollDown(false);
         }
         if (event.nativeEvent.offset < 0.4 && event.nativeEvent.offset > 0) {

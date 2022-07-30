@@ -23,8 +23,9 @@ export const SwiperCard = ({
 }: SwiperCardProps): JSX.Element => {
     const lottieRef = useRef<AnimatedLottieViewInterface>(null);
 
-    const { hapticTouch } = useHaptic();
     const { top } = useSafeAreaInsets();
+
+    const { hapticTouch } = useHaptic();
 
     const onDoubleTap = (event: TapGestureHandlerGestureEvent) => {
         onCardTouch(card.name);

@@ -16,6 +16,8 @@ import { usePullToRefresh } from '@hooks/usePullToRefresh';
 export const Swiper = ({ data }: SwiperProps): JSX.Element => {
     const { name } = data[0];
 
+    const { top } = useSafeAreaInsets();
+
     const {
         isAnimation,
         onPageScroll,
@@ -23,8 +25,6 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
         onPageSelected,
         onCardTouch
     } = usePullToRefresh(name);
-
-    const { top } = useSafeAreaInsets();
 
     const paddingTop = useMemo(
         (): StyleProp<ViewStyle> => ({ paddingTop: top || 10 }),
