@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { StyleProp, Text, TouchableWithoutFeedback, View } from 'react-native';
 import {
     State,
