@@ -1,5 +1,6 @@
-import React from 'react';
-import { SafeAreaView } from 'react-native';
+import React, { useMemo } from 'react';
+import { StyleProp, View, ViewStyle } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ViewPager from '@react-native-community/viewpager';
 import * as Animatable from 'react-native-animatable';
 import { SwiperCard } from '@components/swipe/SwiperCard/SwiperCard';
@@ -23,12 +24,19 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
         onCardTouch
     } = usePullToRefresh(name);
 
+    const { top } = useSafeAreaInsets();
+
+    const paddingTop = useMemo(
+        (): StyleProp<ViewStyle> => ({ paddingTop: 10 + top }),
+        [top]
+    );
+
     return (
-        <SafeAreaView style={SwiperStyle.container}>
+        <View style={SwiperStyle.container}>
             {isAnimation && (
                 <Animatable.View
                     animation="bounceIn"
-                    style={SwiperStyle.animatableView}
+                    style={[SwiperStyle.animatableView, paddingTop]}
                 >
                     <Icon name={IconEnum.FLASH_FILLED} size={38} />
                 </Animatable.View>
@@ -49,6 +57,6 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
                     />
                 ))}
             </ViewPager>
-        </SafeAreaView>
+        </View>
     );
 };

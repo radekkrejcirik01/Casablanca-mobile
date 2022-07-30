@@ -1,5 +1,6 @@
 import React from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ProfileScreenStyle } from '@screens/tab/ProfileScreen/ProfileScreen.style';
 import { ProfileImageView } from '@components/profile/ProfileImageView';
 import { PlaceTags } from '@components/registration/PlaceTags/PlaceTags';
@@ -21,7 +22,7 @@ export const ProfileScreen = (): JSX.Element => {
     };
 
     return (
-        <SafeAreaView>
+        <SafeAreaProvider>
             <ProfileImageView source="">
                 <View style={ProfileScreenStyle.bottomContainer}>
                     <View style={ProfileScreenStyle.view}>
@@ -45,6 +46,6 @@ export const ProfileScreen = (): JSX.Element => {
                     </View>
                 </View>
             </ProfileImageView>
-        </SafeAreaView>
+        </SafeAreaProvider>
     );
 };

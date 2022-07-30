@@ -17,6 +17,7 @@ import { PasswordScreenStyle } from '@screens/registration/PasswordScreen/Passwo
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { useNavigation } from '@hooks/useNavigation';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
+import { setUserToken } from '@store/UserReducer';
 
 export const PasswordScreen = (): JSX.Element => {
     const password = useSelector(
@@ -40,7 +41,7 @@ export const PasswordScreen = (): JSX.Element => {
 
     const continuePressed = () => {
         if (password) {
-            navigateTo(RegistrationStackNavigatorEnum.EmailScreen);
+            dispatch(setUserToken('radek'));
         } else {
             Alert.alert('Please type password');
         }

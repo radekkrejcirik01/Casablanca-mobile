@@ -13,7 +13,7 @@ export const SettingsListItemStyle = StyleSheet.create({
         flexDirection: 'row'
     },
     title: {
-        paddingVertical: 15,
+        paddingVertical: 12,
         paddingLeft: 5,
         flex: 1,
         color: COLORS.WHITE,

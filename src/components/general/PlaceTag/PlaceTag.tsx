@@ -20,7 +20,7 @@ export const PlaceTag = ({ tag, onSelect }: PlaceTagProps): JSX.Element => {
             }}
             style={[
                 PlaceTagStyle.container,
-                tagged && {
+                !tagged && {
                     borderColor: COLORS.WHITE
                 }
             ]}

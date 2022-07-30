@@ -3,6 +3,7 @@ import { SafeAreaView, View } from 'react-native';
 import { Swiper } from '@components/swipe/Swiper/Swiper';
 import { SwiperScreenStyle } from '@screens/tab/SwipeScreen/SwipeScreen.style';
 import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export const SwipeScreen = (): JSX.Element => {
     const data: Array<CardDataProps> = [
@@ -30,10 +31,10 @@ export const SwipeScreen = (): JSX.Element => {
     ];
 
     return (
-        <SafeAreaView style={SwiperScreenStyle.safeArea}>
+        <SafeAreaProvider style={SwiperScreenStyle.safeArea}>
             <View style={SwiperScreenStyle.view}>
                 <Swiper data={data} />
             </View>
-        </SafeAreaView>
+        </SafeAreaProvider>
     );
 };

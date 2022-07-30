@@ -1,12 +1,16 @@
 import React from 'react';
 import { Linking, View } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { SettingsListItem } from '@components/settings/SettingsListItem/SettingsListItem';
 import { SettingsListStyle } from '@components/settings/SettingsList/SettingsList.style';
 import { useNavigation } from '@hooks/useNavigation';
 import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/ProfileStackNavigator.enum';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
+import { setUserToken } from '@store/UserReducer';
 
 export const SettingsList = (): JSX.Element => {
+    const dispatch = useDispatch();
+
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.ProfileStack);
 
     const openAboutScreen = () => {
@@ -39,7 +43,9 @@ export const SettingsList = (): JSX.Element => {
         navigateTo(ProfileStackNavigatorEnum.AccountScreen);
     };
 
-    const LogOut = () => {};
+    const LogOut = () => {
+        dispatch(setUserToken(null));
+    };
 
     return (
         <View style={SettingsListStyle.container}>
