@@ -1,12 +1,13 @@
-import React, { useRef } from 'react';
-import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import React, { useMemo, useRef } from 'react';
+import { StyleProp, Text, TouchableWithoutFeedback, View } from 'react-native';
 import {
     State,
     TapGestureHandler,
     TapGestureHandlerGestureEvent
 } from 'react-native-gesture-handler';
 import LottieView from 'lottie-react-native';
-import FastImage from 'react-native-fast-image';
+import FastImage, { ImageStyle } from 'react-native-fast-image';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
     AnimatedLottieViewInterface,
     SwiperCardProps
@@ -14,6 +15,7 @@ import {
 import { SwiperCardStyle } from '@components/swipe/SwiperCard/SwiperCard.style';
 import { PLACE_TAGS } from '@components/registration/PlaceTags/PlaceTags.const';
 import { PLACE_EMOJIS } from '@components/general/PlaceTag/PlaceTag.const';
+import { useHaptic } from '@hooks/useHaptic';
 
 export const SwiperCard = ({
     card,
@@ -21,14 +23,23 @@ export const SwiperCard = ({
 }: SwiperCardProps): JSX.Element => {
     const lottieRef = useRef<AnimatedLottieViewInterface>(null);
 
+    const { hapticTouch } = useHaptic();
+    const { top } = useSafeAreaInsets();
+
     const onDoubleTap = (event: TapGestureHandlerGestureEvent) => {
         onCardTouch(card.name);
         // Trigger like event
         if (event.nativeEvent.state === State.ACTIVE) {
+            hapticTouch('impactLight');
             lottieRef.current.reset(0);
             lottieRef.current.play(2, 75);
         }
     };
+
+    const paddingTop = useMemo(
+        (): StyleProp<ImageStyle> => ({ paddingTop: top > 0 ? top - 10 : 10 }),
+        [top]
+    );
 
     const onRemoveLike = () => {
         lottieRef.current.reset(0);
@@ -39,7 +50,7 @@ export const SwiperCard = ({
             <View style={SwiperCardStyle.container}>
                 <FastImage
                     source={{ uri: card.image }}
-                    style={SwiperCardStyle.image}
+                    style={[SwiperCardStyle.image, paddingTop]}
                     resizeMode="cover"
                 >
                     <TouchableWithoutFeedback onPress={onRemoveLike}>
@@ -56,23 +67,18 @@ export const SwiperCard = ({
                             <Text
                                 style={[
                                     SwiperCardStyle.tagText,
-                                    { fontSize: 14 }
+                                    SwiperCardStyle.tagTitle
                                 ]}
                             >
                                 {card.name}, {card.age}
                             </Text>
                         </View>
-                        {PLACE_TAGS.map((value) => (
+                        {PLACE_TAGS.slice(0, 4).map((value) => (
                             <View
                                 key={value}
                                 style={SwiperCardStyle.tagInfoView}
                             >
-                                <Text
-                                    style={{
-                                        paddingRight: 3,
-                                        fontSize: 12
-                                    }}
-                                >
+                                <Text style={SwiperCardStyle.emoji}>
                                     {
                                         PLACE_EMOJIS[
                                             value as keyof typeof PLACE_EMOJIS

@@ -8,7 +8,6 @@ export const SwiperCardStyle = StyleSheet.create({
     image: {
         width: '100%',
         height: '100%',
-        paddingTop: 10,
         paddingRight: 5,
         paddingLeft: '3%',
         paddingBottom: '5%'
@@ -31,10 +30,17 @@ export const SwiperCardStyle = StyleSheet.create({
         marginTop: 10,
         backgroundColor: COLORS.MAIN_BLUE
     },
+    tagTitle: {
+        fontSize: 14
+    },
     tagText: {
         fontSize: 12.5,
         color: COLORS.WHITE,
         fontWeight: 'bold',
         paddingHorizontal: 2
+    },
+    emoji: {
+        paddingRight: 3,
+        fontSize: 12
     }
 });

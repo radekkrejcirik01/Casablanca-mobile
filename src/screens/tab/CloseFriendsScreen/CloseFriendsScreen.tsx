@@ -13,11 +13,15 @@ import {
 export const CloseFriendsScreen = (): JSX.Element => {
     const data = [
         {
-            name: 'Radek',
+            name: 'Radek + 1',
             description: 'Stavovské divadlo',
             date: '28. 7. 19:00'
         },
-        { name: 'Tomas', description: 'Národní divadlo', date: '28. 7. 19:00' }
+        {
+            name: 'Tomas + 1',
+            description: 'Národní divadlo',
+            date: '28. 7. 19:00'
+        }
     ];
 
     const { modalVisible, showModal, hideModal } = useModal();

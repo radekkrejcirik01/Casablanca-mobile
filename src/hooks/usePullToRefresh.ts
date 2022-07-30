@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
     PageScrollStateChangedNativeEvent,
     ViewPagerOnPageScrollEvent,
     ViewPagerOnPageSelectedEvent
 } from '@react-native-community/viewpager';
-import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+import { useHaptic } from '@hooks/useHaptic';
 
 export const usePullToRefresh = (
     index: string
@@ -25,28 +25,23 @@ export const usePullToRefresh = (
 
     const [touchIndex, setTouchIndex] = useState<string>();
 
-    const hapticOptions = useMemo(
-        (): ReactNativeHapticFeedback.HapticOptions => ({
-            enableVibrateFallback: true,
-            ignoreAndroidSystemSettings: false
-        }),
-        []
-    );
+    const { hapticTouch } = useHaptic();
 
-    const onRefresh = useCallback(() => {
-        ReactNativeHapticFeedback.trigger('impactMedium', hapticOptions);
-    }, [hapticOptions]);
+    const onRefresh = () => {
+        console.log('onRefresh');
+    };
 
     useEffect(() => {
         if (
             touchIndex === index &&
             scrollPage === 0 &&
-            scrollOffset < 0.95 &&
+            scrollOffset < 0.93 &&
             scrollOffset > 0.3 &&
             !isScrollDown &&
             !isAnimation
         ) {
             onRefresh();
+            hapticTouch('impactMedium');
             setIsAnimation(true);
             setIsScrollDown(false);
         }
@@ -77,7 +72,7 @@ export const usePullToRefresh = (
     const onPageScroll = (event: ViewPagerOnPageScrollEvent) => {
         setScrollOffset(event.nativeEvent.offset);
 
-        if (event.nativeEvent.offset > 0.95) {
+        if (event.nativeEvent.offset > 0.93) {
             setIsScrollDown(false);
         }
         if (event.nativeEvent.offset < 0.4 && event.nativeEvent.offset > 0) {

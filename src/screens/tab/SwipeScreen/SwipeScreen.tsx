@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View } from 'react-native';
+import { View } from 'react-native';
 import { Swiper } from '@components/swipe/Swiper/Swiper';
 import { SwiperScreenStyle } from '@screens/tab/SwipeScreen/SwipeScreen.style';
 import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
@@ -9,7 +9,7 @@ export const SwipeScreen = (): JSX.Element => {
     const data: Array<CardDataProps> = [
         {
             image: 'https://static.onecms.io/wp-content/uploads/sites/6/2019/07/st3-production-still-4-2000.jpg',
-            name: 'Zuzana',
+            name: 'Radek',
             age: '34',
             tags: ['Theatre', 'Cafe'],
             color: 'blue'
@@ -23,7 +23,7 @@ export const SwipeScreen = (): JSX.Element => {
         },
         {
             image: 'https://static.onecms.io/wp-content/uploads/sites/6/2019/07/st3-production-still-4-2000.jpg',
-            name: 'Radek',
+            name: 'Tomas',
             age: '34',
             tags: ['Theatre', 'Cafe'],
             color: 'blue'
