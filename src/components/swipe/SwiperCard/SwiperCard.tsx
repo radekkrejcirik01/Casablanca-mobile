@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { StyleProp, Text, TouchableWithoutFeedback, View } from 'react-native';
 import {
     State,
@@ -37,7 +37,7 @@ export const SwiperCard = ({
     };
 
     const paddingTop = useMemo(
-        (): StyleProp<ImageStyle> => ({ paddingTop: top > 0 ? top - 10 : 10 }),
+        (): StyleProp<ImageStyle> => ({ paddingTop: top ? top - 10 : 10 }),
         [top]
     );
 

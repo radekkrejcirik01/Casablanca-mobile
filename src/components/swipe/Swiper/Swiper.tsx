@@ -27,7 +27,7 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
     const { top } = useSafeAreaInsets();
 
     const paddingTop = useMemo(
-        (): StyleProp<ViewStyle> => ({ paddingTop: top > 0 ? top : 10 }),
+        (): StyleProp<ViewStyle> => ({ paddingTop: top || 10 }),
         [top]
     );
 
