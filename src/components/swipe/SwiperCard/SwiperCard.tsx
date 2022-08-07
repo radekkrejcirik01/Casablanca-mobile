@@ -8,6 +8,7 @@ import {
 import LottieView from 'lottie-react-native';
 import FastImage, { ImageStyle } from 'react-native-fast-image';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import ViewPager from '@react-native-community/viewpager';
 import {
     AnimatedLottieViewInterface,
     SwiperCardProps
@@ -16,10 +17,13 @@ import { SwiperCardStyle } from '@components/swipe/SwiperCard/SwiperCard.style';
 import { PLACE_TAGS } from '@components/registration/PlaceTags/PlaceTags.const';
 import { PLACE_EMOJIS } from '@components/general/PlaceTag/PlaceTag.const';
 import { useHaptic } from '@hooks/useHaptic';
+import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
+import { SwiperStyle } from '@components/swipe/Swiper/Swiper.style';
 
 export const SwiperCard = ({
     card,
-    onCardTouch
+    onCardTouch,
+    onInfoTouch
 }: SwiperCardProps): JSX.Element => {
     const lottieRef = useRef<AnimatedLottieViewInterface>(null);
 
@@ -37,6 +41,10 @@ export const SwiperCard = ({
         }
     };
 
+    const infoTouch = () => {
+        onInfoTouch(card.images, card.name, card.age);
+    };
+
     const paddingTop = useMemo(
         (): StyleProp<ImageStyle> => ({ paddingTop: top ? top - 10 : 10 }),
         [top]
@@ -49,50 +57,57 @@ export const SwiperCard = ({
     return (
         <TapGestureHandler onHandlerStateChange={onDoubleTap} numberOfTaps={2}>
             <View style={SwiperCardStyle.container}>
-                <FastImage
-                    source={{ uri: card.image }}
-                    style={[SwiperCardStyle.image, paddingTop]}
-                    resizeMode="cover"
-                >
-                    <TouchableWithoutFeedback onPress={onRemoveLike}>
-                        <LottieView
-                            ref={lottieRef}
-                            source={require('../../../assets/animations/like.json')}
-                            autoPlay={false}
-                            loop={false}
-                            style={SwiperCardStyle.lottieView}
-                        />
-                    </TouchableWithoutFeedback>
-                    <View style={SwiperCardStyle.tagView}>
-                        <View style={SwiperCardStyle.tagInfoView}>
-                            <Text
-                                style={[
-                                    SwiperCardStyle.tagText,
-                                    SwiperCardStyle.tagTitle
-                                ]}
-                            >
-                                {card.name}, {card.age}
-                            </Text>
-                        </View>
-                        {PLACE_TAGS.slice(0, 4).map((value) => (
-                            <View
-                                key={value}
-                                style={SwiperCardStyle.tagInfoView}
-                            >
-                                <Text style={SwiperCardStyle.emoji}>
-                                    {
-                                        PLACE_EMOJIS[
-                                            value as keyof typeof PLACE_EMOJIS
-                                        ]
-                                    }
-                                </Text>
-                                <Text style={SwiperCardStyle.tagText}>
-                                    {value}
-                                </Text>
+                <ViewPager style={SwiperStyle.viewPager}>
+                    {card.images.map((uri: string, index: number) => (
+                        <FastImage
+                            key={uri + index.toString()}
+                            source={{ uri }}
+                            resizeMode="cover"
+                            style={[SwiperCardStyle.image, paddingTop]}
+                        >
+                            <TouchableWithoutFeedback onPress={onRemoveLike}>
+                                <LottieView
+                                    ref={lottieRef}
+                                    source={require('../../../assets/animations/like.json')}
+                                    autoPlay={false}
+                                    loop={false}
+                                    style={SwiperCardStyle.lottieView}
+                                />
+                            </TouchableWithoutFeedback>
+                            <View style={SwiperCardStyle.tagView}>
+                                <TouchableOpacity onPress={infoTouch}>
+                                    <View style={SwiperCardStyle.tagInfoView}>
+                                        <Text
+                                            style={[
+                                                SwiperCardStyle.tagText,
+                                                SwiperCardStyle.tagTitle
+                                            ]}
+                                        >
+                                            {card.name}, {card.age}
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
+                                {PLACE_TAGS.slice(0, 4).map((value) => (
+                                    <View
+                                        key={value}
+                                        style={SwiperCardStyle.tagInfoView}
+                                    >
+                                        <Text style={SwiperCardStyle.emoji}>
+                                            {
+                                                PLACE_EMOJIS[
+                                                    value as keyof typeof PLACE_EMOJIS
+                                                ]
+                                            }
+                                        </Text>
+                                        <Text style={SwiperCardStyle.tagText}>
+                                            {value}
+                                        </Text>
+                                    </View>
+                                ))}
                             </View>
-                        ))}
-                    </View>
-                </FastImage>
+                        </FastImage>
+                    ))}
+                </ViewPager>
             </View>
         </TapGestureHandler>
     );

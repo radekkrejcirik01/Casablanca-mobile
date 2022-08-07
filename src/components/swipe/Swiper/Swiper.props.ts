@@ -3,7 +3,7 @@ export interface SwiperProps {
 }
 
 export interface CardDataProps {
-    image: string;
+    images: Array<string>;
     name: string;
     age: string;
     tags: Array<string>;

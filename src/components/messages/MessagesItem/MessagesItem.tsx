@@ -5,16 +5,22 @@ import { TouchableOpacity } from '@components/general/TouchableOpacity/Touchable
 import { MessagesItemProps } from '@components/messages/MessagesItem/MessagesItem.props';
 import { MessagesItemStyle } from '@components/messages/MessagesItem/MessagesItem.style';
 
-export const MessagesItem = ({ item, onPress }: MessagesItemProps): JSX.Element => {
+export const MessagesItem = ({
+    item,
+    onPress
+}: MessagesItemProps): JSX.Element => {
     const onPressItem = () => {
         onPress(item);
     };
     return (
-        <TouchableOpacity onPress={onPressItem} style={MessagesItemStyle.container}>
+        <TouchableOpacity
+            onPress={onPressItem}
+            style={MessagesItemStyle.container}
+        >
             <View style={MessagesItemStyle.row}>
                 <View>
                     <FastImage
-                        source={{ uri: item.image }}
+                        source={{ uri: item.images[0] }}
                         style={MessagesItemStyle.image}
                     />
                 </View>
@@ -22,7 +28,10 @@ export const MessagesItem = ({ item, onPress }: MessagesItemProps): JSX.Element 
                     <View style={MessagesItemStyle.firstRow}>
                         <Text style={MessagesItemStyle.text}>{item.name}</Text>
                         <Text
-                            style={[MessagesItemStyle.text, MessagesItemStyle.opacity]}
+                            style={[
+                                MessagesItemStyle.text,
+                                MessagesItemStyle.opacity
+                            ]}
                         >
                             Monday
                         </Text>

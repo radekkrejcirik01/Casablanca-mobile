@@ -15,7 +15,7 @@ export const MatchItem = ({ item, onPress }: MatchItemProps): JSX.Element => {
             style={MatchItemStyle.container}
         >
             <FastImage
-                source={{ uri: item.image }}
+                source={{ uri: item.images[0] }}
                 style={MatchItemStyle.image}
             />
             <Text style={MatchItemStyle.text}>
