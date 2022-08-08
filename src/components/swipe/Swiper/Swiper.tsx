@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ViewPager from '@react-native-community/viewpager';
@@ -14,16 +14,16 @@ import { Modal } from '@components/general/Modal/Modal';
 import { useModal } from '@hooks/useModal';
 import { InfoProfileScreen } from '@screens/general/InfoProfileScreen/InfoProfileScreen';
 import { InfoProps } from '@screens/general/InfoProfileScreen/InfoProfileScreen.props';
-import { AnimatedLottieViewInterface } from '@components/swipe/SwiperCard/SwiperCard.props';
+import { useLottie } from '@hooks/useLottie';
 
 export const Swiper = ({ data }: SwiperProps): JSX.Element => {
     const { name } = data[0];
 
-    const lottieRef = useRef<AnimatedLottieViewInterface>(null);
-
     const [info, setInfo] = useState<InfoProps>(null);
 
     const { top } = useSafeAreaInsets();
+
+    const { lottieRef, lottieReset, lottiePlay } = useLottie();
 
     const {
         isAnimation,
@@ -53,35 +53,28 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
 
     useEffect(() => {
         if (isAnimation) {
-            lottieRef.current.reset(0); // TODO: useLottie
-            lottieRef.current.play(2, 75);
+            lottiePlay();
             return;
         }
-        lottieRef.current.reset(0);
-    }, [isAnimation]);
+        lottieReset();
+    }, [isAnimation, lottiePlay, lottieReset]);
 
     return (
         <View style={SwiperStyle.container}>
             <View
-                style={{
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    position: 'absolute',
-                    alignSelf: 'center',
-                    top
-                }}
+                style={[
+                    SwiperStyle.lottieContainer,
+                    {
+                        top
+                    }
+                ]}
             >
                 <LottieView
                     ref={lottieRef}
                     source={require('../../../assets/animations/animation.json')}
                     autoPlay={false}
                     loop={false}
-                    style={[
-                        {
-                            width: 50,
-                            height: 50
-                        }
-                    ]}
+                    style={SwiperStyle.lottie}
                 />
             </View>
             <ViewPager

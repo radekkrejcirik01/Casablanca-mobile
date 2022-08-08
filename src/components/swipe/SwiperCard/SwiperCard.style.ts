@@ -7,37 +7,37 @@ export const SwiperCardStyle = StyleSheet.create({
     },
     image: {
         width: '100%',
-        height: '100%',
-        paddingRight: 5,
-        paddingLeft: '3%',
-        paddingBottom: '5%'
+        height: '100%'
     },
-    lottieView: {
+    lottie: {
         width: 90,
         height: 90,
+        position: 'absolute',
         alignSelf: 'flex-end'
     },
     tagView: {
-        flex: 1,
+        left: '3%',
+        bottom: '5%',
+        position: 'absolute',
         justifyContent: 'flex-end'
     },
     tagInfoView: {
-        flexDirection: 'row',
-        alignSelf: 'flex-start',
-        borderRadius: 20,
+        marginTop: 10,
         padding: 7.5,
         paddingHorizontal: 10,
-        marginTop: 10,
-        backgroundColor: COLORS.MAIN_BLUE
+        borderRadius: 20,
+        backgroundColor: COLORS.MAIN_BLUE,
+        flexDirection: 'row',
+        alignSelf: 'flex-start'
     },
     tagTitle: {
         fontSize: 14
     },
     tagText: {
+        paddingHorizontal: 2,
         fontSize: 12.5,
         color: COLORS.WHITE,
-        fontWeight: 'bold',
-        paddingHorizontal: 2
+        fontWeight: 'bold'
     },
     emoji: {
         paddingRight: 3,
