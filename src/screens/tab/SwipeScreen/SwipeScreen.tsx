@@ -45,9 +45,7 @@ export const SwipeScreen = (): JSX.Element => {
 
     return (
         <SafeAreaProvider style={SwiperScreenStyle.safeArea}>
-            <View style={SwiperScreenStyle.view}>
-                <Swiper data={data} />
-            </View>
+            <Swiper data={data} />
         </SafeAreaProvider>
     );
 };
