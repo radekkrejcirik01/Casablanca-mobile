@@ -17,14 +17,14 @@ export const ProfileTabOptions: BottomTabNavigationOptions = {
 };
 
 export const SwipeTabOptions: BottomTabNavigationOptions = {
-    tabBarLabel: 'ChatList',
+    tabBarLabel: 'Swipe',
     tabBarIcon: ({ focused }) => (
         <Text style={{ fontSize: focused ? 25 : 20 }}>🔍</Text>
     )
 };
 
 export const MessagesTabOptions: BottomTabNavigationOptions = {
-    tabBarLabel: 'Chat',
+    tabBarLabel: 'Messages',
     tabBarIcon: ({ focused }) => (
         <Text style={{ fontSize: focused ? 25 : 20 }}>💬</Text>
     )

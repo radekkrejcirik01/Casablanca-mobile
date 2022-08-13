@@ -8,4 +8,10 @@ export const ALL_PLACE_TAGS = [
     'Museum'
 ];
 
-export const PLACE_TAGS = ['Theatre', 'Concert', 'Cafe', 'Movies'];
+export const PLACE_TAGS = [
+    'Theatre',
+    'Concert',
+    'Cafe',
+    'Movies',
+    'Restaurant'
+];

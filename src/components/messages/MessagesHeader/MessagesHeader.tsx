@@ -17,7 +17,7 @@ export const MessagesHeader = (): JSX.Element => {
 
     return (
         <View style={MessagesHeaderStyle.container}>
-            <Title title="Chat" style={MessagesHeaderStyle.title} />
+            <Title title="Chats" style={MessagesHeaderStyle.title} />
             <IconButton
                 icon={IconEnum.BELL}
                 size={24}
