@@ -31,9 +31,7 @@ export const ProfileScreen = (): JSX.Element => {
                             onPress={openSettings}
                             size={22}
                         />
-                        <Text style={ProfileScreenStyle.firstname}>
-                            firstname
-                        </Text>
+                        <Text style={ProfileScreenStyle.firstname}>Radek</Text>
                         <IconButton
                             icon={IconEnum.EDIT}
                             onPress={openEdit}

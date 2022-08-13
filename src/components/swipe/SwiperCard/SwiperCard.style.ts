@@ -42,5 +42,10 @@ export const SwiperCardStyle = StyleSheet.create({
     emoji: {
         paddingRight: 3,
         fontSize: 12
+    },
+    dotProgressBar: {
+        alignSelf: 'center',
+        bottom: 10,
+        position: 'absolute'
     }
 });

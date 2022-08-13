@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
     StyleProp,
     Text,
@@ -14,7 +14,9 @@ import {
 import LottieView from 'lottie-react-native';
 import FastImage from 'react-native-fast-image';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import ViewPager from '@react-native-community/viewpager';
+import ViewPager, {
+    ViewPagerOnPageSelectedEvent
+} from '@react-native-community/viewpager';
 import { SwiperCardProps } from '@components/swipe/SwiperCard/SwiperCard.props';
 import { SwiperCardStyle } from '@components/swipe/SwiperCard/SwiperCard.style';
 import { PLACE_TAGS } from '@components/registration/PlaceTags/PlaceTags.const';
@@ -23,6 +25,7 @@ import { useHaptic } from '@hooks/useHaptic';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
 import { SwiperStyle } from '@components/swipe/Swiper/Swiper.style';
 import { useLottie } from '@hooks/useLottie';
+import { DotProgressBar } from '@components/general/DotProgressBar/DotProgressBar';
 
 export const SwiperCard = ({
     card,
@@ -33,6 +36,8 @@ export const SwiperCard = ({
 
     const { lottieRef, lottieReset, lottiePlay } = useLottie();
     const { hapticTouch } = useHaptic();
+
+    const [pagePosition, setPagePosition] = useState<number>(0);
 
     const onDoubleTap = (event: TapGestureHandlerGestureEvent) => {
         onCardTouch(card.name);
@@ -58,10 +63,17 @@ export const SwiperCard = ({
         lottieReset();
     };
 
+    const onPageSelected = (event: ViewPagerOnPageSelectedEvent) => {
+        setPagePosition(event.nativeEvent.position);
+    };
+
     return (
         <TapGestureHandler onHandlerStateChange={onDoubleTap} numberOfTaps={2}>
             <View style={SwiperCardStyle.container}>
-                <ViewPager style={SwiperStyle.viewPager}>
+                <ViewPager
+                    style={SwiperStyle.viewPager}
+                    onPageSelected={onPageSelected}
+                >
                     {card.images.map((uri: string, index: number) => (
                         <FastImage
                             key={uri + index.toString()} // TODO: Change to uri only
@@ -107,6 +119,11 @@ export const SwiperCard = ({
                         </View>
                     ))}
                 </View>
+                <DotProgressBar
+                    pagesNumber={card.images?.length}
+                    currentPage={pagePosition}
+                    style={SwiperCardStyle.dotProgressBar}
+                />
             </View>
         </TapGestureHandler>
     );
