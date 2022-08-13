@@ -1,34 +1,40 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { PLACE_TAGS } from '@components/registration/PlaceTags/PlaceTags.const';
+import { ALL_PLACE_TAGS } from '@components/registration/PlaceTags/PlaceTags.const';
 import { PlaceTag } from '@components/general/PlaceTag/PlaceTag';
 import { PlaceTagsStyle } from '@components/registration/PlaceTags/PlaceTags.style';
-import { ReducerProps } from '@store/index.props';
-import { addTagAction, removeTagAction } from '@store/RegistrationReducer';
+import {
+    PlaceTagsDefaultProps,
+    PlaceTagsProps
+} from '@components/registration/PlaceTags/PlaceTags.props';
 
-export const PlaceTags = (): JSX.Element => {
-    const tags = useSelector((state: ReducerProps) => state.registration.tags);
+export const PlaceTags = ({
+    tags,
+    showAll,
+    style
+}: PlaceTagsProps): JSX.Element => {
+    const data = useMemo(
+        (): Array<string> => (showAll ? ALL_PLACE_TAGS : tags),
+        [showAll, tags]
+    );
 
-    const dispatch = useDispatch();
-
-    const pushTags = (value: string) => {
-        if (!tags.includes(value)) {
-            dispatch(addTagAction(value));
-        } else {
-            dispatch(removeTagAction(value));
-        }
+    const onSelect = (tag: string) => {
+        console.log(tag);
     };
 
     return (
-        <View style={PlaceTagsStyle.container}>
-            {PLACE_TAGS.map((value) => (
+        <View style={[PlaceTagsStyle.container, style]}>
+            {data?.map((value: string) => (
                 <PlaceTag
                     key={value}
                     tag={value}
-                    onSelect={(tag: string) => pushTags(tag)}
+                    onSelect={onSelect}
+                    isTagged={tags.includes(value)}
+                    showAll={showAll}
                 />
             ))}
         </View>
     );
 };
+
+PlaceTags.defaultProps = PlaceTagsDefaultProps;

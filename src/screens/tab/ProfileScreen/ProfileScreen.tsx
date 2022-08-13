@@ -9,6 +9,7 @@ import { IconButton } from '@components/general/IconButton/IconButton';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { useNavigation } from '@hooks/useNavigation';
 import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/ProfileStackNavigator.enum';
+import { PLACE_TAGS } from '@components/registration/PlaceTags/PlaceTags.const';
 
 export const ProfileScreen = (): JSX.Element => {
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.ProfileStack);
@@ -40,7 +41,7 @@ export const ProfileScreen = (): JSX.Element => {
                     </View>
                     <Text style={ProfileScreenStyle.age}>20</Text>
                     <View style={ProfileScreenStyle.tagsView}>
-                        <PlaceTags />
+                        <PlaceTags tags={PLACE_TAGS} />
                     </View>
                 </View>
             </ProfileImageView>

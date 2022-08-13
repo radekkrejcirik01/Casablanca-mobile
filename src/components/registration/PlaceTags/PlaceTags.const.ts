@@ -1,4 +1,4 @@
-export const PLACE_TAGS = [
+export const ALL_PLACE_TAGS = [
     'Theatre',
     'Concert',
     'Cafe',
@@ -7,3 +7,5 @@ export const PLACE_TAGS = [
     'Restaurant',
     'Museum'
 ];
+
+export const PLACE_TAGS = ['Theatre', 'Concert', 'Cafe', 'Movies'];

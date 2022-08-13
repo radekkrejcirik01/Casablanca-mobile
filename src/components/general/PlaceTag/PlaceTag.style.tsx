@@ -12,7 +12,7 @@ export const PlaceTagStyle = StyleSheet.create({
         borderWidth: 2.5,
         borderRadius: 20,
         backgroundColor: COLORS.MAIN_BLUE,
-        borderColor: COLORS.MAIN_BLUE
+        borderColor: COLORS.WHITE
     },
     emoji: {
         paddingRight: 3
