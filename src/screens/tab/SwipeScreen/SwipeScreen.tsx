@@ -1,5 +1,4 @@
 import React from 'react';
-import { View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Swiper } from '@components/swipe/Swiper/Swiper';
 import { SwiperScreenStyle } from '@screens/tab/SwipeScreen/SwipeScreen.style';
