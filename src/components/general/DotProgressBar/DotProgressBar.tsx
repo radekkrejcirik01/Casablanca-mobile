@@ -17,7 +17,7 @@ export const DotProgressBar = ({
     const dotColor = useCallback(
         (value: number): StyleProp<ViewStyle> => ({
             backgroundColor:
-                value === currentPage ? COLORS.WHITE : COLORS.MAIN_BLUE
+                value === currentPage ? COLORS.WHITE : COLORS.LIGHTGRAY_300
         }),
         [currentPage]
     );

@@ -7,9 +7,9 @@ export const DotProgressBarStyle = StyleSheet.create({
         justifyContent: 'center'
     },
     dot: {
-        margin: 8,
+        margin: 4,
         borderRadius: 10,
-        width: 10,
-        height: 10
+        width: 8,
+        height: 8
     }
 });

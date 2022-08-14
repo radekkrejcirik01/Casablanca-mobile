@@ -80,7 +80,58 @@ export const SwiperCard = ({
                             source={{ uri }}
                             resizeMode="cover"
                             style={SwiperCardStyle.image}
-                        />
+                        >
+                            {index === 0 && (
+                                <View style={SwiperCardStyle.tagView}>
+                                    <TouchableOpacity
+                                        onPress={infoTouch}
+                                        style={SwiperCardStyle.touchableTag}
+                                    >
+                                        <View
+                                            style={SwiperCardStyle.tagInfoView}
+                                        >
+                                            <Text
+                                                style={[
+                                                    SwiperCardStyle.tagText,
+                                                    SwiperCardStyle.tagTitle
+                                                ]}
+                                            >
+                                                {card.name}, {card.age}
+                                            </Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    {PLACE_TAGS.slice(0, 4).map(
+                                        (value: string) => (
+                                            <View
+                                                key={value}
+                                                style={
+                                                    SwiperCardStyle.tagInfoView
+                                                }
+                                            >
+                                                <Text
+                                                    style={
+                                                        SwiperCardStyle.emoji
+                                                    }
+                                                >
+                                                    {
+                                                        PLACE_EMOJIS[
+                                                            value as keyof typeof PLACE_EMOJIS
+                                                        ]
+                                                    }
+                                                </Text>
+                                                <Text
+                                                    style={
+                                                        SwiperCardStyle.tagText
+                                                    }
+                                                >
+                                                    {value}
+                                                </Text>
+                                            </View>
+                                        )
+                                    )}
+                                </View>
+                            )}
+                        </FastImage>
                     ))}
                 </ViewPager>
                 <TouchableWithoutFeedback onPress={onRemoveLike}>
@@ -93,32 +144,6 @@ export const SwiperCard = ({
                         />
                     </View>
                 </TouchableWithoutFeedback>
-                <View style={SwiperCardStyle.tagView}>
-                    <TouchableOpacity onPress={infoTouch}>
-                        <View style={SwiperCardStyle.tagInfoView}>
-                            <Text
-                                style={[
-                                    SwiperCardStyle.tagText,
-                                    SwiperCardStyle.tagTitle
-                                ]}
-                            >
-                                {card.name}, {card.age}
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
-                    {PLACE_TAGS.slice(0, 4).map((value) => (
-                        <View key={value} style={SwiperCardStyle.tagInfoView}>
-                            <Text style={SwiperCardStyle.emoji}>
-                                {
-                                    PLACE_EMOJIS[
-                                        value as keyof typeof PLACE_EMOJIS
-                                    ]
-                                }
-                            </Text>
-                            <Text style={SwiperCardStyle.tagText}>{value}</Text>
-                        </View>
-                    ))}
-                </View>
                 <DotProgressBar
                     pagesNumber={card.images?.length}
                     currentPage={pagePosition}

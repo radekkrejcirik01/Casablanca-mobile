@@ -16,10 +16,13 @@ export const SwiperCardStyle = StyleSheet.create({
         alignSelf: 'flex-end'
     },
     tagView: {
-        left: '3%',
-        bottom: '5%',
-        position: 'absolute',
+        marginLeft: 15,
+        marginBottom: 60,
+        flex: 1,
         justifyContent: 'flex-end'
+    },
+    touchableTag: {
+        alignSelf: 'flex-start'
     },
     tagInfoView: {
         marginTop: 10,
@@ -45,7 +48,7 @@ export const SwiperCardStyle = StyleSheet.create({
     },
     dotProgressBar: {
         alignSelf: 'center',
-        bottom: 10,
+        bottom: 15,
         position: 'absolute'
     }
 });

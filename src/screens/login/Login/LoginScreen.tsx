@@ -11,7 +11,6 @@ import { TouchableOpacity } from '@components/general/TouchableOpacity/Touchable
 import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
-import COLORS from '@constants/COLORS';
 
 export const LoginScreen = (): JSX.Element => {
     const [username, setUsername] = useState<string>();
@@ -47,7 +46,7 @@ export const LoginScreen = (): JSX.Element => {
             </TouchableOpacity>
             <TouchableOpacity onPress={registerPressed}>
                 <Text style={LoginScreenStyle.registerText}>
-                    No account yet? Create one 🎉
+                    No account yet? Create one
                 </Text>
             </TouchableOpacity>
         </SafeAreaProvider>

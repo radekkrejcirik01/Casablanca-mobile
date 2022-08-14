@@ -8,10 +8,10 @@ export const SwipeScreen = (): JSX.Element => {
     const data: Array<CardDataProps> = [
         {
             images: [
-                'https://static.onecms.io/wp-content/uploads/sites/6/2019/07/st3-production-still-4-2000.jpg',
-                'https://static.onecms.io/wp-content/uploads/sites/6/2019/07/st3-production-still-4-2000.jpg',
-                'https://variety.com/wp-content/uploads/2020/05/fyseetv_st_mayahawke_yt_thumbnail.jpg',
-                'https://variety.com/wp-content/uploads/2020/05/fyseetv_st_mayahawke_yt_thumbnail.jpg'
+                'https://s5.favim.com/orig/69/analog-boy-grunge-hipster-Favim.com-654208.jpg',
+                'https://s5.favim.com/orig/69/analog-boy-grunge-hipster-Favim.com-654208.jpg',
+                'https://s5.favim.com/orig/69/analog-boy-grunge-hipster-Favim.com-654208.jpg',
+                'https://s5.favim.com/orig/69/analog-boy-grunge-hipster-Favim.com-654208.jpg'
             ],
             name: 'Radek',
             age: '34',
@@ -20,10 +20,10 @@ export const SwipeScreen = (): JSX.Element => {
         },
         {
             images: [
-                'https://variety.com/wp-content/uploads/2020/05/fyseetv_st_mayahawke_yt_thumbnail.jpg',
-                'https://variety.com/wp-content/uploads/2020/05/fyseetv_st_mayahawke_yt_thumbnail.jpg',
                 'https://static.onecms.io/wp-content/uploads/sites/6/2019/07/st3-production-still-4-2000.jpg',
-                'https://static.onecms.io/wp-content/uploads/sites/6/2019/07/st3-production-still-4-2000.jpg'
+                'https://static.onecms.io/wp-content/uploads/sites/6/2019/07/st3-production-still-4-2000.jpg',
+                'https://variety.com/wp-content/uploads/2020/05/fyseetv_st_mayahawke_yt_thumbnail.jpg',
+                'https://variety.com/wp-content/uploads/2020/05/fyseetv_st_mayahawke_yt_thumbnail.jpg'
             ],
             name: 'Adela',
             age: '34',
