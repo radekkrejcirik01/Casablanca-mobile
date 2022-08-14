@@ -7,7 +7,7 @@ import { TextAreaProps } from '@components/general/TextArea/TextArea.props';
 export const TextArea = ({ onChange }: TextAreaProps): JSX.Element => (
     <Input
         onChange={onChange}
-        inputType={InputTypeEnum.TEXT}
+        inputType={InputTypeEnum.TEXT_AREA}
         multiline
         viewStyle={TextAreaStyle.input}
     />

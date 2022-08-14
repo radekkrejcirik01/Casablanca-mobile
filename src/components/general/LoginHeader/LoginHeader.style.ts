@@ -9,8 +9,8 @@ export const LoginHeaderStyle = StyleSheet.create({
     },
     text: {
         marginLeft: 5,
-        color: COLORS.WHITE,
         fontSize: 25,
+        color: COLORS.WHITE,
         fontWeight: 'bold'
     }
 });

@@ -1,5 +1,5 @@
 import React, { forwardRef, useEffect, useMemo, useState } from 'react';
-import { TextInput, View } from 'react-native';
+import { StyleProp, TextInput, View, ViewStyle } from 'react-native';
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import {
     InputDefaultProps,
@@ -34,6 +34,12 @@ export const Input = forwardRef(
         useEffect(() => {
             setInputValue(value);
         }, [value]);
+
+        const alignItems = useMemo(
+            (): StyleProp<ViewStyle> =>
+                inputType !== InputTypeEnum.TEXT_AREA && InputStyle.centerItems,
+            [inputType]
+        );
 
         const keyboardType = useMemo(() => {
             if (inputType === InputTypeEnum.EMAIL) {
@@ -71,7 +77,7 @@ export const Input = forwardRef(
         }, [isSecured, inputType, iconRight]);
 
         return (
-            <View style={[InputStyle.container, viewStyle]}>
+            <View style={[InputStyle.container, alignItems, viewStyle]}>
                 <TextInput
                     ref={ref}
                     value={inputValue}

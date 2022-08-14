@@ -10,6 +10,9 @@ export const InputStyle = StyleSheet.create({
         borderColor: COLORS.WHITE,
         flexDirection: 'row'
     },
+    centerItems: {
+        alignItems: 'center'
+    },
     input: {
         flex: 1,
         fontSize: 16,
