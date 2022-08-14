@@ -15,6 +15,9 @@ export interface ReducerProps {
         whoShow: WhoShowSelectEnum;
         password: string;
     };
+    save: {
+        isVisible: boolean;
+    };
 }
 
 export interface Birthday {

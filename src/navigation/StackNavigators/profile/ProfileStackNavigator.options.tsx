@@ -1,11 +1,14 @@
+import React from 'react';
 import { StackNavigationOptions } from '@react-navigation/stack';
+import { HeaderSave } from '@components/general/HeaderSave/HeaderSave';
 
 export const SettingsTitle: StackNavigationOptions = {
     headerTitle: 'Settings'
 };
 
-export const EditTitle: StackNavigationOptions = {
-    headerTitle: 'Edit'
+export const EditOptions: StackNavigationOptions = {
+    headerTitle: 'Edit',
+    headerRight: () => <HeaderSave />
 };
 
 export const AboutTitle: StackNavigationOptions = {

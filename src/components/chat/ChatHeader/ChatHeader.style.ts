@@ -3,15 +3,15 @@ import COLORS from '@constants/COLORS';
 
 export const ChatHeaderStyle = StyleSheet.create({
     safeArea: {
-        borderBottomWidth: 0.5,
+        borderBottomWidth: 2,
         borderBottomColor: COLORS.LIGHTGRAY,
         backgroundColor: COLORS.MAIN_BLUE
     },
     container: {
-        flexDirection: 'row',
-        alignItems: 'center',
         marginLeft: 10,
-        paddingBottom: 10
+        paddingBottom: 10,
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     profileContainer: {
         flexDirection: 'row'
@@ -30,8 +30,8 @@ export const ChatHeaderStyle = StyleSheet.create({
         fontWeight: 'bold'
     },
     text: {
+        fontSize: 9,
         color: COLORS.WHITE,
-        fontWeight: '600',
-        fontSize: 9
+        fontWeight: '600'
     }
 });

@@ -1,8 +1,10 @@
 import { StyleSheet } from 'react-native';
+import COLORS from '@constants/COLORS';
 
 export const ChangeProfileImageStyle = StyleSheet.create({
-    touchableOpacity: {
-        alignSelf: 'center'
+    container: {
+        alignSelf: 'center',
+        alignItems: 'center'
     },
     image: {
         width: 100,
@@ -10,9 +12,9 @@ export const ChangeProfileImageStyle = StyleSheet.create({
         borderRadius: 50,
         alignSelf: 'center'
     },
-    icon: {
-        bottom: 8,
-        right: -12,
-        position: 'absolute'
+    text: {
+        fontSize: 12,
+        color: COLORS.WHITE,
+        fontWeight: 'bold'
     }
 });

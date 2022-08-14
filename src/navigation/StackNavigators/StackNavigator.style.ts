@@ -3,7 +3,8 @@ import COLORS from '@constants/COLORS';
 
 export const StackNavigatorStyle = StyleSheet.create({
     navigationScreen: {
-        backgroundColor: COLORS.MAIN_BLUE,
-        shadowOpacity: 0
+        shadowOpacity: 0,
+        borderWidth: 2,
+        backgroundColor: COLORS.MAIN_BLUE
     }
 });

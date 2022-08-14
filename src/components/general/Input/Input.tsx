@@ -42,18 +42,33 @@ export const Input = forwardRef(
             return 'default';
         }, [inputType]);
 
-        const SecuredIcon = (): JSX.Element => (
-            <TouchableOpacity
-                onPress={() => setIsSecured(!isSecured)}
-                disabled={inputType !== InputTypeEnum.PASSWORD}
-            >
-                {isSecured ? (
-                    <Icon name={IconEnum.LOCK} size={25} />
-                ) : (
-                    <Icon name={IconEnum.UNLOCK} size={25} />
-                )}
-            </TouchableOpacity>
-        );
+        const onChangeText = (e: string) => {
+            setInputValue(e);
+            if (onChange) {
+                onChange(e);
+            }
+        };
+
+        const inputIcon = useMemo((): JSX.Element => {
+            const SecuredIcon = (): JSX.Element => (
+                <TouchableOpacity
+                    onPress={() => setIsSecured(!isSecured)}
+                    disabled={inputType !== InputTypeEnum.PASSWORD}
+                >
+                    {isSecured ? (
+                        <Icon name={IconEnum.LOCK} size={25} />
+                    ) : (
+                        <Icon name={IconEnum.UNLOCK} size={25} />
+                    )}
+                </TouchableOpacity>
+            );
+
+            return inputType === InputTypeEnum.PASSWORD ? (
+                <SecuredIcon />
+            ) : (
+                iconRight
+            );
+        }, [isSecured, inputType, iconRight]);
 
         return (
             <View style={[InputStyle.container, viewStyle]}>
@@ -69,19 +84,10 @@ export const Input = forwardRef(
                     style={[InputStyle.input, inputStyle]}
                     placeholderTextColor={placeholderTextColor}
                     secureTextEntry={isSecured}
-                    onChangeText={(e) => {
-                        setInputValue(e);
-                        if (onChange) {
-                            onChange(e);
-                        }
-                    }}
+                    onChangeText={onChangeText}
                     {...props}
                 />
-                {inputType === InputTypeEnum.PASSWORD ? (
-                    <SecuredIcon />
-                ) : (
-                    iconRight
-                )}
+                {inputIcon}
             </View>
         );
     }

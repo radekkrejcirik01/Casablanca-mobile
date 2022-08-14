@@ -12,7 +12,7 @@ import {
     CommunityRulesTitle,
     DeleteAccountTitle,
     DistanceTitle,
-    EditTitle,
+    EditOptions,
     HelpCenterTitle,
     SettingsTitle
 } from '@navigation/StackNavigators/profile/ProfileStackNavigator.options';
@@ -36,7 +36,7 @@ export const ProfileStackNavigator = (): JSX.Element => (
         <Profile.Screen
             name={ProfileStackNavigatorEnum.EditScreen}
             component={EditScreen}
-            options={{ ...NavigationScreenHeader, ...EditTitle }}
+            options={{ ...NavigationScreenHeader, ...EditOptions }}
         />
         <Profile.Screen
             name={ProfileStackNavigatorEnum.AboutScreen}

@@ -39,7 +39,7 @@ export const ProfileScreen = (): JSX.Element => {
                             size={21}
                         />
                     </View>
-                    <Text style={ProfileScreenStyle.age}>20</Text>
+                    <Text style={ProfileScreenStyle.age}>21</Text>
                     <View style={ProfileScreenStyle.tagsView}>
                         <PlaceTags tags={PLACE_TAGS} />
                     </View>
