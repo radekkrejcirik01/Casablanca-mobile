@@ -87,7 +87,6 @@ export const SettingsList = (): JSX.Element => {
             />
             <SettingsListItem
                 title="Log Out"
-                hasArrow
                 onPress={LogOut}
                 style={SettingsListStyle.lastItem}
             />

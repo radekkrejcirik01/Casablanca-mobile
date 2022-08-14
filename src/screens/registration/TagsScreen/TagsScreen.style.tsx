@@ -5,7 +5,8 @@ export const TagsScreenStyle = StyleSheet.create({
         flex: 1
     },
     placeTags: {
-        marginVertical: '20%',
+        marginTop: '30%',
+        marginBottom: '40%',
         paddingHorizontal: 40
     }
 });

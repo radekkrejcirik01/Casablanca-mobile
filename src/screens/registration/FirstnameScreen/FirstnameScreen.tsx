@@ -3,8 +3,6 @@ import { Alert, TextInput, View } from 'react-native';
 import { useNavigation as useNavigationModule } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import LinearGradient from 'react-native-linear-gradient';
-import COLORS from '@constants/COLORS';
 import { Icon } from '@components/icon/Icon';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
@@ -48,25 +46,19 @@ export const FirstnameScreen = (): JSX.Element => {
 
     return (
         <SafeAreaProvider>
-            <LinearGradient
-                colors={[COLORS.MAIN_RED, COLORS.MAIN_BLUE]}
-                locations={[0.15, 0.9]}
-                style={FirstnameScreenStyle.container}
-            >
-                <Title title="What is your firstname?" />
-                <View style={FirstnameScreenStyle.inputContainer}>
-                    <Input
-                        ref={input}
-                        inputType={InputTypeEnum.TEXT}
-                        autoFocus
-                        onChange={(value: string) =>
-                            dispatch(setFirstnameAction(value))
-                        }
-                        iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
-                    />
-                </View>
-                <Continue onPress={continuePressed} />
-            </LinearGradient>
+            <Title title="What is your firstname?" />
+            <View style={FirstnameScreenStyle.inputContainer}>
+                <Input
+                    ref={input}
+                    inputType={InputTypeEnum.TEXT}
+                    autoFocus
+                    onChange={(value: string) =>
+                        dispatch(setFirstnameAction(value))
+                    }
+                    iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
+                />
+            </View>
+            <Continue onPress={continuePressed} />
         </SafeAreaProvider>
     );
 };

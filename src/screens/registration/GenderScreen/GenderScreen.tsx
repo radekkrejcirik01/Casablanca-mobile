@@ -2,8 +2,6 @@ import React from 'react';
 import { Alert, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import LinearGradient from 'react-native-linear-gradient';
-import COLORS from '@constants/COLORS';
 import { Continue } from '@components/registration/Continue/Continue';
 import { Title } from '@components/general/Title/Title';
 import { GenderScreenStyle } from '@screens/registration/GenderScreen/GenderScreen.style';
@@ -32,17 +30,11 @@ export const GenderScreen = (): JSX.Element => {
 
     return (
         <SafeAreaProvider>
-            <LinearGradient
-                colors={[COLORS.MAIN_RED, COLORS.MAIN_BLUE]}
-                locations={[0.15, 0.9]}
-                style={GenderScreenStyle.container}
-            >
-                <Title title="I am" />
-                <View style={GenderScreenStyle.select}>
-                    <GenderSelect />
-                </View>
-                <Continue onPress={continuePressed} />
-            </LinearGradient>
+            <Title title="I am" />
+            <View style={GenderScreenStyle.select}>
+                <GenderSelect />
+            </View>
+            <Continue onPress={continuePressed} />
         </SafeAreaProvider>
     );
 };

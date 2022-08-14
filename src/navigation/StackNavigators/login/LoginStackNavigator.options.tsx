@@ -5,7 +5,6 @@ import { RegistrationStackNavigatorStyle } from '@navigation/StackNavigators/reg
 
 export const LoginScreenOptions: StackNavigationOptions = {
     headerTitle: () => <LoginHeader />,
-    headerStyle: {
-        ...RegistrationStackNavigatorStyle.header
-    }
+    headerStyle: RegistrationStackNavigatorStyle.header,
+    headerTitleContainerStyle: RegistrationStackNavigatorStyle.headerTitle
 };

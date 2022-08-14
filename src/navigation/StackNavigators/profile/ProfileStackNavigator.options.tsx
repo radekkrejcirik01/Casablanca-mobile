@@ -7,7 +7,7 @@ export const SettingsTitle: StackNavigationOptions = {
 };
 
 export const EditOptions: StackNavigationOptions = {
-    headerTitle: 'Edit',
+    headerTitle: 'Edit your profile',
     headerRight: () => <HeaderSave />
 };
 

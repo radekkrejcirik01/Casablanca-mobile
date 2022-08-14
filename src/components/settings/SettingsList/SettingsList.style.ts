@@ -7,7 +7,6 @@ export const SettingsListStyle = StyleSheet.create({
     },
     lastItem: {
         marginTop: 150,
-        borderTopWidth: 1,
         borderColor: COLORS.LIGHTGRAY_100
     }
 });

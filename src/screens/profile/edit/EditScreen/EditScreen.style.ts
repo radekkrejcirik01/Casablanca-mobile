@@ -6,9 +6,9 @@ export const SwiperCardStyle = StyleSheet.create({
         paddingHorizontal: 15
     },
     title: {
-        marginTop: 30,
-        marginBottom: 20,
-        fontSize: 18,
+        marginTop: 40,
+        marginBottom: 25,
+        fontSize: 15,
         color: COLORS.WHITE,
         fontWeight: 'bold'
     }

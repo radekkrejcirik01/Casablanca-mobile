@@ -18,7 +18,6 @@ export const EditScreen = (): JSX.Element => {
 
     return (
         <SafeAreaProvider style={SwiperCardStyle.container}>
-            <Text style={SwiperCardStyle.title}>Profile picture</Text>
             <ChangeProfileImage />
             <Text style={SwiperCardStyle.title}>Fave places to go</Text>
             <PlaceTags tags={PLACE_TAGS} showAll />

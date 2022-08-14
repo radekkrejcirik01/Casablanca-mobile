@@ -28,10 +28,10 @@ export const SettingsListItem = ({
     };
 
     return (
-        <View style={[SettingsListItemStyle.container, style]}>
+        <View style={style}>
             <TouchableOpacity
                 onPress={onPress}
-                disabled={!hasArrow}
+                disabled={hasSwitch}
                 style={SettingsListItemStyle.touchableOpacity}
             >
                 {icon}

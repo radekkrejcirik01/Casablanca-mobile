@@ -2,8 +2,6 @@ import React from 'react';
 import { Alert, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import LinearGradient from 'react-native-linear-gradient';
-import COLORS from '@constants/COLORS';
 import { Continue } from '@components/registration/Continue/Continue';
 import { Title } from '@components/general/Title/Title';
 import { BirthdayScreenStyle } from '@screens/registration/BirthdayScreen/BirthdayScreen.style';
@@ -39,17 +37,11 @@ export const BirthdayScreen = (): JSX.Element => {
 
     return (
         <SafeAreaProvider>
-            <LinearGradient
-                colors={[COLORS.MAIN_RED, COLORS.MAIN_BLUE]}
-                locations={[0.15, 0.9]}
-                style={BirthdayScreenStyle.container}
-            >
-                <Title title="When is your birthday?" />
-                <View style={BirthdayScreenStyle.inputContainer}>
-                    <BirthdayInput birthday={birthday} />
-                </View>
-                <Continue onPress={continuePressed} />
-            </LinearGradient>
+            <Title title="When is your birthday?" />
+            <View style={BirthdayScreenStyle.inputContainer}>
+                <BirthdayInput birthday={birthday} />
+            </View>
+            <Continue onPress={continuePressed} />
         </SafeAreaProvider>
     );
 };

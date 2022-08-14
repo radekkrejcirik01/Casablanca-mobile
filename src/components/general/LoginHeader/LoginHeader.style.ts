@@ -4,12 +4,11 @@ import COLORS from '@constants/COLORS';
 export const LoginHeaderStyle = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        justifyContent: 'center',
         alignItems: 'center'
     },
     text: {
         marginLeft: 5,
-        fontSize: 25,
+        fontSize: 30,
         color: COLORS.WHITE,
         fontWeight: 'bold'
     }

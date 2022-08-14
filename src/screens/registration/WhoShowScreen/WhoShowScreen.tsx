@@ -1,9 +1,7 @@
 import React from 'react';
 import { Alert, View } from 'react-native';
 import { useSelector } from 'react-redux';
-import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import COLORS from '@constants/COLORS';
 import { Continue } from '@components/registration/Continue/Continue';
 import { Title } from '@components/general/Title/Title';
 import { WhoShowScreenStyle } from '@screens/registration/WhoShowScreen/WhoShowScreen.style';
@@ -32,17 +30,11 @@ export const WhoShowScreen = (): JSX.Element => {
 
     return (
         <SafeAreaProvider>
-            <LinearGradient
-                colors={[COLORS.MAIN_RED, COLORS.MAIN_BLUE]}
-                locations={[0.15, 0.9]}
-                style={WhoShowScreenStyle.container}
-            >
-                <Title title="Show me" />
-                <View style={WhoShowScreenStyle.select}>
-                    <WhoShowSelect />
-                </View>
-                <Continue onPress={continuePressed} />
-            </LinearGradient>
+            <Title title="Show me" />
+            <View style={WhoShowScreenStyle.select}>
+                <WhoShowSelect />
+            </View>
+            <Continue onPress={continuePressed} />
         </SafeAreaProvider>
     );
 };
