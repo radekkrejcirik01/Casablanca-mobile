@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { Text } from 'react-native';
+import { Alert, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
 import { HeaderSaveStyle } from '@components/general/HeaderSave/HeaderSave.style';
@@ -15,6 +15,7 @@ export const HeaderSave = (): JSX.Element => {
 
     const onPress = useCallback(() => {
         dispatch(setSaveVisible(false));
+        Alert.alert('Your info has been updated 🎉');
     }, [dispatch]);
 
     const saveButton = useMemo(

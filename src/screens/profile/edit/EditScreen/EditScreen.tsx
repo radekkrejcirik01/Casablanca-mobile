@@ -1,11 +1,11 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Keyboard, Text, TouchableWithoutFeedback } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { SwiperCardStyle } from '@screens/profile/edit/EditScreen/EditScreen.style';
+import { EditScreenStyle } from '@screens/profile/edit/EditScreen/EditScreen.style';
 import { ChangeProfileImage } from '@components/general/ChangeProfileImage/ChangeProfileImage';
 import { PlaceTags } from '@components/registration/PlaceTags/PlaceTags';
 import { PLACE_TAGS } from '@components/registration/PlaceTags/PlaceTags.const';
+import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';
 import { TextArea } from '@components/general/TextArea/TextArea';
 import { setSaveVisible } from '@store/SaveReducer';
 
@@ -17,12 +17,17 @@ export const EditScreen = (): JSX.Element => {
     };
 
     return (
-        <SafeAreaProvider style={SwiperCardStyle.container}>
-            <ChangeProfileImage />
-            <Text style={SwiperCardStyle.title}>Fave places to go</Text>
-            <PlaceTags tags={PLACE_TAGS} showAll />
-            <Text style={SwiperCardStyle.title}>About</Text>
-            <TextArea onChange={onChange} />
-        </SafeAreaProvider>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <KeyboardAvoidingView
+                keyboardVerticalOffset={55}
+                style={EditScreenStyle.container}
+            >
+                <ChangeProfileImage />
+                <Text style={EditScreenStyle.title}>Fave places to go</Text>
+                <PlaceTags tags={PLACE_TAGS} showAll />
+                <Text style={EditScreenStyle.title}>About</Text>
+                <TextArea onChange={onChange} />
+            </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
     );
 };

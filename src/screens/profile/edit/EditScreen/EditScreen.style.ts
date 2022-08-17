@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const SwiperCardStyle = StyleSheet.create({
+export const EditScreenStyle = StyleSheet.create({
     container: {
         paddingHorizontal: 15
     },
