@@ -24,19 +24,20 @@ export const ChatHeader = (): JSX.Element => {
                 <TouchableOpacity onPress={navigateBack}>
                     <Icon name={IconEnum.BACK} size={20} />
                 </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={openProfile}
-                    style={ChatHeaderStyle.profileContainer}
-                >
-                    <FastImage
-                        source={require('../../../assets/images/profilovka.png')}
-                        style={ChatHeaderStyle.image}
-                    />
-                    <View style={ChatHeaderStyle.infoContainer}>
-                        <Text style={ChatHeaderStyle.name}>Radek</Text>
-                        <Text style={ChatHeaderStyle.text}>View profile</Text>
-                    </View>
-                </TouchableOpacity>
+                <View style={ChatHeaderStyle.contentContainer}>
+                    <TouchableOpacity
+                        onPress={openProfile}
+                        style={ChatHeaderStyle.profileContainer}
+                    >
+                        <FastImage
+                            source={require('../../../assets/images/profilovka.png')}
+                            style={ChatHeaderStyle.image}
+                        />
+                        <View style={ChatHeaderStyle.infoContainer}>
+                            <Text style={ChatHeaderStyle.name}>Radek</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
             </View>
         </SafeAreaView>
     );

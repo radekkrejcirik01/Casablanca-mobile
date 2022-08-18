@@ -3,16 +3,16 @@ import COLORS from '@constants/COLORS';
 
 export const PlaceTagStyle = StyleSheet.create({
     container: {
+        margin: 5,
+        paddingVertical: 6,
+        paddingHorizontal: 8,
+        borderRadius: 20,
+        borderWidth: 2.25,
+        borderColor: COLORS.WHITE,
+        backgroundColor: COLORS.MAIN_BLUE,
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'row',
-        paddingVertical: 8,
-        paddingHorizontal: 10,
-        margin: 5,
-        borderWidth: 2.5,
-        borderRadius: 20,
-        backgroundColor: COLORS.MAIN_BLUE,
-        borderColor: COLORS.WHITE
+        flexDirection: 'row'
     },
     emoji: {
         paddingRight: 3

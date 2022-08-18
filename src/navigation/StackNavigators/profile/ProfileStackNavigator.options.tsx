@@ -1,9 +1,14 @@
 import React from 'react';
 import { StackNavigationOptions } from '@react-navigation/stack';
 import { HeaderSave } from '@components/general/HeaderSave/HeaderSave';
+import { StackNavigatorStyle } from '@navigation/StackNavigators/StackNavigator.style';
 
-export const SettingsTitle: StackNavigationOptions = {
-    headerTitle: 'Settings'
+export const SettingsOptions: StackNavigationOptions = {
+    headerTitle: 'Settings',
+    headerStyle: [
+        StackNavigatorStyle.navigationScreen,
+        StackNavigatorStyle.bottomBorder
+    ]
 };
 
 export const EditOptions: StackNavigationOptions = {

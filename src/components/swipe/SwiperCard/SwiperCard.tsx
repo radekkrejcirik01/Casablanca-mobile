@@ -22,7 +22,7 @@ import {
     SwiperCardProps
 } from '@components/swipe/SwiperCard/SwiperCard.props';
 import { SwiperCardStyle } from '@components/swipe/SwiperCard/SwiperCard.style';
-import { PLACE_TAGS } from '@components/registration/PlaceTags/PlaceTags.const';
+import { PLACE_TAGS } from '@components/general/PlaceTags/PlaceTags.const';
 import { PLACE_EMOJIS } from '@components/general/PlaceTag/PlaceTag.const';
 import { useHaptic } from '@hooks/useHaptic';
 import { SwiperStyle } from '@components/swipe/Swiper/Swiper.style';

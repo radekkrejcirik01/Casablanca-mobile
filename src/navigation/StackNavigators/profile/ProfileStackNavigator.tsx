@@ -14,7 +14,7 @@ import {
     DistanceTitle,
     EditOptions,
     HelpCenterTitle,
-    SettingsTitle
+    SettingsOptions
 } from '@navigation/StackNavigators/profile/ProfileStackNavigator.options';
 import { AboutScreen } from '@screens/profile/settings/AboutScreen/AboutScreen';
 import { HelpCenterScreen } from '@screens/profile/settings/HelpCenterScreen/HelpCenterScreen';
@@ -31,7 +31,7 @@ export const ProfileStackNavigator = (): JSX.Element => (
         <Profile.Screen
             name={ProfileStackNavigatorEnum.SettingsScreen}
             component={SettingsScreen}
-            options={{ ...NavigationScreenHeader, ...SettingsTitle }}
+            options={{ ...NavigationScreenHeader, ...SettingsOptions }}
         />
         <Profile.Screen
             name={ProfileStackNavigatorEnum.EditScreen}

@@ -1,6 +1,7 @@
 export default {
     MAIN_RED: '#ff5555',
     MAIN_BLUE: '#634bed',
+    MAIN_BLUE_100: '#735def',
     WHITE: '#ffffff',
     GRAY_300: '#0d0d0d',
     GRAY_800: '#b3b3b3',

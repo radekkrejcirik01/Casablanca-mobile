@@ -15,7 +15,7 @@ export const HeaderSave = (): JSX.Element => {
 
     const onPress = useCallback(() => {
         dispatch(setSaveVisible(false));
-        Alert.alert('Your info has been updated 🎉');
+        Alert.alert('Profile has been updated 🎉');
     }, [dispatch]);
 
     const saveButton = useMemo(

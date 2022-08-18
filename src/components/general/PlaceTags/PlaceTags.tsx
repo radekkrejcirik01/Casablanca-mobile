@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import { View } from 'react-native';
-import { ALL_PLACE_TAGS } from '@components/registration/PlaceTags/PlaceTags.const';
+import { ALL_PLACE_TAGS } from '@components/general/PlaceTags/PlaceTags.const';
 import { PlaceTag } from '@components/general/PlaceTag/PlaceTag';
-import { PlaceTagsStyle } from '@components/registration/PlaceTags/PlaceTags.style';
+import { PlaceTagsStyle } from '@components/general/PlaceTags/PlaceTags.style';
 import {
     PlaceTagsDefaultProps,
     PlaceTagsProps
-} from '@components/registration/PlaceTags/PlaceTags.props';
+} from '@components/general/PlaceTags/PlaceTags.props';
 
 export const PlaceTags = ({
     tags,

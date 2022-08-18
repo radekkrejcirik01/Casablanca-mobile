@@ -3,35 +3,37 @@ import COLORS from '@constants/COLORS';
 
 export const ChatHeaderStyle = StyleSheet.create({
     safeArea: {
-        borderBottomWidth: 2,
-        borderBottomColor: COLORS.LIGHTGRAY,
+        borderBottomWidth: 0.25,
+        borderBottomColor: COLORS.MAIN_BLUE_100,
         backgroundColor: COLORS.MAIN_BLUE
     },
     container: {
-        marginLeft: 10,
+        marginHorizontal: 10,
         paddingBottom: 10,
         flexDirection: 'row',
         alignItems: 'center'
+    },
+    contentContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
     },
     profileContainer: {
         flexDirection: 'row'
     },
     image: {
         marginLeft: 10,
-        height: 30,
-        width: 30,
+        height: 35,
+        width: 35,
         borderRadius: 20
     },
     infoContainer: {
-        paddingLeft: 10
+        paddingLeft: 10,
+        justifyContent: 'center'
     },
     name: {
         color: COLORS.WHITE,
         fontWeight: 'bold'
-    },
-    text: {
-        fontSize: 9,
-        color: COLORS.WHITE,
-        fontWeight: '600'
     }
 });

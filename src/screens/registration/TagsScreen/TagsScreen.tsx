@@ -2,7 +2,7 @@ import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Continue } from '@components/registration/Continue/Continue';
 import { Title } from '@components/general/Title/Title';
-import { PlaceTags } from '@components/registration/PlaceTags/PlaceTags';
+import { PlaceTags } from '@components/general/PlaceTags/PlaceTags';
 import { TagsScreenStyle } from '@screens/registration/TagsScreen/TagsScreen.style';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { useNavigation } from '@hooks/useNavigation';

@@ -3,13 +3,13 @@ import { Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ProfileScreenStyle } from '@screens/tab/ProfileScreen/ProfileScreen.style';
 import { ProfileImageView } from '@components/profile/ProfileImageView';
-import { PlaceTags } from '@components/registration/PlaceTags/PlaceTags';
+import { PlaceTags } from '@components/general/PlaceTags/PlaceTags';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { IconButton } from '@components/general/IconButton/IconButton';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { useNavigation } from '@hooks/useNavigation';
 import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/ProfileStackNavigator.enum';
-import { PLACE_TAGS } from '@components/registration/PlaceTags/PlaceTags.const';
+import { PLACE_TAGS } from '@components/general/PlaceTags/PlaceTags.const';
 
 export const ProfileScreen = (): JSX.Element => {
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.ProfileStack);
