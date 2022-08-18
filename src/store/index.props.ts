@@ -18,6 +18,9 @@ export interface ReducerProps {
     save: {
         isVisible: boolean;
     };
+    modal: {
+        isModalVisible: boolean;
+    };
 }
 
 export interface Birthday {
