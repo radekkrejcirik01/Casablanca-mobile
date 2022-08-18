@@ -4,7 +4,6 @@ import {
     SafeAreaProvider,
     useSafeAreaInsets
 } from 'react-native-safe-area-context';
-import FastImage from 'react-native-fast-image';
 import { InfoProfileScreenStyle } from '@screens/general/InfoProfileScreen/InfoProfileScreen.style';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { IconButton } from '@components/general/IconButton/IconButton';
@@ -20,7 +19,7 @@ export const InfoProfileScreen = ({
     const { top } = useSafeAreaInsets();
 
     const marginTop = useMemo(
-        (): StyleProp<ViewStyle> => ({ marginTop: top || 20 }),
+        (): StyleProp<ViewStyle> => ({ marginTop: top }),
         [top]
     );
 

@@ -54,7 +54,7 @@ export const SwiperCard = ({
 
     const lottieTop = useMemo(
         (): StyleProp<ViewStyle> => ({
-            top: top ? top - 10 : 10
+            top: top - 10
         }),
         [top]
     );
