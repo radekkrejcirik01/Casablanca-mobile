@@ -4,7 +4,6 @@ import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 export interface SwiperCardProps {
     card: CardDataProps;
     onCardTouch: (name: string) => void;
-    onInfoTouch: (image: Array<string>, name: string, age: string) => void;
 }
 
 export interface AnimatedLottieViewInterface extends LottieView {

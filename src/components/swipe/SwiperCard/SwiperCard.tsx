@@ -22,15 +22,13 @@ import { SwiperCardStyle } from '@components/swipe/SwiperCard/SwiperCard.style';
 import { PLACE_TAGS } from '@components/registration/PlaceTags/PlaceTags.const';
 import { PLACE_EMOJIS } from '@components/general/PlaceTag/PlaceTag.const';
 import { useHaptic } from '@hooks/useHaptic';
-import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
 import { SwiperStyle } from '@components/swipe/Swiper/Swiper.style';
 import { useLottie } from '@hooks/useLottie';
 import { DotProgressBar } from '@components/general/DotProgressBar/DotProgressBar';
 
 export const SwiperCard = ({
     card,
-    onCardTouch,
-    onInfoTouch
+    onCardTouch
 }: SwiperCardProps): JSX.Element => {
     const { top } = useSafeAreaInsets();
 
@@ -46,10 +44,6 @@ export const SwiperCard = ({
             hapticTouch('impactLight');
             lottiePlay();
         }
-    };
-
-    const infoTouch = () => {
-        onInfoTouch(card.images, card.name, card.age);
     };
 
     const lottieTop = useMemo(
@@ -83,23 +77,16 @@ export const SwiperCard = ({
                         >
                             {index === 0 && (
                                 <View style={SwiperCardStyle.tagView}>
-                                    <TouchableOpacity
-                                        onPress={infoTouch}
-                                        style={SwiperCardStyle.touchableTag}
-                                    >
-                                        <View
-                                            style={SwiperCardStyle.tagInfoView}
+                                    <View style={SwiperCardStyle.tagInfoView}>
+                                        <Text
+                                            style={[
+                                                SwiperCardStyle.tagText,
+                                                SwiperCardStyle.tagTitle
+                                            ]}
                                         >
-                                            <Text
-                                                style={[
-                                                    SwiperCardStyle.tagText,
-                                                    SwiperCardStyle.tagTitle
-                                                ]}
-                                            >
-                                                {card.name}, {card.age}
-                                            </Text>
-                                        </View>
-                                    </TouchableOpacity>
+                                            {card.name}, {card.age}
+                                        </Text>
+                                    </View>
                                     {PLACE_TAGS.slice(0, 4).map(
                                         (value: string) => (
                                             <View

@@ -21,9 +21,6 @@ export const SwiperCardStyle = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end'
     },
-    touchableTag: {
-        alignSelf: 'flex-start'
-    },
     tagInfoView: {
         marginTop: 10,
         padding: 7.5,
