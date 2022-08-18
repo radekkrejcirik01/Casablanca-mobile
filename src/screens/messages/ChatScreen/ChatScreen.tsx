@@ -9,7 +9,7 @@ import { InfoProfileScreen } from '@screens/general/InfoProfileScreen/InfoProfil
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducerProps } from '@store/index.props';
 import { setModalVisible } from '@store/ModalReducer';
-import { InfoProps } from '@screens/general/InfoProfileScreen/InfoProfileScreen.props';
+import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 
 export const ChatScreen = (): JSX.Element => {
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export const ChatScreen = (): JSX.Element => {
     };
 
     const modalContent = useMemo((): JSX.Element => {
-        const info: InfoProps = {
+        const info: CardDataProps = {
             images: [
                 'https://s5.favim.com/orig/69/analog-boy-grunge-hipster-Favim.com-654208.jpg',
                 'https://s5.favim.com/orig/69/analog-boy-grunge-hipster-Favim.com-654208.jpg',
@@ -31,7 +31,8 @@ export const ChatScreen = (): JSX.Element => {
                 'https://s5.favim.com/orig/69/analog-boy-grunge-hipster-Favim.com-654208.jpg'
             ],
             name: 'Radek',
-            age: '34'
+            age: '34',
+            tags: ['Theatre', 'Cafe']
         };
 
         return <InfoProfileScreen onClose={onClose} info={info} />;

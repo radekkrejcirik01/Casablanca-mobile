@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { StyleProp, Text, View, ViewStyle } from 'react-native';
+import { StyleProp, ViewStyle } from 'react-native';
 import {
     SafeAreaProvider,
     useSafeAreaInsets
@@ -11,6 +11,7 @@ import {
     InfoProfileScreenDefaultProps,
     InfoProfileScreenProps
 } from '@screens/general/InfoProfileScreen/InfoProfileScreen.props';
+import { SwiperCard } from '@components/swipe/SwiperCard/SwiperCard';
 
 export const InfoProfileScreen = ({
     onClose,
@@ -24,12 +25,18 @@ export const InfoProfileScreen = ({
     );
 
     return (
-        <SafeAreaProvider style={[InfoProfileScreenStyle.safeArea, marginTop]}>
-            <View style={InfoProfileScreenStyle.buttonIconView}>
-                <IconButton icon={IconEnum.CLOSE} onPress={onClose} />
-            </View>
-            <Text>{info?.name}</Text>
-            <Text>{info?.age}</Text>
+        <SafeAreaProvider style={marginTop}>
+            <IconButton
+                icon={IconEnum.CLOSE}
+                onPress={onClose}
+                size={26}
+                style={InfoProfileScreenStyle.iconButton}
+            />
+            <SwiperCard
+                card={info}
+                hasLike={false}
+                style={InfoProfileScreenStyle.swiperCard}
+            />
         </SafeAreaProvider>
     );
 };

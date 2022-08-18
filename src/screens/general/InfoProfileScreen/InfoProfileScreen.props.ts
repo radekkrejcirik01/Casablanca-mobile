@@ -1,6 +1,8 @@
+import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
+
 export interface InfoProfileScreenProps {
     onClose: () => void;
-    info?: InfoProps;
+    info?: CardDataProps;
 }
 
 export const InfoProfileScreenDefaultProps: Omit<
@@ -8,14 +10,9 @@ export const InfoProfileScreenDefaultProps: Omit<
     'onClose'
 > = {
     info: {
-        images: null,
+        images: [],
         name: null,
-        age: null
+        age: null,
+        tags: []
     }
 };
-
-export interface InfoProps {
-    images: Array<string>;
-    name: string;
-    age: string;
-}

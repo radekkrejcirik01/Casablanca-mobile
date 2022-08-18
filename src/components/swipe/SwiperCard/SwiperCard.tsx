@@ -17,7 +17,10 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ViewPager, {
     ViewPagerOnPageSelectedEvent
 } from '@react-native-community/viewpager';
-import { SwiperCardProps } from '@components/swipe/SwiperCard/SwiperCard.props';
+import {
+    SwiperCardDefaultProps,
+    SwiperCardProps
+} from '@components/swipe/SwiperCard/SwiperCard.props';
 import { SwiperCardStyle } from '@components/swipe/SwiperCard/SwiperCard.style';
 import { PLACE_TAGS } from '@components/registration/PlaceTags/PlaceTags.const';
 import { PLACE_EMOJIS } from '@components/general/PlaceTag/PlaceTag.const';
@@ -28,7 +31,9 @@ import { DotProgressBar } from '@components/general/DotProgressBar/DotProgressBa
 
 export const SwiperCard = ({
     card,
-    onCardTouch
+    onCardTouch,
+    hasLike,
+    style
 }: SwiperCardProps): JSX.Element => {
     const { top } = useSafeAreaInsets();
 
@@ -38,11 +43,13 @@ export const SwiperCard = ({
     const [pagePosition, setPagePosition] = useState<number>(0);
 
     const onDoubleTap = (event: TapGestureHandlerGestureEvent) => {
-        onCardTouch(card.name);
-        // Trigger like event
-        if (event.nativeEvent.state === State.ACTIVE) {
-            hapticTouch('impactLight');
-            lottiePlay();
+        if (hasLike) {
+            onCardTouch(card.name);
+            // Trigger like event
+            if (event.nativeEvent.state === State.ACTIVE) {
+                hapticTouch('impactLight');
+                lottiePlay();
+            }
         }
     };
 
@@ -63,7 +70,7 @@ export const SwiperCard = ({
 
     return (
         <TapGestureHandler onHandlerStateChange={onDoubleTap} numberOfTaps={2}>
-            <View style={SwiperCardStyle.container}>
+            <View style={[SwiperCardStyle.container, style]}>
                 <ViewPager
                     style={SwiperStyle.viewPager}
                     onPageSelected={onPageSelected}
@@ -121,16 +128,18 @@ export const SwiperCard = ({
                         </FastImage>
                     ))}
                 </ViewPager>
-                <TouchableWithoutFeedback onPress={onRemoveLike}>
-                    <View style={[SwiperCardStyle.lottie, lottieTop]}>
-                        <LottieView
-                            ref={lottieRef}
-                            source={require('../../../assets/animations/like.json')}
-                            autoPlay={false}
-                            loop={false}
-                        />
-                    </View>
-                </TouchableWithoutFeedback>
+                {hasLike && (
+                    <TouchableWithoutFeedback onPress={onRemoveLike}>
+                        <View style={[SwiperCardStyle.lottie, lottieTop]}>
+                            <LottieView
+                                ref={lottieRef}
+                                source={require('../../../assets/animations/like.json')}
+                                autoPlay={false}
+                                loop={false}
+                            />
+                        </View>
+                    </TouchableWithoutFeedback>
+                )}
                 <DotProgressBar
                     pagesNumber={card.images?.length}
                     currentPage={pagePosition}
@@ -140,3 +149,5 @@ export const SwiperCard = ({
         </TapGestureHandler>
     );
 };
+
+SwiperCard.defaultProps = SwiperCardDefaultProps;

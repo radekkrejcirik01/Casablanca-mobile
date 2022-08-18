@@ -7,5 +7,4 @@ export interface CardDataProps {
     name: string;
     age: string;
     tags: Array<string>;
-    color: string;
 }

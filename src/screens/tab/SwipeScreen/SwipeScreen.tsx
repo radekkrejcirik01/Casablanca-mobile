@@ -15,8 +15,7 @@ export const SwipeScreen = (): JSX.Element => {
             ],
             name: 'Radek',
             age: '34',
-            tags: ['Theatre', 'Cafe'],
-            color: 'blue'
+            tags: ['Theatre', 'Cafe']
         },
         {
             images: [
@@ -27,8 +26,7 @@ export const SwipeScreen = (): JSX.Element => {
             ],
             name: 'Adela',
             age: '34',
-            tags: ['Theatre', 'Cafe'],
-            color: 'green'
+            tags: ['Theatre', 'Cafe']
         },
         {
             images: [
@@ -37,8 +35,7 @@ export const SwipeScreen = (): JSX.Element => {
             ],
             name: 'Tomas',
             age: '34',
-            tags: ['Theatre', 'Cafe'],
-            color: 'blue'
+            tags: ['Theatre', 'Cafe']
         }
     ];
 
