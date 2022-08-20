@@ -19,9 +19,9 @@ export const ChatInput = ({ onSend, style }: ChatInputProps): JSX.Element => {
         <View style={style}>
             <View style={ChatInputStyle.container}>
                 <TextInput
-                    onChangeText={setValue}
                     placeholder="Message..."
                     placeholderTextColor={COLORS.WHITE}
+                    onChangeText={setValue}
                     selectionColor={COLORS.WHITE}
                     style={ChatInputStyle.input}
                 />

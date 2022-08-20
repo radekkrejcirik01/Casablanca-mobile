@@ -85,7 +85,7 @@ export const ChatScreen = (): JSX.Element => {
     };
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={ChatScreenStyle.container}>
             <KeyboardAvoidingView keyboardVerticalOffset={44}>
                 <ChatList data={data} style={ChatScreenStyle.chatList} />
                 <ChatInput onSend={onSend} style={ChatScreenStyle.chatInput} />

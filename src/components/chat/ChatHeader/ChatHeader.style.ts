@@ -3,9 +3,9 @@ import COLORS from '@constants/COLORS';
 
 export const ChatHeaderStyle = StyleSheet.create({
     safeArea: {
-        borderBottomWidth: 0.25,
-        borderBottomColor: COLORS.MAIN_BLUE_100,
-        backgroundColor: COLORS.MAIN_BLUE
+        borderBottomWidth: 0.5,
+        borderBottomColor: COLORS.BLACK_100,
+        backgroundColor: COLORS.BLACK
     },
     container: {
         marginHorizontal: 10,

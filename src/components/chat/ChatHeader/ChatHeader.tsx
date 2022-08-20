@@ -1,12 +1,12 @@
 import React from 'react';
 import { SafeAreaView, Text, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import { useDispatch } from 'react-redux';
 import { Icon } from '@components/icon/Icon';
 import { ChatHeaderStyle } from '@components/chat/ChatHeader/ChatHeader.style';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
 import { useNavigation } from '@hooks/useNavigation';
-import { useDispatch } from 'react-redux';
 import { setModalVisible } from '@store/ModalReducer';
 
 export const ChatHeader = (): JSX.Element => {

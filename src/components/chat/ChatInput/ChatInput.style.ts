@@ -10,16 +10,18 @@ export const ChatInputStyle = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 20,
         borderRadius: 20,
-        borderColor: COLORS.WHITE,
-        borderWidth: 1,
-        backgroundColor: COLORS.MAIN_BLUE,
+        borderWidth: 0.5,
+        borderColor: COLORS.BLACK_100,
+        backgroundColor: COLORS.BLACK,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
     },
     input: {
-        fontSize: 15,
         padding: 5,
+        paddingRight: 10,
+        flex: 1,
+        fontSize: 15,
         color: COLORS.WHITE
     },
     send: {
