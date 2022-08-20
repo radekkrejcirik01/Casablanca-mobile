@@ -22,12 +22,15 @@ export const ChatInput = ({ onSend, style }: ChatInputProps): JSX.Element => {
                     placeholder="Message..."
                     placeholderTextColor={COLORS.WHITE}
                     onChangeText={setValue}
+                    multiline
                     selectionColor={COLORS.WHITE}
                     style={ChatInputStyle.input}
                 />
-                <TouchableOpacity disabled={!value} onPress={onPress}>
-                    <Text style={ChatInputStyle.send}>Send</Text>
-                </TouchableOpacity>
+                <View style={ChatInputStyle.sendView}>
+                    <TouchableOpacity disabled={!value} onPress={onPress}>
+                        <Text style={ChatInputStyle.send}>Send</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     );

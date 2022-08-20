@@ -6,7 +6,7 @@ import { MessagesStackNavigatorEnum } from '@navigation/StackNavigators/messages
 import { NotificationScreen } from '@screens/messages/NotificationScreen/NotificationScreen';
 import { ChatScreen } from '@screens/messages/ChatScreen/ChatScreen';
 import {
-    ChatScreenHeader,
+    ChatScreenOptions,
     NotificationsTitle
 } from '@navigation/StackNavigators/messages/MessagesStackNavigator.options';
 
@@ -22,7 +22,7 @@ export const MessagesStackNavigator = (): JSX.Element => (
         <Messages.Screen
             name={MessagesStackNavigatorEnum.ChatScreen}
             component={ChatScreen}
-            options={ChatScreenHeader}
+            options={ChatScreenOptions}
         />
     </Messages.Navigator>
 );

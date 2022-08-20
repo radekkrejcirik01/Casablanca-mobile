@@ -9,5 +9,8 @@ export const StackNavigatorStyle = StyleSheet.create({
     bottomBorder: {
         borderBottomWidth: 0.25,
         borderBottomColor: COLORS.MAIN_BLUE_100
+    },
+    blackBackground: {
+        backgroundColor: COLORS.BLACK
     }
 });

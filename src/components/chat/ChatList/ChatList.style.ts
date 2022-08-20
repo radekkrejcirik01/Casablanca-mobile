@@ -8,18 +8,18 @@ export const ChatListStyle = StyleSheet.create({
         backgroundColor: COLORS.BLACK
     },
     item: {
-        alignSelf: 'flex-start',
         borderRadius: 20,
         padding: 7.5,
         paddingHorizontal: 10,
         borderWidth: 0.5,
         borderColor: COLORS.BLACK_100,
-        backgroundColor: COLORS.BLACK
+        backgroundColor: COLORS.BLACK,
+        alignSelf: 'flex-start'
     },
     right: {
-        alignSelf: 'flex-end',
         borderColor: COLORS.MAIN_BLUE,
-        backgroundColor: COLORS.MAIN_BLUE
+        backgroundColor: COLORS.MAIN_BLUE,
+        alignSelf: 'flex-end'
     },
     text: {
         margin: 3,
