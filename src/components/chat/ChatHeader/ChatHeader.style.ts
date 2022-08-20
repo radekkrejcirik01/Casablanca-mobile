@@ -3,8 +3,8 @@ import COLORS from '@constants/COLORS';
 
 export const ChatHeaderStyle = StyleSheet.create({
     safeArea: {
-        borderBottomWidth: 0.5,
-        borderBottomColor: COLORS.BLACK_100,
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.BLACK_300,
         backgroundColor: COLORS.BLACK
     },
     container: {
@@ -33,6 +33,7 @@ export const ChatHeaderStyle = StyleSheet.create({
         justifyContent: 'center'
     },
     name: {
+        fontSize: 15,
         color: COLORS.WHITE,
         fontWeight: 'bold'
     }
