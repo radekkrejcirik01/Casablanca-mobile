@@ -1,18 +1,49 @@
-import React from 'react';
-import { Keyboard, VirtualizedList } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+    Keyboard,
+    NativeScrollEvent,
+    NativeSyntheticEvent,
+    VirtualizedList
+} from 'react-native';
 import {
     ChatListDefaultProps,
     ChatListProps
 } from '@components/chat/ChatList/ChatList.props';
 import { ChatListStyle } from '@components/chat/ChatList/ChatList.style';
 import { useChatListRenders } from '@hooks/useChatListRenders';
+import { useKeyboard } from '@hooks/useKeyboard';
 
 export const ChatList = ({ data, style }: ChatListProps): JSX.Element => {
     const { getItem, renderItem, getItemCount, keyExtractor } =
         useChatListRenders(data);
 
+    const { isKeyboardVisible } = useKeyboard();
+
+    const [scrollEnabled, setScrollEnabled] = useState<boolean>(true);
+    const [offset, setOffset] = useState<number>(0);
+
+    const listRef = useRef(null);
+
+    useEffect(() => {
+        if (!isKeyboardVisible) {
+            listRef.current?.scrollToOffset({ offset });
+            setScrollEnabled(true);
+        }
+    }, [isKeyboardVisible, offset]);
+
+    const onScrollBeginDrag = (
+        event: NativeSyntheticEvent<NativeScrollEvent>
+    ) => {
+        if (isKeyboardVisible) {
+            setScrollEnabled(false);
+            setOffset(event.nativeEvent.contentOffset.y);
+            Keyboard.dismiss();
+        }
+    };
+
     return (
         <VirtualizedList
+            ref={listRef}
             data={data}
             getItem={getItem}
             renderItem={renderItem}
@@ -21,8 +52,9 @@ export const ChatList = ({ data, style }: ChatListProps): JSX.Element => {
             initialNumToRender={40}
             showsVerticalScrollIndicator={false}
             inverted
-            keyboardShouldPersistTaps="handled"
-            onScrollBeginDrag={Keyboard.dismiss}
+            scrollEnabled={scrollEnabled}
+            keyboardShouldPersistTaps="always"
+            onScrollBeginDrag={onScrollBeginDrag}
             style={style}
             contentContainerStyle={ChatListStyle.contentContainer}
         />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { Keyboard, Text, TextInput, View } from 'react-native';
 import { ChatInputStyle } from '@components/chat/ChatInput/ChatInput.style';
 import COLORS from '@constants/COLORS';
 import {
@@ -12,6 +12,7 @@ export const ChatInput = ({ onSend, style }: ChatInputProps): JSX.Element => {
     const [value, setValue] = useState<string>();
 
     const onPress = () => {
+        Keyboard.dismiss();
         onSend(value);
     };
 
