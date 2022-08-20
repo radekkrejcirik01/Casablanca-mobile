@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
     Keyboard,
     NativeScrollEvent,
@@ -31,15 +31,16 @@ export const ChatList = ({ data, style }: ChatListProps): JSX.Element => {
         }
     }, [isKeyboardVisible, offset]);
 
-    const onScrollBeginDrag = (
-        event: NativeSyntheticEvent<NativeScrollEvent>
-    ) => {
-        if (isKeyboardVisible) {
-            setScrollEnabled(false);
-            setOffset(event.nativeEvent.contentOffset.y);
-            Keyboard.dismiss();
-        }
-    };
+    const onScrollBeginDrag = useCallback(
+        (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+            if (isKeyboardVisible) {
+                setScrollEnabled(false);
+                setOffset(event.nativeEvent.contentOffset.y);
+                Keyboard.dismiss();
+            }
+        },
+        [isKeyboardVisible]
+    );
 
     return (
         <VirtualizedList
