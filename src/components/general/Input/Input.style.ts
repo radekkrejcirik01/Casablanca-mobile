@@ -5,8 +5,8 @@ export const InputStyle = StyleSheet.create({
     container: {
         paddingHorizontal: 15,
         borderRadius: 30,
-        borderWidth: 2,
         height: 45,
+        borderWidth: 2,
         borderColor: COLORS.WHITE,
         flexDirection: 'row'
     },

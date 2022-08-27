@@ -10,6 +10,7 @@ import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavig
 import { useNavigation } from '@hooks/useNavigation';
 import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/ProfileStackNavigator.enum';
 import { PLACE_TAGS } from '@components/general/PlaceTags/PlaceTags.const';
+import { ThemeView } from '@components/general/ThemeView/ThemeView';
 
 export const ProfileScreen = (): JSX.Element => {
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.ProfileStack);
@@ -25,7 +26,7 @@ export const ProfileScreen = (): JSX.Element => {
     return (
         <SafeAreaProvider>
             <ProfileImageView source="">
-                <View style={ProfileScreenStyle.bottomContainer}>
+                <ThemeView style={ProfileScreenStyle.bottomContainer}>
                     <View style={ProfileScreenStyle.view}>
                         <IconButton
                             icon={IconEnum.SETTINGS}
@@ -43,7 +44,7 @@ export const ProfileScreen = (): JSX.Element => {
                     <View style={ProfileScreenStyle.tagsView}>
                         <PlaceTags tags={PLACE_TAGS} />
                     </View>
-                </View>
+                </ThemeView>
             </ProfileImageView>
         </SafeAreaProvider>
     );

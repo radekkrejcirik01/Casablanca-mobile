@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { LoginHeaderStyle } from '@components/general/LoginHeader/LoginHeader.style';
+import { LoginHeaderStyle } from '@components/login/LoginHeader/LoginHeader.style';
 import { Icon } from '@components/icon/Icon';
 import { IconEnum } from '@components/icon/Icon.enum';
 

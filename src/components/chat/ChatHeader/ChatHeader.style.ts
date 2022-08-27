@@ -2,14 +2,10 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const ChatHeaderStyle = StyleSheet.create({
-    safeArea: {
-        borderBottomWidth: 1,
-        borderBottomColor: COLORS.BLACK_300,
-        backgroundColor: COLORS.BLACK
-    },
     container: {
         marginHorizontal: 10,
         paddingBottom: 10,
+        borderBottomWidth: 1,
         flexDirection: 'row',
         alignItems: 'center'
     },

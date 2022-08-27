@@ -3,8 +3,8 @@ import COLORS from '@constants/COLORS';
 
 export const RegistrationStackNavigatorStyle = StyleSheet.create({
     header: {
-        backgroundColor: COLORS.MAIN_BLUE,
-        shadowOpacity: 0
+        shadowOpacity: 0,
+        backgroundColor: COLORS.TRANSPARENT
     },
     headerTitle: {
         height: 100

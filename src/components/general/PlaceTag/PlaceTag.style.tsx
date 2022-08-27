@@ -9,7 +9,6 @@ export const PlaceTagStyle = StyleSheet.create({
         borderRadius: 20,
         borderWidth: 2.25,
         borderColor: COLORS.WHITE,
-        backgroundColor: COLORS.MAIN_BLUE,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row'

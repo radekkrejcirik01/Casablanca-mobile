@@ -6,6 +6,7 @@ export interface SettingsListItemProps {
     description?: string;
     hasSwitch?: boolean;
     toggleSwitch?: (value: boolean) => void;
+    switchTrue?: boolean;
     hasArrow?: boolean;
     onPress?: () => void;
     style?: StyleProp<ViewStyle>;
@@ -19,6 +20,7 @@ export const SettingsListItemDefaultProps: Omit<
     description: null,
     hasSwitch: false,
     toggleSwitch: (value: boolean) => {},
+    switchTrue: false,
     hasArrow: false,
     onPress: () => {}
 };

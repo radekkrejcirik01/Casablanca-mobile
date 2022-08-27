@@ -14,8 +14,7 @@ export const MessagesScreen = (): JSX.Element => {
             ],
             name: 'Zuzana',
             age: '34',
-            tags: ['Theatre', 'Cafe'],
-            color: 'blue'
+            tags: ['Theatre', 'Cafe']
         },
         {
             images: [
@@ -23,8 +22,7 @@ export const MessagesScreen = (): JSX.Element => {
             ],
             name: 'Ade',
             age: '34',
-            tags: ['Theatre', 'Cafe'],
-            color: 'green'
+            tags: ['Theatre', 'Cafe']
         },
         {
             images: [
@@ -32,8 +30,7 @@ export const MessagesScreen = (): JSX.Element => {
             ],
             name: 'Radek',
             age: '34',
-            tags: ['Theatre', 'Cafe'],
-            color: 'blue'
+            tags: ['Theatre', 'Cafe']
         }
     ];
 

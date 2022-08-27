@@ -21,6 +21,9 @@ export interface ReducerProps {
     modal: {
         isModalVisible: boolean;
     };
+    theme: {
+        isDarkMode: boolean;
+    };
 }
 
 export interface Birthday {

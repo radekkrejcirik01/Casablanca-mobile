@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
-import { ListRenderItemInfo, Text, View } from 'react-native';
+import { ListRenderItemInfo } from 'react-native';
 import { ChatDataProps } from '@components/chat/ChatList/ChatList.props';
-import { ChatListStyle } from '@components/chat/ChatList/ChatList.style';
+import { ChatItem } from '@components/chat/ChatItem/ChatItem';
 
 export const useChatListRenders = (
     data: Array<ChatDataProps>
@@ -21,18 +21,9 @@ export const useChatListRenders = (
     }: ListRenderItemInfo<ChatDataProps>): JSX.Element => {
         const { sender, name, message } = item;
 
-        return (
-            <View
-                style={[
-                    ChatListStyle.item,
-                    sender === 'radek@gmail.com' && ChatListStyle.right
-                ]}
-            >
-                <View>
-                    <Text style={ChatListStyle.text}>{message}</Text>
-                </View>
-            </View>
-        );
+        const isOutbound = sender === 'radek@gmail.com';
+
+        return <ChatItem isOutbound={isOutbound} message={message} />;
     };
 
     const getItemCount = useCallback((): number => data?.length, [data]);

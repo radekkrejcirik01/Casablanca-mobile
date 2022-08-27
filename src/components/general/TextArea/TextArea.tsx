@@ -9,6 +9,7 @@ export const TextArea = ({ onChange }: TextAreaProps): JSX.Element => (
         onChange={onChange}
         inputType={InputTypeEnum.TEXT_AREA}
         multiline
-        viewStyle={TextAreaStyle.input}
+        inputStyle={TextAreaStyle.input}
+        viewStyle={TextAreaStyle.view}
     />
 );

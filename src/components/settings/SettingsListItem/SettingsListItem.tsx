@@ -16,11 +16,12 @@ export const SettingsListItem = ({
     description,
     hasSwitch,
     toggleSwitch,
+    switchTrue,
     hasArrow,
     onPress,
     style
 }: SettingsListItemProps): JSX.Element => {
-    const [switchValue, setSwitchValue] = useState<boolean>(false);
+    const [switchValue, setSwitchValue] = useState<boolean>(switchTrue);
 
     const onValueChange = () => {
         toggleSwitch(!switchValue);

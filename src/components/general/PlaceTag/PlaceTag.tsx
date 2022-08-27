@@ -8,6 +8,7 @@ import { PlaceTagStyle } from '@components/general/PlaceTag/PlaceTag.style';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
 import COLORS from '@constants/COLORS';
 import { PLACE_EMOJIS } from '@components/general/PlaceTag/PlaceTag.const';
+import { useTheme } from '@hooks/useTheme';
 
 export const PlaceTag = ({
     tag,
@@ -17,6 +18,8 @@ export const PlaceTag = ({
 }: PlaceTagProps): JSX.Element => {
     const [tagged, setTagged] = useState<boolean>(isTagged);
 
+    const { isDarkMode } = useTheme();
+
     const onPress = () => {
         if (showAll) {
             setTagged(!tagged);
@@ -24,17 +27,21 @@ export const PlaceTag = ({
         }
     };
 
-    const backgroundColor = useMemo(
-        (): StyleProp<ViewStyle> =>
-            tagged && {
-                backgroundColor: COLORS.WHITE
-            },
-        [tagged]
-    );
+    const backgroundColor = useMemo((): StyleProp<ViewStyle> => {
+        const color = isDarkMode ? COLORS.MAIN_BLUE : COLORS.WHITE;
 
-    const color = useMemo(
-        (): StyleProp<TextStyle> => tagged && { color: COLORS.MAIN_BLUE },
-        [tagged]
+        return (
+            tagged && {
+                backgroundColor: color,
+                borderColor: color
+            }
+        );
+    }, [tagged, isDarkMode]);
+
+    const textColor = useMemo(
+        (): StyleProp<TextStyle> =>
+            tagged && { color: isDarkMode ? COLORS.WHITE : COLORS.MAIN_BLUE },
+        [tagged, isDarkMode]
     );
 
     return (
@@ -46,7 +53,7 @@ export const PlaceTag = ({
             <Text style={PlaceTagStyle.emoji}>
                 {PLACE_EMOJIS[tag as keyof typeof PLACE_EMOJIS]}
             </Text>
-            <Text style={[PlaceTagStyle.text, color]}>{tag}</Text>
+            <Text style={[PlaceTagStyle.text, textColor]}>{tag}</Text>
         </TouchableOpacity>
     );
 };

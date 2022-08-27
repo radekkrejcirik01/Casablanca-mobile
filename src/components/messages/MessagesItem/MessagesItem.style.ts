@@ -3,8 +3,8 @@ import COLORS from '@constants/COLORS';
 
 export const MessagesItemStyle = StyleSheet.create({
     container: {
-        alignItems: 'flex-start',
-        marginBottom: 15
+        marginBottom: 15,
+        alignItems: 'flex-start'
     },
     row: {
         flexDirection: 'row'
@@ -16,20 +16,19 @@ export const MessagesItemStyle = StyleSheet.create({
     },
     box: {
         flex: 1,
-        borderBottomWidth: 0.3,
-        borderBottomColor: COLORS.LIGHTGRAY_100,
         paddingBottom: 25,
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        borderBottomWidth: 0.75
     },
     firstRow: {
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
     text: {
-        fontSize: 14,
         color: COLORS.WHITE,
-        fontWeight: 'bold',
-        paddingBottom: 5
+        fontSize: 14,
+        paddingBottom: 5,
+        fontWeight: 'bold'
     },
     opacity: {
         opacity: 0.75

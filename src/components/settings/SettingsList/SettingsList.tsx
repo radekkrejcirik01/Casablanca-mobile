@@ -7,8 +7,14 @@ import { useNavigation } from '@hooks/useNavigation';
 import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/ProfileStackNavigator.enum';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { setUserToken } from '@store/UserReducer';
+import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
+import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
+import { setIsDarkMode } from '@store/ThemeReducer';
+import { useTheme } from '@hooks/useTheme';
 
 export const SettingsList = (): JSX.Element => {
+    const { isDarkMode } = useTheme();
+
     const dispatch = useDispatch();
 
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.ProfileStack);
@@ -41,6 +47,11 @@ export const SettingsList = (): JSX.Element => {
 
     const openAccountScreen = () => {
         navigateTo(ProfileStackNavigatorEnum.AccountScreen);
+    };
+
+    const toggleDarkMode = (value: boolean) => {
+        dispatch(setIsDarkMode(value));
+        PersistStorage.setItem(PersistStorageKeys.THEME, value.toString());
     };
 
     const LogOut = () => {
@@ -84,6 +95,12 @@ export const SettingsList = (): JSX.Element => {
                 title="Account"
                 hasArrow
                 onPress={openAccountScreen}
+            />
+            <SettingsListItem
+                title="Dark mode"
+                hasSwitch
+                switchTrue={isDarkMode}
+                toggleSwitch={toggleDarkMode}
             />
             <SettingsListItem
                 title="Log Out"

@@ -3,14 +3,14 @@ import COLORS from '@constants/COLORS';
 
 export const BottomTabNavigatorStyle = StyleSheet.create({
     tabBar: {
-        backgroundColor: COLORS.MAIN_BLUE,
-        borderTopWidth: 0,
+        marginTop: 10,
         paddingHorizontal: 15,
-        marginTop: 10
+        borderTopWidth: 0,
+        backgroundColor: COLORS.TRANSPARENT
     },
     tabBarLabel: {
+        fontSize: 9,
         color: COLORS.WHITE,
-        fontWeight: 'bold',
-        fontSize: 9
+        fontWeight: 'bold'
     }
 });

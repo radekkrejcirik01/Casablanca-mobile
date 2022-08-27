@@ -5,8 +5,7 @@ export const ProfileScreenStyle = StyleSheet.create({
     bottomContainer: {
         height: '100%',
         paddingTop: 20,
-        backgroundColor: COLORS.MAIN_BLUE,
-        borderRadius: 30
+        borderRadius: 25
     },
     view: {
         marginHorizontal: 20,
@@ -15,14 +14,14 @@ export const ProfileScreenStyle = StyleSheet.create({
         alignItems: 'center'
     },
     firstname: {
-        color: 'white',
         fontSize: 30,
+        color: COLORS.WHITE,
         fontWeight: 'bold'
     },
     age: {
         marginTop: 10,
-        color: 'white',
         fontSize: 20,
+        color: COLORS.WHITE,
         textAlign: 'center',
         fontWeight: 'bold'
     },

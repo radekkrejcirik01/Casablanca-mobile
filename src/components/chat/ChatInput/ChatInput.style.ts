@@ -11,8 +11,6 @@ export const ChatInputStyle = StyleSheet.create({
         paddingRight: 20,
         borderRadius: 25,
         borderWidth: 1,
-        borderColor: COLORS.BLACK_200,
-        backgroundColor: COLORS.BLACK,
         flexDirection: 'row'
     },
     input: {

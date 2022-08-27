@@ -1,12 +1,10 @@
 import { StyleSheet } from 'react-native';
-import COLORS from '@constants/COLORS';
 
 export const CardStyle = StyleSheet.create({
     container: {
-        padding: 10,
         marginBottom: 20,
-        borderRadius: 20,
-        backgroundColor: COLORS.WHITE
+        padding: 10,
+        borderRadius: 20
     },
     row: {
         flexDirection: 'row'
@@ -21,19 +19,8 @@ export const CardStyle = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
-    name: {
+    text: {
         padding: 5,
-        fontWeight: '600',
-        color: COLORS.MAIN_BLUE
-    },
-    date: {
-        padding: 5,
-        fontWeight: '600',
-        color: COLORS.MAIN_BLUE
-    },
-    description: {
-        padding: 5,
-        fontWeight: '600',
-        color: COLORS.MAIN_BLUE
+        fontWeight: '600'
     }
 });

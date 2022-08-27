@@ -3,8 +3,8 @@ import COLORS from '@constants/COLORS';
 
 export const ProfileImageViewStyle = StyleSheet.create({
     animatedImage: {
-        borderBottomLeftRadius: 30,
-        borderBottomRightRadius: 30,
+        borderBottomLeftRadius: 25,
+        borderBottomRightRadius: 25,
         backgroundColor: COLORS.LIGHTGRAY_100
     }
 });
