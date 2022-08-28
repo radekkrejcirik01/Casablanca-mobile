@@ -9,7 +9,10 @@ import { ProfileStackNavigator } from '@navigation/StackNavigators/profile/Profi
 import { MessagesStackNavigator } from '@navigation/StackNavigators/messages/MessagesStackNavigator';
 import { RegistrationStackNavigator } from '@navigation/StackNavigators/registration/RegistrationStackNavigator';
 import { LoginStackNavigator } from '@navigation/StackNavigators/login/LoginStackNavigator';
-import { NavigatorScreenOptions, NoHeader } from './RootStackNavigator.options';
+import {
+    NavigatorScreenOptions,
+    NoHeader
+} from '@navigation/RootNavigator/RootStackNavigator.options';
 
 const Root = createStackNavigator<ParamListBase>();
 
