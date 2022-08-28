@@ -5,15 +5,12 @@ import {
     NativeSyntheticEvent,
     VirtualizedList
 } from 'react-native';
-import {
-    ChatListDefaultProps,
-    ChatListProps
-} from '@components/chat/ChatList/ChatList.props';
+import { ChatListProps } from '@components/chat/ChatList/ChatList.props';
 import { ChatListStyle } from '@components/chat/ChatList/ChatList.style';
 import { useChatListRenders } from '@hooks/useChatListRenders';
 import { useKeyboard } from '@hooks/useKeyboard';
 
-export const ChatList = ({ data, style }: ChatListProps): JSX.Element => {
+export const ChatList = ({ data }: ChatListProps): JSX.Element => {
     const { getItem, renderItem, getItemCount, keyExtractor } =
         useChatListRenders(data);
 
@@ -23,6 +20,9 @@ export const ChatList = ({ data, style }: ChatListProps): JSX.Element => {
     const [offset, setOffset] = useState<number>(0);
 
     const listRef = useRef(null);
+
+    // TODO: Find way how to prioritize navigation swipe back over the list's scroll gesture
+    const HIT_SLOP = { left: -20 };
 
     useEffect(() => {
         if (!isKeyboardVisible) {
@@ -53,13 +53,11 @@ export const ChatList = ({ data, style }: ChatListProps): JSX.Element => {
             initialNumToRender={40}
             showsVerticalScrollIndicator={false}
             inverted
+            hitSlop={HIT_SLOP}
             scrollEnabled={scrollEnabled}
             keyboardShouldPersistTaps="always"
             onScrollBeginDrag={onScrollBeginDrag}
-            style={style}
             contentContainerStyle={ChatListStyle.contentContainer}
         />
     );
 };
-
-ChatList.defaultProps = ChatListDefaultProps;
