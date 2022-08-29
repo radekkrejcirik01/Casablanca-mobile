@@ -21,9 +21,6 @@ export const ChatList = ({ data }: ChatListProps): JSX.Element => {
 
     const listRef = useRef(null);
 
-    // TODO: Find way how to prioritize navigation swipe back over the list's scroll gesture
-    const HIT_SLOP = { left: -20 };
-
     useEffect(() => {
         if (!isKeyboardVisible) {
             listRef.current?.scrollToOffset({ offset });
@@ -53,7 +50,6 @@ export const ChatList = ({ data }: ChatListProps): JSX.Element => {
             initialNumToRender={40}
             showsVerticalScrollIndicator={false}
             inverted
-            hitSlop={HIT_SLOP}
             scrollEnabled={scrollEnabled}
             keyboardShouldPersistTaps="always"
             onScrollBeginDrag={onScrollBeginDrag}
