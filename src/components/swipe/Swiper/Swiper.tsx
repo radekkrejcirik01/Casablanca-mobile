@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ViewPager from '@react-native-community/viewpager';
 import LottieView from 'lottie-react-native';
 import { SwiperCard } from '@components/swipe/SwiperCard/SwiperCard';
@@ -14,8 +13,6 @@ import { useLottie } from '@hooks/useLottie';
 
 export const Swiper = ({ data }: SwiperProps): JSX.Element => {
     const { name } = data[0];
-
-    const { top } = useSafeAreaInsets();
 
     const { lottieRef, lottieReset, lottiePlay } = useLottie();
 
@@ -37,14 +34,7 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
 
     return (
         <View style={SwiperStyle.container}>
-            <View
-                style={[
-                    SwiperStyle.lottieContainer,
-                    {
-                        top
-                    }
-                ]}
-            >
+            <View style={SwiperStyle.lottieContainer}>
                 <LottieView
                     ref={lottieRef}
                     source={require('../../../assets/animations/animation.json')}
@@ -61,13 +51,21 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
                 onPageSelected={onPageSelected}
                 style={SwiperStyle.viewPager}
             >
-                {data.map((source: CardDataProps) => (
-                    <SwiperCard
-                        key={source.name}
-                        card={source}
-                        onCardTouch={onCardTouch}
-                    />
-                ))}
+                {data.map((source: CardDataProps, index: number) => {
+                    const style =
+                        index === 0
+                            ? SwiperStyle.topCard
+                            : data?.length - 1 === index &&
+                              SwiperStyle.bottomCard;
+                    return (
+                        <SwiperCard
+                            key={source.name}
+                            card={source}
+                            onCardTouch={onCardTouch}
+                            style={style}
+                        />
+                    );
+                })}
             </ViewPager>
         </View>
     );

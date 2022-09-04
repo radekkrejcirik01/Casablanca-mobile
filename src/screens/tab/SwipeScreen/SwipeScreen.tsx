@@ -1,8 +1,9 @@
 import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Swiper } from '@components/swipe/Swiper/Swiper';
-import { SwiperScreenStyle } from '@screens/tab/SwipeScreen/SwipeScreen.style';
 import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
+import { SwipeHeader } from '@components/swipe/SwipeHeader/SwipeHeader';
+import { Screen } from '@components/general/Screen/Screen';
+import { ScreenEdgesEnum } from '@components/general/Screen/Screen.enum';
 
 export const SwipeScreen = (): JSX.Element => {
     const data: Array<CardDataProps> = [
@@ -40,8 +41,9 @@ export const SwipeScreen = (): JSX.Element => {
     ];
 
     return (
-        <SafeAreaProvider style={SwiperScreenStyle.safeArea}>
+        <Screen edges={[ScreenEdgesEnum.TOP]}>
+            <SwipeHeader />
             <Swiper data={data} />
-        </SafeAreaProvider>
+        </Screen>
     );
 };

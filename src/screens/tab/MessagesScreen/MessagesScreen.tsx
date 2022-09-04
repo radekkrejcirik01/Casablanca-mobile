@@ -1,10 +1,10 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native';
 import { MatchList } from '@components/messages/MatchList/MatchList';
 import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
-import { MessagesScreenStyle } from '@screens/tab/MessagesScreen/MessagesScreen.style';
 import { MessagesList } from '@components/messages/MessagesList/MessagesList';
 import { MessagesHeader } from '@components/messages/MessagesHeader/MessagesHeader';
+import { Screen } from '@components/general/Screen/Screen';
+import { MessagesScreenStyle } from '@screens/tab/MessagesScreen/MessagesScreen.style';
 
 export const MessagesScreen = (): JSX.Element => {
     const data: Array<CardDataProps> = [
@@ -35,10 +35,10 @@ export const MessagesScreen = (): JSX.Element => {
     ];
 
     return (
-        <SafeAreaView style={MessagesScreenStyle.container}>
+        <Screen style={MessagesScreenStyle.screen}>
             <MessagesHeader />
             <MatchList data={data} />
             <MessagesList data={data} />
-        </SafeAreaView>
+        </Screen>
     );
 };

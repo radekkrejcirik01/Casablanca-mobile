@@ -3,7 +3,8 @@ import COLORS from '@constants/COLORS';
 
 export const SwiperCardStyle = StyleSheet.create({
     container: {
-        backgroundColor: COLORS.GRAY_300
+        backgroundColor: COLORS.GRAY_300,
+        overflow: 'hidden'
     },
     image: {
         width: '100%',
@@ -44,8 +45,8 @@ export const SwiperCardStyle = StyleSheet.create({
         fontSize: 12
     },
     dotProgressBar: {
-        alignSelf: 'center',
         bottom: 15,
-        position: 'absolute'
+        position: 'absolute',
+        alignSelf: 'center'
     }
 });

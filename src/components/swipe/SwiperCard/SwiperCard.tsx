@@ -1,11 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import {
-    StyleProp,
-    Text,
-    TouchableWithoutFeedback,
-    View,
-    ViewStyle
-} from 'react-native';
+import React, { useState } from 'react';
+import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import {
     State,
     TapGestureHandler,
@@ -13,7 +7,6 @@ import {
 } from 'react-native-gesture-handler';
 import LottieView from 'lottie-react-native';
 import FastImage from 'react-native-fast-image';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ViewPager, {
     ViewPagerOnPageSelectedEvent
 } from '@react-native-community/viewpager';
@@ -35,8 +28,6 @@ export const SwiperCard = ({
     hasLike,
     style
 }: SwiperCardProps): JSX.Element => {
-    const { top } = useSafeAreaInsets();
-
     const { lottieRef, lottieReset, lottiePlay } = useLottie();
     const { hapticTouch } = useHaptic();
 
@@ -52,13 +43,6 @@ export const SwiperCard = ({
             }
         }
     };
-
-    const lottieTop = useMemo(
-        (): StyleProp<ViewStyle> => ({
-            top: top - 10
-        }),
-        [top]
-    );
 
     const onRemoveLike = () => {
         lottieReset();
@@ -130,11 +114,10 @@ export const SwiperCard = ({
                 </ViewPager>
                 {hasLike && (
                     <TouchableWithoutFeedback onPress={onRemoveLike}>
-                        <View style={[SwiperCardStyle.lottie, lottieTop]}>
+                        <View style={SwiperCardStyle.lottie}>
                             <LottieView
                                 ref={lottieRef}
                                 source={require('../../../assets/animations/like.json')}
-                                autoPlay={false}
                                 loop={false}
                             />
                         </View>

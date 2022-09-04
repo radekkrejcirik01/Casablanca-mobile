@@ -1,9 +1,6 @@
 import React, { useMemo } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
-import {
-    SafeAreaProvider,
-    useSafeAreaInsets
-} from 'react-native-safe-area-context';
+import { SafeAreaView, StyleProp, ViewStyle } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { InfoProfileScreenStyle } from '@screens/general/InfoProfileScreen/InfoProfileScreen.style';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { IconButton } from '@components/general/IconButton/IconButton';
@@ -19,13 +16,16 @@ export const InfoProfileScreen = ({
 }: InfoProfileScreenProps): JSX.Element => {
     const { top } = useSafeAreaInsets();
 
-    const marginTop = useMemo(
-        (): StyleProp<ViewStyle> => ({ marginTop: top }),
+    const style = useMemo(
+        (): StyleProp<ViewStyle> => [
+            InfoProfileScreenStyle.container,
+            { marginTop: top }
+        ],
         [top]
     );
 
     return (
-        <SafeAreaProvider style={marginTop}>
+        <SafeAreaView style={style}>
             <IconButton
                 icon={IconEnum.CLOSE}
                 onPress={onClose}
@@ -37,7 +37,7 @@ export const InfoProfileScreen = ({
                 hasLike={false}
                 style={InfoProfileScreenStyle.swiperCard}
             />
-        </SafeAreaProvider>
+        </SafeAreaView>
     );
 };
 

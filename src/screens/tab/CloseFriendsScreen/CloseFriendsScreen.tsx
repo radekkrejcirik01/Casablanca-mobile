@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { SafeAreaView } from 'react-native';
 import { Title } from '@components/general/Title/Title';
 import { CloseFriendsScreenStyle } from '@screens/tab/CloseFriendsScreen/CloseFriendsScreen.style';
 import { CardList } from '@components/closeFriends/CardList/CardList';
@@ -9,6 +8,7 @@ import {
     DESCRIPTION,
     TITLE
 } from '@screens/tab/CloseFriendsScreen/CloseFriendsScreen.const';
+import { Screen } from '@components/general/Screen/Screen';
 
 export const CloseFriendsScreen = (): JSX.Element => {
     const data = [
@@ -31,11 +31,8 @@ export const CloseFriendsScreen = (): JSX.Element => {
     }, [showModal]);
 
     return (
-        <SafeAreaView style={CloseFriendsScreenStyle.container}>
-            <Title
-                title="Close friends"
-                style={CloseFriendsScreenStyle.title}
-            />
+        <Screen style={CloseFriendsScreenStyle.screen}>
+            <Title title="Close friends" />
             <CardList data={data} />
             <InfoModal
                 title={TITLE}
@@ -43,6 +40,6 @@ export const CloseFriendsScreen = (): JSX.Element => {
                 isVisible={modalVisible}
                 onClose={hideModal}
             />
-        </SafeAreaView>
+        </Screen>
     );
 };

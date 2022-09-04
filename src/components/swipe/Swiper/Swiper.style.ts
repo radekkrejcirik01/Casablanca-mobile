@@ -2,9 +2,14 @@ import { StyleSheet } from 'react-native';
 
 export const SwiperStyle = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        marginTop: 15,
+        marginBottom: 10,
+        borderRadius: 20,
+        overflow: 'hidden'
     },
     lottieContainer: {
+        top: 13,
         alignItems: 'center',
         justifyContent: 'center',
         position: 'absolute',
@@ -15,7 +20,14 @@ export const SwiperStyle = StyleSheet.create({
         height: 50
     },
     viewPager: {
-        width: '100%',
-        height: '100%'
+        flex: 1
+    },
+    topCard: {
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20
+    },
+    bottomCard: {
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20
     }
 });

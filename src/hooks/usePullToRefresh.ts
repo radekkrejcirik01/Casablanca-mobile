@@ -52,7 +52,8 @@ export const usePullToRefresh = (
         scrollPage,
         isScrollDown,
         isAnimation,
-        onRefresh
+        onRefresh,
+        hapticTouch
     ]);
 
     useEffect(() => {

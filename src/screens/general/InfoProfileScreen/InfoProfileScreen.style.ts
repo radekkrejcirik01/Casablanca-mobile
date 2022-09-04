@@ -1,6 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 export const InfoProfileScreenStyle = StyleSheet.create({
+    container: {
+        flex: 1
+    },
     iconButton: {
         top: 15,
         right: 15,
@@ -8,8 +11,7 @@ export const InfoProfileScreenStyle = StyleSheet.create({
         position: 'absolute'
     },
     swiperCard: {
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        overflow: 'hidden'
+        flex: 1,
+        borderRadius: 20
     }
 });
