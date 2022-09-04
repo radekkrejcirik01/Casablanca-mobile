@@ -6,43 +6,14 @@ export const SwiperCardStyle = StyleSheet.create({
         backgroundColor: COLORS.GRAY_300,
         overflow: 'hidden'
     },
-    image: {
-        width: '100%',
-        height: '100%'
+    viewPager: {
+        flex: 1
     },
     lottie: {
         width: 90,
         height: 90,
         position: 'absolute',
         alignSelf: 'flex-end'
-    },
-    tagView: {
-        marginLeft: 15,
-        marginBottom: 60,
-        flex: 1,
-        justifyContent: 'flex-end'
-    },
-    tagInfoView: {
-        marginTop: 10,
-        padding: 7.5,
-        paddingHorizontal: 10,
-        borderRadius: 20,
-        backgroundColor: COLORS.MAIN_BLUE,
-        flexDirection: 'row',
-        alignSelf: 'flex-start'
-    },
-    tagTitle: {
-        fontSize: 14
-    },
-    tagText: {
-        paddingHorizontal: 2,
-        fontSize: 12.5,
-        color: COLORS.WHITE,
-        fontWeight: 'bold'
-    },
-    emoji: {
-        paddingRight: 3,
-        fontSize: 12
     },
     dotProgressBar: {
         bottom: 15,

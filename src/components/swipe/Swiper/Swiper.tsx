@@ -51,7 +51,7 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
                 onPageSelected={onPageSelected}
                 style={SwiperStyle.viewPager}
             >
-                {data.map((source: CardDataProps, index: number) => {
+                {data.map((card: CardDataProps, index: number) => {
                     const style =
                         index === 0
                             ? SwiperStyle.topCard
@@ -59,8 +59,9 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
                               SwiperStyle.bottomCard;
                     return (
                         <SwiperCard
-                            key={source.name}
-                            card={source}
+                            key={card.name}
+                            card={card}
+                            index={index}
                             onCardTouch={onCardTouch}
                             style={style}
                         />

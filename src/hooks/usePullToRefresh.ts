@@ -52,7 +52,6 @@ export const usePullToRefresh = (
         scrollPage,
         isScrollDown,
         isAnimation,
-        onRefresh,
         hapticTouch
     ]);
 

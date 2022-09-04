@@ -4,12 +4,14 @@ import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 
 export interface SwiperCardProps {
     card: CardDataProps;
+    index?: number;
     onCardTouch?: (name: string) => void;
     hasLike?: boolean;
     style?: StyleProp<ViewStyle>;
 }
 
 export const SwiperCardDefaultProps: Omit<SwiperCardProps, 'card'> = {
+    index: 0,
     onCardTouch: () => {},
     hasLike: true,
     style: {}
