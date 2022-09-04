@@ -13,6 +13,7 @@ import {
     NavigatorScreenOptions,
     NoHeader
 } from '@navigation/RootNavigator/RootStackNavigator.options';
+import { SwiperStackNavigator } from '@navigation/StackNavigators/swipe/SwipeStackNavigator';
 
 const Root = createStackNavigator<ParamListBase>();
 
@@ -31,6 +32,11 @@ export const RootStackNavigator = (): JSX.Element => {
                     <Root.Screen
                         name={RootStackNavigatorEnum.ProfileStack}
                         component={ProfileStackNavigator}
+                        options={NoHeader}
+                    />
+                    <Root.Screen
+                        name={RootStackNavigatorEnum.SwiperStack}
+                        component={SwiperStackNavigator}
                         options={NoHeader}
                     />
                     <Root.Screen

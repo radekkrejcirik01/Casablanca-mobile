@@ -4,15 +4,15 @@ import { Title } from '@components/general/Title/Title';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { SwipeHeaderStyle } from '@components/swipe/SwipeHeader/SwipeHeader.style';
 import { IconButton } from '@components/general/IconButton/IconButton';
-import { MessagesStackNavigatorEnum } from '@navigation/StackNavigators/messages/MessagesStackNavigator.enum';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { useNavigation } from '@hooks/useNavigation';
+import { SwiperStackNavigatorEnum } from '@navigation/StackNavigators/swipe/SwiperStackNavigator.enum';
 
 export const SwipeHeader = (): JSX.Element => {
-    const { navigateTo } = useNavigation(RootStackNavigatorEnum.MessagesStack);
+    const { navigateTo } = useNavigation(RootStackNavigatorEnum.SwiperStack);
 
     const openNotificationScreen = () => {
-        navigateTo(MessagesStackNavigatorEnum.NotificationScreen);
+        navigateTo(SwiperStackNavigatorEnum.FiltersScreen);
     };
 
     return (
