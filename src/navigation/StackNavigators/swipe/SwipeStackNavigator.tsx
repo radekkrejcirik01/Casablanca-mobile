@@ -3,17 +3,17 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ParamListBase } from '@react-navigation/native';
 import { NavigationScreenHeader } from '@navigation/StackNavigators/StackNavigator.options';
 import { FiltersScreen } from '@screens/swipe/FiltersScreen';
-import { FiltersTitle } from '@navigation/StackNavigators/swipe/SwiperStackNavigator.options';
-import { SwiperStackNavigatorEnum } from '@navigation/StackNavigators/swipe/SwiperStackNavigator.enum';
+import { FiltersTitle } from '@navigation/StackNavigators/swipe/SwipeStackNavigator.options';
+import { SwipeStackNavigatorEnum } from '@navigation/StackNavigators/swipe/SwipeStackNavigator.enum';
 
-const Swiper = createStackNavigator<ParamListBase>();
+const Swipe = createStackNavigator<ParamListBase>();
 
-export const SwiperStackNavigator = (): JSX.Element => (
-    <Swiper.Navigator>
-        <Swiper.Screen
-            name={SwiperStackNavigatorEnum.FiltersScreen}
+export const SwipeStackNavigator = (): JSX.Element => (
+    <Swipe.Navigator>
+        <Swipe.Screen
+            name={SwipeStackNavigatorEnum.FiltersScreen}
             component={FiltersScreen}
             options={{ ...NavigationScreenHeader, ...FiltersTitle }}
         />
-    </Swiper.Navigator>
+    </Swipe.Navigator>
 );

@@ -1,7 +1,7 @@
 export enum RootStackNavigatorEnum {
     BottomTabBar = 'BottomTabBar',
     ProfileStack = 'ProfileStack',
-    SwiperStack = 'SwiperStack',
+    SwipeStack = 'SwipeStack',
     MessagesStack = 'MessagesStack',
     LoginStack = 'LoginStack',
     RegistrationStack = 'RegistrationStack'

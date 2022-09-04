@@ -4,7 +4,7 @@ import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavig
 import { MessagesStackNavigatorEnum } from '@navigation/StackNavigators/messages/MessagesStackNavigator.enum';
 import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/ProfileStackNavigator.enum';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
-import { SwiperStackNavigatorEnum } from '@navigation/StackNavigators/swipe/SwiperStackNavigator.enum';
+import { SwipeStackNavigatorEnum } from '@navigation/StackNavigators/swipe/SwipeStackNavigator.enum';
 
 export const useNavigation = (
     stack?: RootStackNavigatorEnum
@@ -13,7 +13,7 @@ export const useNavigation = (
         screen:
             | RootStackNavigatorEnum
             | ProfileStackNavigatorEnum
-            | SwiperStackNavigatorEnum
+            | SwipeStackNavigatorEnum
             | MessagesStackNavigatorEnum
             | RegistrationStackNavigatorEnum
     ) => void;
