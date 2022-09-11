@@ -1,4 +1,10 @@
-import React, { forwardRef, useEffect, useMemo, useState } from 'react';
+import React, {
+    ForwardedRef,
+    forwardRef,
+    useEffect,
+    useMemo,
+    useState
+} from 'react';
 import { StyleProp, TextInput, View, ViewStyle } from 'react-native';
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import {
@@ -24,7 +30,7 @@ export const Input = forwardRef(
             iconRight,
             ...props
         }: InputProps,
-        ref
+        ref: ForwardedRef<TextInput>
     ): JSX.Element => {
         const [inputValue, setInputValue] = useState<string>();
         const [isSecured, setIsSecured] = useState<boolean>(

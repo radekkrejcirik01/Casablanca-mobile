@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { TouchableWithoutFeedback, View } from 'react-native';
+import { View } from 'react-native';
 import {
     State,
     TapGestureHandler,
     TapGestureHandlerGestureEvent
 } from 'react-native-gesture-handler';
-import LottieView from 'lottie-react-native';
 import ViewPager, {
     ViewPagerOnPageSelectedEvent
 } from '@react-native-community/viewpager';
@@ -14,31 +13,29 @@ import {
     SwiperCardProps
 } from '@components/swipe/SwiperCard/SwiperCard.props';
 import { SwiperCardStyle } from '@components/swipe/SwiperCard/SwiperCard.style';
-import { useHaptic } from '@hooks/useHaptic';
-import { useLottie } from '@hooks/useLottie';
 import { DotProgressBar } from '@components/general/DotProgressBar/DotProgressBar';
 import { SwiperCardItem } from '@components/swipe/SwiperCardItem/SwiperCardItem';
+import { Lottie } from '@components/general/Lottie/Lottie';
+import { useLottie } from '@hooks/useLottie';
 
 export const SwiperCard = ({
     card,
-    index,
+    cardIndex,
     onCardTouch,
     hasLike,
     style
 }: SwiperCardProps): JSX.Element => {
-    const { lottieRef, lottieReset, lottiePlay } = useLottie();
-    const { hapticTouch } = useHaptic();
+    const { lottieRef, lottiePlay, lottieReset } = useLottie(2, 29);
 
     const [pagePosition, setPagePosition] = useState<number>(0);
 
     const onDoubleTap = (event: TapGestureHandlerGestureEvent) => {
         if (hasLike) {
-            if (index < 2) {
+            if (cardIndex < 2) {
                 onCardTouch(card.name);
             }
             // Trigger like event
             if (event.nativeEvent.state === State.ACTIVE) {
-                hapticTouch('impactLight');
                 lottiePlay();
             }
         }
@@ -46,6 +43,7 @@ export const SwiperCard = ({
 
     const onRemoveLike = () => {
         lottieReset();
+        console.log('onRemoveLike');
     };
 
     const onPageSelected = (event: ViewPagerOnPageSelectedEvent) => {
@@ -69,15 +67,12 @@ export const SwiperCard = ({
                     ))}
                 </ViewPager>
                 {hasLike && (
-                    <TouchableWithoutFeedback onPress={onRemoveLike}>
-                        <View style={SwiperCardStyle.lottie}>
-                            <LottieView
-                                ref={lottieRef}
-                                source={require('../../../assets/animations/like.json')}
-                                loop={false}
-                            />
-                        </View>
-                    </TouchableWithoutFeedback>
+                    <Lottie
+                        ref={lottieRef}
+                        source={require('../../../assets/animations/like.json')}
+                        onRemoveLike={onRemoveLike}
+                        style={SwiperCardStyle.lottie}
+                    />
                 )}
                 <DotProgressBar
                     pagesNumber={card?.images?.length}

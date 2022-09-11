@@ -1,21 +1,24 @@
 import { Ref, useCallback, useRef } from 'react';
-import { AnimatedLottieViewInterface } from '@components/swipe/SwiperCard/SwiperCard.props';
+import LottieView from 'lottie-react-native';
 
-export const useLottie = (): {
-    lottieRef: Ref<AnimatedLottieViewInterface>;
+export const useLottie = (
+    start: number,
+    end: number
+): {
+    lottieRef: Ref<LottieView>;
     lottieReset: () => void;
     lottiePlay: () => void;
 } => {
-    const lottieRef = useRef<AnimatedLottieViewInterface>(null);
+    const lottieRef = useRef<LottieView>(null);
 
     const lottieReset = useCallback(() => {
-        lottieRef.current.reset(0);
+        lottieRef.current.reset();
     }, []);
 
     const lottiePlay = useCallback(() => {
         lottieReset();
-        lottieRef.current.play(2, 75);
-    }, [lottieReset]);
+        lottieRef.current.play(start, end);
+    }, [end, lottieReset, start]);
 
     return { lottieRef, lottieReset, lottiePlay };
 };

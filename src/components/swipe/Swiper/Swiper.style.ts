@@ -8,14 +8,12 @@ export const SwiperStyle = StyleSheet.create({
         borderRadius: 20,
         overflow: 'hidden'
     },
-    lottieContainer: {
+    lottie: {
         top: 13,
         alignItems: 'center',
         justifyContent: 'center',
         position: 'absolute',
-        alignSelf: 'center'
-    },
-    lottie: {
+        alignSelf: 'center',
         width: 50,
         height: 50
     },
