@@ -25,7 +25,10 @@ export const SwiperCard = ({
     hasLike,
     style
 }: SwiperCardProps): JSX.Element => {
-    const { lottieRef, lottiePlay, lottieReset } = useLottie(2, 29);
+    const { lottieRef, lottiePlay, lottieReset, isLottieActive } = useLottie(
+        2,
+        30
+    );
 
     const [pagePosition, setPagePosition] = useState<number>(0);
 
@@ -72,6 +75,7 @@ export const SwiperCard = ({
                         source={require('../../../assets/animations/like.json')}
                         onRemoveLike={onRemoveLike}
                         style={SwiperCardStyle.lottie}
+                        isActive={isLottieActive}
                     />
                 )}
                 <DotProgressBar

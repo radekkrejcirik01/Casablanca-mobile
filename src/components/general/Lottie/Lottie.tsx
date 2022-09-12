@@ -1,5 +1,5 @@
 import { TouchableWithoutFeedback, View } from 'react-native';
-import React, { ForwardedRef, forwardRef, useState } from 'react';
+import React, { ForwardedRef, forwardRef, useEffect, useState } from 'react';
 import LottieView from 'lottie-react-native';
 import FastImage from 'react-native-fast-image';
 import { LottieStyle } from '@components/general/Lottie/Lottie.style';
@@ -10,37 +10,52 @@ import {
 
 export const Lottie = forwardRef(
     (
-        { onRemoveLike, style, ...props }: LottieProps,
+        { onRemoveLike, isActive, style, ...props }: LottieProps,
         ref: ForwardedRef<LottieView>
     ): JSX.Element => {
         const [didAnimationFinish, setDidAnimationFinish] =
             useState<boolean>(false);
 
-        const onAnimationFinish = () => setDidAnimationFinish(true);
+        const [cancelMode, setCancelMode] = useState<boolean>(false);
+
+        useEffect(() => {
+            if (isActive) {
+                setDidAnimationFinish(false);
+                setCancelMode(false);
+            }
+        }, [isActive]);
+
+        const onAnimationFinish = () => {
+            if (!cancelMode) {
+                setDidAnimationFinish(true);
+            }
+            setCancelMode(false);
+        };
 
         const onPress = () => {
-            setDidAnimationFinish(false);
+            setCancelMode(true);
             onRemoveLike();
+            setDidAnimationFinish(false);
         };
 
         return (
-            <View style={style}>
-                <LottieView
-                    ref={ref}
-                    autoPlay={false}
-                    loop={false}
-                    onAnimationFinish={onAnimationFinish}
-                    {...props}
-                />
-                {didAnimationFinish && onRemoveLike && (
-                    <TouchableWithoutFeedback onPress={onPress}>
+            <TouchableWithoutFeedback onPress={onPress} disabled={!isActive}>
+                <View style={style}>
+                    <LottieView
+                        ref={ref}
+                        autoPlay={false}
+                        loop={false}
+                        onAnimationFinish={onAnimationFinish}
+                        {...props}
+                    />
+                    {didAnimationFinish && onRemoveLike && (
                         <FastImage
                             source={require('../../../assets/images/like.png')}
                             style={LottieStyle.image}
                         />
-                    </TouchableWithoutFeedback>
-                )}
-            </View>
+                    )}
+                </View>
+            </TouchableWithoutFeedback>
         );
     }
 );
