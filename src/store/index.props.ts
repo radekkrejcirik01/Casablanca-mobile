@@ -1,5 +1,5 @@
 import { GenderSelectEnum } from '@components/registration/GenderSelect/GenderSelect.enum';
-import { WhoShowSelectEnum } from '@components/registration/WhoShowSelect/WhoShowSelect.enum';
+import { ShowMeSelectEnum } from '@components/registration/ShowMeSelect/ShowMeSelect.enum';
 
 export interface ReducerProps {
     user: {
@@ -12,7 +12,7 @@ export interface ReducerProps {
         photos: Array<string>;
         tags: Array<string>;
         gender: GenderSelectEnum;
-        whoShow: WhoShowSelectEnum;
+        showMe: ShowMeSelectEnum;
         password: string;
     };
     save: {

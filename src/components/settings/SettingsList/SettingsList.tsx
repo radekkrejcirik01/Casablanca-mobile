@@ -31,6 +31,10 @@ export const SettingsList = (): JSX.Element => {
         navigateTo(ProfileStackNavigatorEnum.DistanceScreen);
     };
 
+    const openShowMeScreen = () => {
+        navigateTo(ProfileStackNavigatorEnum.ShowMeScreen);
+    };
+
     const openHelpCenterScreen = () => {
         navigateTo(ProfileStackNavigatorEnum.HelpCenterScreen);
     };
@@ -75,6 +79,12 @@ export const SettingsList = (): JSX.Element => {
                 description="100km"
                 hasArrow
                 onPress={openDistanceScreen}
+            />
+            <SettingsListItem
+                title="Show me"
+                description="Women"
+                hasArrow
+                onPress={openShowMeScreen}
             />
             <SettingsListItem
                 title="Help center"

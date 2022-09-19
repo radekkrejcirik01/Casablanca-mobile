@@ -13,7 +13,7 @@ export const RegistrationReducer = createSlice({
         photos: [],
         tags: [],
         gender: null,
-        whoShow: null,
+        showMe: null,
         password: null
     },
     reducers: {
@@ -51,8 +51,8 @@ export const RegistrationReducer = createSlice({
         setGenderAction: (state, action) => {
             state.gender = action.payload;
         },
-        setWhoShowAction: (state, action) => {
-            state.whoShow = action.payload;
+        setShowMeAction: (state, action) => {
+            state.showMe = action.payload;
         },
         setPasswordAction: (state, action) => {
             state.password = action.payload;
@@ -71,7 +71,7 @@ export const {
     addTagAction,
     removeTagAction,
     setGenderAction,
-    setWhoShowAction,
+    setShowMeAction,
     setPasswordAction
 } = RegistrationReducer.actions;
 

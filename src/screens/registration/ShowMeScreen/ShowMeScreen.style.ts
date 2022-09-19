@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const WhoShowScreenStyle = StyleSheet.create({
+export const ShowMeScreenStyle = StyleSheet.create({
     container: {
         flex: 1
     },

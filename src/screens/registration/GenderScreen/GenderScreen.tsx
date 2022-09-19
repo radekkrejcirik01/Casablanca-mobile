@@ -22,7 +22,7 @@ export const GenderScreen = (): JSX.Element => {
 
     const continuePressed = () => {
         if (gender) {
-            navigateTo(RegistrationStackNavigatorEnum.WhoShowScreen);
+            navigateTo(RegistrationStackNavigatorEnum.ShowMeScreen);
         } else {
             Alert.alert('Please select option');
         }

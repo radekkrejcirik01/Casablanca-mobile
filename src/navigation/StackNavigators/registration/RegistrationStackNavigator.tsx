@@ -13,7 +13,7 @@ import { BirthdayScreen } from '@screens/registration/BirthdayScreen/BirthdayScr
 import { PhotosScreen } from '@screens/registration/PhotosScreen/PhotosScreen';
 import { TagsScreen } from '@screens/registration/TagsScreen/TagsScreen';
 import { GenderScreen } from '@screens/registration/GenderScreen/GenderScreen';
-import { WhoShowScreen } from '@screens/registration/WhoShowScreen/WhoShowScreen';
+import { ShowMeScreen } from '@screens/registration/ShowMeScreen/ShowMeScreen';
 import { PasswordScreen } from '@screens/registration/PasswordScreen/PasswordScreen';
 
 const Registration = createStackNavigator<ParamListBase>();
@@ -66,8 +66,8 @@ export const RegistrationStackNavigator = (): JSX.Element => (
             }}
         />
         <Registration.Screen
-            name={RegistrationStackNavigatorEnum.WhoShowScreen}
-            component={WhoShowScreen}
+            name={RegistrationStackNavigatorEnum.ShowMeScreen}
+            component={ShowMeScreen}
             options={{
                 ...RegistrationScreenOptions,
                 ...ForNoAnimation

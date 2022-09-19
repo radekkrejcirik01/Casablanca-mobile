@@ -5,6 +5,6 @@ export enum RegistrationStackNavigatorEnum {
     PhotosScreen = 'PhotosScreen',
     FavePlacesScreen = 'FavePlacesScreen',
     GenderScreen = 'GenderScreen',
-    WhoShowScreen = 'WhoShowScreen',
+    ShowMeScreen = 'ShowMeScreen',
     PasswordScreen = 'PasswordScreen'
 }

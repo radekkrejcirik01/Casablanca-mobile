@@ -1,20 +1,20 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const GenderSelectStyle = StyleSheet.create({
+export const ShowMeSelectStyle = StyleSheet.create({
     container: {
-        marginTop: '20%',
+        marginTop: 64,
         marginHorizontal: 40
     },
     row: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        marginBottom: 20,
+        padding: 15,
+        borderRadius: 20,
         borderWidth: 2,
         borderColor: COLORS.WHITE,
-        borderRadius: 20,
-        padding: 15,
-        marginBottom: 20
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     text: {
         color: COLORS.WHITE,

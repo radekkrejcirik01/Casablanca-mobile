@@ -24,6 +24,10 @@ export const DistanceTitle: StackNavigationOptions = {
     headerTitle: 'Distance'
 };
 
+export const ShowMeTitle: StackNavigationOptions = {
+    headerTitle: 'Show me'
+};
+
 export const HelpCenterTitle: StackNavigationOptions = {
     headerTitle: 'Help Center'
 };
