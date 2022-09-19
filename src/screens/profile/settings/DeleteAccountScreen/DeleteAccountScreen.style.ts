@@ -2,8 +2,11 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const DeleteAccountScreenStyle = StyleSheet.create({
+    container: {
+        paddingTop: 10
+    },
     title: {
-        padding: 20,
+        paddingHorizontal: 15,
         fontSize: 25,
         fontWeight: '600',
         color: COLORS.WHITE
@@ -19,7 +22,7 @@ export const DeleteAccountScreenStyle = StyleSheet.create({
         color: COLORS.WHITE,
         fontWeight: 'bold'
     },
-    noContainer: {
+    notNowContainer: {
         marginTop: 30,
         paddingVertical: 8,
         paddingHorizontal: 10,
@@ -27,7 +30,7 @@ export const DeleteAccountScreenStyle = StyleSheet.create({
         alignSelf: 'center',
         backgroundColor: COLORS.WHITE
     },
-    no: {
+    notNow: {
         fontSize: 18,
         color: COLORS.MAIN_BLUE,
         fontWeight: 'bold'
