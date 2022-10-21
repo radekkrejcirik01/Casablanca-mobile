@@ -2,9 +2,6 @@ import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
 export const LoginScreenStyle = StyleSheet.create({
-    container: {
-        flex: 1
-    },
     inputView: {
         height: 105,
         marginTop: '45%',
