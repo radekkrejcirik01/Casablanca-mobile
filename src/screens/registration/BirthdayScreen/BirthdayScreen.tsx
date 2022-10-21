@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, View } from 'react-native';
+import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Continue } from '@components/registration/Continue/Continue';
@@ -38,9 +38,10 @@ export const BirthdayScreen = (): JSX.Element => {
     return (
         <SafeAreaProvider>
             <Title title="When is your birthday?" />
-            <View style={BirthdayScreenStyle.inputContainer}>
-                <BirthdayInput birthday={birthday} />
-            </View>
+            <BirthdayInput
+                birthday={birthday}
+                style={BirthdayScreenStyle.input}
+            />
             <Continue onPress={continuePressed} />
         </SafeAreaProvider>
     );

@@ -47,17 +47,14 @@ export const PasswordScreen = (): JSX.Element => {
     return (
         <SafeAreaProvider>
             <Title title="Password" />
-            <View style={PasswordScreenStyle.inputContainer}>
-                <Input
-                    ref={input}
-                    inputType={InputTypeEnum.PASSWORD}
-                    autoFocus
-                    onChange={(value: string) =>
-                        dispatch(setPasswordAction(value))
-                    }
-                    iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
-                />
-            </View>
+            <Input
+                ref={input}
+                inputType={InputTypeEnum.PASSWORD}
+                autoFocus
+                onChange={(value: string) => dispatch(setPasswordAction(value))}
+                iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
+                viewStyle={PasswordScreenStyle.input}
+            />
             <Continue onPress={continuePressed} />
         </SafeAreaProvider>
     );

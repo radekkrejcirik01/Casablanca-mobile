@@ -1,5 +1,4 @@
 import React from 'react';
-import { View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Continue } from '@components/registration/Continue/Continue';
 import { Title } from '@components/general/Title/Title';
@@ -21,9 +20,7 @@ export const PhotosScreen = (): JSX.Element => {
     return (
         <SafeAreaProvider>
             <Title title="Choose photos" />
-            <View style={PhotosScreenStyle.photoPlaceholderContainer}>
-                <PhotoPlaceholder />
-            </View>
+            <PhotoPlaceholder style={PhotosScreenStyle.photoPlaceholder} />
             <Continue onPress={continuePressed} />
         </SafeAreaProvider>
     );

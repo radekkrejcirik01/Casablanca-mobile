@@ -22,7 +22,7 @@ export const ShowMeScreen = (): JSX.Element => {
 
     const continuePressed = () => {
         if (showMe) {
-            navigateTo(RegistrationStackNavigatorEnum.PasswordScreen);
+            navigateTo(RegistrationStackNavigatorEnum.EmailScreen);
             return;
         }
         Alert.alert('Please select option');

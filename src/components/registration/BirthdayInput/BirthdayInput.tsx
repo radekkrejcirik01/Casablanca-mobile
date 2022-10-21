@@ -4,7 +4,10 @@ import { useDispatch } from 'react-redux';
 import { Input } from '@components/general/Input/Input';
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import { BirthdayInputStyle } from '@components/registration/BirthdayInput/BirthdayInput.style';
-import { BirthdayInputProps } from '@components/registration/BirthdayInput/BirthdayInput.props';
+import {
+    BirthdayInputDefaultProps,
+    BirthdayInputProps
+} from '@components/registration/BirthdayInput/BirthdayInput.props';
 import {
     setBirthdayDayAction,
     setBirthdayMonthAction,
@@ -12,7 +15,8 @@ import {
 } from '@store/RegistrationReducer';
 
 export const BirthdayInput = ({
-    birthday
+    birthday,
+    style
 }: BirthdayInputProps): JSX.Element => {
     const dispatch = useDispatch();
 
@@ -21,7 +25,7 @@ export const BirthdayInput = ({
     const inputDay = createRef<TextInput>();
 
     return (
-        <View style={BirthdayInputStyle.container}>
+        <View style={[BirthdayInputStyle.container, style]}>
             <Input
                 value={birthday.year}
                 onChange={(value: string) => {
@@ -116,3 +120,5 @@ export const BirthdayInput = ({
         </View>
     );
 };
+
+BirthdayInput.defaultProps = BirthdayInputDefaultProps;

@@ -38,7 +38,7 @@ export const EmailScreen = (): JSX.Element => {
 
     const continuePressed = () => {
         if (email && email.includes('@')) {
-            navigateTo(RegistrationStackNavigatorEnum.BirthdayScreen);
+            navigateTo(RegistrationStackNavigatorEnum.PasswordScreen);
         } else if (email) {
             Alert.alert('Please select email address');
         }
@@ -51,17 +51,14 @@ export const EmailScreen = (): JSX.Element => {
     return (
         <SafeAreaProvider>
             <Title title="What is your email?" />
-            <View style={EmailScreenStyle.inputContainer}>
-                <Input
-                    ref={input}
-                    inputType={InputTypeEnum.EMAIL}
-                    onChange={(value: string) =>
-                        dispatch(setEmailAction(value))
-                    }
-                    value={email}
-                    iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
-                />
-            </View>
+            <Input
+                ref={input}
+                inputType={InputTypeEnum.EMAIL}
+                onChange={(value: string) => dispatch(setEmailAction(value))}
+                value={email}
+                iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
+                viewStyle={EmailScreenStyle.input}
+            />
             <Continue onPress={continuePressed} />
         </SafeAreaProvider>
     );

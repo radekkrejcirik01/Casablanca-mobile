@@ -1,11 +1,8 @@
 import { StyleSheet } from 'react-native';
 
 export const FirstnameScreenStyle = StyleSheet.create({
-    container: {
-        flex: 1
-    },
-    inputContainer: {
+    input: {
         marginTop: '20%',
-        paddingHorizontal: 40
+        marginHorizontal: 40
     }
 });

@@ -5,30 +5,30 @@ export const BirthdayInputStyle = StyleSheet.create({
     container: {
         width: 250,
         height: 50,
-        borderColor: COLORS.WHITE,
+        paddingHorizontal: 15,
         borderWidth: 2,
         borderRadius: 30,
+        borderColor: COLORS.WHITE,
         alignSelf: 'center',
         justifyContent: 'space-around',
         alignItems: 'center',
-        flexDirection: 'row',
-        paddingHorizontal: 15
+        flexDirection: 'row'
     },
     inputView: {
-        flexDirection: 'column',
         height: 40,
-        borderWidth: 0
+        borderWidth: 0,
+        flexDirection: 'column'
     },
     input: {
         width: 55,
-        textAlign: 'center',
         fontSize: 18,
-        fontWeight: '600'
+        fontWeight: '600',
+        textAlign: 'center'
     },
     slash: {
+        paddingBottom: 5,
         fontSize: 24,
-        fontWeight: '400',
         color: COLORS.WHITE,
-        paddingBottom: 5
+        fontWeight: '400'
     }
 });

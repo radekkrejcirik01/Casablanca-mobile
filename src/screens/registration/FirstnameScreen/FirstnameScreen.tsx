@@ -1,4 +1,4 @@
-import React, { createRef, useEffect } from 'react';
+import React, { createRef, useCallback, useEffect } from 'react';
 import { Alert, TextInput, View } from 'react-native';
 import { useNavigation as useNavigationModule } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,9 +36,14 @@ export const FirstnameScreen = (): JSX.Element => {
         return unsubscribe;
     }, [navigation, input]);
 
+    const onChange = useCallback(
+        (value: string) => dispatch(setFirstnameAction(value)),
+        [dispatch]
+    );
+
     const continuePressed = () => {
         if (firstname) {
-            navigateTo(RegistrationStackNavigatorEnum.EmailScreen);
+            navigateTo(RegistrationStackNavigatorEnum.BirthdayScreen);
         } else {
             Alert.alert('Please select firstname');
         }
@@ -47,17 +52,14 @@ export const FirstnameScreen = (): JSX.Element => {
     return (
         <SafeAreaProvider>
             <Title title="What is your firstname?" />
-            <View style={FirstnameScreenStyle.inputContainer}>
-                <Input
-                    ref={input}
-                    inputType={InputTypeEnum.TEXT}
-                    autoFocus
-                    onChange={(value: string) =>
-                        dispatch(setFirstnameAction(value))
-                    }
-                    iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
-                />
-            </View>
+            <Input
+                ref={input}
+                inputType={InputTypeEnum.TEXT}
+                autoFocus
+                onChange={onChange}
+                iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
+                viewStyle={FirstnameScreenStyle.input}
+            />
             <Continue onPress={continuePressed} />
         </SafeAreaProvider>
     );

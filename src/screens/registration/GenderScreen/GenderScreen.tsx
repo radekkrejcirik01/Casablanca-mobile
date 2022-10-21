@@ -31,9 +31,7 @@ export const GenderScreen = (): JSX.Element => {
     return (
         <SafeAreaProvider>
             <Title title="I am" />
-            <View style={GenderScreenStyle.select}>
-                <GenderSelect />
-            </View>
+            <GenderSelect style={GenderScreenStyle.select} />
             <Continue onPress={continuePressed} />
         </SafeAreaProvider>
     );

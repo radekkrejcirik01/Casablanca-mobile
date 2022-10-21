@@ -8,8 +8,12 @@ import { TouchableOpacity } from '@components/general/TouchableOpacity/Touchable
 import { GenderSelectEnum } from '@components/registration/GenderSelect/GenderSelect.enum';
 import { ReducerProps } from '@store/index.props';
 import { setGenderAction } from '@store/RegistrationReducer';
+import {
+    GenderSelectDefaultProps,
+    GenderSelectProps
+} from '@components/registration/GenderSelect/GenderSelect.props';
 
-export const GenderSelect = (): JSX.Element => {
+export const GenderSelect = ({ style }: GenderSelectProps): JSX.Element => {
     const gender = useSelector(
         (state: ReducerProps) => state.registration.gender
     );
@@ -25,7 +29,7 @@ export const GenderSelect = (): JSX.Element => {
     };
 
     return (
-        <View style={GenderSelectStyle.container}>
+        <View style={[GenderSelectStyle.container, style]}>
             <TouchableOpacity
                 onPress={femalePress}
                 style={GenderSelectStyle.row}
@@ -62,3 +66,5 @@ export const GenderSelect = (): JSX.Element => {
         </View>
     );
 };
+
+GenderSelect.defaultProps = GenderSelectDefaultProps;
