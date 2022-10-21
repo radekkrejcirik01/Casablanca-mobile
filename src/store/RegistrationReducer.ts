@@ -8,7 +8,8 @@ export const RegistrationReducer = createSlice({
         birthday: {
             year: null,
             month: null,
-            day: null
+            day: null,
+            value: null
         },
         photos: [],
         tags: [],
@@ -32,6 +33,9 @@ export const RegistrationReducer = createSlice({
         setBirthdayDayAction: (state, action) => {
             state.birthday.day = action.payload;
         },
+        setBirthdayValueAction: (state, action) => {
+            state.birthday.value = action.payload;
+        },
         addPhotoAction: (state, action) => {
             state.photos = [...state.photos, action.payload];
         },
@@ -44,9 +48,9 @@ export const RegistrationReducer = createSlice({
             state.tags = [...state.tags, action.payload];
         },
         removeTagAction: (state, action) => {
-            let arr: Array<string> = state.photos;
+            let arr: Array<string> = state.tags;
             arr = arr.filter((tag: string) => tag !== action.payload);
-            state.photos = arr;
+            state.tags = arr;
         },
         setGenderAction: (state, action) => {
             state.gender = action.payload;
@@ -66,6 +70,7 @@ export const {
     setBirthdayYearAction,
     setBirthdayMonthAction,
     setBirthdayDayAction,
+    setBirthdayValueAction,
     addPhotoAction,
     removePhotoAction,
     addTagAction,

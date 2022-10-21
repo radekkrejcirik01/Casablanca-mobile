@@ -1,6 +1,6 @@
 import React from 'react';
 import { Alert } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Continue } from '@components/registration/Continue/Continue';
 import { Title } from '@components/general/Title/Title';
@@ -11,11 +11,13 @@ import { ReducerProps } from '@store/index.props';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
 import { useNavigation } from '@hooks/useNavigation';
+import { setBirthdayValueAction } from '@store/RegistrationReducer';
 
 export const BirthdayScreen = (): JSX.Element => {
     const birthday = useSelector(
         (state: ReducerProps) => state.registration.birthday
     );
+    const dispatch = useDispatch();
 
     const { navigateTo } = useNavigation(
         RootStackNavigatorEnum.RegistrationStack
@@ -23,6 +25,7 @@ export const BirthdayScreen = (): JSX.Element => {
 
     const continuePressed = () => {
         const birthdayValue = `${birthday.year}/${birthday.month}/${birthday.day}`;
+        dispatch(setBirthdayValueAction(birthdayValue));
 
         if (getAge(birthdayValue) >= 18) {
             navigateTo(RegistrationStackNavigatorEnum.PhotosScreen);

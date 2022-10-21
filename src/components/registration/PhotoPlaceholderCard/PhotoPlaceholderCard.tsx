@@ -1,5 +1,4 @@
-import React from 'react';
-import { View } from 'react-native';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import ImagePicker, { ImageOrVideo } from 'react-native-image-crop-picker';
 import FastImage from 'react-native-fast-image';
@@ -25,6 +24,11 @@ export const PhotoPlaceholderCard = ({
         });
     };
 
+    const removePhoto = useCallback(
+        () => dispatch(removePhotoAction(photo)),
+        [dispatch, photo]
+    );
+
     return (
         <TouchableOpacity
             onPress={onPress}
@@ -33,13 +37,13 @@ export const PhotoPlaceholderCard = ({
             {photo && (
                 <TouchableOpacity
                     style={PhotoPlaceholderCardStyle.closeTouchableOpacity}
-                    onPress={() => {
-                        dispatch(removePhotoAction(photo));
-                    }}
+                    onPress={removePhoto}
                 >
-                    <View style={PhotoPlaceholderCardStyle.closeView}>
-                        <Icon name={IconEnum.CLOSE} size={15} />
-                    </View>
+                    <Icon
+                        name={IconEnum.CLOSE}
+                        size={15}
+                        style={PhotoPlaceholderCardStyle.closeView}
+                    />
                 </TouchableOpacity>
             )}
             <FastImage

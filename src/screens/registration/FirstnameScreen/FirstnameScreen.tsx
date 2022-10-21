@@ -1,5 +1,5 @@
 import React, { createRef, useCallback, useEffect } from 'react';
-import { Alert, TextInput, View } from 'react-native';
+import { Alert, TextInput } from 'react-native';
 import { useNavigation as useNavigationModule } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -20,12 +20,12 @@ export const FirstnameScreen = (): JSX.Element => {
     const firstname = useSelector(
         (state: ReducerProps) => state.registration.firstname
     );
+    const dispatch = useDispatch();
 
     const navigation = useNavigationModule();
     const { navigateTo } = useNavigation(
         RootStackNavigatorEnum.RegistrationStack
     );
-    const dispatch = useDispatch();
 
     const input = createRef<TextInput>();
 

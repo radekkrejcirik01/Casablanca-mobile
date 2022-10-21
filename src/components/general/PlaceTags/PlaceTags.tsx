@@ -9,18 +9,15 @@ import {
 } from '@components/general/PlaceTags/PlaceTags.props';
 
 export const PlaceTags = ({
-    tags,
+    onSelect,
     showAll,
-    style
+    style,
+    tags
 }: PlaceTagsProps): JSX.Element => {
     const data = useMemo(
         (): Array<string> => (showAll ? ALL_PLACE_TAGS : tags),
         [showAll, tags]
     );
-
-    const onSelect = (tag: string) => {
-        console.log(tag);
-    };
 
     return (
         <View style={[PlaceTagsStyle.container, style]}>
