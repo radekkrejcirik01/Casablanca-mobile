@@ -11,6 +11,12 @@ import { TouchableOpacity } from '@components/general/TouchableOpacity/Touchable
 import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
+import {
+    deleteRequest,
+    getRequest,
+    postRequest,
+    updateRequest
+} from '@utils/Axios/Axios.service';
 
 export const LoginScreen = (): JSX.Element => {
     const [username, setUsername] = useState<string>();
@@ -22,16 +28,11 @@ export const LoginScreen = (): JSX.Element => {
     );
 
     const loginPressed = () => {
-        fetch('https://techtropolis-dgkra.ondigitalocean.app/users/register', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                Username: username,
-                Password: password
-            })
+        postRequest('user/login', {
+            username,
+            password
+        }).subscribe((result) => {
+            console.log(JSON.stringify(result));
         });
     };
 
