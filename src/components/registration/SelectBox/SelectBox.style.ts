@@ -1,12 +1,8 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const ShowMeSelectStyle = StyleSheet.create({
+export const SelectBoxStyle = StyleSheet.create({
     container: {
-        marginTop: 64,
-        marginHorizontal: 40
-    },
-    row: {
         marginBottom: 20,
         padding: 15,
         borderRadius: 20,

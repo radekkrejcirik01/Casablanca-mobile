@@ -12,8 +12,3 @@ export const GenderSelectDefaultProps: Omit<
 > = {
     style: {}
 };
-
-export interface SelectBoxProps {
-    title: string;
-    value: boolean;
-}

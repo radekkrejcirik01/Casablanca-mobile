@@ -33,7 +33,7 @@ export const GenderScreen = (): JSX.Element => {
         if (gender) {
             navigateTo(RegistrationStackNavigatorEnum.ShowMeScreen);
         } else {
-            Alert.alert('Please select option');
+            Alert.alert('Please select some option');
         }
     };
 
