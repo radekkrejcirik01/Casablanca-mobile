@@ -49,6 +49,7 @@ export const FirstnameScreen = (): JSX.Element => {
                 inputType={InputTypeEnum.TEXT}
                 autoFocus
                 onChange={onChange}
+                value={firstname}
                 iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
                 viewStyle={FirstnameScreenStyle.input}
             />

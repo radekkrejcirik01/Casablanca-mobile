@@ -14,10 +14,11 @@ import { PasswordScreenStyle } from '@screens/registration/PasswordScreen/Passwo
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { useNavigation } from '@hooks/useNavigation';
 import { setUserToken } from '@store/UserReducer';
+import { postRequest } from '@utils/Axios/Axios.service';
 
 export const PasswordScreen = (): JSX.Element => {
-    const password = useSelector(
-        (state: ReducerProps) => state.registration.password
+    const registration = useSelector(
+        (state: ReducerProps) => state.registration
     );
     const dispatch = useDispatch();
 
@@ -32,10 +33,25 @@ export const PasswordScreen = (): JSX.Element => {
         [dispatch]
     );
 
+    const register = () => {
+        postRequest('user/register', {
+            firstname: registration.firstname,
+            birthday: registration.birthday.value,
+            tags: registration.tags,
+            photos: registration.photos,
+            gender: registration.gender,
+            showMe: registration.showMe,
+            email: registration.email,
+            password: registration.password
+        }).subscribe((result) => {
+            console.log(JSON.stringify(result));
+        });
+    };
+
     const continuePressed = () => {
-        if (password.length > 7) {
-            dispatch(setUserToken('radek'));
-        } else if (!password) {
+        if (registration.password.length > 7) {
+            register();
+        } else if (!registration.password) {
             Alert.alert('Please type password');
         } else {
             Alert.alert(
@@ -52,6 +68,7 @@ export const PasswordScreen = (): JSX.Element => {
                 inputType={InputTypeEnum.PASSWORD}
                 autoFocus
                 onChange={onChange}
+                value={registration.password}
                 iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
                 viewStyle={PasswordScreenStyle.input}
             />

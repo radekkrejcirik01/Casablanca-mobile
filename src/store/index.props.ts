@@ -30,4 +30,5 @@ export interface Birthday {
     year: string;
     month: string;
     day: string;
+    value: string;
 }
