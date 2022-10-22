@@ -1,6 +1,5 @@
-import React, { createRef, useCallback, useEffect } from 'react';
+import React, { createRef, useCallback } from 'react';
 import { Alert, TextInput } from 'react-native';
-import { useNavigation as useNavigationModule } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Icon } from '@components/icon/Icon';
@@ -22,19 +21,12 @@ export const FirstnameScreen = (): JSX.Element => {
     );
     const dispatch = useDispatch();
 
-    const navigation = useNavigationModule();
-    const { navigateTo } = useNavigation(
-        RootStackNavigatorEnum.RegistrationStack
-    );
-
     const input = createRef<TextInput>();
 
-    useEffect(() => {
-        const unsubscribe = navigation.addListener('focus', () => {
-            input.current?.focus();
-        });
-        return unsubscribe;
-    }, [navigation, input]);
+    const { navigateTo } = useNavigation(
+        RootStackNavigatorEnum.RegistrationStack,
+        () => input.current?.focus()
+    );
 
     const onChange = useCallback(
         (value: string) => dispatch(setFirstnameAction(value)),

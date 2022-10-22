@@ -1,6 +1,5 @@
-import React, { createRef, useEffect } from 'react';
-import { Alert, TextInput, View } from 'react-native';
-import { useNavigation as useNavigationModule } from '@react-navigation/native';
+import React, { createRef, useCallback } from 'react';
+import { Alert, TextInput } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Icon } from '@components/icon/Icon';
@@ -20,31 +19,27 @@ export const EmailScreen = (): JSX.Element => {
     const email = useSelector(
         (state: ReducerProps) => state.registration.email
     );
-
-    const navigation = useNavigationModule();
-    const { navigateTo } = useNavigation(
-        RootStackNavigatorEnum.RegistrationStack
-    );
     const dispatch = useDispatch();
 
     const input = createRef<TextInput>();
 
-    useEffect(() => {
-        const unsubscribe = navigation.addListener('focus', () => {
-            input.current?.focus();
-        });
-        return unsubscribe;
-    }, [navigation, input]);
+    const { navigateTo } = useNavigation(
+        RootStackNavigatorEnum.RegistrationStack,
+        () => input.current?.focus()
+    );
+
+    const onChange = useCallback(
+        (value: string) => dispatch(setEmailAction(value)),
+        [dispatch]
+    );
 
     const continuePressed = () => {
         if (email && email.includes('@')) {
             navigateTo(RegistrationStackNavigatorEnum.PasswordScreen);
         } else if (email) {
+            Alert.alert('Please select valid email address');
+        } else {
             Alert.alert('Please select email address');
-        }
-
-        if (!email) {
-            Alert.alert('Please select email');
         }
     };
 
@@ -54,7 +49,7 @@ export const EmailScreen = (): JSX.Element => {
             <Input
                 ref={input}
                 inputType={InputTypeEnum.EMAIL}
-                onChange={(value: string) => dispatch(setEmailAction(value))}
+                onChange={onChange}
                 value={email}
                 iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
                 viewStyle={EmailScreenStyle.input}

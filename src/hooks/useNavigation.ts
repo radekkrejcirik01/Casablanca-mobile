@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useNavigation as useNavigationModule } from '@react-navigation/native';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { MessagesStackNavigatorEnum } from '@navigation/StackNavigators/messages/MessagesStackNavigator.enum';
@@ -7,7 +7,8 @@ import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/regi
 import { SwipeStackNavigatorEnum } from '@navigation/StackNavigators/swipe/SwipeStackNavigator.enum';
 
 export const useNavigation = (
-    stack?: RootStackNavigatorEnum
+    stack?: RootStackNavigatorEnum,
+    onFocus?: () => void
 ): {
     navigateTo: (
         screen:
@@ -20,6 +21,13 @@ export const useNavigation = (
     navigateBack: () => void;
 } => {
     const navigation = useNavigationModule();
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            if (onFocus) onFocus();
+        });
+        return unsubscribe;
+    }, [onFocus, navigation]);
 
     const navigateTo = useCallback(
         (screen: string) => {

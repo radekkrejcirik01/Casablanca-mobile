@@ -1,7 +1,6 @@
-import React, { createRef, useEffect } from 'react';
-import { Alert, TextInput, View } from 'react-native';
+import React, { createRef, useCallback } from 'react';
+import { Alert, TextInput } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigation as useNavigationModule } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Icon } from '@components/icon/Icon';
 import { IconEnum } from '@components/icon/Icon.enum';
@@ -20,27 +19,28 @@ export const PasswordScreen = (): JSX.Element => {
     const password = useSelector(
         (state: ReducerProps) => state.registration.password
     );
-
-    const navigation = useNavigationModule();
-    const { navigateTo } = useNavigation(
-        RootStackNavigatorEnum.RegistrationStack
-    );
     const dispatch = useDispatch();
 
     const input = createRef<TextInput>();
 
-    useEffect(() => {
-        const unsubscribe = navigation.addListener('focus', () => {
-            input.current?.focus();
-        });
-        return unsubscribe;
-    }, [navigation, input]);
+    useNavigation(RootStackNavigatorEnum.RegistrationStack, () =>
+        input.current?.focus()
+    );
+
+    const onChange = useCallback(
+        (value: string) => dispatch(setPasswordAction(value)),
+        [dispatch]
+    );
 
     const continuePressed = () => {
-        if (password) {
+        if (password.length > 7) {
             dispatch(setUserToken('radek'));
-        } else {
+        } else if (!password) {
             Alert.alert('Please type password');
+        } else {
+            Alert.alert(
+                'Password is too short, safer would be at least 8 characters'
+            );
         }
     };
 
@@ -51,7 +51,7 @@ export const PasswordScreen = (): JSX.Element => {
                 ref={input}
                 inputType={InputTypeEnum.PASSWORD}
                 autoFocus
-                onChange={(value: string) => dispatch(setPasswordAction(value))}
+                onChange={onChange}
                 iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
                 viewStyle={PasswordScreenStyle.input}
             />
