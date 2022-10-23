@@ -1,10 +1,10 @@
 export enum RegistrationStackNavigatorEnum {
     FirstnameScreen = 'FirstnameScreen',
-    EmailScreen = 'EmailScreen',
     BirthdayScreen = 'BirthdayScreen',
     PhotosScreen = 'PhotosScreen',
-    FavePlacesScreen = 'FavePlacesScreen',
+    TagsScreen = 'TagsScreen',
     GenderScreen = 'GenderScreen',
     ShowMeScreen = 'ShowMeScreen',
+    EmailScreen = 'EmailScreen',
     PasswordScreen = 'PasswordScreen'
 }

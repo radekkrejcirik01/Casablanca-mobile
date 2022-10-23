@@ -50,7 +50,7 @@ export const RegistrationStackNavigator = (): JSX.Element => (
             }}
         />
         <Registration.Screen
-            name={RegistrationStackNavigatorEnum.FavePlacesScreen}
+            name={RegistrationStackNavigatorEnum.TagsScreen}
             component={TagsScreen}
             options={{
                 ...RegistrationScreenOptions,

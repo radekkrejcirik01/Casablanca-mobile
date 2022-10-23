@@ -30,13 +30,13 @@ export const ShowMeScreen = (): JSX.Element => {
         [dispatch]
     );
 
-    const continuePressed = () => {
+    const continuePressed = useCallback(() => {
         if (showMe) {
             navigateTo(RegistrationStackNavigatorEnum.EmailScreen);
         } else {
             Alert.alert('Please select some option');
         }
-    };
+    }, [navigateTo, showMe]);
 
     return (
         <SafeAreaProvider>

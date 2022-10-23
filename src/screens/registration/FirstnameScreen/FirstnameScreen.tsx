@@ -33,13 +33,13 @@ export const FirstnameScreen = (): JSX.Element => {
         [dispatch]
     );
 
-    const continuePressed = () => {
+    const continuePressed = useCallback(() => {
         if (firstname) {
             navigateTo(RegistrationStackNavigatorEnum.BirthdayScreen);
         } else {
             Alert.alert('Please select firstname');
         }
-    };
+    }, [firstname, navigateTo]);
 
     return (
         <SafeAreaProvider>

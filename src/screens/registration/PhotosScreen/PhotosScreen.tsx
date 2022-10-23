@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Continue } from '@components/registration/Continue/Continue';
 import { Title } from '@components/general/Title/Title';
@@ -13,9 +13,10 @@ export const PhotosScreen = (): JSX.Element => {
         RootStackNavigatorEnum.RegistrationStack
     );
 
-    const continuePressed = () => {
-        navigateTo(RegistrationStackNavigatorEnum.FavePlacesScreen);
-    };
+    const continuePressed = useCallback(
+        () => navigateTo(RegistrationStackNavigatorEnum.TagsScreen),
+        [navigateTo]
+    );
 
     return (
         <SafeAreaProvider>

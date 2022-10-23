@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -23,7 +23,7 @@ export const BirthdayScreen = (): JSX.Element => {
         RootStackNavigatorEnum.RegistrationStack
     );
 
-    const continuePressed = () => {
+    const continuePressed = useCallback(() => {
         const birthdayValue = `${birthday.year}/${birthday.month}/${birthday.day}`;
         dispatch(setBirthdayValueAction(birthdayValue));
 
@@ -36,7 +36,7 @@ export const BirthdayScreen = (): JSX.Element => {
         if (!getAge(birthdayValue)) {
             Alert.alert('Sorry, invalid birthday');
         }
-    };
+    }, [birthday.day, birthday.month, birthday.year, dispatch, navigateTo]);
 
     return (
         <SafeAreaProvider>

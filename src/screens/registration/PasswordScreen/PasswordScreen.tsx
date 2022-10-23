@@ -33,7 +33,7 @@ export const PasswordScreen = (): JSX.Element => {
         [dispatch]
     );
 
-    const register = () => {
+    const register = useCallback(() => {
         postRequest('user/register', {
             firstname: registration.firstname,
             birthday: registration.birthday.value,
@@ -46,9 +46,9 @@ export const PasswordScreen = (): JSX.Element => {
         }).subscribe((result) => {
             console.log(JSON.stringify(result));
         });
-    };
+    }, [registration]);
 
-    const continuePressed = () => {
+    const continuePressed = useCallback(() => {
         if (registration.password.length > 7) {
             register();
         } else if (!registration.password) {
@@ -58,7 +58,7 @@ export const PasswordScreen = (): JSX.Element => {
                 'Password is too short, safer would be at least 8 characters'
             );
         }
-    };
+    }, [register, registration.password]);
 
     return (
         <SafeAreaProvider>

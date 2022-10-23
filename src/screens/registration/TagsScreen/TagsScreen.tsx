@@ -30,9 +30,10 @@ export const TagsScreen = (): JSX.Element => {
         [dispatch, tags]
     );
 
-    const continuePressed = () => {
-        navigateTo(RegistrationStackNavigatorEnum.GenderScreen);
-    };
+    const continuePressed = useCallback(
+        () => navigateTo(RegistrationStackNavigatorEnum.GenderScreen),
+        [navigateTo]
+    );
 
     return (
         <SafeAreaProvider>

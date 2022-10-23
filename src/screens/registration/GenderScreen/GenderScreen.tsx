@@ -29,13 +29,13 @@ export const GenderScreen = (): JSX.Element => {
         [dispatch]
     );
 
-    const continuePressed = () => {
+    const continuePressed = useCallback(() => {
         if (gender) {
             navigateTo(RegistrationStackNavigatorEnum.ShowMeScreen);
         } else {
             Alert.alert('Please select some option');
         }
-    };
+    }, [gender, navigateTo]);
 
     return (
         <SafeAreaProvider>

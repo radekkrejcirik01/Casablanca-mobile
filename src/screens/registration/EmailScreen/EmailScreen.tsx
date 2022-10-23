@@ -33,7 +33,7 @@ export const EmailScreen = (): JSX.Element => {
         [dispatch]
     );
 
-    const continuePressed = () => {
+    const continuePressed = useCallback(() => {
         if (email && email.includes('@')) {
             navigateTo(RegistrationStackNavigatorEnum.PasswordScreen);
         } else if (email) {
@@ -41,7 +41,7 @@ export const EmailScreen = (): JSX.Element => {
         } else {
             Alert.alert('Please select email address');
         }
-    };
+    }, [email, navigateTo]);
 
     return (
         <SafeAreaProvider>
