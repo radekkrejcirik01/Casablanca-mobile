@@ -14,9 +14,9 @@ export const getRequest = <T>(
         )
     ).pipe(map((result: AxiosResponse<T>) => result.data));
 
-export const postRequest = <T>(
+export const postRequest = <T, B>(
     endpoint: string,
-    data: T,
+    data: B,
     config?: AxiosRequestConfig
 ): Observable<T> =>
     defer(() =>

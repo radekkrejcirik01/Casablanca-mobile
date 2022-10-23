@@ -1,3 +1,4 @@
 export enum PersistStorageKeys {
-    THEME = 'THEME'
+    THEME = 'THEME',
+    TOKEN = 'TOKEN'
 }

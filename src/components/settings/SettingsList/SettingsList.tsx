@@ -55,11 +55,14 @@ export const SettingsList = (): JSX.Element => {
 
     const toggleDarkMode = (value: boolean) => {
         dispatch(setIsDarkMode(value));
-        PersistStorage.setItem(PersistStorageKeys.THEME, value.toString());
+
+        const mode = value ? 'dark' : 'light';
+        PersistStorage.setItem(PersistStorageKeys.THEME, mode).catch();
     };
 
     const LogOut = () => {
         dispatch(setUserToken(null));
+        PersistStorage.setItem(PersistStorageKeys.TOKEN, '').catch();
     };
 
     return (

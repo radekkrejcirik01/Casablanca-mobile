@@ -1,4 +1,7 @@
 import React, { useCallback } from 'react';
+import { Alert } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import ImagePicker, { ImageOrVideo } from 'react-native-image-crop-picker';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Continue } from '@components/registration/Continue/Continue';
 import { Title } from '@components/general/Title/Title';
@@ -7,21 +10,45 @@ import { PhotoPlaceholder } from '@components/registration/PhotoPlaceholder/Phot
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { useNavigation } from '@hooks/useNavigation';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
+import { ReducerProps } from '@store/index.props';
+import { addPhotoAction } from '@store/RegistrationReducer';
 
 export const PhotosScreen = (): JSX.Element => {
+    const photos = useSelector(
+        (state: ReducerProps) => state.registration.photos
+    );
+    const dispatch = useDispatch();
+
     const { navigateTo } = useNavigation(
         RootStackNavigatorEnum.RegistrationStack
     );
 
-    const continuePressed = useCallback(
-        () => navigateTo(RegistrationStackNavigatorEnum.TagsScreen),
-        [navigateTo]
-    );
+    const onPress = useCallback(() => {
+        ImagePicker.openPicker({
+            width: 300,
+            height: 400,
+            cropping: true
+        }).then((image: ImageOrVideo) => {
+            dispatch(addPhotoAction(image.path));
+        });
+    }, [dispatch]);
+
+    const continuePressed = useCallback(() => {
+        if (photos?.length) {
+            navigateTo(RegistrationStackNavigatorEnum.TagsScreen);
+        } else {
+            Alert.alert('Please select at least 1 profile photo');
+        }
+    }, [navigateTo, photos?.length]);
 
     return (
         <SafeAreaProvider>
             <Title title="Choose photos" />
-            <PhotoPlaceholder style={PhotosScreenStyle.photoPlaceholder} />
+            <PhotoPlaceholder
+                onPress={onPress}
+                photos={photos}
+                style={PhotosScreenStyle.photoPlaceholder}
+            />
             <Continue onPress={continuePressed} />
         </SafeAreaProvider>
     );

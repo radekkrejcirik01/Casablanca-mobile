@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { Alert } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 import { Continue } from '@components/registration/Continue/Continue';
@@ -30,10 +31,13 @@ export const TagsScreen = (): JSX.Element => {
         [dispatch, tags]
     );
 
-    const continuePressed = useCallback(
-        () => navigateTo(RegistrationStackNavigatorEnum.GenderScreen),
-        [navigateTo]
-    );
+    const continuePressed = useCallback(() => {
+        if (tags?.length) {
+            navigateTo(RegistrationStackNavigatorEnum.GenderScreen);
+        } else {
+            Alert.alert('Please select at least 1 fave place');
+        }
+    }, [tags?.length, navigateTo]);
 
     return (
         <SafeAreaProvider>
