@@ -1,7 +1,7 @@
 export interface ResponseInterface {
     status: string;
     message: string;
-    data: {
+    data?: {
         id: number;
         email: string;
     };
@@ -14,6 +14,11 @@ export interface RegistrationInterface {
     photos: Array<string>;
     gender: string;
     showMe: string;
+    email: string;
+    password: string;
+}
+
+export interface LoginInterface {
     email: string;
     password: string;
 }

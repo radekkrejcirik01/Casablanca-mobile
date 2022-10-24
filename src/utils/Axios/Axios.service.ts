@@ -1,6 +1,11 @@
-import { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { defer, map, Observable } from 'rxjs';
+import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { catchError, defer, map, Observable, of } from 'rxjs';
 import { axiosInstance } from '@utils/Axios/Axios.instance';
+
+const catchErrorFunction = (error: AxiosError) => {
+    console.error(error);
+    return of(null);
+};
 
 export const getRequest = <T>(
     endpoint: string,
@@ -12,7 +17,10 @@ export const getRequest = <T>(
             `https://w2gdfxt8dc.execute-api.eu-central-1.amazonaws.com/${endpoint}${id}`,
             config
         )
-    ).pipe(map((result: AxiosResponse<T>) => result.data));
+    ).pipe(
+        map((result: AxiosResponse<T>) => result.data),
+        catchError((err: AxiosError) => catchErrorFunction(err))
+    );
 
 export const postRequest = <T, B>(
     endpoint: string,
@@ -25,7 +33,10 @@ export const postRequest = <T, B>(
             data,
             config
         )
-    ).pipe(map((result: AxiosResponse<T>) => result.data));
+    ).pipe(
+        map((result: AxiosResponse<T>) => result.data),
+        catchError((err: AxiosError) => catchErrorFunction(err))
+    );
 
 export const updateRequest = <T>(
     endpoint: string,
@@ -38,7 +49,10 @@ export const updateRequest = <T>(
             data,
             config
         )
-    ).pipe(map((result: AxiosResponse<T>) => result.data));
+    ).pipe(
+        map((result: AxiosResponse<T>) => result.data),
+        catchError((err: AxiosError) => catchErrorFunction(err))
+    );
 
 export const deleteRequest = <T>(
     endpoint: string,
@@ -50,4 +64,7 @@ export const deleteRequest = <T>(
             `https://w2gdfxt8dc.execute-api.eu-central-1.amazonaws.com/${endpoint}/${id}`,
             config
         )
-    ).pipe(map((result: AxiosResponse<T>) => result.data));
+    ).pipe(
+        map((result: AxiosResponse<T>) => result.data),
+        catchError((err: AxiosError) => catchErrorFunction(err))
+    );

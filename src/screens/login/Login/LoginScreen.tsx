@@ -11,15 +11,17 @@ import { TouchableOpacity } from '@components/general/TouchableOpacity/Touchable
 import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
+import { postRequest } from '@utils/Axios/Axios.service';
 import {
-    deleteRequest,
-    getRequest,
-    postRequest,
-    updateRequest
-} from '@utils/Axios/Axios.service';
+    LoginInterface,
+    ResponseInterface
+} from '@models/Registration/Registration.interface';
+import { setUserToken } from '@store/UserReducer';
+import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
+import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 
 export const LoginScreen = (): JSX.Element => {
-    const [username, setUsername] = useState<string>();
+    const [email, setUsername] = useState<string>();
     const [password, setPassword] = useState<string>();
 
     const dispatch = useDispatch();
@@ -28,11 +30,14 @@ export const LoginScreen = (): JSX.Element => {
     );
 
     const loginPressed = () => {
-        postRequest('user/login', {
-            username,
+        postRequest<ResponseInterface, LoginInterface>('user/login', {
+            email,
             password
-        }).subscribe((result) => {
-            console.log(JSON.stringify(result));
+        }).subscribe((response) => {
+            if (response?.status) {
+                dispatch(setUserToken(email));
+                PersistStorage.setItem(PersistStorageKeys.TOKEN, email).catch();
+            }
         });
     };
 
@@ -44,14 +49,16 @@ export const LoginScreen = (): JSX.Element => {
         <SafeAreaProvider>
             <View style={LoginScreenStyle.inputView}>
                 <Input
-                    placeholder="Username"
+                    placeholder="Email"
                     onChange={setUsername}
+                    value={email}
                     inputType={InputTypeEnum.TEXT}
                     iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
                 />
                 <Input
                     placeholder="Password"
                     onChange={setPassword}
+                    value={password}
                     inputType={InputTypeEnum.PASSWORD}
                 />
             </View>
