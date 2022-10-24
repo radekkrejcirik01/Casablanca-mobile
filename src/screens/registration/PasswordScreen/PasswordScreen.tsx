@@ -40,16 +40,11 @@ export const PasswordScreen = (): JSX.Element => {
     );
 
     const register = useCallback(() => {
-        postRequest<ResponseInterface, RegistrationInterface>('user/register', {
-            firstname: registration.firstname,
-            birthday: registration.birthday.value,
-            tags: registration.tags,
-            photos: registration.photos,
-            gender: registration.gender,
-            showMe: registration.showMe,
-            email: registration.email,
-            password: registration.password
-        }).subscribe((response: ResponseInterface) => {
+        const data = { ...registration, birthday: registration.birthday.value };
+        postRequest<ResponseInterface, RegistrationInterface>(
+            'user/register',
+            data
+        ).subscribe((response: ResponseInterface) => {
             dispatch(setUserToken(response.data.email));
             PersistStorage.setItem(
                 PersistStorageKeys.TOKEN,
