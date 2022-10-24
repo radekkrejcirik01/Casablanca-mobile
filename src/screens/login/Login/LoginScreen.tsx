@@ -51,14 +51,12 @@ export const LoginScreen = (): JSX.Element => {
                 <Input
                     placeholder="Email"
                     onChange={setUsername}
-                    value={email}
                     inputType={InputTypeEnum.TEXT}
                     iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
                 />
                 <Input
                     placeholder="Password"
                     onChange={setPassword}
-                    value={password}
                     inputType={InputTypeEnum.PASSWORD}
                 />
             </View>
