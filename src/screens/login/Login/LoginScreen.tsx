@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -29,7 +29,7 @@ export const LoginScreen = (): JSX.Element => {
         RootStackNavigatorEnum.RegistrationStack
     );
 
-    const loginPressed = () => {
+    const loginPressed = useCallback(() => {
         postRequest<ResponseInterface, LoginInterface>('user/login', {
             email,
             password
@@ -39,11 +39,11 @@ export const LoginScreen = (): JSX.Element => {
                 PersistStorage.setItem(PersistStorageKeys.TOKEN, email).catch();
             }
         });
-    };
+    }, [dispatch, email, password]);
 
-    const registerPressed = () => {
+    const registerPressed = useCallback(() => {
         navigateTo(RegistrationStackNavigatorEnum.FirstnameScreen);
-    };
+    }, [navigateTo]);
 
     return (
         <SafeAreaProvider>
