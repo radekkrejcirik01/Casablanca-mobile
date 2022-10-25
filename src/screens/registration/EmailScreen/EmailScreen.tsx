@@ -6,7 +6,6 @@ import { Icon } from '@components/icon/Icon';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import { Input } from '@components/general/Input/Input';
-import { Continue } from '@components/registration/Continue/Continue';
 import { Title } from '@components/general/Title/Title';
 import { EmailScreenStyle } from '@screens/registration/EmailScreen/EmailScreen.style';
 import { setEmailAction } from '@store/RegistrationReducer';
@@ -14,6 +13,7 @@ import { ReducerProps } from '@store/index.props';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
 import { useNavigation } from '@hooks/useNavigation';
+import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
 
 export const EmailScreen = (): JSX.Element => {
     const email = useSelector(
@@ -45,7 +45,7 @@ export const EmailScreen = (): JSX.Element => {
 
     return (
         <SafeAreaProvider>
-            <Title title="What is your email?" />
+            <Title title="What is your email?" style={EmailScreenStyle.title} />
             <Input
                 ref={input}
                 inputType={InputTypeEnum.EMAIL}
@@ -54,7 +54,7 @@ export const EmailScreen = (): JSX.Element => {
                 iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
                 viewStyle={EmailScreenStyle.input}
             />
-            <Continue onPress={continuePressed} />
+            <ContinueButton onPress={continuePressed} />
         </SafeAreaProvider>
     );
 };

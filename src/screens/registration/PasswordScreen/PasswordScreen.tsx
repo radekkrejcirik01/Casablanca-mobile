@@ -6,7 +6,6 @@ import { Icon } from '@components/icon/Icon';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import { Input } from '@components/general/Input/Input';
-import { Continue } from '@components/registration/Continue/Continue';
 import { Title } from '@components/general/Title/Title';
 import { setPasswordAction } from '@store/RegistrationReducer';
 import { ReducerProps } from '@store/index.props';
@@ -21,6 +20,7 @@ import {
     RegistrationInterface,
     ResponseInterface
 } from '@models/Registration/Registration.interface';
+import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
 
 export const PasswordScreen = (): JSX.Element => {
     const registration = useSelector(
@@ -67,7 +67,7 @@ export const PasswordScreen = (): JSX.Element => {
 
     return (
         <SafeAreaProvider>
-            <Title title="Password" />
+            <Title title="Password" style={PasswordScreenStyle.title} />
             <Input
                 ref={input}
                 inputType={InputTypeEnum.PASSWORD}
@@ -77,7 +77,7 @@ export const PasswordScreen = (): JSX.Element => {
                 iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
                 viewStyle={PasswordScreenStyle.input}
             />
-            <Continue onPress={continuePressed} />
+            <ContinueButton onPress={continuePressed} />
         </SafeAreaProvider>
     );
 };

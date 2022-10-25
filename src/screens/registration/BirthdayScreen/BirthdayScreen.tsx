@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Continue } from '@components/registration/Continue/Continue';
 import { Title } from '@components/general/Title/Title';
 import { BirthdayScreenStyle } from '@screens/registration/BirthdayScreen/BirthdayScreen.style';
 import { BirthdayInput } from '@components/registration/BirthdayInput/BirthdayInput';
@@ -12,6 +11,7 @@ import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavig
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
 import { useNavigation } from '@hooks/useNavigation';
 import { setBirthdayValueAction } from '@store/RegistrationReducer';
+import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
 
 export const BirthdayScreen = (): JSX.Element => {
     const birthday = useSelector(
@@ -40,12 +40,15 @@ export const BirthdayScreen = (): JSX.Element => {
 
     return (
         <SafeAreaProvider>
-            <Title title="When is your birthday?" />
+            <Title
+                title="When is your birthday?"
+                style={BirthdayScreenStyle.title}
+            />
             <BirthdayInput
                 birthday={birthday}
                 style={BirthdayScreenStyle.input}
             />
-            <Continue onPress={continuePressed} />
+            <ContinueButton onPress={continuePressed} />
         </SafeAreaProvider>
     );
 };

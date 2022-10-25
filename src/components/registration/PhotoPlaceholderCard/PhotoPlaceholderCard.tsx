@@ -24,6 +24,10 @@ export const PhotoPlaceholderCard = ({
             onPress={onPress}
             style={PhotoPlaceholderCardStyle.container}
         >
+            <FastImage
+                style={PhotoPlaceholderCardStyle.photo}
+                source={{ uri: photo }}
+            />
             {photo && (
                 <TouchableOpacity
                     style={PhotoPlaceholderCardStyle.closeTouchableOpacity}
@@ -32,14 +36,10 @@ export const PhotoPlaceholderCard = ({
                     <Icon
                         name={IconEnum.CLOSE}
                         size={15}
-                        style={PhotoPlaceholderCardStyle.closeView}
+                        style={PhotoPlaceholderCardStyle.closeIcon}
                     />
                 </TouchableOpacity>
             )}
-            <FastImage
-                style={PhotoPlaceholderCardStyle.photo}
-                source={{ uri: photo }}
-            />
         </TouchableOpacity>
     );
 };

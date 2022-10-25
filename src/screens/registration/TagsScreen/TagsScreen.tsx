@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
-import { Continue } from '@components/registration/Continue/Continue';
 import { Title } from '@components/general/Title/Title';
 import { PlaceTags } from '@components/general/PlaceTags/PlaceTags';
 import { TagsScreenStyle } from '@screens/registration/TagsScreen/TagsScreen.style';
@@ -11,6 +10,7 @@ import { useNavigation } from '@hooks/useNavigation';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
 import { ReducerProps } from '@store/index.props';
 import { addTagAction, removeTagAction } from '@store/RegistrationReducer';
+import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
 
 export const TagsScreen = (): JSX.Element => {
     const tags = useSelector((state: ReducerProps) => state.registration.tags);
@@ -41,14 +41,17 @@ export const TagsScreen = (): JSX.Element => {
 
     return (
         <SafeAreaProvider>
-            <Title title="Fave places to go" />
+            <Title
+                title="What are your to-go places?"
+                style={TagsScreenStyle.title}
+            />
             <PlaceTags
                 onSelect={onSelect}
                 tags={tags}
                 showAll
                 style={TagsScreenStyle.placeTags}
             />
-            <Continue onPress={continuePressed} />
+            <ContinueButton onPress={continuePressed} />
         </SafeAreaProvider>
     );
 };

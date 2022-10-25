@@ -65,7 +65,7 @@ export const LoginScreen = (): JSX.Element => {
             </TouchableOpacity>
             <TouchableOpacity onPress={registerPressed}>
                 <Text style={LoginScreenStyle.registerText}>
-                    No account yet? Create one
+                    No account yet? Create one!
                 </Text>
             </TouchableOpacity>
         </SafeAreaProvider>

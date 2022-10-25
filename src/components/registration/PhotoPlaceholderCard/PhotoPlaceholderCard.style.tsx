@@ -7,17 +7,16 @@ export const PhotoPlaceholderCardStyle = StyleSheet.create({
         margin: 20
     },
     closeTouchableOpacity: {
-        zIndex: 1,
-        alignItems: 'flex-end'
+        bottom: -6,
+        right: -6,
+        position: 'absolute'
     },
-    closeView: {
-        position: 'absolute',
-        width: 24,
-        height: 24,
+    closeIcon: {
+        width: 25,
+        height: 25,
+        padding: 4,
         borderRadius: 20,
-        backgroundColor: COLORS.MAIN_BLUE,
-        justifyContent: 'center',
-        alignItems: 'center'
+        backgroundColor: COLORS.MAIN_BLUE
     },
     photo: {
         flexBasis: 160,

@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native';
 
 export const TagsScreenStyle = StyleSheet.create({
-    container: {
-        flex: 1
+    title: {
+        marginTop: 25,
+        marginHorizontal: 25
     },
     placeTags: {
-        marginTop: '30%',
-        marginBottom: '40%',
-        paddingHorizontal: 40
+        marginTop: '20%',
+        marginHorizontal: 40
     }
 });

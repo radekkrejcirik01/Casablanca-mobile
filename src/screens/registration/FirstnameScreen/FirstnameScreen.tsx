@@ -7,13 +7,13 @@ import { IconEnum } from '@components/icon/Icon.enum';
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import { Input } from '@components/general/Input/Input';
 import { FirstnameScreenStyle } from '@screens/registration/FirstnameScreen/FirstnameScreen.style';
-import { Continue } from '@components/registration/Continue/Continue';
 import { Title } from '@components/general/Title/Title';
 import { setFirstnameAction } from '@store/RegistrationReducer';
 import { ReducerProps } from '@store/index.props';
 import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
+import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
 
 export const FirstnameScreen = (): JSX.Element => {
     const firstname = useSelector(
@@ -43,7 +43,10 @@ export const FirstnameScreen = (): JSX.Element => {
 
     return (
         <SafeAreaProvider>
-            <Title title="What is your firstname?" />
+            <Title
+                title="What is your first name?"
+                style={FirstnameScreenStyle.title}
+            />
             <Input
                 ref={input}
                 inputType={InputTypeEnum.TEXT}
@@ -53,7 +56,7 @@ export const FirstnameScreen = (): JSX.Element => {
                 iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
                 viewStyle={FirstnameScreenStyle.input}
             />
-            <Continue onPress={continuePressed} />
+            <ContinueButton onPress={continuePressed} />
         </SafeAreaProvider>
     );
 };

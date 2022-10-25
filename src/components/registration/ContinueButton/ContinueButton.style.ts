@@ -1,14 +1,14 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const ContinueStyle = StyleSheet.create({
+export const ContinueButtonStyle = StyleSheet.create({
     container: {
-        alignSelf: 'center',
-        marginTop: '25%'
+        marginTop: '25%',
+        alignSelf: 'center'
     },
     text: {
-        color: COLORS.WHITE,
         fontSize: 18,
+        color: COLORS.WHITE,
         fontWeight: 'bold',
         alignSelf: 'center'
     }

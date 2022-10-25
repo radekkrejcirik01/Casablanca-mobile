@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Continue } from '@components/registration/Continue/Continue';
 import { Title } from '@components/general/Title/Title';
 import { GenderScreenStyle } from '@screens/registration/GenderScreen/GenderScreen.style';
 import { GenderSelect } from '@components/registration/GenderSelect/GenderSelect';
@@ -11,6 +10,7 @@ import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavig
 import { useNavigation } from '@hooks/useNavigation';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
 import { setGenderAction } from '@store/RegistrationReducer';
+import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
 
 export const GenderScreen = (): JSX.Element => {
     const gender = useSelector(
@@ -39,13 +39,13 @@ export const GenderScreen = (): JSX.Element => {
 
     return (
         <SafeAreaProvider>
-            <Title title="I am" />
+            <Title title="I am" style={GenderScreenStyle.title} />
             <GenderSelect
                 gender={gender}
                 onSelect={onSelect}
                 style={GenderScreenStyle.select}
             />
-            <Continue onPress={continuePressed} />
+            <ContinueButton onPress={continuePressed} />
         </SafeAreaProvider>
     );
 };
