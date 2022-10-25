@@ -12,6 +12,7 @@ import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/regi
 import { ReducerProps } from '@store/index.props';
 import { addPhotoAction } from '@store/RegistrationReducer';
 import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
+import { ImagePickerOptions } from '@screens/registration/PhotosScreen/PhotosScreen.options';
 
 export const PhotosScreen = (): JSX.Element => {
     const photos = useSelector(
@@ -24,13 +25,11 @@ export const PhotosScreen = (): JSX.Element => {
     );
 
     const onPress = useCallback(() => {
-        ImagePicker.openPicker({
-            width: 300,
-            height: 400,
-            cropping: true
-        }).then((image: ImageOrVideo) => {
-            dispatch(addPhotoAction(image.path));
-        });
+        ImagePicker.openPicker(ImagePickerOptions).then(
+            (image: ImageOrVideo) => {
+                dispatch(addPhotoAction(image.path));
+            }
+        );
     }, [dispatch]);
 
     const continuePressed = useCallback(() => {
