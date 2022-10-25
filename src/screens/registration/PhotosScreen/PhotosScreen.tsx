@@ -52,7 +52,10 @@ export const PhotosScreen = (): JSX.Element => {
                 photos={photos}
                 style={PhotosScreenStyle.photoPlaceholder}
             />
-            <ContinueButton onPress={continuePressed} />
+            <ContinueButton
+                onPress={continuePressed}
+                style={PhotosScreenStyle.continue}
+            />
         </SafeAreaProvider>
     );
 };
