@@ -9,18 +9,20 @@ import {
 
 export const PhotoPlaceholder = ({
     onPress,
+    onRemove,
     photos,
+    photosNumber,
     style
 }: PhotoPlaceholderProps): JSX.Element => (
-    <View style={style}>
-        <View style={PhotoPlaceholderStyle.containerCard}>
-            <PhotoPlaceholderCard onPress={onPress} photo={photos[0]} />
-            <PhotoPlaceholderCard onPress={onPress} photo={photos[1]} />
-        </View>
-        <View style={PhotoPlaceholderStyle.containerCard}>
-            <PhotoPlaceholderCard onPress={onPress} photo={photos[2]} />
-            <PhotoPlaceholderCard onPress={onPress} photo={photos[3]} />
-        </View>
+    <View style={[style, PhotoPlaceholderStyle.containerCard]}>
+        {[...Array(photosNumber).keys()].map((value: number) => (
+            <PhotoPlaceholderCard
+                key={value}
+                onPress={onPress}
+                onRemove={onRemove}
+                photo={photos[value]}
+            />
+        ))}
     </View>
 );
 

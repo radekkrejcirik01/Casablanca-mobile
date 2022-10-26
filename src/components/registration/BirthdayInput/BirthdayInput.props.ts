@@ -6,11 +6,16 @@ import {
     TextInputKeyPressEventData,
     ViewStyle
 } from 'react-native';
-import { Birthday } from '@store/index.props';
 
 export interface BirthdayInputProps {
     birthday: Birthday;
     style?: StyleProp<ViewStyle>;
+}
+
+interface Birthday {
+    year: string;
+    month: string;
+    day: string;
 }
 
 export const BirthdayInputDefaultProps: Omit<BirthdayInputProps, 'birthday'> = {
@@ -24,4 +29,5 @@ export interface ValueInputProps {
     innerRef: Ref<TextInput>;
     autoFocus: boolean;
     placeholder: string;
+    maxLength: number;
 }

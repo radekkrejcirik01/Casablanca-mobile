@@ -2,10 +2,15 @@ import { StyleProp, ViewStyle } from 'react-native';
 
 export interface PhotoPlaceholderProps {
     onPress: () => void;
+    onRemove: (photo: string) => void;
     photos: Array<string>;
+    photosNumber: number;
     style?: StyleProp<ViewStyle>;
 }
 
-export const PhotoPlaceholderDefaultProps = {
+export const PhotoPlaceholderDefaultProps: Omit<
+    PhotoPlaceholderProps,
+    'onPress' | 'onRemove' | 'photos' | 'photosNumber'
+> = {
     style: {}
 };

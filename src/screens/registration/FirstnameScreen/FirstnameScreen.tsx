@@ -8,7 +8,7 @@ import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import { Input } from '@components/general/Input/Input';
 import { FirstnameScreenStyle } from '@screens/registration/FirstnameScreen/FirstnameScreen.style';
 import { Title } from '@components/general/Title/Title';
-import { setFirstnameAction } from '@store/RegistrationReducer';
+import { setFirstnameAction } from '@store/UserReducer';
 import { ReducerProps } from '@store/index.props';
 import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
@@ -17,7 +17,7 @@ import { ContinueButton } from '@components/registration/ContinueButton/Continue
 
 export const FirstnameScreen = (): JSX.Element => {
     const firstname = useSelector(
-        (state: ReducerProps) => state.registration.firstname
+        (state: ReducerProps) => state.user.firstname
     );
     const dispatch = useDispatch();
 

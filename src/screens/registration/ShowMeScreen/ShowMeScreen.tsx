@@ -9,13 +9,11 @@ import { ReducerProps } from '@store/index.props';
 import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
-import { setShowMeAction } from '@store/RegistrationReducer';
+import { setShowMeAction } from '@store/UserReducer';
 import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
 
 export const ShowMeScreen = (): JSX.Element => {
-    const showMe = useSelector(
-        (state: ReducerProps) => state.registration.showMe
-    );
+    const showMe = useSelector((state: ReducerProps) => state.user.showMe);
 
     const dispatch = useDispatch();
 

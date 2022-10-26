@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Linking, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { SettingsListItem } from '@components/settings/SettingsListItem/SettingsListItem';
@@ -6,7 +6,7 @@ import { SettingsListStyle } from '@components/settings/SettingsList/SettingsLis
 import { useNavigation } from '@hooks/useNavigation';
 import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/ProfileStackNavigator.enum';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
-import { setUserToken } from '@store/UserReducer';
+import { resetUserState } from '@store/UserReducer';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { setIsDarkMode } from '@store/ThemeReducer';
@@ -53,17 +53,20 @@ export const SettingsList = (): JSX.Element => {
         navigateTo(ProfileStackNavigatorEnum.AccountScreen);
     };
 
-    const toggleDarkMode = (value: boolean) => {
-        dispatch(setIsDarkMode(value));
+    const toggleDarkMode = useCallback(
+        (value: boolean) => {
+            dispatch(setIsDarkMode(value));
 
-        const mode = value ? 'dark' : 'light';
-        PersistStorage.setItem(PersistStorageKeys.THEME, mode).catch();
-    };
+            const mode = value ? 'dark' : 'light';
+            PersistStorage.setItem(PersistStorageKeys.THEME, mode).catch();
+        },
+        [dispatch]
+    );
 
-    const LogOut = () => {
-        dispatch(setUserToken(null));
+    const LogOut = useCallback(() => {
+        dispatch(resetUserState());
         PersistStorage.setItem(PersistStorageKeys.TOKEN, '').catch();
-    };
+    }, [dispatch]);
 
     return (
         <View style={SettingsListStyle.container}>

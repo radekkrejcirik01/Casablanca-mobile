@@ -9,11 +9,11 @@ import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavig
 import { useNavigation } from '@hooks/useNavigation';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
 import { ReducerProps } from '@store/index.props';
-import { addTagAction, removeTagAction } from '@store/RegistrationReducer';
+import { addTagAction, removeTagAction } from '@store/UserReducer';
 import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
 
 export const TagsScreen = (): JSX.Element => {
-    const tags = useSelector((state: ReducerProps) => state.registration.tags);
+    const tags = useSelector((state: ReducerProps) => state.user.tags);
     const dispatch = useDispatch();
 
     const { navigateTo } = useNavigation(
@@ -35,7 +35,7 @@ export const TagsScreen = (): JSX.Element => {
         if (tags?.length) {
             navigateTo(RegistrationStackNavigatorEnum.GenderScreen);
         } else {
-            Alert.alert('Please select at least 1 fave place');
+            Alert.alert('Please select at least 1 favorite place');
         }
     }, [tags?.length, navigateTo]);
 

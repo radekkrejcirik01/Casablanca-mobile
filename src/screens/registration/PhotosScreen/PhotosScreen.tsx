@@ -10,14 +10,12 @@ import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavig
 import { useNavigation } from '@hooks/useNavigation';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
 import { ReducerProps } from '@store/index.props';
-import { addPhotoAction } from '@store/RegistrationReducer';
+import { addPhotoAction, removePhotoAction } from '@store/UserReducer';
 import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
 import { ImagePickerOptions } from '@screens/registration/PhotosScreen/PhotosScreen.options';
 
 export const PhotosScreen = (): JSX.Element => {
-    const photos = useSelector(
-        (state: ReducerProps) => state.registration.photos
-    );
+    const photos = useSelector((state: ReducerProps) => state.user.photos);
     const dispatch = useDispatch();
 
     const { navigateTo } = useNavigation(
@@ -31,6 +29,11 @@ export const PhotosScreen = (): JSX.Element => {
             }
         );
     }, [dispatch]);
+
+    const onRemove = useCallback(
+        (photo: string) => dispatch(removePhotoAction(photo)),
+        [dispatch]
+    );
 
     const continuePressed = useCallback(() => {
         if (photos?.length) {
@@ -48,7 +51,9 @@ export const PhotosScreen = (): JSX.Element => {
             />
             <PhotoPlaceholder
                 onPress={onPress}
+                onRemove={onRemove}
                 photos={photos}
+                photosNumber={4}
                 style={PhotosScreenStyle.photoPlaceholder}
             />
             <ContinueButton

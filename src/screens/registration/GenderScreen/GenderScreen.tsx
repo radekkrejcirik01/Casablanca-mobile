@@ -9,12 +9,12 @@ import { ReducerProps } from '@store/index.props';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { useNavigation } from '@hooks/useNavigation';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
-import { setGenderAction } from '@store/RegistrationReducer';
+import { setGenderAction } from '@store/UserReducer';
 import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
 
 export const GenderScreen = (): JSX.Element => {
     const gender = useSelector(
-        (state: ReducerProps) => state.registration.gender
+        (state: ReducerProps) => state.user.gender
     );
     const dispatch = useDispatch();
 

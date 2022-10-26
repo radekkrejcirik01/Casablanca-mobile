@@ -8,7 +8,7 @@ import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import { Input } from '@components/general/Input/Input';
 import { Title } from '@components/general/Title/Title';
 import { EmailScreenStyle } from '@screens/registration/EmailScreen/EmailScreen.style';
-import { setEmailAction } from '@store/RegistrationReducer';
+import { setEmailAction } from '@store/UserReducer';
 import { ReducerProps } from '@store/index.props';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
@@ -17,7 +17,7 @@ import { ContinueButton } from '@components/registration/ContinueButton/Continue
 
 export const EmailScreen = (): JSX.Element => {
     const email = useSelector(
-        (state: ReducerProps) => state.registration.email
+        (state: ReducerProps) => state.user.email
     );
     const dispatch = useDispatch();
 

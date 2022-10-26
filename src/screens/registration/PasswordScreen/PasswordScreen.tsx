@@ -7,12 +7,11 @@ import { IconEnum } from '@components/icon/Icon.enum';
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import { Input } from '@components/general/Input/Input';
 import { Title } from '@components/general/Title/Title';
-import { setPasswordAction } from '@store/RegistrationReducer';
+import { setPasswordAction, setUserToken } from '@store/UserReducer';
 import { ReducerProps } from '@store/index.props';
 import { PasswordScreenStyle } from '@screens/registration/PasswordScreen/PasswordScreen.style';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { useNavigation } from '@hooks/useNavigation';
-import { setUserToken } from '@store/UserReducer';
 import { postRequest } from '@utils/Axios/Axios.service';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
@@ -23,9 +22,7 @@ import {
 import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
 
 export const PasswordScreen = (): JSX.Element => {
-    const registration = useSelector(
-        (state: ReducerProps) => state.registration
-    );
+    const registration = useSelector((state: ReducerProps) => state.user);
     const dispatch = useDispatch();
 
     const input = createRef<TextInput>();

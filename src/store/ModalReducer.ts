@@ -1,10 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { Modal } from '@store/index.props';
+
+const initialState: Modal = {
+    isModalVisible: false
+};
 
 export const ModalReducer = createSlice({
     name: 'modal',
-    initialState: {
-        isModalVisible: false
-    },
+    initialState,
     reducers: {
         setModalVisible: (state, action) => {
             state.isModalVisible = action.payload;

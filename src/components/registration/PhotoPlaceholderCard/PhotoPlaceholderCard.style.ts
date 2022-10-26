@@ -3,7 +3,6 @@ import COLORS from '@constants/COLORS';
 
 export const PhotoPlaceholderCardStyle = StyleSheet.create({
     container: {
-        flex: 1,
         margin: 20
     },
     closeTouchableOpacity: {
@@ -19,7 +18,8 @@ export const PhotoPlaceholderCardStyle = StyleSheet.create({
         backgroundColor: COLORS.MAIN_BLUE
     },
     photo: {
-        flexBasis: 160,
+        height: 160,
+        width: 140,
         borderRadius: 20,
         backgroundColor: COLORS.LIGHTGRAY
     }

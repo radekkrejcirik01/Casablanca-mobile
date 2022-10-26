@@ -10,13 +10,11 @@ import { ReducerProps } from '@store/index.props';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
 import { useNavigation } from '@hooks/useNavigation';
-import { setBirthdayValueAction } from '@store/RegistrationReducer';
+import { setBirthdayValueAction } from '@store/UserReducer';
 import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
 
 export const BirthdayScreen = (): JSX.Element => {
-    const birthday = useSelector(
-        (state: ReducerProps) => state.registration.birthday
-    );
+    const birthday = useSelector((state: ReducerProps) => state.user.birthday);
     const dispatch = useDispatch();
 
     const { navigateTo } = useNavigation(
@@ -24,17 +22,15 @@ export const BirthdayScreen = (): JSX.Element => {
     );
 
     const continuePressed = useCallback(() => {
-        const birthdayValue = `${birthday.year}/${birthday.month}/${birthday.day}`;
-        dispatch(setBirthdayValueAction(birthdayValue));
+        const birthdayValue = `${birthday.year}-${birthday.month}-${birthday.day}`;
 
-        if (getAge(birthdayValue) >= 18) {
-            navigateTo(RegistrationStackNavigatorEnum.PhotosScreen);
-        }
-        if (getAge(birthdayValue) < 18) {
-            Alert.alert('Sorry, Casablanca is only for people older 18');
-        }
         if (!getAge(birthdayValue)) {
             Alert.alert('Sorry, invalid birthday');
+        } else if (getAge(birthdayValue) > 17) {
+            dispatch(setBirthdayValueAction(birthdayValue));
+            navigateTo(RegistrationStackNavigatorEnum.PhotosScreen);
+        } else {
+            Alert.alert('Sorry, Casablanca is only for people older 18');
         }
     }, [birthday.day, birthday.month, birthday.year, dispatch, navigateTo]);
 

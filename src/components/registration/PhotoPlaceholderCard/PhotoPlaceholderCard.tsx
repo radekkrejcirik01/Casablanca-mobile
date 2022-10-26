@@ -1,23 +1,17 @@
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import FastImage from 'react-native-fast-image';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
 import { PhotoPlaceholderCardStyle } from '@components/registration/PhotoPlaceholderCard/PhotoPlaceholderCard.style';
 import { Icon } from '@components/icon/Icon';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { PhotoPlaceholderCardProps } from '@components/registration/PhotoPlaceholderCard/PhotoPlaceholderCard.props';
-import { removePhotoAction } from '@store/RegistrationReducer';
 
 export const PhotoPlaceholderCard = ({
     onPress,
+    onRemove,
     photo
 }: PhotoPlaceholderCardProps): JSX.Element => {
-    const dispatch = useDispatch();
-
-    const removePhoto = useCallback(
-        () => dispatch(removePhotoAction(photo)),
-        [dispatch, photo]
-    );
+    const removePhoto = useCallback(() => onRemove(photo), [onRemove, photo]);
 
     return (
         <TouchableOpacity

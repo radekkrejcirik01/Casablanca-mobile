@@ -2,6 +2,8 @@ import { StyleSheet } from 'react-native';
 
 export const PhotoPlaceholderStyle = StyleSheet.create({
     containerCard: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center'
     }
 });

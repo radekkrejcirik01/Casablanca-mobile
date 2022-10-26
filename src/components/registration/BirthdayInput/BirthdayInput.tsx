@@ -19,7 +19,7 @@ import {
     setBirthdayDayAction,
     setBirthdayMonthAction,
     setBirthdayYearAction
-} from '@store/RegistrationReducer';
+} from '@store/UserReducer';
 
 export const BirthdayInput = ({
     birthday,
@@ -122,7 +122,8 @@ export const BirthdayInput = ({
             onKeyPress,
             innerRef,
             autoFocus,
-            placeholder
+            placeholder,
+            maxLength
         }: ValueInputProps): JSX.Element => (
             <Input
                 value={value}
@@ -134,7 +135,7 @@ export const BirthdayInput = ({
                 autoCorrect={false}
                 autoComplete="off"
                 keyboardAppearance="light"
-                maxLength={4}
+                maxLength={maxLength}
                 keyboardType="number-pad"
                 placeholder={placeholder}
                 viewStyle={BirthdayInputStyle.inputView}
@@ -153,6 +154,7 @@ export const BirthdayInput = ({
                 innerRef={inputYear}
                 autoFocus={yearAutoFocus}
                 placeholder="YYYY"
+                maxLength={4}
             />
             <Text style={BirthdayInputStyle.slash}>/</Text>
             <ValueInput
@@ -162,6 +164,7 @@ export const BirthdayInput = ({
                 innerRef={inputMonth}
                 autoFocus={monthAutoFocus}
                 placeholder="MM"
+                maxLength={2}
             />
             <Text style={BirthdayInputStyle.slash}>/</Text>
             <ValueInput
@@ -171,6 +174,7 @@ export const BirthdayInput = ({
                 innerRef={inputDay}
                 autoFocus={dayAutoFocus}
                 placeholder="DD"
+                maxLength={2}
             />
         </View>
     );

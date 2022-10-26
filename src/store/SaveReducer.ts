@@ -1,10 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { Save } from '@store/index.props';
+
+const initialState: Save = {
+    isVisible: false
+};
 
 export const SaveReducer = createSlice({
     name: 'save',
-    initialState: {
-        isVisible: false
-    },
+    initialState,
     reducers: {
         setSaveVisible: (state, action) => {
             state.isVisible = action.payload;

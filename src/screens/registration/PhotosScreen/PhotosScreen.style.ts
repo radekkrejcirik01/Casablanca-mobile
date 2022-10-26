@@ -6,8 +6,7 @@ export const PhotosScreenStyle = StyleSheet.create({
         marginHorizontal: 25
     },
     photoPlaceholder: {
-        marginTop: '10%',
-        paddingHorizontal: 20
+        marginTop: '10%'
     },
     continue: {
         marginTop: '15%'
