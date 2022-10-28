@@ -1,12 +1,3 @@
-export interface ResponseInterface {
-    status: string;
-    message: string;
-    data?: {
-        id: number;
-        email: string;
-    };
-}
-
 export interface RegistrationInterface {
     firstname: string;
     birthday: string;
@@ -18,7 +9,29 @@ export interface RegistrationInterface {
     password: string;
 }
 
+export interface RegistrationResponseInterface {
+    status: string;
+    message: string;
+    data?: {
+        email: string;
+    };
+}
+
 export interface LoginInterface {
     email: string;
     password: string;
+}
+
+export interface LoginResponseInterface {
+    status: string;
+    message: string;
+    data?: {
+        email: string;
+        firstname: string;
+        birthday: string;
+        photos: Array<string>;
+        tags: Array<string>;
+        gender: string;
+        showme: string;
+    };
 }

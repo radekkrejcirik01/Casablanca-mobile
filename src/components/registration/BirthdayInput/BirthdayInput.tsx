@@ -19,7 +19,7 @@ import {
     setBirthdayDayAction,
     setBirthdayMonthAction,
     setBirthdayYearAction
-} from '@store/UserReducer';
+} from '@store/BirthdayReducer';
 
 export const BirthdayInput = ({
     birthday,

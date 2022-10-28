@@ -5,12 +5,7 @@ const initialState: User = {
     token: null,
     firstname: null,
     email: null,
-    birthday: {
-        year: null,
-        month: null,
-        day: null,
-        value: null
-    },
+    birthday: null,
     photos: [],
     tags: [],
     gender: null,
@@ -31,17 +26,8 @@ export const UserReducer = createSlice({
         setEmailAction: (state, action) => {
             state.email = action.payload;
         },
-        setBirthdayYearAction: (state, action) => {
-            state.birthday.year = action.payload;
-        },
-        setBirthdayMonthAction: (state, action) => {
-            state.birthday.month = action.payload;
-        },
-        setBirthdayDayAction: (state, action) => {
-            state.birthday.day = action.payload;
-        },
-        setBirthdayValueAction: (state, action) => {
-            state.birthday.value = action.payload;
+        setBirthdayAction: (state, action) => {
+            state.birthday = action.payload;
         },
         addPhotoAction: (state, action) => {
             state.photos = [...state.photos, action.payload];
@@ -68,6 +54,10 @@ export const UserReducer = createSlice({
         setPasswordAction: (state, action) => {
             state.password = action.payload;
         },
+        setUserStateAction: (state, action) => {
+            action.payload.token = action.payload.email;
+            return action.payload;
+        },
         resetUserState: () => initialState
     }
 });
@@ -76,10 +66,7 @@ export const {
     setUserToken,
     setFirstnameAction,
     setEmailAction,
-    setBirthdayYearAction,
-    setBirthdayMonthAction,
-    setBirthdayDayAction,
-    setBirthdayValueAction,
+    setBirthdayAction,
     addPhotoAction,
     removePhotoAction,
     addTagAction,
@@ -87,6 +74,7 @@ export const {
     setGenderAction,
     setShowMeAction,
     setPasswordAction,
+    setUserStateAction,
     resetUserState
 } = UserReducer.actions;
 

@@ -14,9 +14,9 @@ import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/regi
 import { postRequest } from '@utils/Axios/Axios.service';
 import {
     LoginInterface,
-    ResponseInterface
+    LoginResponseInterface
 } from '@models/Registration/Registration.interface';
-import { setUserToken } from '@store/UserReducer';
+import { resetUserState, setUserStateAction } from '@store/UserReducer';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 
@@ -30,20 +30,21 @@ export const LoginScreen = (): JSX.Element => {
     );
 
     const loginPressed = useCallback(() => {
-        postRequest<ResponseInterface, LoginInterface>('user/login', {
+        postRequest<LoginResponseInterface, LoginInterface>('user/login', {
             email,
             password
-        }).subscribe((response) => {
+        }).subscribe((response: LoginResponseInterface) => {
             if (response?.status) {
-                dispatch(setUserToken(email));
+                dispatch(setUserStateAction(response.data));
                 PersistStorage.setItem(PersistStorageKeys.TOKEN, email).catch();
             }
         });
     }, [dispatch, email, password]);
 
     const registerPressed = useCallback(() => {
+        dispatch(resetUserState());
         navigateTo(RegistrationStackNavigatorEnum.FirstnameScreen);
-    }, [navigateTo]);
+    }, [dispatch, navigateTo]);
 
     return (
         <SafeAreaProvider>

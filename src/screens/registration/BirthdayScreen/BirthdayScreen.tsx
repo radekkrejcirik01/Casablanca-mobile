@@ -10,11 +10,11 @@ import { ReducerProps } from '@store/index.props';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
 import { useNavigation } from '@hooks/useNavigation';
-import { setBirthdayValueAction } from '@store/UserReducer';
+import { setBirthdayAction } from '@store/UserReducer';
 import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
 
 export const BirthdayScreen = (): JSX.Element => {
-    const birthday = useSelector((state: ReducerProps) => state.user.birthday);
+    const birthday = useSelector((state: ReducerProps) => state.birthday);
     const dispatch = useDispatch();
 
     const { navigateTo } = useNavigation(
@@ -27,7 +27,7 @@ export const BirthdayScreen = (): JSX.Element => {
         if (!getAge(birthdayValue)) {
             Alert.alert('Sorry, invalid birthday');
         } else if (getAge(birthdayValue) > 17) {
-            dispatch(setBirthdayValueAction(birthdayValue));
+            dispatch(setBirthdayAction(birthdayValue));
             navigateTo(RegistrationStackNavigatorEnum.PhotosScreen);
         } else {
             Alert.alert('Sorry, Casablanca is only for people older 18');

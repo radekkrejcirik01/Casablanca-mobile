@@ -2,6 +2,7 @@ import { GenderSelectEnum } from '@components/registration/GenderSelect/GenderSe
 import { ShowMeSelectEnum } from '@components/registration/ShowMeSelect/ShowMeSelect.enum';
 
 export interface ReducerProps {
+    birthday: Birthday;
     user: User;
     save: Save;
     modal: Modal;
@@ -12,7 +13,7 @@ export interface User {
     token: string;
     firstname: string;
     email: string;
-    birthday: Birthday;
+    birthday: string;
     photos: Array<string>;
     tags: Array<string>;
     gender: GenderSelectEnum;
@@ -20,11 +21,10 @@ export interface User {
     password: string;
 }
 
-interface Birthday {
+export interface Birthday {
     year: string;
     month: string;
     day: string;
-    value: string;
 }
 
 export interface Save {
