@@ -1,7 +1,6 @@
 import React, { createRef, useCallback } from 'react';
 import { Alert, TextInput } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Icon } from '@components/icon/Icon';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
@@ -44,7 +43,7 @@ export const EmailScreen = (): JSX.Element => {
     }, [email, navigateTo]);
 
     return (
-        <SafeAreaProvider>
+        <>
             <Title title="What is your email?" style={EmailScreenStyle.title} />
             <Input
                 ref={input}
@@ -55,6 +54,6 @@ export const EmailScreen = (): JSX.Element => {
                 viewStyle={EmailScreenStyle.input}
             />
             <ContinueButton onPress={continuePressed} />
-        </SafeAreaProvider>
+        </>
     );
 };

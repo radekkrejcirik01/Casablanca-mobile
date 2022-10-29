@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Title } from '@components/general/Title/Title';
 import { BirthdayScreenStyle } from '@screens/registration/BirthdayScreen/BirthdayScreen.style';
 import { BirthdayInput } from '@components/registration/BirthdayInput/BirthdayInput';
@@ -35,7 +34,7 @@ export const BirthdayScreen = (): JSX.Element => {
     }, [birthday.day, birthday.month, birthday.year, dispatch, navigateTo]);
 
     return (
-        <SafeAreaProvider>
+        <>
             <Title
                 title="When is your birthday?"
                 style={BirthdayScreenStyle.title}
@@ -45,6 +44,6 @@ export const BirthdayScreen = (): JSX.Element => {
                 style={BirthdayScreenStyle.input}
             />
             <ContinueButton onPress={continuePressed} />
-        </SafeAreaProvider>
+        </>
     );
 };

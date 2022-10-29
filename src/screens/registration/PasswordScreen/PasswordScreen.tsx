@@ -1,7 +1,6 @@
 import React, { createRef, useCallback } from 'react';
 import { Alert, TextInput } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Icon } from '@components/icon/Icon';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
@@ -62,7 +61,7 @@ export const PasswordScreen = (): JSX.Element => {
     }, [register, registration.password]);
 
     return (
-        <SafeAreaProvider>
+        <>
             <Title title="Password" style={PasswordScreenStyle.title} />
             <Input
                 ref={input}
@@ -74,6 +73,6 @@ export const PasswordScreen = (): JSX.Element => {
                 viewStyle={PasswordScreenStyle.input}
             />
             <ContinueButton onPress={continuePressed} />
-        </SafeAreaProvider>
+        </>
     );
 };

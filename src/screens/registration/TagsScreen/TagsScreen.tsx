@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 import { Title } from '@components/general/Title/Title';
 import { PlaceTags } from '@components/general/PlaceTags/PlaceTags';
@@ -40,7 +39,7 @@ export const TagsScreen = (): JSX.Element => {
     }, [tags?.length, navigateTo]);
 
     return (
-        <SafeAreaProvider>
+        <>
             <Title
                 title="What are your to-go places?"
                 style={TagsScreenStyle.title}
@@ -52,6 +51,6 @@ export const TagsScreen = (): JSX.Element => {
                 style={TagsScreenStyle.placeTags}
             />
             <ContinueButton onPress={continuePressed} />
-        </SafeAreaProvider>
+        </>
     );
 };

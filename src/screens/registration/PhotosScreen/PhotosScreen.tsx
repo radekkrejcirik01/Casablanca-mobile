@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import ImagePicker, { ImageOrVideo } from 'react-native-image-crop-picker';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Title } from '@components/general/Title/Title';
 import { PhotosScreenStyle } from '@screens/registration/PhotosScreen/PhotosScreen.style';
 import { PhotoPlaceholder } from '@components/registration/PhotoPlaceholder/PhotoPlaceholder';
@@ -44,7 +43,7 @@ export const PhotosScreen = (): JSX.Element => {
     }, [navigateTo, photos?.length]);
 
     return (
-        <SafeAreaProvider>
+        <>
             <Title
                 title="Photos for your profile"
                 style={PhotosScreenStyle.title}
@@ -60,6 +59,6 @@ export const PhotosScreen = (): JSX.Element => {
                 onPress={continuePressed}
                 style={PhotosScreenStyle.continue}
             />
-        </SafeAreaProvider>
+        </>
     );
 };

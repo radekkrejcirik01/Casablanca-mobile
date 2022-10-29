@@ -19,14 +19,16 @@ export const BirthdayReducer = createSlice({
         },
         setBirthdayDayAction: (state, action) => {
             state.day = action.payload;
-        }
+        },
+        resetBirthdayState: () => initialState
     }
 });
 
 export const {
     setBirthdayYearAction,
     setBirthdayMonthAction,
-    setBirthdayDayAction
+    setBirthdayDayAction,
+    resetBirthdayState
 } = BirthdayReducer.actions;
 
 export default BirthdayReducer.reducer;

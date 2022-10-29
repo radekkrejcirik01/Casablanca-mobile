@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { Text, View } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { LoginScreenStyle } from '@screens/login/Login/LoginScreen.style';
 import { Input } from '@components/general/Input/Input';
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
@@ -17,6 +16,7 @@ import {
     LoginResponseInterface
 } from '@models/Registration/Registration.interface';
 import { resetUserState, setUserStateAction } from '@store/UserReducer';
+import { resetBirthdayState } from '@store/BirthdayReducer';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 
@@ -42,12 +42,13 @@ export const LoginScreen = (): JSX.Element => {
     }, [dispatch, email, password]);
 
     const registerPressed = useCallback(() => {
+        dispatch(resetBirthdayState());
         dispatch(resetUserState());
         navigateTo(RegistrationStackNavigatorEnum.FirstnameScreen);
     }, [dispatch, navigateTo]);
 
     return (
-        <SafeAreaProvider>
+        <>
             <View style={LoginScreenStyle.inputView}>
                 <Input
                     placeholder="Email"
@@ -69,6 +70,6 @@ export const LoginScreen = (): JSX.Element => {
                     No account yet? Create one!
                 </Text>
             </TouchableOpacity>
-        </SafeAreaProvider>
+        </>
     );
 };
