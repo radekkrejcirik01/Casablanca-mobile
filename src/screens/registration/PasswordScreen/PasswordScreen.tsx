@@ -16,7 +16,7 @@ import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import {
     RegistrationInterface,
-    RegistrationResponseInterface
+    ResponseInterface
 } from '@models/Registration/Registration.interface';
 import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
 
@@ -36,15 +36,17 @@ export const PasswordScreen = (): JSX.Element => {
     );
 
     const register = useCallback(() => {
-        postRequest<RegistrationResponseInterface, RegistrationInterface>(
+        postRequest<ResponseInterface, RegistrationInterface>(
             'user/register',
             registration
-        ).subscribe((response: RegistrationResponseInterface) => {
-            dispatch(setUserToken(response.data.email));
-            PersistStorage.setItem(
-                PersistStorageKeys.TOKEN,
-                response.data.email
-            ).catch();
+        ).subscribe((response: ResponseInterface) => {
+            if (response?.status) {
+                dispatch(setUserToken(registration.email));
+                PersistStorage.setItem(
+                    PersistStorageKeys.TOKEN,
+                    registration.email
+                ).catch();
+            }
         });
     }, [dispatch, registration]);
 

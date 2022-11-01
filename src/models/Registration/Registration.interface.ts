@@ -1,3 +1,8 @@
+export interface ResponseInterface {
+    status: string;
+    message: string;
+}
+
 export interface RegistrationInterface {
     firstname: string;
     birthday: string;
@@ -9,20 +14,16 @@ export interface RegistrationInterface {
     password: string;
 }
 
-export interface RegistrationResponseInterface {
-    status: string;
-    message: string;
-    data?: {
-        email: string;
-    };
-}
-
 export interface LoginInterface {
     email: string;
     password: string;
 }
 
-export interface LoginResponseInterface {
+export interface UserGetInterface {
+    email: string;
+}
+
+export interface UserResponseInterface {
     status: string;
     message: string;
     data?: {

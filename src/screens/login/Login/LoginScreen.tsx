@@ -13,7 +13,7 @@ import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/regi
 import { postRequest } from '@utils/Axios/Axios.service';
 import {
     LoginInterface,
-    LoginResponseInterface
+    UserResponseInterface
 } from '@models/Registration/Registration.interface';
 import { resetUserState, setUserStateAction } from '@store/UserReducer';
 import { resetBirthdayState } from '@store/BirthdayReducer';
@@ -30,10 +30,10 @@ export const LoginScreen = (): JSX.Element => {
     );
 
     const loginPressed = useCallback(() => {
-        postRequest<LoginResponseInterface, LoginInterface>('user/login', {
+        postRequest<UserResponseInterface, LoginInterface>('user/login', {
             email,
             password
-        }).subscribe((response: LoginResponseInterface) => {
+        }).subscribe((response: UserResponseInterface) => {
             if (response?.status) {
                 dispatch(setUserStateAction(response.data));
                 PersistStorage.setItem(PersistStorageKeys.TOKEN, email).catch();

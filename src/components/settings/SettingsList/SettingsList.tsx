@@ -11,6 +11,7 @@ import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { setIsDarkMode } from '@store/ThemeReducer';
 import { useTheme } from '@hooks/useTheme';
+import THEMES from '@constants/THEMES';
 
 export const SettingsList = (): JSX.Element => {
     const { isDarkMode } = useTheme();
@@ -57,7 +58,7 @@ export const SettingsList = (): JSX.Element => {
         (value: boolean) => {
             dispatch(setIsDarkMode(value));
 
-            const mode = value ? 'dark' : 'light';
+            const mode = value ? THEMES.DARK : THEMES.LIGHT;
             PersistStorage.setItem(PersistStorageKeys.THEME, mode).catch();
         },
         [dispatch]

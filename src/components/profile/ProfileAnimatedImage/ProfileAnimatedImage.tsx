@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
-import { Animated } from 'react-native';
-import FastImage from 'react-native-fast-image';
+import { Animated, StyleProp } from 'react-native';
+import FastImage, { ImageStyle, Source } from 'react-native-fast-image';
 import { ProfileAnimatedImageStyle } from '@components/profile/ProfileAnimatedImage/ProfileAnimatedImage.style';
 import { ProfileAnimatedImageProps } from '@components/profile/ProfileAnimatedImage/ProfileAnimatedImage.props';
+import AnimatedInterpolation = Animated.AnimatedInterpolation;
 
 export const ProfileAnimatedImage = ({
     source,
@@ -10,8 +11,16 @@ export const ProfileAnimatedImage = ({
 }: ProfileAnimatedImageProps): JSX.Element => {
     const AnimatedImage = Animated.createAnimatedComponent(FastImage);
 
+    const imageSource = useMemo(
+        (): Source | number => ({ uri: source }),
+        [source]
+    );
+
     const style = useMemo(
-        () => [
+        (): (
+            | StyleProp<ImageStyle>
+            | { transform: { scale: AnimatedInterpolation }[] }
+        )[] => [
             ProfileAnimatedImageStyle.animatedImage,
             {
                 transform: [
@@ -24,10 +33,5 @@ export const ProfileAnimatedImage = ({
         [scale]
     );
 
-    return (
-        <AnimatedImage
-            source={source || require('@assets/images/profilovka.png')}
-            style={style}
-        />
-    );
+    return <AnimatedImage source={imageSource} style={style} />;
 };
