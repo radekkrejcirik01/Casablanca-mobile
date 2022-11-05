@@ -7,6 +7,7 @@ export interface ReducerProps {
     save: Save;
     modal: Modal;
     theme: Theme;
+    bottomBar: BottomBar;
 }
 
 export interface User {
@@ -38,4 +39,8 @@ export interface Modal {
 
 export interface Theme {
     isDarkMode: boolean;
+}
+
+export interface BottomBar {
+    isVisible: boolean;
 }

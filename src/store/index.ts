@@ -4,6 +4,7 @@ import UserReducer from '@store/UserReducer';
 import SaveReducer from '@store/SaveReducer';
 import ModalReducer from '@store/ModalReducer';
 import ThemeReducer from '@store/ThemeReducer';
+import BottomBarReducer from '@store/BottomBarReducer';
 
 export default configureStore({
     reducer: {
@@ -11,6 +12,7 @@ export default configureStore({
         user: UserReducer,
         save: SaveReducer,
         modal: ModalReducer,
-        theme: ThemeReducer
+        theme: ThemeReducer,
+        bottomBar: BottomBarReducer
     }
 });
