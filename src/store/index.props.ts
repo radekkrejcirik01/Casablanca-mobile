@@ -16,6 +16,7 @@ export interface User {
     birthday: string;
     photos: Array<string>;
     tags: Array<string>;
+    about: string;
     gender: GenderSelectEnum;
     showMe: ShowMeSelectEnum;
     password: string;

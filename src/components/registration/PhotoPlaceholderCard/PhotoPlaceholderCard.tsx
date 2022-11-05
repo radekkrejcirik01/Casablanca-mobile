@@ -4,19 +4,23 @@ import { TouchableOpacity } from '@components/general/TouchableOpacity/Touchable
 import { PhotoPlaceholderCardStyle } from '@components/registration/PhotoPlaceholderCard/PhotoPlaceholderCard.style';
 import { Icon } from '@components/icon/Icon';
 import { IconEnum } from '@components/icon/Icon.enum';
-import { PhotoPlaceholderCardProps } from '@components/registration/PhotoPlaceholderCard/PhotoPlaceholderCard.props';
+import {
+    PhotoPlaceholderCardDefaultProps,
+    PhotoPlaceholderCardProps
+} from '@components/registration/PhotoPlaceholderCard/PhotoPlaceholderCard.props';
 
 export const PhotoPlaceholderCard = ({
     onPress,
     onRemove,
-    photo
+    photo,
+    style
 }: PhotoPlaceholderCardProps): JSX.Element => {
     const removePhoto = useCallback(() => onRemove(photo), [onRemove, photo]);
 
     return (
         <TouchableOpacity
             onPress={onPress}
-            style={PhotoPlaceholderCardStyle.container}
+            style={[PhotoPlaceholderCardStyle.container, style]}
         >
             <FastImage
                 style={PhotoPlaceholderCardStyle.photo}
@@ -37,3 +41,5 @@ export const PhotoPlaceholderCard = ({
         </TouchableOpacity>
     );
 };
+
+PhotoPlaceholderCard.defaultProps = PhotoPlaceholderCardDefaultProps;

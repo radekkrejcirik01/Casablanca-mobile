@@ -8,6 +8,7 @@ const initialState: User = {
     birthday: null,
     photos: [],
     tags: [],
+    about: null,
     gender: null,
     showMe: null,
     password: null
@@ -45,6 +46,12 @@ export const UserReducer = createSlice({
             arr = arr.filter((tag: string) => tag !== action.payload);
             state.tags = arr;
         },
+        setTagsAction: (state, action) => {
+            state.tags = action.payload;
+        },
+        setAboutAction: (state, action) => {
+            state.about = action.payload;
+        },
         setGenderAction: (state, action) => {
             state.gender = action.payload;
         },
@@ -56,6 +63,7 @@ export const UserReducer = createSlice({
         },
         setUserStateAction: (state, action) => {
             action.payload.token = action.payload.email;
+            action.payload.about = '';
             return action.payload;
         },
         resetUserState: () => initialState
@@ -71,6 +79,8 @@ export const {
     removePhotoAction,
     addTagAction,
     removeTagAction,
+    setTagsAction,
+    setAboutAction,
     setGenderAction,
     setShowMeAction,
     setPasswordAction,

@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { Linking, View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SettingsListItem } from '@components/settings/SettingsListItem/SettingsListItem';
 import { SettingsListStyle } from '@components/settings/SettingsList/SettingsList.style';
 import { useNavigation } from '@hooks/useNavigation';
@@ -12,11 +12,13 @@ import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { setIsDarkMode } from '@store/ThemeReducer';
 import { useTheme } from '@hooks/useTheme';
 import THEMES from '@constants/THEMES';
+import { ReducerProps } from '@store/index.props';
 
 export const SettingsList = (): JSX.Element => {
-    const { isDarkMode } = useTheme();
-
+    const { showMe } = useSelector((state: ReducerProps) => state.user);
     const dispatch = useDispatch();
+
+    const { isDarkMode } = useTheme();
 
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.ProfileStack);
 
@@ -89,7 +91,7 @@ export const SettingsList = (): JSX.Element => {
             />
             <SettingsListItem
                 title="Show me"
-                description="Women"
+                description={showMe}
                 hasArrow
                 onPress={openShowMeScreen}
             />

@@ -6,7 +6,6 @@ export const TextAreaStyle = StyleSheet.create({
     },
     view: {
         paddingHorizontal: 7,
-        height: 150,
         borderWidth: 1.5,
         borderRadius: 10,
         textAlignVertical: 'top'

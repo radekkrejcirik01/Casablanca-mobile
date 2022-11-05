@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { Alert, Text } from 'react-native';
+import { Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
 import { HeaderSaveStyle } from '@components/general/HeaderSave/HeaderSave.style';
@@ -10,12 +10,10 @@ export const HeaderSave = (): JSX.Element => {
     const isVisible = useSelector(
         (state: ReducerProps) => state.save.isVisible
     );
-
     const dispatch = useDispatch();
 
     const onPress = useCallback(() => {
         dispatch(setSaveVisible(false));
-        Alert.alert('Profile has been updated 🎉');
     }, [dispatch]);
 
     const saveButton = useMemo(
