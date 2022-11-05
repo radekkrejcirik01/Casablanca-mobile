@@ -9,6 +9,8 @@ import {
     ViewStyle
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import ImagePicker, { ImageOrVideo } from 'react-native-image-crop-picker';
 import { EditScreenStyle } from '@screens/profile/edit/EditScreen/EditScreen.style';
 import { PlaceTags } from '@components/general/PlaceTags/PlaceTags';
 import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';
@@ -28,8 +30,6 @@ import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 import { InfoProfileScreen } from '@screens/general/InfoProfileScreen/InfoProfileScreen';
 import { getAge } from '@functions/getAge';
 import { PhotoHorizontalList } from '@components/edit/PhotoHorizontalList/PhotoHorizontalList';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import ImagePicker, { ImageOrVideo } from 'react-native-image-crop-picker';
 import { ImagePickerOptions } from '@screens/registration/PhotosScreen/PhotosScreen.options';
 
 export const EditScreen = (): JSX.Element => {
