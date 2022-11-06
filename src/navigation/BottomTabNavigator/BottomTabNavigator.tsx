@@ -3,6 +3,7 @@ import { Animated } from 'react-native';
 import {
     BottomTabBar,
     BottomTabBarProps,
+    BottomTabNavigationOptions,
     createBottomTabNavigator
 } from '@react-navigation/bottom-tabs';
 import { useSelector } from 'react-redux';
@@ -20,27 +21,30 @@ import {
 } from '@navigation/BottomTabNavigator/BottomTabNavigator.options';
 import { ReducerProps } from '@store/index.props';
 import { useAnimated } from '@hooks/useAnimated';
+import { BottomTabNavigatorStyle } from '@navigation/BottomTabNavigator/BottomTabNavigator.style';
+import { useGetTabBarHeight } from '@hooks/useGetTabBarHeight';
+import AnimatedValue = Animated.AnimatedValue;
 
 export const BottomTabNavigator = (): JSX.Element => {
     const TabBar = createBottomTabNavigator();
 
     const { isVisible } = useSelector((state: ReducerProps) => state.bottomBar);
 
-    const TAB_BAR_OFFSET = -100;
-
     const animatedValue = useRef(new Animated.Value(1)).current;
     const { animationCallback } = useAnimated(animatedValue);
+
+    const { onLayout, tabBarHeight } = useGetTabBarHeight();
 
     useEffect(() => {
         if (isVisible) {
             animationCallback(1);
         } else {
-            animationCallback(TAB_BAR_OFFSET);
+            animationCallback(-tabBarHeight);
         }
-    }, [animationCallback, isVisible, TAB_BAR_OFFSET]);
+    }, [animationCallback, isVisible, tabBarHeight]);
 
     const style = useMemo(
-        () => ({
+        (): { bottom: AnimatedValue } => ({
             bottom: animatedValue
         }),
         [animatedValue]
@@ -48,11 +52,23 @@ export const BottomTabNavigator = (): JSX.Element => {
 
     const tabBar = useCallback(
         (props: BottomTabBarProps) => (
-            <Animated.View style={style}>
+            <Animated.View onLayout={onLayout} style={style}>
                 <BottomTabBar {...props} />
             </Animated.View>
         ),
-        [style]
+        [onLayout, style]
+    );
+
+    const profileTabOptions = useMemo(
+        (): BottomTabNavigationOptions => ({
+            ...ProfileTabOptions,
+            tabBarStyle: [
+                BottomTabNavigatorStyle.tabBar,
+                BottomTabNavigatorStyle.tabBarProfile,
+                { marginTop: -tabBarHeight }
+            ]
+        }),
+        [tabBarHeight]
     );
 
     return (
@@ -64,7 +80,7 @@ export const BottomTabNavigator = (): JSX.Element => {
             <TabBar.Screen
                 name={BottomTabNavigatorEnum.ProfileTab}
                 component={ProfileScreen}
-                options={ProfileTabOptions}
+                options={profileTabOptions}
             />
             <TabBar.Screen
                 name={BottomTabNavigatorEnum.SwipeTab}
