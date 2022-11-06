@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState
+} from 'react';
 import {
     Animated,
     NativeScrollEvent,
@@ -21,12 +27,20 @@ export const ProfileScrollView = ({
     const [lastContentOffset, setLastContentOffset] = useState<number>(0);
     const [isScrolling, setIsScrolling] = useState<boolean>(false);
     const [isBottomBarVisible, setIsBottomBarVisible] = useState<boolean>(true);
+    const [canImageInterpolate, setCanImageInterpolate] =
+        useState<boolean>(false);
 
     const scrollY = useRef(new Animated.Value(0)).current;
+    const listRef = useRef(null);
 
     useEffect(() => {
         dispatch(setBottomBarVisible(isBottomBarVisible));
     }, [dispatch, isBottomBarVisible]);
+
+    const isScrollingDown = useCallback(
+        (offset: number, y: number) => offset > y,
+        []
+    );
 
     const onScroll = useMemo(
         (): ((event: NativeSyntheticEvent<NativeScrollEvent>) => void) =>
@@ -43,24 +57,53 @@ export const ProfileScrollView = ({
                     listener: (
                         event: NativeSyntheticEvent<NativeScrollEvent>
                     ) => {
+                        const isDown = isScrollingDown(
+                            lastContentOffset,
+                            event.nativeEvent.contentOffset.y
+                        );
+
                         if (
-                            lastContentOffset >
-                                event.nativeEvent.contentOffset.y &&
-                            event.nativeEvent.contentOffset.y < 200
+                            isDown &&
+                            event.nativeEvent.contentOffset.y <= 0 &&
+                            canImageInterpolate &&
+                            !isScrolling
                         ) {
+                            listRef.current?.scrollTo({
+                                x: 0,
+                                y: 0,
+                                animated: false
+                            });
+                            setCanImageInterpolate(false);
+                        }
+
+                        if (isDown && event.nativeEvent.contentOffset.y < 150) {
                             setIsBottomBarVisible(true);
                         } else if (
-                            lastContentOffset <
-                                event.nativeEvent.contentOffset.y &&
+                            !isDown &&
+                            event.nativeEvent.contentOffset.y >= 0 &&
                             isScrolling
                         ) {
                             setIsBottomBarVisible(false);
                         }
+
+                        if (
+                            !isDown &&
+                            event.nativeEvent.contentOffset.y > 100
+                        ) {
+                            setCanImageInterpolate(true);
+                        }
+
                         setLastContentOffset(event.nativeEvent.contentOffset.y);
                     }
                 }
             ),
-        [isScrolling, lastContentOffset, scrollY]
+        [
+            canImageInterpolate,
+            isScrolling,
+            isScrollingDown,
+            lastContentOffset,
+            scrollY
+        ]
     );
 
     const onScrollBeginDrag = () => setIsScrolling(true);
@@ -74,6 +117,7 @@ export const ProfileScrollView = ({
 
     return (
         <Animated.ScrollView
+            ref={listRef}
             showsVerticalScrollIndicator={false}
             scrollEventThrottle={16}
             onScroll={onScroll}
