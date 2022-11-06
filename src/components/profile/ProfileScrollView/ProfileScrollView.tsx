@@ -28,31 +28,39 @@ export const ProfileScrollView = ({
         dispatch(setBottomBarVisible(isBottomBarVisible));
     }, [dispatch, isBottomBarVisible]);
 
-    const onScroll = Animated.event(
-        [
-            {
-                nativeEvent: {
-                    contentOffset: { y: scrollY }
+    const onScroll = useMemo(
+        (): ((event: NativeSyntheticEvent<NativeScrollEvent>) => void) =>
+            Animated.event(
+                [
+                    {
+                        nativeEvent: {
+                            contentOffset: { y: scrollY }
+                        }
+                    }
+                ],
+                {
+                    ...animatedEventConfig,
+                    listener: (
+                        event: NativeSyntheticEvent<NativeScrollEvent>
+                    ) => {
+                        if (
+                            lastContentOffset >
+                                event.nativeEvent.contentOffset.y &&
+                            event.nativeEvent.contentOffset.y < 200
+                        ) {
+                            setIsBottomBarVisible(true);
+                        } else if (
+                            lastContentOffset <
+                                event.nativeEvent.contentOffset.y &&
+                            isScrolling
+                        ) {
+                            setIsBottomBarVisible(false);
+                        }
+                        setLastContentOffset(event.nativeEvent.contentOffset.y);
+                    }
                 }
-            }
-        ],
-        {
-            ...animatedEventConfig,
-            listener: (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-                if (
-                    lastContentOffset > event.nativeEvent.contentOffset.y &&
-                    event.nativeEvent.contentOffset.y < 200
-                ) {
-                    setIsBottomBarVisible(true);
-                } else if (
-                    lastContentOffset < event.nativeEvent.contentOffset.y &&
-                    isScrolling
-                ) {
-                    setIsBottomBarVisible(false);
-                }
-                setLastContentOffset(event.nativeEvent.contentOffset.y);
-            }
-        }
+            ),
+        [isScrolling, lastContentOffset, scrollY]
     );
 
     const onScrollBeginDrag = () => setIsScrolling(true);
