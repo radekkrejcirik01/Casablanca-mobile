@@ -25,11 +25,7 @@ export const ProfileScrollView = ({
     const scrollY = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
-        if (isBottomBarVisible) {
-            dispatch(setBottomBarVisible(true));
-        } else {
-            dispatch(setBottomBarVisible(false));
-        }
+        dispatch(setBottomBarVisible(isBottomBarVisible));
     }, [dispatch, isBottomBarVisible]);
 
     const onScroll = Animated.event(
