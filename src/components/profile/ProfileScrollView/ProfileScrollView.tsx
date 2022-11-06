@@ -18,19 +18,19 @@ export const ProfileScrollView = ({
 }: ProfileScrollViewProps): JSX.Element => {
     const dispatch = useDispatch();
 
-    const [offset, setOffset] = useState<boolean>(true);
     const [lastContentOffset, setLastContentOffset] = useState<number>(0);
     const [isScrolling, setIsScrolling] = useState<boolean>(false);
+    const [isBottomBarVisible, setIsBottomBarVisible] = useState<boolean>(true);
 
     const scrollY = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
-        if (offset) {
+        if (isBottomBarVisible) {
             dispatch(setBottomBarVisible(true));
-            return;
+        } else {
+            dispatch(setBottomBarVisible(false));
         }
-        dispatch(setBottomBarVisible(false));
-    }, [dispatch, offset]);
+    }, [dispatch, isBottomBarVisible]);
 
     const onScroll = Animated.event(
         [
@@ -47,12 +47,12 @@ export const ProfileScrollView = ({
                     lastContentOffset > event.nativeEvent.contentOffset.y &&
                     event.nativeEvent.contentOffset.y < 200
                 ) {
-                    setOffset(true);
+                    setIsBottomBarVisible(true);
                 } else if (
                     lastContentOffset < event.nativeEvent.contentOffset.y &&
                     isScrolling
                 ) {
-                    setOffset(false);
+                    setIsBottomBarVisible(false);
                 }
                 setLastContentOffset(event.nativeEvent.contentOffset.y);
             }
