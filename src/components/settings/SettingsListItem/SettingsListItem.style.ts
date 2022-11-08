@@ -3,15 +3,12 @@ import COLORS from '@constants/COLORS';
 
 export const SettingsListItemStyle = StyleSheet.create({
     touchableOpacity: {
-        paddingLeft: 10,
-        paddingRight: 20,
         alignItems: 'center',
         flexDirection: 'row'
     },
     title: {
-        paddingVertical: 14,
-        paddingLeft: 5,
         flex: 1,
+        paddingVertical: 14,
         fontSize: 16,
         color: COLORS.WHITE,
         fontWeight: '600'

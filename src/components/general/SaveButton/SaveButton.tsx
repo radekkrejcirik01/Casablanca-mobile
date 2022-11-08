@@ -2,11 +2,11 @@ import React, { useCallback, useMemo } from 'react';
 import { Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
-import { HeaderSaveStyle } from '@components/general/HeaderSave/HeaderSave.style';
+import { SaveButtonStyle } from '@components/general/SaveButton/SaveButton.style';
 import { ReducerProps } from '@store/index.props';
 import { setSaveVisible } from '@store/SaveReducer';
 
-export const HeaderSave = (): JSX.Element => {
+export const SaveButton = (): JSX.Element => {
     const isVisible = useSelector(
         (state: ReducerProps) => state.save.isVisible
     );
@@ -21,9 +21,9 @@ export const HeaderSave = (): JSX.Element => {
             isVisible ? (
                 <TouchableOpacity
                     onPress={onPress}
-                    style={HeaderSaveStyle.container}
+                    style={SaveButtonStyle.container}
                 >
-                    <Text style={HeaderSaveStyle.text}>Save</Text>
+                    <Text style={SaveButtonStyle.text}>Save</Text>
                 </TouchableOpacity>
             ) : null,
         [isVisible, onPress]

@@ -2,16 +2,15 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import {
     Alert,
     Keyboard,
-    ScrollView,
     StyleProp,
     Text,
     TouchableWithoutFeedback,
+    View,
     ViewStyle
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ImagePicker, { ImageOrVideo } from 'react-native-image-crop-picker';
-import { EditScreenStyle } from '@screens/profile/edit/EditScreen/EditScreen.style';
 import { PlaceTags } from '@components/general/PlaceTags/PlaceTags';
 import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';
 import { TextArea } from '@components/general/TextArea/TextArea';
@@ -31,8 +30,11 @@ import { InfoProfileScreen } from '@screens/general/InfoProfileScreen/InfoProfil
 import { getAge } from '@functions/getAge';
 import { PhotoHorizontalList } from '@components/edit/PhotoHorizontalList/PhotoHorizontalList';
 import { ImagePickerOptions } from '@screens/registration/PhotosScreen/PhotosScreen.options';
+import { ProfileEditStyle } from '@components/profile/ProfileEdit/ProfileEdit.style';
+import { Title } from '@components/general/Title/Title';
+import { SaveButton } from '@components/general/SaveButton/SaveButton';
 
-export const EditScreen = (): JSX.Element => {
+export const ProfileEdit = (): JSX.Element => {
     const { about, firstname, birthday, photos, tags } = useSelector(
         (state: ReducerProps) => state.user
     );
@@ -146,7 +148,7 @@ export const EditScreen = (): JSX.Element => {
         const info: CardDataProps = {
             images: photos,
             name: firstname,
-            age: getAge(birthday).toString(),
+            age: getAge(birthday)?.toString(),
             tags: tagsValue
         };
 
@@ -154,21 +156,22 @@ export const EditScreen = (): JSX.Element => {
     }, [birthday, firstname, photos, tagsValue]);
 
     return (
-        <ScrollView showsHorizontalScrollIndicator={false}>
+        <>
+            <View style={ProfileEditStyle.header}>
+                <Title title="Edit profile" />
+                <SaveButton />
+            </View>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <KeyboardAvoidingView
-                    keyboardVerticalOffset={55}
-                    style={EditScreenStyle.keyboardAvoidingView}
-                >
+                <KeyboardAvoidingView keyboardVerticalOffset={55}>
                     <PhotoHorizontalList
                         onPress={onPhotoPress}
                         onRemove={onPhotoRemove}
                         photos={photos}
                         photosNumber={4}
                     />
-                    <Text style={EditScreenStyle.title}>To go places</Text>
+                    <Text style={ProfileEditStyle.text}>To go places</Text>
                     <PlaceTags onSelect={onSelect} tags={tags} showAll />
-                    <Text style={EditScreenStyle.title}>About</Text>
+                    <Text style={ProfileEditStyle.text}>About</Text>
                     <TextArea
                         value={aboutValue}
                         onChange={onChange}
@@ -186,6 +189,6 @@ export const EditScreen = (): JSX.Element => {
                 content={modalContent}
                 onClose={onClose}
             />
-        </ScrollView>
+        </>
     );
 };

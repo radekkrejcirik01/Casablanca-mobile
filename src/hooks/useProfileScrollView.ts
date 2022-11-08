@@ -88,8 +88,9 @@ export const useProfileScrollView = (): {
                         }
 
                         if (
-                            !isDown &&
-                            event.nativeEvent.contentOffset.y > 100
+                            isDown &&
+                            event.nativeEvent.contentOffset.y > 0 &&
+                            !isScrolling
                         ) {
                             setCanImageInterpolate(true);
                         }

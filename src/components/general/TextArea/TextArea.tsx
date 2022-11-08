@@ -17,7 +17,6 @@ export const TextArea = ({
         onChange={onChange}
         inputType={InputTypeEnum.TEXT_AREA}
         multiline
-        inputStyle={TextAreaStyle.input}
         viewStyle={[TextAreaStyle.view, viewStyle]}
     />
 );

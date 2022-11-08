@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Linking, View } from 'react-native';
+import { Linking } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { SettingsListItem } from '@components/settings/SettingsListItem/SettingsListItem';
 import { SettingsListStyle } from '@components/settings/SettingsList/SettingsList.style';
@@ -72,7 +72,7 @@ export const SettingsList = (): JSX.Element => {
     }, [dispatch]);
 
     return (
-        <View style={SettingsListStyle.container}>
+        <>
             <SettingsListItem
                 title="About Casablanca"
                 hasArrow
@@ -126,6 +126,6 @@ export const SettingsList = (): JSX.Element => {
                 onPress={LogOut}
                 style={SettingsListStyle.lastItem}
             />
-        </View>
+        </>
     );
 };

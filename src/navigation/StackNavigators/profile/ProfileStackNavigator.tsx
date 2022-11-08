@@ -2,7 +2,6 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ParamListBase } from '@react-navigation/native';
 import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/ProfileStackNavigator.enum';
-import { SettingsScreen } from '@screens/profile/settings/SettingsScreen/SettingsScreen';
 import { NavigationScreenHeader } from '@navigation/StackNavigators/StackNavigator.options';
 import { DistanceScreen } from '@screens/profile/settings/DistanceScreen/DistanceScreen';
 import {
@@ -12,9 +11,7 @@ import {
     CommunityRulesTitle,
     DeleteAccountTitle,
     DistanceTitle,
-    EditOptions,
     HelpCenterTitle,
-    SettingsOptions,
     ShowMeTitle
 } from '@navigation/StackNavigators/profile/ProfileStackNavigator.options';
 import { AboutScreen } from '@screens/profile/settings/AboutScreen/AboutScreen';
@@ -23,23 +20,12 @@ import { CommunityRulesScreen } from '@screens/profile/settings/CommunityRulesSc
 import { AccountScreen } from '@screens/profile/settings/AccountScreen/AccountScreen';
 import { ChangePasswordScreen } from '@screens/profile/settings/ChangePasswordScreen/ChangePasswordScreen';
 import { DeleteAccountScreen } from '@screens/profile/settings/DeleteAccountScreen/DeleteAccountScreen';
-import { EditScreen } from '@screens/profile/edit/EditScreen/EditScreen';
 import { ShowMeScreen } from '@screens/profile/settings/ShowMeScreen/ShowMeScreen';
 
 const Profile = createStackNavigator<ParamListBase>();
 
 export const ProfileStackNavigator = (): JSX.Element => (
     <Profile.Navigator>
-        <Profile.Screen
-            name={ProfileStackNavigatorEnum.SettingsScreen}
-            component={SettingsScreen}
-            options={{ ...NavigationScreenHeader, ...SettingsOptions }}
-        />
-        <Profile.Screen
-            name={ProfileStackNavigatorEnum.EditScreen}
-            component={EditScreen}
-            options={{ ...NavigationScreenHeader, ...EditOptions }}
-        />
         <Profile.Screen
             name={ProfileStackNavigatorEnum.AboutScreen}
             component={AboutScreen}

@@ -1,20 +1,5 @@
 import React from 'react';
 import { StackNavigationOptions } from '@react-navigation/stack';
-import { HeaderSave } from '@components/general/HeaderSave/HeaderSave';
-import { StackNavigatorStyle } from '@navigation/StackNavigators/StackNavigator.style';
-
-export const SettingsOptions: StackNavigationOptions = {
-    headerTitle: 'Settings',
-    headerStyle: [
-        StackNavigatorStyle.navigationScreen,
-        StackNavigatorStyle.bottomBorder
-    ]
-};
-
-export const EditOptions: StackNavigationOptions = {
-    headerTitle: 'Edit your profile',
-    headerRight: () => <HeaderSave />
-};
 
 export const AboutTitle: StackNavigationOptions = {
     headerTitle: 'About'

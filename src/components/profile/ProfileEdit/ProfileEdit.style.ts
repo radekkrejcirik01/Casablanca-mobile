@@ -1,11 +1,14 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const EditScreenStyle = StyleSheet.create({
-    keyboardAvoidingView: {
-        padding: 15
+export const ProfileEditStyle = StyleSheet.create({
+    header: {
+        marginBottom: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
-    title: {
+    text: {
         marginTop: 20,
         marginBottom: 25,
         fontSize: 15,

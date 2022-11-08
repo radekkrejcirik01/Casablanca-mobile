@@ -10,7 +10,11 @@ export const PhotoHorizontalList = ({
     photos,
     photosNumber
 }: PhotoHorizontalListProps): JSX.Element => (
-    <ScrollView horizontal style={PhotoHorizontalListStyle.container}>
+    <ScrollView
+        horizontal
+        style={PhotoHorizontalListStyle.container}
+        showsHorizontalScrollIndicator={false}
+    >
         {[...Array(photosNumber).keys()].map((value: number) => (
             <PhotoPlaceholderCard
                 key={value}
