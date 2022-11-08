@@ -66,8 +66,7 @@ export const useProfileScrollView = (): {
                         if (
                             isDown &&
                             event.nativeEvent.contentOffset.y <= 0 &&
-                            canImageInterpolate &&
-                            !isScrolling
+                            canImageInterpolate
                         ) {
                             ref.current?.scrollTo({
                                 x: 0,
