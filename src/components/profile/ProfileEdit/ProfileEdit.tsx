@@ -157,12 +157,12 @@ export const ProfileEdit = (): JSX.Element => {
 
     return (
         <>
-            <View style={ProfileEditStyle.header}>
-                <Title title="Edit profile" />
-                <SaveButton />
-            </View>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <KeyboardAvoidingView keyboardVerticalOffset={55}>
+                    <View style={ProfileEditStyle.header}>
+                        <Title title="Edit profile" />
+                        <SaveButton />
+                    </View>
                     <PhotoHorizontalList
                         onPress={onPhotoPress}
                         onRemove={onPhotoRemove}

@@ -3,7 +3,8 @@ import COLORS from '@constants/COLORS';
 
 export const SettingsListStyle = StyleSheet.create({
     lastItem: {
-        marginTop: 150,
+        marginTop: 100,
+        marginBottom: 50,
         borderColor: COLORS.LIGHTGRAY_100
     }
 });

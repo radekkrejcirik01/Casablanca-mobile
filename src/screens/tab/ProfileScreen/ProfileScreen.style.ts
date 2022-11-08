@@ -21,10 +21,11 @@ export const ProfileScreenStyle = StyleSheet.create({
         fontWeight: 'bold'
     },
     tagsView: {
+        height: 150,
         marginTop: 20
     },
     underScroll: {
-        marginTop: 200,
+        marginTop: 100,
         paddingHorizontal: 15
     }
 });
