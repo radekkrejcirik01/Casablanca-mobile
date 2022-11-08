@@ -15,11 +15,13 @@ export const PhotoPlaceholderCard = ({
     photo,
     style
 }: PhotoPlaceholderCardProps): JSX.Element => {
+    const pressPhoto = useCallback(() => onPress(photo), [onPress, photo]);
+
     const removePhoto = useCallback(() => onRemove(photo), [onRemove, photo]);
 
     return (
         <TouchableOpacity
-            onPress={onPress}
+            onPress={pressPhoto}
             style={[PhotoPlaceholderCardStyle.container, style]}
         >
             <FastImage

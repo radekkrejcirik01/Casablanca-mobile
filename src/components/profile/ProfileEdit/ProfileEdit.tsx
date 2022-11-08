@@ -10,18 +10,12 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import ImagePicker, { ImageOrVideo } from 'react-native-image-crop-picker';
 import { PlaceTags } from '@components/general/PlaceTags/PlaceTags';
 import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';
 import { TextArea } from '@components/general/TextArea/TextArea';
 import { setSaveVisible } from '@store/SaveReducer';
 import { ReducerProps } from '@store/index.props';
-import {
-    addPhotoAction,
-    removePhotoAction,
-    setAboutAction,
-    setTagsAction
-} from '@store/UserReducer';
+import { setAboutAction, setTagsAction } from '@store/UserReducer';
 import { isArrayEqual } from '@functions/checking-functions';
 import { CheckProfileButton } from '@components/edit/CheckProfileButton/CheckProfileButton';
 import { Modal } from '@components/general/Modal/Modal';
@@ -29,10 +23,10 @@ import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 import { InfoProfileScreen } from '@screens/general/InfoProfileScreen/InfoProfileScreen';
 import { getAge } from '@functions/getAge';
 import { PhotoHorizontalList } from '@components/edit/PhotoHorizontalList/PhotoHorizontalList';
-import { ImagePickerOptions } from '@screens/registration/PhotosScreen/PhotosScreen.options';
 import { ProfileEditStyle } from '@components/profile/ProfileEdit/ProfileEdit.style';
 import { Title } from '@components/general/Title/Title';
 import { SaveButton } from '@components/general/SaveButton/SaveButton';
+import { usePhotoPicker } from '@hooks/usePhotoPicker';
 
 export const ProfileEdit = (): JSX.Element => {
     const { about, firstname, birthday, photos, tags } = useSelector(
@@ -43,12 +37,14 @@ export const ProfileEdit = (): JSX.Element => {
     );
     const dispatch = useDispatch();
 
+    const { bottom } = useSafeAreaInsets();
+
+    const { onPhotoPress, onPhotoRemove } = usePhotoPicker();
+
     const [tagsValue, setTagsValue] = useState<Array<string>>(tags);
     const [aboutValue, setAboutValue] = useState<string>(about);
 
     const [modalVisible, setModalVisible] = useState<boolean>(false);
-
-    const { bottom } = useSafeAreaInsets();
 
     const saveTags = useCallback(() => {
         dispatch(setTagsAction(tagsValue));
@@ -76,19 +72,6 @@ export const ProfileEdit = (): JSX.Element => {
             }
         }
     }, [about, aboutValue, isVisible, saveAbout, saveTags, tags, tagsValue]);
-
-    const onPhotoPress = useCallback(() => {
-        ImagePicker.openPicker(ImagePickerOptions).then(
-            (image: ImageOrVideo) => {
-                dispatch(addPhotoAction(image.path));
-            }
-        );
-    }, [dispatch]);
-
-    const onPhotoRemove = useCallback(
-        (photo: string) => dispatch(removePhotoAction(photo)),
-        [dispatch]
-    );
 
     const check = useCallback(
         (aboutString: string, tagsArray: Array<string>) => {

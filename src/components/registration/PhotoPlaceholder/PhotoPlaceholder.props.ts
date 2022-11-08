@@ -1,7 +1,7 @@
 import { StyleProp, ViewStyle } from 'react-native';
 
 export interface PhotoPlaceholderProps {
-    onPress: () => void;
+    onPress: (photo: string) => void;
     onRemove: (photo: string) => void;
     photos: Array<string>;
     photosNumber: number;

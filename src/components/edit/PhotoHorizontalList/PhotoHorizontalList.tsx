@@ -20,7 +20,7 @@ export const PhotoHorizontalList = ({
                 key={value}
                 onPress={onPress}
                 onRemove={onRemove}
-                photo={photos[value]}
+                photo={photos[value] || null}
                 style={PhotoHorizontalListStyle.photoPlaceholderCard}
             />
         ))}

@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import { Alert } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import ImagePicker, { ImageOrVideo } from 'react-native-image-crop-picker';
+import { useSelector } from 'react-redux';
 import { Title } from '@components/general/Title/Title';
 import { PhotosScreenStyle } from '@screens/registration/PhotosScreen/PhotosScreen.style';
 import { PhotoPlaceholder } from '@components/registration/PhotoPlaceholder/PhotoPlaceholder';
@@ -9,30 +8,17 @@ import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavig
 import { useNavigation } from '@hooks/useNavigation';
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
 import { ReducerProps } from '@store/index.props';
-import { addPhotoAction, removePhotoAction } from '@store/UserReducer';
 import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
-import { ImagePickerOptions } from '@screens/registration/PhotosScreen/PhotosScreen.options';
+import { usePhotoPicker } from '@hooks/usePhotoPicker';
 
 export const PhotosScreen = (): JSX.Element => {
     const photos = useSelector((state: ReducerProps) => state.user.photos);
-    const dispatch = useDispatch();
 
     const { navigateTo } = useNavigation(
         RootStackNavigatorEnum.RegistrationStack
     );
 
-    const onPress = useCallback(() => {
-        ImagePicker.openPicker(ImagePickerOptions).then(
-            (image: ImageOrVideo) => {
-                dispatch(addPhotoAction(image.path));
-            }
-        );
-    }, [dispatch]);
-
-    const onRemove = useCallback(
-        (photo: string) => dispatch(removePhotoAction(photo)),
-        [dispatch]
-    );
+    const { onPhotoPress, onPhotoRemove } = usePhotoPicker();
 
     const continuePressed = useCallback(() => {
         if (photos?.length) {
@@ -49,8 +35,8 @@ export const PhotosScreen = (): JSX.Element => {
                 style={PhotosScreenStyle.title}
             />
             <PhotoPlaceholder
-                onPress={onPress}
-                onRemove={onRemove}
+                onPress={onPhotoPress}
+                onRemove={onPhotoRemove}
                 photos={photos}
                 photosNumber={4}
                 style={PhotosScreenStyle.photoPlaceholder}

@@ -1,7 +1,7 @@
 import { StyleProp, ViewStyle } from 'react-native';
 
 export interface PhotoPlaceholderCardProps {
-    onPress: () => void;
+    onPress: (photo: string) => void;
     onRemove: (photo: string) => void;
     photo: string;
     style?: StyleProp<ViewStyle>;
