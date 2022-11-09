@@ -5,29 +5,36 @@ import { TouchableOpacity } from '@components/general/TouchableOpacity/Touchable
 import { SaveButtonStyle } from '@components/general/SaveButton/SaveButton.style';
 import { ReducerProps } from '@store/index.props';
 import { setSaveVisible } from '@store/SaveReducer';
+import {
+    SaveButtonDefaultProps,
+    SaveButtonProps
+} from '@components/general/SaveButton/SaveButton.props';
 
-export const SaveButton = (): JSX.Element => {
+export const SaveButton = ({ onPress }: SaveButtonProps): JSX.Element => {
     const isVisible = useSelector(
         (state: ReducerProps) => state.save.isVisible
     );
     const dispatch = useDispatch();
 
-    const onPress = useCallback(() => {
+    const onPressButton = useCallback(() => {
+        onPress();
         dispatch(setSaveVisible(false));
-    }, [dispatch]);
+    }, [dispatch, onPress]);
 
     const saveButton = useMemo(
         (): JSX.Element =>
             isVisible ? (
                 <TouchableOpacity
-                    onPress={onPress}
+                    onPress={onPressButton}
                     style={SaveButtonStyle.container}
                 >
                     <Text style={SaveButtonStyle.text}>Save</Text>
                 </TouchableOpacity>
             ) : null,
-        [isVisible, onPress]
+        [isVisible, onPressButton]
     );
 
     return saveButton;
 };
+
+SaveButton.defaultProps = SaveButtonDefaultProps;

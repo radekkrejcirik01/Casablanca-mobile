@@ -1,20 +1,17 @@
-import { useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useCallback, useMemo, useState } from 'react';
 import ImagePicker, {
     ImageOrVideo,
     Options
 } from 'react-native-image-crop-picker';
-import {
-    addPhotoAction,
-    removePhotoAction,
-    replacePhotoAction
-} from '@store/UserReducer';
 
-export const usePhotoPicker = (): {
+export const usePhotoPicker = (
+    photos: Array<string>
+): {
     onPhotoPress: (photo: string) => void;
     onPhotoRemove: (photo: string) => void;
+    photosValue: Array<string>;
 } => {
-    const dispatch = useDispatch();
+    const [photosValue, setPhotosValue] = useState<Array<string>>(photos);
 
     const ImagePickerOptions = useMemo(
         (): Options => ({
@@ -27,29 +24,32 @@ export const usePhotoPicker = (): {
     );
 
     const onPhotoPress = useCallback(
-        (photo: string) => {
+        (value: string) => {
             ImagePicker.openPicker(ImagePickerOptions)
                 .then((image: ImageOrVideo) => {
-                    if (photo) {
-                        dispatch(
-                            replacePhotoAction({
-                                photo1: photo,
-                                photo2: image.path
-                            })
+                    if (value) {
+                        const array = photosValue.map((item: string) =>
+                            item === value ? image.path : item
                         );
+
+                        setPhotosValue(array);
                     } else {
-                        dispatch(addPhotoAction(image.path));
+                        setPhotosValue([...photosValue, image.path]);
                     }
                 })
                 .catch(() => {});
         },
-        [dispatch, ImagePickerOptions]
+        [ImagePickerOptions, photosValue]
     );
 
     const onPhotoRemove = useCallback(
-        (photo: string) => dispatch(removePhotoAction(photo)),
-        [dispatch]
+        (photo: string) => {
+            let arr: Array<string> = photosValue;
+            arr = arr.filter((value: string) => value !== photo);
+            setPhotosValue(arr);
+        },
+        [photosValue]
     );
 
-    return { onPhotoPress, onPhotoRemove };
+    return { onPhotoPress, onPhotoRemove, photosValue };
 };

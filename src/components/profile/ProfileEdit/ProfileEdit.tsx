@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import {
     Alert,
     Keyboard,
@@ -17,63 +17,32 @@ import { setSaveVisible } from '@store/SaveReducer';
 import { ReducerProps } from '@store/index.props';
 import { setAboutAction, setTagsAction } from '@store/UserReducer';
 import { isArrayEqual } from '@functions/checking-functions';
-import { CheckProfileButton } from '@components/edit/CheckProfileButton/CheckProfileButton';
+import { CheckProfileButton } from '@components/profile/CheckProfileButton/CheckProfileButton';
 import { Modal } from '@components/general/Modal/Modal';
 import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 import { InfoProfileScreen } from '@screens/general/InfoProfileScreen/InfoProfileScreen';
 import { getAge } from '@functions/getAge';
-import { PhotoHorizontalList } from '@components/edit/PhotoHorizontalList/PhotoHorizontalList';
+import { PhotoHorizontalList } from '@components/profile/PhotoHorizontalList/PhotoHorizontalList';
 import { ProfileEditStyle } from '@components/profile/ProfileEdit/ProfileEdit.style';
 import { Title } from '@components/general/Title/Title';
 import { SaveButton } from '@components/general/SaveButton/SaveButton';
-import { usePhotoPicker } from '@hooks/usePhotoPicker';
+import { PhotoEdit } from '@components/profile/PhotoEdit/PhotoEdit';
 
 export const ProfileEdit = (): JSX.Element => {
     const { about, firstname, birthday, photos, tags } = useSelector(
         (state: ReducerProps) => state.user
     );
-    const isVisible = useSelector(
-        (state: ReducerProps) => state.save.isVisible
-    );
     const dispatch = useDispatch();
 
     const { bottom } = useSafeAreaInsets();
-
-    const { onPhotoPress, onPhotoRemove } = usePhotoPicker();
 
     const [tagsValue, setTagsValue] = useState<Array<string>>(tags);
     const [aboutValue, setAboutValue] = useState<string>(about);
 
     const [modalVisible, setModalVisible] = useState<boolean>(false);
+    const [modalContent, setModalContent] = useState<JSX.Element>();
 
-    const saveTags = useCallback(() => {
-        dispatch(setTagsAction(tagsValue));
-    }, [dispatch, tagsValue]);
-
-    const saveAbout = useCallback(() => {
-        dispatch(setAboutAction(aboutValue));
-    }, [dispatch, aboutValue]);
-
-    useEffect(() => {
-        dispatch(setSaveVisible(false));
-    }, [dispatch]);
-
-    useEffect(() => {
-        if (!isVisible) {
-            if (!tagsValue?.length) {
-                Alert.alert('Please select at least one tag');
-                return;
-            }
-            if (!isArrayEqual(tagsValue, tags)) {
-                saveTags();
-            }
-            if (aboutValue !== about) {
-                saveAbout();
-            }
-        }
-    }, [about, aboutValue, isVisible, saveAbout, saveTags, tags, tagsValue]);
-
-    const check = useCallback(
+    const checkSaveVisible = useCallback(
         (aboutString: string, tagsArray: Array<string>) => {
             if (aboutString !== about || !isArrayEqual(tagsArray, tags)) {
                 dispatch(setSaveVisible(true));
@@ -83,6 +52,32 @@ export const ProfileEdit = (): JSX.Element => {
         },
         [about, dispatch, tags]
     );
+
+    const saveTags = useCallback(() => {
+        dispatch(setTagsAction(tagsValue));
+    }, [dispatch, tagsValue]);
+
+    const saveAbout = useCallback(() => {
+        dispatch(setAboutAction(aboutValue));
+    }, [dispatch, aboutValue]);
+
+    const onPressSaveButton = useCallback(() => {
+        if (!tagsValue?.length) {
+            Alert.alert('Please select at least one tag');
+            return;
+        }
+        if (!isArrayEqual(tagsValue, tags)) {
+            saveTags();
+        }
+        if (aboutValue !== about) {
+            saveAbout();
+        }
+    }, [about, aboutValue, saveAbout, saveTags, tags, tagsValue]);
+
+    const openPhotoEdit = useCallback(() => {
+        setModalVisible(true);
+        setModalContent(<PhotoEdit photos={photos} />);
+    }, [photos]);
 
     const onSelect = useCallback(
         (newTag: string) => {
@@ -95,18 +90,18 @@ export const ProfileEdit = (): JSX.Element => {
                 setTagsValue(arr);
             }
 
-            check(aboutValue, arr);
+            checkSaveVisible(aboutValue, arr);
         },
-        [aboutValue, check, tagsValue]
+        [aboutValue, checkSaveVisible, tagsValue]
     );
 
-    const onChange = useCallback(
+    const onChangeTextArea = useCallback(
         (value: string) => {
             setAboutValue(value);
 
-            check(value, tagsValue);
+            checkSaveVisible(value, tagsValue);
         },
-        [check, tagsValue]
+        [checkSaveVisible, tagsValue]
     );
 
     const textAreaViewStyle = useMemo(
@@ -114,20 +109,9 @@ export const ProfileEdit = (): JSX.Element => {
         [bottom]
     );
 
-    const onPress = () => {
-        setModalVisible(true);
-    };
+    const onCloseModal = () => setModalVisible(false);
 
-    const checkProfileButtonStyle = useMemo(
-        (): StyleProp<ViewStyle> => ({ marginTop: 20 + bottom }),
-        [bottom]
-    );
-
-    const onClose = () => {
-        setModalVisible(false);
-    };
-
-    const modalContent = useMemo((): JSX.Element => {
+    const InfoModalContent = useCallback((): JSX.Element => {
         const info: CardDataProps = {
             images: photos,
             name: firstname,
@@ -135,8 +119,18 @@ export const ProfileEdit = (): JSX.Element => {
             tags: tagsValue
         };
 
-        return <InfoProfileScreen onClose={onClose} info={info} />;
+        return <InfoProfileScreen onClose={onCloseModal} info={info} />;
     }, [birthday, firstname, photos, tagsValue]);
+
+    const onCheckProfile = () => {
+        setModalVisible(true);
+        setModalContent(<InfoModalContent />);
+    };
+
+    const checkProfileButtonStyle = useMemo(
+        (): StyleProp<ViewStyle> => ({ marginTop: 20 + bottom }),
+        [bottom]
+    );
 
     return (
         <>
@@ -144,11 +138,10 @@ export const ProfileEdit = (): JSX.Element => {
                 <KeyboardAvoidingView keyboardVerticalOffset={55}>
                     <View style={ProfileEditStyle.header}>
                         <Title title="Edit profile" />
-                        <SaveButton />
+                        <SaveButton onPress={onPressSaveButton} />
                     </View>
                     <PhotoHorizontalList
-                        onPress={onPhotoPress}
-                        onRemove={onPhotoRemove}
+                        onPress={openPhotoEdit}
                         photos={photos}
                         photosNumber={4}
                     />
@@ -157,20 +150,20 @@ export const ProfileEdit = (): JSX.Element => {
                     <Text style={ProfileEditStyle.text}>About</Text>
                     <TextArea
                         value={aboutValue}
-                        onChange={onChange}
+                        onChange={onChangeTextArea}
                         viewStyle={textAreaViewStyle}
                     />
                 </KeyboardAvoidingView>
             </TouchableWithoutFeedback>
             <CheckProfileButton
-                onPress={onPress}
+                onPress={onCheckProfile}
                 style={checkProfileButtonStyle}
             />
             <Modal
                 isVisible={modalVisible}
                 backdropOpacity={0.1}
                 content={modalContent}
-                onClose={onClose}
+                onClose={onCloseModal}
             />
         </>
     );

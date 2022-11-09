@@ -1,4 +1,5 @@
 import React from 'react';
+import { SafeAreaView } from 'react-native';
 import ModalComponent from 'react-native-modal';
 import { ModalProps } from '@components/general/Modal/Modal.props';
 import { ModalStyle } from '@components/general/Modal/Modal.style';
@@ -23,6 +24,6 @@ export const Modal = ({
         style={ModalStyle.container}
         {...props}
     >
-        {content}
+        <SafeAreaView style={ModalStyle.view}>{content}</SafeAreaView>
     </ModalComponent>
 );

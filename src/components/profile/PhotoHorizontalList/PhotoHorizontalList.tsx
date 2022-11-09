@@ -1,12 +1,11 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
 import { PhotoPlaceholderCard } from '@components/registration/PhotoPlaceholderCard/PhotoPlaceholderCard';
-import { PhotoHorizontalListStyle } from '@components/edit/PhotoHorizontalList/PhotoHorizontalList.style';
-import { PhotoHorizontalListProps } from '@components/edit/PhotoHorizontalList/PhotoHorizontalList.props';
+import { PhotoHorizontalListStyle } from '@components/profile/PhotoHorizontalList/PhotoHorizontalList.style';
+import { PhotoHorizontalListProps } from '@components/profile/PhotoHorizontalList/PhotoHorizontalList.props';
 
 export const PhotoHorizontalList = ({
     onPress,
-    onRemove,
     photos,
     photosNumber
 }: PhotoHorizontalListProps): JSX.Element => (
@@ -19,8 +18,8 @@ export const PhotoHorizontalList = ({
             <PhotoPlaceholderCard
                 key={value}
                 onPress={onPress}
-                onRemove={onRemove}
                 photo={photos[value] || null}
+                removable={false}
                 style={PhotoHorizontalListStyle.photoPlaceholderCard}
             />
         ))}

@@ -23,8 +23,7 @@ export const useProfileScrollView = (): {
     const [lastContentOffset, setLastContentOffset] = useState<number>(0);
     const [isScrolling, setIsScrolling] = useState<boolean>(false);
     const [isBottomBarVisible, setIsBottomBarVisible] = useState<boolean>(true);
-    const [canImageInterpolate, setCanImageInterpolate] =
-        useState<boolean>(false);
+    const [stopWhenUp, setStopWhenUp] = useState<boolean>(false);
 
     const scrollY = useRef(new Animated.Value(0)).current;
     const ref = useRef(null);
@@ -64,16 +63,19 @@ export const useProfileScrollView = (): {
                         );
 
                         if (
-                            isDown &&
-                            event.nativeEvent.contentOffset.y <= 0 &&
-                            canImageInterpolate
+                            stopWhenUp &&
+                            event.nativeEvent.contentOffset.y <= 0
                         ) {
                             ref.current?.scrollTo({
                                 x: 0,
-                                y: 0,
+                                y: event.nativeEvent.contentOffset.y,
                                 animated: false
                             });
-                            setCanImageInterpolate(false);
+                            setStopWhenUp(false);
+                        }
+
+                        if (event.nativeEvent.contentOffset.y > 200) {
+                            setStopWhenUp(true);
                         }
 
                         if (isDown && event.nativeEvent.contentOffset.y < 150) {
@@ -86,25 +88,11 @@ export const useProfileScrollView = (): {
                             setIsBottomBarVisible(false);
                         }
 
-                        if (
-                            isDown &&
-                            event.nativeEvent.contentOffset.y > 0 &&
-                            !isScrolling
-                        ) {
-                            setCanImageInterpolate(true);
-                        }
-
                         setLastContentOffset(event.nativeEvent.contentOffset.y);
                     }
                 }
             ),
-        [
-            canImageInterpolate,
-            isScrolling,
-            isScrollingDown,
-            lastContentOffset,
-            scrollY
-        ]
+        [isScrolling, isScrollingDown, lastContentOffset, scrollY, stopWhenUp]
     );
 
     const onScrollBeginDrag = () => setIsScrolling(true);

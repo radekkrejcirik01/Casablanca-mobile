@@ -13,6 +13,7 @@ export const PhotoPlaceholderCard = ({
     onPress,
     onRemove,
     photo,
+    removable,
     style
 }: PhotoPlaceholderCardProps): JSX.Element => {
     const pressPhoto = useCallback(() => onPress(photo), [onPress, photo]);
@@ -28,7 +29,7 @@ export const PhotoPlaceholderCard = ({
                 style={PhotoPlaceholderCardStyle.photo}
                 source={{ uri: photo }}
             />
-            {photo && (
+            {photo && removable && (
                 <TouchableOpacity
                     style={PhotoPlaceholderCardStyle.closeTouchableOpacity}
                     onPress={removePhoto}

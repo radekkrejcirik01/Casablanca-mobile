@@ -30,17 +30,8 @@ export const UserReducer = createSlice({
         setBirthdayAction: (state, action) => {
             state.birthday = action.payload;
         },
-        addPhotoAction: (state, action) => {
-            state.photos = [...state.photos, action.payload];
-        },
-        replacePhotoAction: (state, action) => {
-            const index = state.photos.indexOf(action.payload.photo1);
-            state.photos[index] = action.payload.photo2;
-        },
-        removePhotoAction: (state, action) => {
-            let arr: Array<string> = state.photos;
-            arr = arr.filter((photo: string) => photo !== action.payload);
-            state.photos = arr;
+        setPhotosAction: (state, action) => {
+            state.photos = action.payload;
         },
         addTagAction: (state, action) => {
             state.tags = [...state.tags, action.payload];
@@ -79,9 +70,7 @@ export const {
     setFirstnameAction,
     setEmailAction,
     setBirthdayAction,
-    addPhotoAction,
-    replacePhotoAction,
-    removePhotoAction,
+    setPhotosAction,
     addTagAction,
     removeTagAction,
     setTagsAction,

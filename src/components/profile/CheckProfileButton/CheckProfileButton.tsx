@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { CheckProfileButtonStyle } from '@components/edit/CheckProfileButton/CheckProfileButton.style';
+import { CheckProfileButtonStyle } from '@components/profile/CheckProfileButton/CheckProfileButton.style';
 import {
     CheckProfileButtonDefaultProps,
     CheckProfileButtonProps
-} from '@components/edit/CheckProfileButton/CheckProfileButton.props';
+} from '@components/profile/CheckProfileButton/CheckProfileButton.props';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
 
 export const CheckProfileButton = ({
