@@ -19,6 +19,8 @@ export const FiltersList = (): JSX.Element => {
         navigateTo(ProfileStackNavigatorEnum.ShowMeScreen);
     }, [navigateTo]);
 
+    const toggleTags = (value: boolean) => {};
+
     return (
         <>
             <ListItem
@@ -32,6 +34,11 @@ export const FiltersList = (): JSX.Element => {
                 description={showMe}
                 hasArrow
                 onPress={openShowMeScreen}
+            />
+            <ListItem
+                title="Filter by tags"
+                hasSwitch
+                toggleSwitch={toggleTags}
             />
         </>
     );
