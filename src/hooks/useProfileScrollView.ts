@@ -64,11 +64,11 @@ export const useProfileScrollView = (): {
 
                         if (
                             stopWhenUp &&
-                            event.nativeEvent.contentOffset.y <= 0
+                            event.nativeEvent.contentOffset.y <= 2
                         ) {
                             ref.current?.scrollTo({
                                 x: 0,
-                                y: event.nativeEvent.contentOffset.y,
+                                y: lastContentOffset,
                                 animated: false
                             });
                             setStopWhenUp(false);
