@@ -3,10 +3,12 @@ import COLORS from '@constants/COLORS';
 
 export const ProfileEditStyle = StyleSheet.create({
     header: {
-        marginBottom: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
+    },
+    photoHorizontalList: {
+        marginTop: 20
     },
     text: {
         marginTop: 20,

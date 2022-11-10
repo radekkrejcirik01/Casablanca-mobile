@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { PhotoPlaceholder } from '@components/registration/PhotoPlaceholder/PhotoPlaceholder';
@@ -10,31 +10,44 @@ import { SaveButton } from '@components/general/SaveButton/SaveButton';
 import { isArrayEqual } from '@functions/checking-functions';
 import { setSaveVisible } from '@store/SaveReducer';
 import { setPhotosAction } from '@store/UserReducer';
+import { DoneButton } from '@components/general/DoneButton/DoneButton';
+import { PhotoEditProps } from '@components/profile/PhotoEdit/PhotoEdit.props';
 
-export const PhotoEdit = ({
-    photos
-}: {
-    photos: Array<string>;
-}): JSX.Element => {
+export const PhotoEdit = ({ photos, onClose }: PhotoEditProps): JSX.Element => {
     const dispatch = useDispatch();
 
     const { onPhotoPress, onPhotoRemove, photosValue } = usePhotoPicker(photos);
 
+    const [isDoneVisible, setIsDoneVisible] = useState<boolean>(true);
+
     useEffect(() => {
         if (!isArrayEqual(photosValue, photos)) {
             dispatch(setSaveVisible(true));
+            setIsDoneVisible(false);
         }
     }, [dispatch, photos, photosValue]);
 
     const onPressSaveButton = useCallback(() => {
         dispatch(setPhotosAction(photosValue));
-    }, [dispatch, photosValue]);
+        onClose();
+    }, [dispatch, onClose, photosValue]);
+
+    const onPressDoneButton = useCallback(() => {
+        onClose();
+    }, [onClose]);
+
+    const doneButton = useMemo(
+        (): JSX.Element =>
+            isDoneVisible && <DoneButton onPress={onPressDoneButton} />,
+        [isDoneVisible, onPressDoneButton]
+    );
 
     return (
         <Screen style={PhotoEditStyle.view}>
             <View style={PhotoEditStyle.header}>
-                <Title title="Choose photos" />
+                <Title title="Profile photos" />
                 <SaveButton onPress={onPressSaveButton} />
+                {doneButton}
             </View>
             <PhotoPlaceholder
                 onPress={onPhotoPress}

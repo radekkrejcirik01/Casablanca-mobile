@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const SettingsListItemStyle = StyleSheet.create({
+export const ListItemStyle = StyleSheet.create({
     touchableOpacity: {
-        alignItems: 'center',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     title: {
         flex: 1,

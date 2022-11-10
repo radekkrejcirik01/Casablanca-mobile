@@ -27,8 +27,12 @@ import { ProfileEditStyle } from '@components/profile/ProfileEdit/ProfileEdit.st
 import { Title } from '@components/general/Title/Title';
 import { SaveButton } from '@components/general/SaveButton/SaveButton';
 import { PhotoEdit } from '@components/profile/PhotoEdit/PhotoEdit';
+import {
+    ProfileEditDefaultProps,
+    ProfileEditProps
+} from '@components/profile/ProfileEdit/ProfileEdit.props';
 
-export const ProfileEdit = (): JSX.Element => {
+export const ProfileEdit = ({ style }: ProfileEditProps): JSX.Element => {
     const { about, firstname, birthday, photos, tags } = useSelector(
         (state: ReducerProps) => state.user
     );
@@ -53,6 +57,8 @@ export const ProfileEdit = (): JSX.Element => {
         [about, dispatch, tags]
     );
 
+    const onCloseModal = () => setModalVisible(false);
+
     const saveTags = useCallback(() => {
         dispatch(setTagsAction(tagsValue));
     }, [dispatch, tagsValue]);
@@ -76,7 +82,7 @@ export const ProfileEdit = (): JSX.Element => {
 
     const openPhotoEdit = useCallback(() => {
         setModalVisible(true);
-        setModalContent(<PhotoEdit photos={photos} />);
+        setModalContent(<PhotoEdit photos={photos} onClose={onCloseModal} />);
     }, [photos]);
 
     const onSelect = useCallback(
@@ -109,8 +115,6 @@ export const ProfileEdit = (): JSX.Element => {
         [bottom]
     );
 
-    const onCloseModal = () => setModalVisible(false);
-
     const InfoModalContent = useCallback((): JSX.Element => {
         const info: CardDataProps = {
             images: photos,
@@ -133,7 +137,7 @@ export const ProfileEdit = (): JSX.Element => {
     );
 
     return (
-        <>
+        <View style={style}>
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <KeyboardAvoidingView keyboardVerticalOffset={55}>
                     <View style={ProfileEditStyle.header}>
@@ -144,6 +148,7 @@ export const ProfileEdit = (): JSX.Element => {
                         onPress={openPhotoEdit}
                         photos={photos}
                         photosNumber={4}
+                        style={ProfileEditStyle.photoHorizontalList}
                     />
                     <Text style={ProfileEditStyle.text}>To go places</Text>
                     <PlaceTags onSelect={onSelect} tags={tags} showAll />
@@ -165,6 +170,8 @@ export const ProfileEdit = (): JSX.Element => {
                 content={modalContent}
                 onClose={onCloseModal}
             />
-        </>
+        </View>
     );
 };
+
+ProfileEdit.defualtProps = ProfileEditDefaultProps;

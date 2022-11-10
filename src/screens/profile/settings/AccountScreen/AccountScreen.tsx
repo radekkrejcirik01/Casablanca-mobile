@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { SettingsListItem } from '@components/settings/SettingsListItem/SettingsListItem';
+import { ListItem } from '@components/general/ListItem/ListItem';
 import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/ProfileStackNavigator.enum';
@@ -19,12 +19,12 @@ export const AccountScreen = (): JSX.Element => {
 
     return (
         <SafeAreaProvider style={AccountScreenStyle.container}>
-            <SettingsListItem
+            <ListItem
                 title="Change password"
                 hasArrow
                 onPress={openChangePassword}
             />
-            <SettingsListItem
+            <ListItem
                 title="Delete account"
                 hasArrow
                 onPress={openDeleteAccount}

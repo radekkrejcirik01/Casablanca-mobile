@@ -25,7 +25,9 @@ export const ProfileScreenStyle = StyleSheet.create({
         marginTop: 20
     },
     underScroll: {
-        marginTop: 100,
-        paddingHorizontal: 15
+        paddingHorizontal: 10
+    },
+    marginTop: {
+        marginTop: 100
     }
 });

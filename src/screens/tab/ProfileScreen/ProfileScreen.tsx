@@ -36,8 +36,8 @@ export const ProfileScreen = (): JSX.Element => {
                         style={ProfileScreenStyle.tagsView}
                     />
                     <View style={ProfileScreenStyle.underScroll}>
-                        <ProfileEdit />
-                        <ProfileSettings />
+                        <ProfileEdit style={ProfileScreenStyle.marginTop} />
+                        <ProfileSettings style={ProfileScreenStyle.marginTop} />
                     </View>
                 </ThemeView>
             </ProfileScrollView>

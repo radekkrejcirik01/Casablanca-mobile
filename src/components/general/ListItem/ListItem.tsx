@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Switch, Text, View } from 'react-native';
 import {
-    SettingsListItemDefaultProps,
-    SettingsListItemProps
-} from '@components/settings/SettingsListItem/SettingsListItem.props';
-import { SettingsListItemStyle } from '@components/settings/SettingsListItem/SettingsListItem.style';
+    ListItemProps,
+    ListItemDefaultProps
+} from '@components/general/ListItem/ListItem.props';
+import { ListItemStyle } from '@components/general/ListItem/ListItem.style';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { Icon } from '@components/icon/Icon';
 import COLORS from '@constants/COLORS';
 
-export const SettingsListItem = ({
+export const ListItem = ({
     icon,
     title,
     description,
@@ -20,27 +20,25 @@ export const SettingsListItem = ({
     hasArrow,
     onPress,
     style
-}: SettingsListItemProps): JSX.Element => {
+}: ListItemProps): JSX.Element => {
     const [switchValue, setSwitchValue] = useState<boolean>(switchTrue);
 
-    const onValueChange = () => {
+    const onValueChange = useCallback(() => {
         toggleSwitch(!switchValue);
         setSwitchValue(!switchValue);
-    };
+    }, [switchValue, toggleSwitch]);
 
     return (
         <View style={style}>
             <TouchableOpacity
                 onPress={onPress}
                 disabled={hasSwitch}
-                style={SettingsListItemStyle.touchableOpacity}
+                style={ListItemStyle.touchableOpacity}
             >
                 {icon}
-                <Text style={SettingsListItemStyle.title}>{title}</Text>
-                <View style={SettingsListItemStyle.containerRight}>
-                    <Text style={SettingsListItemStyle.description}>
-                        {description}
-                    </Text>
+                <Text style={ListItemStyle.title}>{title}</Text>
+                <View style={ListItemStyle.containerRight}>
+                    <Text style={ListItemStyle.description}>{description}</Text>
                     {hasSwitch && (
                         <Switch
                             onValueChange={onValueChange}
@@ -55,4 +53,4 @@ export const SettingsListItem = ({
     );
 };
 
-SettingsListItem.defaultProps = SettingsListItemDefaultProps;
+ListItem.defaultProps = ListItemDefaultProps;

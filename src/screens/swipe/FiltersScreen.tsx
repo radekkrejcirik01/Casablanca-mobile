@@ -1,4 +1,10 @@
 import React from 'react';
-import { Screen } from '@components/general/Screen/Screen';
+import { ScrollView } from 'react-native';
+import { FiltersList } from '@components/swipe/FiltersList/FiltersList';
+import { FiltersScreenStyle } from '@screens/swipe/FiltersScreen.style';
 
-export const FiltersScreen = (): JSX.Element => <Screen />;
+export const FiltersScreen = (): JSX.Element => (
+    <ScrollView style={FiltersScreenStyle.container}>
+        <FiltersList />
+    </ScrollView>
+);

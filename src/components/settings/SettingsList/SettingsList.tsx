@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
-import { Linking } from 'react-native';
+import { Linking, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { SettingsListItem } from '@components/settings/SettingsListItem/SettingsListItem';
+import { ListItem } from '@components/general/ListItem/ListItem';
 import { SettingsListStyle } from '@components/settings/SettingsList/SettingsList.style';
 import { useNavigation } from '@hooks/useNavigation';
 import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/ProfileStackNavigator.enum';
@@ -13,8 +13,12 @@ import { setIsDarkMode } from '@store/ThemeReducer';
 import { useTheme } from '@hooks/useTheme';
 import THEMES from '@constants/THEMES';
 import { ReducerProps } from '@store/index.props';
+import {
+    SettingsListDefaultProps,
+    SettingsListProps
+} from '@components/settings/SettingsList/SettingsList.props';
 
-export const SettingsList = (): JSX.Element => {
+export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
     const { showMe } = useSelector((state: ReducerProps) => state.user);
     const dispatch = useDispatch();
 
@@ -22,29 +26,29 @@ export const SettingsList = (): JSX.Element => {
 
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.ProfileStack);
 
-    const openAboutScreen = () => {
+    const openAboutScreen = useCallback(() => {
         navigateTo(ProfileStackNavigatorEnum.AboutScreen);
-    };
+    }, [navigateTo]);
 
     const toggleSwitch = (value: boolean) => {
         console.log(JSON.stringify(value));
     };
 
-    const openDistanceScreen = () => {
+    const openDistanceScreen = useCallback(() => {
         navigateTo(ProfileStackNavigatorEnum.DistanceScreen);
-    };
+    }, [navigateTo]);
 
-    const openShowMeScreen = () => {
+    const openShowMeScreen = useCallback(() => {
         navigateTo(ProfileStackNavigatorEnum.ShowMeScreen);
-    };
+    }, [navigateTo]);
 
-    const openHelpCenterScreen = () => {
+    const openHelpCenterScreen = useCallback(() => {
         navigateTo(ProfileStackNavigatorEnum.HelpCenterScreen);
-    };
+    }, [navigateTo]);
 
-    const openCommunityRulesScreen = () => {
+    const openCommunityRulesScreen = useCallback(() => {
         navigateTo(ProfileStackNavigatorEnum.CommunityRulesScreen);
-    };
+    }, [navigateTo]);
 
     const openPrivacyPolicyScreen = () => {
         Linking.openURL(
@@ -52,9 +56,9 @@ export const SettingsList = (): JSX.Element => {
         );
     };
 
-    const openAccountScreen = () => {
+    const openAccountScreen = useCallback(() => {
         navigateTo(ProfileStackNavigatorEnum.AccountScreen);
-    };
+    }, [navigateTo]);
 
     const toggleDarkMode = useCallback(
         (value: boolean) => {
@@ -72,60 +76,58 @@ export const SettingsList = (): JSX.Element => {
     }, [dispatch]);
 
     return (
-        <>
-            <SettingsListItem
+        <View style={style}>
+            <ListItem
                 title="About Casablanca"
                 hasArrow
                 onPress={openAboutScreen}
             />
-            <SettingsListItem
+            <ListItem
                 title="Push notification"
                 hasSwitch
                 toggleSwitch={toggleSwitch}
             />
-            <SettingsListItem
+            <ListItem
                 title="Distance"
                 description="100km"
                 hasArrow
                 onPress={openDistanceScreen}
             />
-            <SettingsListItem
+            <ListItem
                 title="Show me"
                 description={showMe}
                 hasArrow
                 onPress={openShowMeScreen}
             />
-            <SettingsListItem
+            <ListItem
                 title="Help center"
                 hasArrow
                 onPress={openHelpCenterScreen}
             />
-            <SettingsListItem
+            <ListItem
                 title="Community rules"
                 hasArrow
                 onPress={openCommunityRulesScreen}
             />
-            <SettingsListItem
+            <ListItem
                 title="Privacy policy"
                 hasArrow
                 onPress={openPrivacyPolicyScreen}
             />
-            <SettingsListItem
-                title="Account"
-                hasArrow
-                onPress={openAccountScreen}
-            />
-            <SettingsListItem
+            <ListItem title="Account" hasArrow onPress={openAccountScreen} />
+            <ListItem
                 title="Dark mode"
                 hasSwitch
                 switchTrue={isDarkMode}
                 toggleSwitch={toggleDarkMode}
             />
-            <SettingsListItem
+            <ListItem
                 title="Log Out"
                 onPress={LogOut}
                 style={SettingsListStyle.lastItem}
             />
-        </>
+        </View>
     );
 };
+
+SettingsList.defaultProps = SettingsListDefaultProps;

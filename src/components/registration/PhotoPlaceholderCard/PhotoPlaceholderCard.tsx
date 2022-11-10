@@ -23,7 +23,7 @@ export const PhotoPlaceholderCard = ({
     return (
         <TouchableOpacity
             onPress={pressPhoto}
-            style={[PhotoPlaceholderCardStyle.container, style]}
+            style={[style, PhotoPlaceholderCardStyle.container]}
         >
             <FastImage
                 style={PhotoPlaceholderCardStyle.photo}
