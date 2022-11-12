@@ -1,3 +1,4 @@
 export interface DistanceIndicatorProps {
-    onChange: (value: number) => void;
+    distanceValue: number;
+    onValueChange: (value: number) => void;
 }

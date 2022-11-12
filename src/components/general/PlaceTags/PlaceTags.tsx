@@ -10,6 +10,7 @@ import {
 
 export const PlaceTags = ({
     onSelect,
+    onTagPress,
     showAll,
     style,
     tags
@@ -26,6 +27,7 @@ export const PlaceTags = ({
                     key={value}
                     tag={value}
                     onSelect={onSelect}
+                    onTagPress={onTagPress}
                     isTagged={tags.includes(value)}
                     showAll={showAll}
                 />

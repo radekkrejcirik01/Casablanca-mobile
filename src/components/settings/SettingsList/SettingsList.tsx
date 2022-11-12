@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Linking, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { ListItem } from '@components/general/ListItem/ListItem';
@@ -6,7 +6,11 @@ import { SettingsListStyle } from '@components/settings/SettingsList/SettingsLis
 import { useNavigation } from '@hooks/useNavigation';
 import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/ProfileStackNavigator.enum';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
-import { resetUserState } from '@store/UserReducer';
+import {
+    resetUserState,
+    setFilterByTagsAction,
+    setNotificationsAction
+} from '@store/UserReducer';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { setIsDarkMode } from '@store/ThemeReducer';
@@ -19,24 +23,40 @@ import {
 } from '@components/settings/SettingsList/SettingsList.props';
 
 export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
-    const { showMe } = useSelector((state: ReducerProps) => state.user);
+    const { showMe, distance, filterByTags, notifications } = useSelector(
+        (state: ReducerProps) => state.user
+    );
     const dispatch = useDispatch();
 
     const { isDarkMode } = useTheme();
-
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.ProfileStack);
 
     const openAboutScreen = useCallback(() => {
         navigateTo(ProfileStackNavigatorEnum.AboutScreen);
     }, [navigateTo]);
 
-    const toggleSwitch = (value: boolean) => {
-        console.log(JSON.stringify(value));
-    };
+    const toggleNotification = useCallback(
+        (value: boolean) => {
+            dispatch(setNotificationsAction(value));
+        },
+        [dispatch]
+    );
+
+    const distanceDescription = useMemo(
+        () => `${distance?.toString()} km`,
+        [distance]
+    );
 
     const openDistanceScreen = useCallback(() => {
         navigateTo(ProfileStackNavigatorEnum.DistanceScreen);
     }, [navigateTo]);
+
+    const toggleTags = useCallback(
+        (value: boolean) => {
+            dispatch(setFilterByTagsAction(value));
+        },
+        [dispatch]
+    );
 
     const openShowMeScreen = useCallback(() => {
         navigateTo(ProfileStackNavigatorEnum.ShowMeScreen);
@@ -53,7 +73,7 @@ export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
     const openPrivacyPolicyScreen = () => {
         Linking.openURL(
             'https://www.termsfeed.com/live/c0485039-5d23-4ad7-a4b9-0970911f8ec1'
-        );
+        ).catch();
     };
 
     const openAccountScreen = useCallback(() => {
@@ -84,14 +104,21 @@ export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
             />
             <ListItem
                 title="Push notification"
+                switchValue={notifications}
                 hasSwitch
-                toggleSwitch={toggleSwitch}
+                toggleSwitch={toggleNotification}
             />
             <ListItem
                 title="Distance"
-                description="100km"
+                description={distanceDescription}
                 hasArrow
                 onPress={openDistanceScreen}
+            />
+            <ListItem
+                title="Filter by tags"
+                hasSwitch
+                switchValue={filterByTags}
+                toggleSwitch={toggleTags}
             />
             <ListItem
                 title="Show me"
@@ -118,7 +145,7 @@ export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
             <ListItem
                 title="Dark mode"
                 hasSwitch
-                switchTrue={isDarkMode}
+                switchValue={isDarkMode}
                 toggleSwitch={toggleDarkMode}
             />
             <ListItem

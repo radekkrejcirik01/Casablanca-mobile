@@ -1,57 +1,51 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
 import { DistanceIndicatorProps } from '@components/general/DistanceIndicator/DistanceIndicator.props';
 import { DistanceIndicatorStyle } from '@components/general/DistanceIndicator/DistanceIndicator.style';
 
 export const DistanceIndicator = ({
-    onChange
+    distanceValue,
+    onValueChange
 }: DistanceIndicatorProps): JSX.Element => {
-    const [distance, setDistance] = useState<number>(100);
-
-    const onValueChange = useCallback(
-        (value: number) => {
-            onChange(value);
-            setDistance(value);
-        },
-        [onChange]
-    );
+    const text = useMemo((): string => `${distanceValue} km`, [distanceValue]);
 
     const pressMinus = useCallback(() => {
-        if (distance > 100) {
-            onValueChange(distance - 50);
+        if (distanceValue > 100) {
+            onValueChange(distanceValue - 50);
             return;
         }
-        if (distance > 10) {
-            onValueChange(distance - 10);
+        if (distanceValue > 10) {
+            onValueChange(distanceValue - 10);
             return;
         }
-        if (distance > 1) {
-            onValueChange(distance - 1);
+        if (distanceValue > 1) {
+            onValueChange(distanceValue - 1);
         }
-    }, [distance, onValueChange]);
+    }, [distanceValue, onValueChange]);
 
     const pressPlus = useCallback(() => {
-        if (distance >= 100) {
-            onValueChange(distance + 50);
+        if (distanceValue >= 100) {
+            onValueChange(distanceValue + 50);
             return;
         }
-        if (distance >= 10) {
-            onValueChange(distance + 10);
+        if (distanceValue >= 10) {
+            onValueChange(distanceValue + 10);
             return;
         }
-        if (distance >= 1) {
-            onValueChange(distance + 1);
+        if (distanceValue >= 1) {
+            onValueChange(distanceValue + 1);
         }
-    }, [distance, onValueChange]);
+    }, [distanceValue, onValueChange]);
 
-    const disabled = useMemo((): boolean => distance === 1, [distance]);
+    const disabled = useMemo(
+        (): boolean => distanceValue === 1,
+        [distanceValue]
+    );
 
     return (
         <View>
-            <Text style={DistanceIndicatorStyle.distanceText}>
-                {distance} km
-            </Text>
+            <Text style={DistanceIndicatorStyle.distanceText}>{text}</Text>
             <View style={DistanceIndicatorStyle.pointView}>
                 <TouchableOpacity onPress={pressMinus} disabled={disabled}>
                     <Text style={DistanceIndicatorStyle.pointText}>👈</Text>

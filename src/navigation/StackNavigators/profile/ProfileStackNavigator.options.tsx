@@ -1,16 +1,19 @@
 import React from 'react';
 import { StackNavigationOptions } from '@react-navigation/stack';
+import { SaveHeader } from '@components/general/SaveHeader/SaveHeader';
 
 export const AboutTitle: StackNavigationOptions = {
     headerTitle: 'About'
 };
 
-export const DistanceTitle: StackNavigationOptions = {
-    headerTitle: 'Distance'
+export const DistanceOptions: StackNavigationOptions = {
+    headerTitle: 'Distance',
+    headerRight: () => <SaveHeader />
 };
 
-export const ShowMeTitle: StackNavigationOptions = {
-    headerTitle: 'Show me'
+export const ShowMeOptions: StackNavigationOptions = {
+    headerTitle: 'Show me',
+    headerRight: () => <SaveHeader />
 };
 
 export const HelpCenterTitle: StackNavigationOptions = {

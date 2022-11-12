@@ -5,6 +5,7 @@ export const PhotoHorizontalListStyle = StyleSheet.create({
         marginHorizontal: -15 // Attach to screen border
     },
     photoPlaceholderCard: {
-        margin: 10
+        marginVertical: 20,
+        marginLeft: 15
     }
 });

@@ -21,7 +21,7 @@ export const SelectBox = ({
     >
         <Text style={SelectBoxStyle.text}>{title}</Text>
         <CheckBox
-            disabled={false}
+            disabled
             tintColor={COLORS.WHITE}
             onTintColor={COLORS.WHITE}
             onCheckColor={COLORS.WHITE}

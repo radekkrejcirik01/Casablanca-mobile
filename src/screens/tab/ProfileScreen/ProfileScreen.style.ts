@@ -7,10 +7,12 @@ export const ProfileScreenStyle = StyleSheet.create({
         paddingTop: 20,
         borderRadius: 25
     },
+    touchableOpacity: {
+        alignSelf: 'center'
+    },
     firstname: {
         fontSize: 30,
         color: COLORS.WHITE,
-        alignSelf: 'center',
         fontWeight: 'bold'
     },
     age: {

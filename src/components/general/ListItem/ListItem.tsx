@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Switch, Text, View } from 'react-native';
 import {
     ListItemProps,
@@ -16,17 +16,21 @@ export const ListItem = ({
     description,
     hasSwitch,
     toggleSwitch,
-    switchTrue,
+    switchValue,
     hasArrow,
     onPress,
     style
 }: ListItemProps): JSX.Element => {
-    const [switchValue, setSwitchValue] = useState<boolean>(switchTrue);
+    const [valueSwitch, setValueSwitch] = useState<boolean>(switchValue);
+
+    useEffect(() => {
+        setValueSwitch(switchValue);
+    }, [switchValue]);
 
     const onValueChange = useCallback(() => {
-        toggleSwitch(!switchValue);
-        setSwitchValue(!switchValue);
-    }, [switchValue, toggleSwitch]);
+        toggleSwitch(!valueSwitch);
+        setValueSwitch(!valueSwitch);
+    }, [toggleSwitch, valueSwitch]);
 
     return (
         <View style={style}>
@@ -42,7 +46,7 @@ export const ListItem = ({
                     {hasSwitch && (
                         <Switch
                             onValueChange={onValueChange}
-                            value={switchValue}
+                            value={valueSwitch}
                             ios_backgroundColor={COLORS.LIGHTGRAY}
                         />
                     )}

@@ -6,7 +6,7 @@ export interface ListItemProps {
     description?: string;
     hasSwitch?: boolean;
     toggleSwitch?: (value: boolean) => void;
-    switchTrue?: boolean;
+    switchValue?: boolean;
     hasArrow?: boolean;
     onPress?: () => void;
     style?: StyleProp<ViewStyle>;
@@ -17,7 +17,7 @@ export const ListItemDefaultProps: Omit<ListItemProps, 'title'> = {
     description: null,
     hasSwitch: false,
     toggleSwitch: (value: boolean) => {},
-    switchTrue: false,
+    switchValue: false,
     hasArrow: false,
     onPress: () => {}
 };

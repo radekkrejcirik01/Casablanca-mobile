@@ -11,10 +11,7 @@ export const ProfileAnimatedImage = ({
 }: ProfileAnimatedImageProps): JSX.Element => {
     const AnimatedImage = Animated.createAnimatedComponent(FastImage);
 
-    const imageSource = useMemo(
-        (): Source | number => ({ uri: source }),
-        [source]
-    );
+    const imageSource = useMemo((): Source => ({ uri: source }), [source]);
 
     const style = useMemo(
         (): (

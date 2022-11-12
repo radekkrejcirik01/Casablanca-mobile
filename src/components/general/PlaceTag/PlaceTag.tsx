@@ -13,6 +13,7 @@ import { useTheme } from '@hooks/useTheme';
 export const PlaceTag = ({
     tag,
     onSelect,
+    onTagPress,
     isTagged,
     showAll
 }: PlaceTagProps): JSX.Element => {
@@ -24,6 +25,8 @@ export const PlaceTag = ({
         if (showAll) {
             setTagged(!tagged);
             onSelect(tag);
+        } else {
+            onTagPress();
         }
     };
 

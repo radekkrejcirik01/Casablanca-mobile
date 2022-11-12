@@ -20,6 +20,9 @@ export interface User {
     about: string;
     gender: GenderSelectEnum;
     showMe: ShowMeSelectEnum;
+    distance: number;
+    filterByTags: boolean;
+    notifications: boolean;
     password: string;
 }
 

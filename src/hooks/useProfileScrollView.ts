@@ -1,4 +1,11 @@
-import { Ref, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+    RefObject,
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState
+} from 'react';
 import {
     Animated,
     NativeScrollEvent,
@@ -13,10 +20,11 @@ import AnimatedInterpolation = Animated.AnimatedInterpolation;
 
 export const useProfileScrollView = (): {
     scale: AnimatedInterpolation;
-    ref: Ref<ScrollView>;
+    ref: RefObject<ScrollView>;
     onScroll: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
     onScrollBeginDrag: () => void;
     onScrollEndDrag: () => void;
+    scrollToInfo: () => void;
 } => {
     const dispatch = useDispatch();
 
@@ -99,11 +107,21 @@ export const useProfileScrollView = (): {
 
     const onScrollEndDrag = () => setIsScrolling(false);
 
+    const scrollToInfo = () => {
+        ref?.current?.scrollTo({
+            x: 0,
+            y: 800,
+            animated: true
+        });
+        setIsBottomBarVisible(false);
+    };
+
     return {
         scale,
         ref,
         onScroll,
         onScrollBeginDrag,
-        onScrollEndDrag
+        onScrollEndDrag,
+        scrollToInfo
     };
 };

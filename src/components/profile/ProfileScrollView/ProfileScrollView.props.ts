@@ -1,4 +1,8 @@
 export interface ProfileScrollViewProps {
     source: string;
-    children?: JSX.Element;
+    children: JSX.Element;
+}
+
+export interface ProfileScrollViewForwardedRefProps {
+    scrollToInfo: () => void;
 }

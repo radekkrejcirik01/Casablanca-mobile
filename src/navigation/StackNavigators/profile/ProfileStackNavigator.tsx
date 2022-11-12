@@ -10,9 +10,9 @@ import {
     ChangePasswordTitle,
     CommunityRulesTitle,
     DeleteAccountTitle,
-    DistanceTitle,
+    DistanceOptions,
     HelpCenterTitle,
-    ShowMeTitle
+    ShowMeOptions
 } from '@navigation/StackNavigators/profile/ProfileStackNavigator.options';
 import { AboutScreen } from '@screens/profile/settings/AboutScreen/AboutScreen';
 import { HelpCenterScreen } from '@screens/profile/settings/HelpCenterScreen/HelpCenterScreen';
@@ -34,12 +34,12 @@ export const ProfileStackNavigator = (): JSX.Element => (
         <Profile.Screen
             name={ProfileStackNavigatorEnum.DistanceScreen}
             component={DistanceScreen}
-            options={{ ...NavigationScreenHeader, ...DistanceTitle }}
+            options={{ ...NavigationScreenHeader, ...DistanceOptions }}
         />
         <Profile.Screen
             name={ProfileStackNavigatorEnum.ShowMeScreen}
             component={ShowMeScreen}
-            options={{ ...NavigationScreenHeader, ...ShowMeTitle }}
+            options={{ ...NavigationScreenHeader, ...ShowMeOptions }}
         />
         <Profile.Screen
             name={ProfileStackNavigatorEnum.HelpCenterScreen}
