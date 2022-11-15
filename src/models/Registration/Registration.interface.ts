@@ -6,11 +6,15 @@ export interface ResponseInterface {
 export interface RegistrationInterface {
     firstname: string;
     birthday: string;
+    about: string;
     tags: Array<string>;
     photos: Array<string>;
-    gender: string;
-    showMe: string;
+    gender: number;
+    showMe: number;
     email: string;
+    distance: number;
+    filterByTags: number;
+    notifications: number;
     password: string;
 }
 

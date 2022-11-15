@@ -21,14 +21,15 @@ export const ShowMeScreen = (): JSX.Element => {
     );
 
     const onSelect = useCallback(
-        (value: string) => {
+        (value: number) => {
             dispatch(setShowMeAction(value));
         },
         [dispatch]
     );
 
     const continuePressed = useCallback(() => {
-        if (showMe) {
+        // 'null' specific
+        if (showMe !== null) {
             navigateTo(RegistrationStackNavigatorEnum.EmailScreen);
         } else {
             Alert.alert('Please select some option');

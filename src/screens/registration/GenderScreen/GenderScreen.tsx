@@ -12,9 +12,7 @@ import { setGenderAction } from '@store/UserReducer';
 import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
 
 export const GenderScreen = (): JSX.Element => {
-    const gender = useSelector(
-        (state: ReducerProps) => state.user.gender
-    );
+    const gender = useSelector((state: ReducerProps) => state.user.gender);
     const dispatch = useDispatch();
 
     const { navigateTo } = useNavigation(
@@ -22,14 +20,15 @@ export const GenderScreen = (): JSX.Element => {
     );
 
     const onSelect = useCallback(
-        (value: string) => {
+        (value: number) => {
             dispatch(setGenderAction(value));
         },
         [dispatch]
     );
 
     const continuePressed = useCallback(() => {
-        if (gender) {
+        // 'null' specific
+        if (gender !== null) {
             navigateTo(RegistrationStackNavigatorEnum.ShowMeScreen);
         } else {
             Alert.alert('Please select some option');

@@ -11,9 +11,9 @@ const initialState: User = {
     about: null,
     gender: null,
     showMe: null,
-    distance: 50,
-    filterByTags: false,
-    notifications: true,
+    distance: null,
+    filterByTags: null,
+    notifications: null,
     password: null
 };
 
@@ -70,10 +70,6 @@ export const UserReducer = createSlice({
         },
         setUserStateAction: (state, action) => {
             action.payload.token = action.payload.email;
-            action.payload.about = '';
-            action.payload.distance = 50;
-            action.payload.filterByTags = true;
-            action.payload.notifications = true;
             return action.payload;
         },
         resetUserState: () => initialState

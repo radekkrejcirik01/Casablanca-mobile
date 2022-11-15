@@ -1,8 +1,8 @@
 import { StyleProp, ViewStyle } from 'react-native';
 
 export interface GenderSelectProps {
-    gender: string;
-    onSelect: (value: string) => void;
+    gender: number;
+    onSelect: (value: number) => void;
     style?: StyleProp<ViewStyle>;
 }
 

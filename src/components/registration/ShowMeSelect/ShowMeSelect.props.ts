@@ -1,9 +1,8 @@
 import { StyleProp, ViewStyle } from 'react-native';
-import { ShowMeSelectEnum } from '@components/registration/ShowMeSelect/ShowMeSelect.enum';
 
 export interface ShowMeSelectProps {
-    showMe: string;
-    onSelect: (value: ShowMeSelectEnum) => void;
+    showMe: number;
+    onSelect: (value: number) => void;
     style?: StyleProp<ViewStyle>;
 }
 

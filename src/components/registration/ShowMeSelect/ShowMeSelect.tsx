@@ -14,19 +14,19 @@ export const ShowMeSelect = ({
 }: ShowMeSelectProps): JSX.Element => (
     <View style={style}>
         <SelectBox
-            onPressIn={() => onSelect(ShowMeSelectEnum.WOMEN)}
+            onPressIn={() => onSelect(1)}
             title={ShowMeSelectEnum.WOMEN}
-            value={showMe === ShowMeSelectEnum.WOMEN}
+            value={showMe === 1}
         />
         <SelectBox
-            onPressIn={() => onSelect(ShowMeSelectEnum.MEN)}
+            onPressIn={() => onSelect(0)}
             title={ShowMeSelectEnum.MEN}
-            value={showMe === ShowMeSelectEnum.MEN}
+            value={showMe === 0}
         />
         <SelectBox
-            onPressIn={() => onSelect(ShowMeSelectEnum.ALL)}
+            onPressIn={() => onSelect(2)}
             title={ShowMeSelectEnum.ALL}
-            value={showMe === ShowMeSelectEnum.ALL}
+            value={showMe === 2}
         />
     </View>
 );

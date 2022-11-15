@@ -14,14 +14,14 @@ export const GenderSelect = ({
 }: GenderSelectProps): JSX.Element => (
     <View style={style}>
         <SelectBox
-            onPressIn={() => onSelect(GenderSelectEnum.WOMAN)}
+            onPressIn={() => onSelect(1)}
             title={GenderSelectEnum.WOMAN}
-            value={gender === GenderSelectEnum.WOMAN}
+            value={gender === 1}
         />
         <SelectBox
-            onPressIn={() => onSelect(GenderSelectEnum.MAN)}
+            onPressIn={() => onSelect(0)}
             title={GenderSelectEnum.MAN}
-            value={gender === GenderSelectEnum.MAN}
+            value={gender === 0}
         />
     </View>
 );

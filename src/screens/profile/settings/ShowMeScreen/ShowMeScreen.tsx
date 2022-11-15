@@ -4,7 +4,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ShowMeSelect } from '@components/registration/ShowMeSelect/ShowMeSelect';
 import { ReducerProps } from '@store/index.props';
 import { ShowMeScreenStyle } from '@screens/profile/settings/ShowMeScreen/ShowMeScreen.style';
-import { ShowMeSelectEnum } from '@components/registration/ShowMeSelect/ShowMeSelect.enum';
 import { setSaveVisible } from '@store/SaveReducer';
 import { setShowMeAction } from '@store/UserReducer';
 
@@ -15,7 +14,7 @@ export const ShowMeScreen = (): JSX.Element => {
     );
     const dispatch = useDispatch();
 
-    const [showMeValue, setShowMeValue] = useState<ShowMeSelectEnum>(showMe);
+    const [showMeValue, setShowMeValue] = useState<number>(showMe);
 
     useEffect(() => {
         dispatch(setSaveVisible(false));
@@ -28,7 +27,7 @@ export const ShowMeScreen = (): JSX.Element => {
     }, [dispatch, isVisible, showMe, showMeValue]);
 
     const onSelect = useCallback(
-        (value: ShowMeSelectEnum) => {
+        (value: number) => {
             setShowMeValue(value);
             if (value !== showMe) {
                 dispatch(setSaveVisible(true));
