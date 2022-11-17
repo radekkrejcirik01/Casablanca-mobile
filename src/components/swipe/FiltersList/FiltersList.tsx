@@ -6,9 +6,15 @@ import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/P
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { ReducerProps } from '@store/index.props';
 import { setFilterByTagsAction } from '@store/UserReducer';
+import { ShowMeSelectEnum } from '@components/registration/ShowMeSelect/ShowMeSelect.enum';
+import { updateRequest } from '@utils/Axios/Axios.service';
+import {
+    FilterByTagsInterface,
+    ResponseInterface
+} from '@models/Registration/Registration.interface';
 
 export const FiltersList = (): JSX.Element => {
-    const { showMe, distance, filterByTags } = useSelector(
+    const { distance, email, filterByTags, showMe } = useSelector(
         (state: ReducerProps) => state.user
     );
     const dispatch = useDispatch();
@@ -24,15 +30,39 @@ export const FiltersList = (): JSX.Element => {
         navigateTo(ProfileStackNavigatorEnum.DistanceScreen);
     }, [navigateTo]);
 
+    const showMeDescription = useMemo((): ShowMeSelectEnum => {
+        if (showMe === 0) {
+            return ShowMeSelectEnum.MEN;
+        }
+        if (showMe === 1) {
+            return ShowMeSelectEnum.WOMEN;
+        }
+        return ShowMeSelectEnum.ALL;
+    }, [showMe]);
+
     const openShowMeScreen = useCallback(() => {
         navigateTo(ProfileStackNavigatorEnum.ShowMeScreen);
     }, [navigateTo]);
 
+    const switchTagsValue = useMemo(
+        (): boolean => !!filterByTags,
+        [filterByTags]
+    );
+
     const toggleTags = useCallback(
         (value: boolean) => {
-            dispatch(setFilterByTagsAction(value));
+            const filterByTagsValue = value ? 1 : 0;
+            updateRequest<ResponseInterface, FilterByTagsInterface>(
+                'user/filterByTags/update',
+                {
+                    email,
+                    filterByTags: filterByTagsValue
+                }
+            ).subscribe();
+
+            dispatch(setFilterByTagsAction(filterByTagsValue));
         },
-        [dispatch]
+        [dispatch, email]
     );
 
     return (
@@ -45,14 +75,14 @@ export const FiltersList = (): JSX.Element => {
             />
             <ListItem
                 title="Show me"
-                description={showMe}
+                description={showMeDescription}
                 hasArrow
                 onPress={openShowMeScreen}
             />
             <ListItem
                 title="Filter by tags"
                 hasSwitch
-                switchValue={filterByTags}
+                switchValue={switchTagsValue}
                 toggleSwitch={toggleTags}
             />
         </>

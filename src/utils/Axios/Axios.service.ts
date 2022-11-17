@@ -38,9 +38,9 @@ export const postRequest = <T, B>(
         catchError((err: AxiosError) => catchErrorFunction(err))
     );
 
-export const updateRequest = <T>(
+export const updateRequest = <T, B>(
     endpoint: string,
-    data: T,
+    data: B,
     config?: AxiosRequestConfig
 ): Observable<T> =>
     defer(() =>

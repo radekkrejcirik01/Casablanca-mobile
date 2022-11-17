@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -7,9 +7,16 @@ import { DistanceIndicator } from '@components/general/DistanceIndicator/Distanc
 import { ReducerProps } from '@store/index.props';
 import { setSaveVisible } from '@store/SaveReducer';
 import { setDistanceAction } from '@store/UserReducer';
+import { updateRequest } from '@utils/Axios/Axios.service';
+import {
+    DistanceInterface,
+    ResponseInterface
+} from '@models/Registration/Registration.interface';
 
 export const DistanceScreen = (): JSX.Element => {
-    const distance = useSelector((state: ReducerProps) => state.user.distance);
+    const { distance, email } = useSelector(
+        (state: ReducerProps) => state.user
+    );
     const isVisible = useSelector(
         (state: ReducerProps) => state.save.isVisible
     );
@@ -21,13 +28,23 @@ export const DistanceScreen = (): JSX.Element => {
         dispatch(setSaveVisible(false));
     }, [dispatch]);
 
-    useEffect(() => {
-        if (!isVisible) {
-            if (distanceValue !== distance) {
-                dispatch(setDistanceAction(distanceValue));
+    const saveDistance = useCallback(() => {
+        updateRequest<ResponseInterface, DistanceInterface>(
+            'user/distance/update',
+            {
+                email,
+                distance: distanceValue
             }
+        ).subscribe();
+
+        dispatch(setDistanceAction(distanceValue));
+    }, [dispatch, distanceValue, email]);
+
+    useEffect(() => {
+        if (!isVisible && distanceValue !== distance) {
+            saveDistance();
         }
-    }, [dispatch, distance, distanceValue, isVisible]);
+    }, [distance, distanceValue, isVisible, saveDistance]);
 
     const onValueChange = (value: number) => {
         setDistanceValue(value);

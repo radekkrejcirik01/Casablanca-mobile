@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { Alert, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { PhotoPlaceholder } from '@components/registration/PhotoPlaceholder/PhotoPlaceholder';
 import { usePhotoPicker } from '@hooks/usePhotoPicker';
 import { PhotoEditStyle } from '@components/profile/PhotoEdit/PhotoEdit.style';
@@ -12,8 +12,15 @@ import { setSaveVisible } from '@store/SaveReducer';
 import { setPhotosAction } from '@store/UserReducer';
 import { DoneButton } from '@components/general/DoneButton/DoneButton';
 import { PhotoEditProps } from '@components/profile/PhotoEdit/PhotoEdit.props';
+import { updateRequest } from '@utils/Axios/Axios.service';
+import {
+    PhotosInterface,
+    ResponseInterface
+} from '@models/Registration/Registration.interface';
+import { ReducerProps } from '@store/index.props';
 
 export const PhotoEdit = ({ photos, onClose }: PhotoEditProps): JSX.Element => {
+    const { email } = useSelector((state: ReducerProps) => state.user);
     const dispatch = useDispatch();
 
     const { onPhotoPress, onPhotoRemove, photosValue } = usePhotoPicker(photos);
@@ -27,10 +34,27 @@ export const PhotoEdit = ({ photos, onClose }: PhotoEditProps): JSX.Element => {
         }
     }, [dispatch, photos, photosValue]);
 
-    const onPressSaveButton = useCallback(() => {
+    const savePhotos = useCallback(() => {
+        updateRequest<ResponseInterface, PhotosInterface>(
+            'user/photos/update',
+            {
+                user: email,
+                photos: photosValue
+            }
+        ).subscribe();
+
         dispatch(setPhotosAction(photosValue));
         onClose();
-    }, [dispatch, onClose, photosValue]);
+    }, [dispatch, email, onClose, photosValue]);
+
+    const onPressSaveButton = useCallback(() => {
+        if (photosValue?.length) {
+            savePhotos();
+        } else {
+            setIsDoneVisible(true);
+            Alert.alert('Please select at least one photo');
+        }
+    }, [photosValue, savePhotos]);
 
     const onPressDoneButton = useCallback(() => {
         onClose();

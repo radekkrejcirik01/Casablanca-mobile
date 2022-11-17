@@ -23,6 +23,41 @@ export interface LoginInterface {
     password: string;
 }
 
+export interface PhotosInterface {
+    user: string;
+    photos: Array<string>;
+}
+
+export interface TagsInterface {
+    user: string;
+    tags: Array<string>;
+}
+
+export interface AboutInterface {
+    email: string;
+    about: string;
+}
+
+export interface NotificationsInterface {
+    email: string;
+    notifications: number;
+}
+
+export interface DistanceInterface {
+    email: string;
+    distance: number;
+}
+
+export interface FilterByTagsInterface {
+    email: string;
+    filterByTags: number;
+}
+
+export interface ShowMeInterface {
+    email: string;
+    showMe: number;
+}
+
 export interface UserGetInterface {
     email: string;
 }

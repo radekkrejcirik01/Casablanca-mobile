@@ -21,11 +21,17 @@ import {
     SettingsListDefaultProps,
     SettingsListProps
 } from '@components/settings/SettingsList/SettingsList.props';
+import { ShowMeSelectEnum } from '@components/registration/ShowMeSelect/ShowMeSelect.enum';
+import { updateRequest } from '@utils/Axios/Axios.service';
+import {
+    FilterByTagsInterface,
+    NotificationsInterface,
+    ResponseInterface
+} from '@models/Registration/Registration.interface';
 
 export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
-    const { showMe, distance, filterByTags, notifications } = useSelector(
-        (state: ReducerProps) => state.user
-    );
+    const { email, showMe, distance, filterByTags, notifications } =
+        useSelector((state: ReducerProps) => state.user);
     const dispatch = useDispatch();
 
     const { isDarkMode } = useTheme();
@@ -35,11 +41,25 @@ export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
         navigateTo(ProfileStackNavigatorEnum.AboutScreen);
     }, [navigateTo]);
 
+    const switchNotificationsValue = useMemo(
+        (): boolean => !!notifications,
+        [notifications]
+    );
+
     const toggleNotification = useCallback(
         (value: boolean) => {
-            dispatch(setNotificationsAction(value));
+            const notificationsValue = value ? 1 : 0;
+            updateRequest<ResponseInterface, NotificationsInterface>(
+                'user/notifications/update',
+                {
+                    email,
+                    notifications: notificationsValue
+                }
+            ).subscribe();
+
+            dispatch(setNotificationsAction(notificationsValue));
         },
-        [dispatch]
+        [dispatch, email]
     );
 
     const distanceDescription = useMemo(
@@ -51,12 +71,36 @@ export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
         navigateTo(ProfileStackNavigatorEnum.DistanceScreen);
     }, [navigateTo]);
 
+    const switchTagsValue = useMemo(
+        (): boolean => !!filterByTags,
+        [filterByTags]
+    );
+
     const toggleTags = useCallback(
         (value: boolean) => {
-            dispatch(setFilterByTagsAction(value));
+            const filterByTagsValue = value ? 1 : 0;
+            updateRequest<ResponseInterface, FilterByTagsInterface>(
+                'user/filterByTags/update',
+                {
+                    email,
+                    filterByTags: filterByTagsValue
+                }
+            ).subscribe();
+
+            dispatch(setFilterByTagsAction(filterByTagsValue));
         },
-        [dispatch]
+        [dispatch, email]
     );
+
+    const showMeDescription = useMemo((): ShowMeSelectEnum => {
+        if (showMe === 0) {
+            return ShowMeSelectEnum.MEN;
+        }
+        if (showMe === 1) {
+            return ShowMeSelectEnum.WOMEN;
+        }
+        return ShowMeSelectEnum.ALL;
+    }, [showMe]);
 
     const openShowMeScreen = useCallback(() => {
         navigateTo(ProfileStackNavigatorEnum.ShowMeScreen);
@@ -104,7 +148,7 @@ export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
             />
             <ListItem
                 title="Push notification"
-                switchValue={notifications}
+                switchValue={switchNotificationsValue}
                 hasSwitch
                 toggleSwitch={toggleNotification}
             />
@@ -117,12 +161,12 @@ export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
             <ListItem
                 title="Filter by tags"
                 hasSwitch
-                switchValue={filterByTags}
+                switchValue={switchTagsValue}
                 toggleSwitch={toggleTags}
             />
             <ListItem
                 title="Show me"
-                description={showMe}
+                description={showMeDescription}
                 hasArrow
                 onPress={openShowMeScreen}
             />

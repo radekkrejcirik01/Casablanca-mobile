@@ -31,9 +31,15 @@ import {
     ProfileEditDefaultProps,
     ProfileEditProps
 } from '@components/profile/ProfileEdit/ProfileEdit.props';
+import { updateRequest } from '@utils/Axios/Axios.service';
+import {
+    AboutInterface,
+    ResponseInterface,
+    TagsInterface
+} from '@models/Registration/Registration.interface';
 
 export const ProfileEdit = ({ style }: ProfileEditProps): JSX.Element => {
-    const { about, firstname, birthday, photos, tags } = useSelector(
+    const { about, email, firstname, birthday, photos, tags } = useSelector(
         (state: ReducerProps) => state.user
     );
     const dispatch = useDispatch();
@@ -60,23 +66,33 @@ export const ProfileEdit = ({ style }: ProfileEditProps): JSX.Element => {
     const onCloseModal = () => setModalVisible(false);
 
     const saveTags = useCallback(() => {
+        updateRequest<ResponseInterface, TagsInterface>('user/tags/update', {
+            user: email,
+            tags: tagsValue
+        }).subscribe();
+
         dispatch(setTagsAction(tagsValue));
-    }, [dispatch, tagsValue]);
+    }, [dispatch, email, tagsValue]);
 
     const saveAbout = useCallback(() => {
+        updateRequest<ResponseInterface, AboutInterface>('user/about/update', {
+            email,
+            about: aboutValue
+        }).subscribe();
+
         dispatch(setAboutAction(aboutValue));
-    }, [dispatch, aboutValue]);
+    }, [dispatch, email, aboutValue]);
 
     const onPressSaveButton = useCallback(() => {
-        if (!tagsValue?.length) {
+        if (tagsValue?.length) {
+            if (!isArrayEqual(tagsValue, tags)) {
+                saveTags();
+            }
+            if (aboutValue !== about) {
+                saveAbout();
+            }
+        } else {
             Alert.alert('Please select at least one tag');
-            return;
-        }
-        if (!isArrayEqual(tagsValue, tags)) {
-            saveTags();
-        }
-        if (aboutValue !== about) {
-            saveAbout();
         }
     }, [about, aboutValue, saveAbout, saveTags, tags, tagsValue]);
 
