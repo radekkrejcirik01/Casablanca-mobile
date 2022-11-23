@@ -8,7 +8,7 @@ import { PreloadService } from '@utils/general/PreloadService';
 import { BAR_STYLE } from './App.const';
 
 const App = () => {
-    PreloadService.loadUserObject().catch();
+    PreloadService.init().catch();
 
     return (
         <SafeAreaProvider>

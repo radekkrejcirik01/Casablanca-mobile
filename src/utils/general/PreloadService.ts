@@ -5,25 +5,69 @@ import store from '@store/index';
 import { setUserStateAction, setUserToken } from '@store/UserReducer';
 import { postRequest } from '@utils/Axios/Axios.service';
 import {
+    SwipeGetInterface,
+    SwipeResponseInterface,
     UserGetInterface,
     UserResponseInterface
 } from '@models/Registration/Registration.interface';
 import THEMES from '@constants/THEMES';
 
 class PreloadServiceSingleton {
-    loadUserObject = async () => {
+    email: string = null;
+
+    distance: number = null;
+
+    showMe: number = null;
+
+    filterByTags: number = null;
+
+    tags: Array<string> = null;
+
+    init = async () => {
         const token = await PersistStorage.getItem(PersistStorageKeys.TOKEN);
+        this.email = token;
         store.dispatch(setUserToken(token));
 
         const theme = await PersistStorage.getItem(PersistStorageKeys.THEME);
         store.dispatch(setIsDarkMode(theme === THEMES.DARK));
 
-        if (token) {
-            postRequest<UserResponseInterface, UserGetInterface>('user/get', {
-                email: token
-            }).subscribe((response: UserResponseInterface) => {
+        this.loadUserObject();
+    };
+
+    loadUserObject = () => {
+        if (this.email) {
+            postRequest<UserResponseInterface, UserGetInterface>(
+                'https://w2gdfxt8dc.execute-api.eu-central-1.amazonaws.com/user/get',
+                {
+                    email: this.email
+                }
+            ).subscribe((response: UserResponseInterface) => {
                 if (response?.status) {
+                    this.distance = response.data.distance;
+                    this.showMe = response.data.showMe;
+                    this.filterByTags = response.data.filterByTags;
+                    this.tags = response.data.tags;
                     store.dispatch(setUserStateAction(response.data));
+
+                    this.loadSwipe();
+                }
+            });
+        }
+    };
+
+    loadSwipe = () => {
+        if (this.email) {
+            postRequest<SwipeResponseInterface, SwipeGetInterface>(
+                'https://cb5fb5ckol.execute-api.eu-central-1.amazonaws.com/swipe/get',
+                {
+                    distance: this.distance,
+                    showMe: this.showMe,
+                    filterByTags: this.filterByTags,
+                    tags: this.tags
+                }
+            ).subscribe((response: SwipeResponseInterface) => {
+                if (response?.status) {
+                    console.log(response.data);
                 }
             });
         }

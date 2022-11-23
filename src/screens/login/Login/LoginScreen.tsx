@@ -30,10 +30,13 @@ export const LoginScreen = (): JSX.Element => {
     );
 
     const loginPressed = useCallback(() => {
-        postRequest<UserResponseInterface, LoginInterface>('user/login', {
-            email,
-            password
-        }).subscribe((response: UserResponseInterface) => {
+        postRequest<UserResponseInterface, LoginInterface>(
+            'https://w2gdfxt8dc.execute-api.eu-central-1.amazonaws.com/user/login',
+            {
+                email,
+                password
+            }
+        ).subscribe((response: UserResponseInterface) => {
             if (response?.status) {
                 dispatch(setUserStateAction(response.data));
                 PersistStorage.setItem(PersistStorageKeys.TOKEN, email).catch();

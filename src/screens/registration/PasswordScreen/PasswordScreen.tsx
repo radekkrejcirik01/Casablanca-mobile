@@ -37,7 +37,7 @@ export const PasswordScreen = (): JSX.Element => {
 
     const register = useCallback(() => {
         postRequest<ResponseInterface, RegistrationInterface>(
-            'user/register',
+            'https://w2gdfxt8dc.execute-api.eu-central-1.amazonaws.com/user/register',
             registration
         ).subscribe((response: ResponseInterface) => {
             if (response?.status) {

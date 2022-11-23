@@ -27,13 +27,7 @@ export const postRequest = <T, B>(
     data: B,
     config?: AxiosRequestConfig
 ): Observable<T> =>
-    defer(() =>
-        axiosInstance.post(
-            `https://w2gdfxt8dc.execute-api.eu-central-1.amazonaws.com/${endpoint}`,
-            data,
-            config
-        )
-    ).pipe(
+    defer(() => axiosInstance.post(endpoint, data, config)).pipe(
         map((result: AxiosResponse<T>) => result.data),
         catchError((err: AxiosError) => catchErrorFunction(err))
     );

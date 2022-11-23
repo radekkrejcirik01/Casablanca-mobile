@@ -69,6 +69,31 @@ export interface UserResponseInterface {
         email: string;
         firstname: string;
         birthday: string;
+        about: string;
+        photos: Array<string>;
+        tags: Array<string>;
+        gender: number;
+        showMe: number;
+        distance: number;
+        filterByTags: number;
+        notifications: number;
+    };
+}
+
+export interface SwipeGetInterface {
+    distance: number;
+    showMe: number;
+    filterByTags: number;
+    tags: Array<string>;
+}
+
+export interface SwipeResponseInterface {
+    status: string;
+    message: string;
+    data?: {
+        email: string;
+        firstname: string;
+        birthday: string;
         photos: Array<string>;
         tags: Array<string>;
         gender: string;
