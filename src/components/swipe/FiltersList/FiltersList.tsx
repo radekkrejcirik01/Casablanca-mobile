@@ -14,20 +14,28 @@ import {
 } from '@models/Registration/Registration.interface';
 
 export const FiltersList = (): JSX.Element => {
-    const { distance, email, filterByTags, showMe } = useSelector(
-        (state: ReducerProps) => state.user
-    );
+    const { agePreference, distancePreference, email, filterByTags, showMe } =
+        useSelector((state: ReducerProps) => state.user);
     const dispatch = useDispatch();
 
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.ProfileStack);
 
-    const distanceDescription = useMemo(
-        () => `${distance?.toString()} km`,
-        [distance]
+    const distancePreferenceDescription = useMemo(
+        () => `${distancePreference?.toString()} km`,
+        [distancePreference]
     );
 
-    const openDistanceScreen = useCallback(() => {
-        navigateTo(ProfileStackNavigatorEnum.DistanceScreen);
+    const openDistancePreferenceScreen = useCallback(() => {
+        navigateTo(ProfileStackNavigatorEnum.DistancePreferenceScreen);
+    }, [navigateTo]);
+
+    const agePreferenceDescription = useMemo(
+        () => agePreference?.toString(),
+        [agePreference]
+    );
+
+    const openAgePreferenceScreen = useCallback(() => {
+        navigateTo(ProfileStackNavigatorEnum.AgePreferenceScreen);
     }, [navigateTo]);
 
     const showMeDescription = useMemo((): ShowMeSelectEnum => {
@@ -68,10 +76,16 @@ export const FiltersList = (): JSX.Element => {
     return (
         <>
             <ListItem
-                title="Distance"
-                description={distanceDescription}
+                title="Distance preference"
+                description={distancePreferenceDescription}
                 hasArrow
-                onPress={openDistanceScreen}
+                onPress={openDistancePreferenceScreen}
+            />
+            <ListItem
+                title="Age preference"
+                description={agePreferenceDescription}
+                hasArrow
+                onPress={openAgePreferenceScreen}
             />
             <ListItem
                 title="Show me"

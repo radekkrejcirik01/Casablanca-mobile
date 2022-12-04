@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import COLORS from '@constants/COLORS';
 
-export const DistanceIndicatorStyle = StyleSheet.create({
+export const DistancePreferenceIndicatorStyle = StyleSheet.create({
     distanceText: {
         padding: 10,
         fontSize: 35,
@@ -12,17 +12,8 @@ export const DistanceIndicatorStyle = StyleSheet.create({
         overflow: 'hidden',
         alignSelf: 'center'
     },
-    pointView: {
+    pointContainer: {
         marginTop: 125,
-        paddingHorizontal: 50,
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    pointText: {
-        padding: 15,
-        borderRadius: 20,
-        fontSize: 35,
-        backgroundColor: COLORS.WHITE,
-        overflow: 'hidden'
+        flexDirection: 'row'
     }
 });

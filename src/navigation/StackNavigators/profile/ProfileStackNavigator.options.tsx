@@ -6,8 +6,13 @@ export const AboutTitle: StackNavigationOptions = {
     headerTitle: 'About'
 };
 
-export const DistanceOptions: StackNavigationOptions = {
-    headerTitle: 'Distance',
+export const DistancePreferenceOptions: StackNavigationOptions = {
+    headerTitle: 'Distance preference',
+    headerRight: () => <SaveHeader />
+};
+
+export const AgePreferenceOptions: StackNavigationOptions = {
+    headerTitle: 'Age preference',
     headerRight: () => <SaveHeader />
 };
 

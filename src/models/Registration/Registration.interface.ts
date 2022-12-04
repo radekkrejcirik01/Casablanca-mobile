@@ -12,7 +12,7 @@ export interface RegistrationInterface {
     gender: number;
     showMe: number;
     email: string;
-    distance: number;
+    distancePreference: number;
     filterByTags: number;
     notifications: number;
     password: string;
@@ -43,9 +43,14 @@ export interface NotificationsInterface {
     notifications: number;
 }
 
-export interface DistanceInterface {
+export interface DistancePreferenceInterface {
     email: string;
-    distance: number;
+    distancePreference: number;
+}
+
+export interface AgePreferenceInterface {
+    email: string;
+    agePreference: string;
 }
 
 export interface FilterByTagsInterface {
@@ -74,14 +79,16 @@ export interface UserResponseInterface {
         tags: Array<string>;
         gender: number;
         showMe: number;
-        distance: number;
+        distancePreference: number;
+        agePreference: string;
         filterByTags: number;
         notifications: number;
     };
 }
 
 export interface SwipeGetInterface {
-    distance: number;
+    distancePreference: number;
+    agePreference: string;
     showMe: number;
     filterByTags: number;
     tags: Array<string>;

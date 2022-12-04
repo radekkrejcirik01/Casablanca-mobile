@@ -17,7 +17,8 @@ export interface User {
     tags: Array<string>;
     gender: number;
     showMe: number;
-    distance: number;
+    distancePreference: number;
+    agePreference: string;
     filterByTags: number;
     notifications: number;
     password: string;

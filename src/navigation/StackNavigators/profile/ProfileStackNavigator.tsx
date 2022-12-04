@@ -3,14 +3,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ParamListBase } from '@react-navigation/native';
 import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/ProfileStackNavigator.enum';
 import { NavigationScreenHeader } from '@navigation/StackNavigators/StackNavigator.options';
-import { DistanceScreen } from '@screens/profile/settings/DistanceScreen/DistanceScreen';
+import { DistancePreferenceScreen } from '@screens/profile/settings/DistancePreferenceScreen/DistancePreferenceScreen';
 import {
     AboutTitle,
     AccountTitle,
+    AgePreferenceOptions,
     ChangePasswordTitle,
     CommunityRulesTitle,
     DeleteAccountTitle,
-    DistanceOptions,
+    DistancePreferenceOptions,
     HelpCenterTitle,
     ShowMeOptions
 } from '@navigation/StackNavigators/profile/ProfileStackNavigator.options';
@@ -21,6 +22,7 @@ import { AccountScreen } from '@screens/profile/settings/AccountScreen/AccountSc
 import { ChangePasswordScreen } from '@screens/profile/settings/ChangePasswordScreen/ChangePasswordScreen';
 import { DeleteAccountScreen } from '@screens/profile/settings/DeleteAccountScreen/DeleteAccountScreen';
 import { ShowMeScreen } from '@screens/profile/settings/ShowMeScreen/ShowMeScreen';
+import { AgePreferenceScreen } from '@screens/profile/settings/AgePreferenceScreen/AgePreferenceScreen';
 
 const Profile = createStackNavigator<ParamListBase>();
 
@@ -32,9 +34,20 @@ export const ProfileStackNavigator = (): JSX.Element => (
             options={{ ...NavigationScreenHeader, ...AboutTitle }}
         />
         <Profile.Screen
-            name={ProfileStackNavigatorEnum.DistanceScreen}
-            component={DistanceScreen}
-            options={{ ...NavigationScreenHeader, ...DistanceOptions }}
+            name={ProfileStackNavigatorEnum.DistancePreferenceScreen}
+            component={DistancePreferenceScreen}
+            options={{
+                ...NavigationScreenHeader,
+                ...DistancePreferenceOptions
+            }}
+        />
+        <Profile.Screen
+            name={ProfileStackNavigatorEnum.AgePreferenceScreen}
+            component={AgePreferenceScreen}
+            options={{
+                ...NavigationScreenHeader,
+                ...AgePreferenceOptions
+            }}
         />
         <Profile.Screen
             name={ProfileStackNavigatorEnum.ShowMeScreen}

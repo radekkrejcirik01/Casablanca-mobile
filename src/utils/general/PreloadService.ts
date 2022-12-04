@@ -15,7 +15,9 @@ import THEMES from '@constants/THEMES';
 class PreloadServiceSingleton {
     email: string = null;
 
-    distance: number = null;
+    distancePreference: number = null;
+
+    agePreference: string = null;
 
     showMe: number = null;
 
@@ -43,11 +45,14 @@ class PreloadServiceSingleton {
                 }
             ).subscribe((response: UserResponseInterface) => {
                 if (response?.status) {
-                    this.distance = response.data.distance;
+                    this.distancePreference = response.data.distancePreference;
+                    this.agePreference = response.data.agePreference;
                     this.showMe = response.data.showMe;
                     this.filterByTags = response.data.filterByTags;
                     this.tags = response.data.tags;
                     store.dispatch(setUserStateAction(response.data));
+
+                    console.log(JSON.stringify(response.data));
 
                     this.loadSwipe();
                 }
@@ -60,7 +65,8 @@ class PreloadServiceSingleton {
             postRequest<SwipeResponseInterface, SwipeGetInterface>(
                 'https://cb5fb5ckol.execute-api.eu-central-1.amazonaws.com/swipe/get',
                 {
-                    distance: this.distance,
+                    distancePreference: this.distancePreference,
+                    agePreference: this.agePreference,
                     showMe: this.showMe,
                     filterByTags: this.filterByTags,
                     tags: this.tags

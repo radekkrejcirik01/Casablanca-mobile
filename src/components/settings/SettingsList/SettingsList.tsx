@@ -30,8 +30,14 @@ import {
 } from '@models/Registration/Registration.interface';
 
 export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
-    const { email, showMe, distance, filterByTags, notifications } =
-        useSelector((state: ReducerProps) => state.user);
+    const {
+        agePreference,
+        distancePreference,
+        email,
+        filterByTags,
+        notifications,
+        showMe
+    } = useSelector((state: ReducerProps) => state.user);
     const dispatch = useDispatch();
 
     const { isDarkMode } = useTheme();
@@ -62,13 +68,22 @@ export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
         [dispatch, email]
     );
 
-    const distanceDescription = useMemo(
-        () => `${distance?.toString()} km`,
-        [distance]
+    const distancePreferenceDescription = useMemo(
+        () => `${distancePreference?.toString()} km`,
+        [distancePreference]
     );
 
-    const openDistanceScreen = useCallback(() => {
-        navigateTo(ProfileStackNavigatorEnum.DistanceScreen);
+    const openDistancePreferenceScreen = useCallback(() => {
+        navigateTo(ProfileStackNavigatorEnum.DistancePreferenceScreen);
+    }, [navigateTo]);
+
+    const agePreferenceDescription = useMemo(
+        () => agePreference?.toString(),
+        [agePreference]
+    );
+
+    const openAgePreferenceScreen = useCallback(() => {
+        navigateTo(ProfileStackNavigatorEnum.AgePreferenceScreen);
     }, [navigateTo]);
 
     const switchTagsValue = useMemo(
@@ -153,10 +168,16 @@ export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
                 toggleSwitch={toggleNotification}
             />
             <ListItem
-                title="Distance"
-                description={distanceDescription}
+                title="Distance preference"
+                description={distancePreferenceDescription}
                 hasArrow
-                onPress={openDistanceScreen}
+                onPress={openDistancePreferenceScreen}
+            />
+            <ListItem
+                title="Age preference"
+                description={agePreferenceDescription}
+                hasArrow
+                onPress={openAgePreferenceScreen}
             />
             <ListItem
                 title="Filter by tags"

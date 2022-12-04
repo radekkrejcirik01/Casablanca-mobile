@@ -11,7 +11,8 @@ const initialState: User = {
     about: null,
     gender: null,
     showMe: null,
-    distance: null,
+    distancePreference: null,
+    agePreference: null,
     filterByTags: null,
     notifications: null,
     password: null
@@ -56,8 +57,11 @@ export const UserReducer = createSlice({
         setShowMeAction: (state, action) => {
             state.showMe = action.payload;
         },
-        setDistanceAction: (state, action) => {
-            state.distance = action.payload;
+        setDistancePreferenceAction: (state, action) => {
+            state.distancePreference = action.payload;
+        },
+        setAgePreferenceAction: (state, action) => {
+            state.agePreference = action.payload;
         },
         setFilterByTagsAction: (state, action) => {
             state.filterByTags = action.payload;
@@ -88,7 +92,8 @@ export const {
     setAboutAction,
     setGenderAction,
     setShowMeAction,
-    setDistanceAction,
+    setDistancePreferenceAction,
+    setAgePreferenceAction,
     setFilterByTagsAction,
     setNotificationsAction,
     setPasswordAction,
