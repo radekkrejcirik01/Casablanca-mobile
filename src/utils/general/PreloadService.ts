@@ -52,8 +52,6 @@ class PreloadServiceSingleton {
                     this.tags = response.data.tags;
                     store.dispatch(setUserStateAction(response.data));
 
-                    console.log(JSON.stringify(response.data));
-
                     this.loadSwipe();
                 }
             });
@@ -73,7 +71,6 @@ class PreloadServiceSingleton {
                 }
             ).subscribe((response: SwipeResponseInterface) => {
                 if (response?.status) {
-                    console.log(response.data);
                 }
             });
         }

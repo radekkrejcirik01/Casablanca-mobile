@@ -162,7 +162,7 @@ export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
                 onPress={openAboutScreen}
             />
             <ListItem
-                title="Push notification"
+                title="Receive notification"
                 switchValue={switchNotificationsValue}
                 hasSwitch
                 toggleSwitch={toggleNotification}

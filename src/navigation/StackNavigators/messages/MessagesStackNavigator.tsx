@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ParamListBase } from '@react-navigation/native';
 import { NavigationScreenHeader } from '@navigation/StackNavigators/StackNavigator.options';
 import { MessagesStackNavigatorEnum } from '@navigation/StackNavigators/messages/MessagesStackNavigator.enum';
-import { NotificationScreen } from '@screens/messages/NotificationScreen/NotificationScreen';
+import { NotificationsScreen } from '@screens/messages/NotificationsScreen/NotificationsScreen';
 import { ChatScreen } from '@screens/messages/ChatScreen/ChatScreen';
 import {
     ChatScreenOptions,
@@ -15,8 +15,8 @@ const Messages = createStackNavigator<ParamListBase>();
 export const MessagesStackNavigator = (): JSX.Element => (
     <Messages.Navigator>
         <Messages.Screen
-            name={MessagesStackNavigatorEnum.NotificationScreen}
-            component={NotificationScreen}
+            name={MessagesStackNavigatorEnum.NotificationsScreen}
+            component={NotificationsScreen}
             options={{ ...NavigationScreenHeader, ...NotificationsTitle }}
         />
         <Messages.Screen

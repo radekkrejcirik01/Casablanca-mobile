@@ -12,7 +12,7 @@ export const MessagesHeader = (): JSX.Element => {
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.MessagesStack);
 
     const openNotificationScreen = () => {
-        navigateTo(MessagesStackNavigatorEnum.NotificationScreen);
+        navigateTo(MessagesStackNavigatorEnum.NotificationsScreen);
     };
 
     return (

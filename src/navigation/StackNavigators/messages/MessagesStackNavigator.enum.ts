@@ -1,4 +1,4 @@
 export enum MessagesStackNavigatorEnum {
-    NotificationScreen = 'NotificationScreen',
+    NotificationsScreen = 'NotificationsScreen',
     ChatScreen = 'ChatScreen'
 }
