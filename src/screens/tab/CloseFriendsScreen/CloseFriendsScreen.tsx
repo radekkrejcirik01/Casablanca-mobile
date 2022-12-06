@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Title } from '@components/general/Title/Title';
 import { CloseFriendsScreenStyle } from '@screens/tab/CloseFriendsScreen/CloseFriendsScreen.style';
 import { CardList } from '@components/closeFriends/CardList/CardList';
@@ -9,8 +9,12 @@ import {
     TITLE
 } from '@screens/tab/CloseFriendsScreen/CloseFriendsScreen.const';
 import { Screen } from '@components/general/Screen/Screen';
+import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
+import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 
 export const CloseFriendsScreen = (): JSX.Element => {
+    const { modalVisible, showModal, hideModal } = useModal();
+
     const data = [
         {
             name: 'Radek + 1',
@@ -24,11 +28,21 @@ export const CloseFriendsScreen = (): JSX.Element => {
         }
     ];
 
-    const { modalVisible, showModal, hideModal } = useModal();
-
     useEffect(() => {
-        showModal();
+        PersistStorage.getItem(PersistStorageKeys.CLOSE_FRIENDS_INFO).then(
+            (isRead: string) => {
+                if (!isRead) {
+                    showModal();
+                }
+            }
+        );
     }, [showModal]);
+
+    const onClose = useCallback(() => {
+        hideModal();
+        const key = PersistStorageKeys.CLOSE_FRIENDS_INFO;
+        PersistStorage.setItem(key, key).catch();
+    }, [hideModal]);
 
     return (
         <Screen style={CloseFriendsScreenStyle.screen}>
@@ -38,7 +52,7 @@ export const CloseFriendsScreen = (): JSX.Element => {
                 title={TITLE}
                 description={DESCRIPTION}
                 isVisible={modalVisible}
-                onClose={hideModal}
+                onClose={onClose}
             />
         </Screen>
     );
