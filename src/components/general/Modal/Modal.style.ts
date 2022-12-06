@@ -5,6 +5,7 @@ export const ModalStyle = StyleSheet.create({
         margin: 0
     },
     view: {
-        flex: 1
+        flex: 1,
+        justifyContent: 'center'
     }
 });

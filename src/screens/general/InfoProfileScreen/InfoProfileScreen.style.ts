@@ -1,8 +1,10 @@
 import { StyleSheet } from 'react-native';
+import COLORS from '@constants/COLORS';
 
 export const InfoProfileScreenStyle = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        backgroundColor: COLORS.BLACK
     },
     iconButton: {
         top: 15,
