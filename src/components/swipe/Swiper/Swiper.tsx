@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { View } from 'react-native';
+import { StyleProp, View, ViewStyle } from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
 import { SwiperCard } from '@components/swipe/SwiperCard/SwiperCard';
 import {
@@ -12,7 +12,7 @@ import { useLottie } from '@hooks/useLottie';
 import { Lottie } from '@components/general/Lottie/Lottie';
 
 export const Swiper = ({ data }: SwiperProps): JSX.Element => {
-    const { name } = data[0];
+    const { email } = data[0];
 
     const { lottieRef, lottieReset, lottiePlay } = useLottie(2, 50);
 
@@ -22,7 +22,7 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
         onPageScrollStateChanged,
         onPageSelected,
         onCardTouch
-    } = usePullToRefresh(name);
+    } = usePullToRefresh(email);
 
     useEffect(() => {
         if (isAnimation) {
@@ -33,7 +33,7 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
     }, [isAnimation, lottiePlay, lottieReset]);
 
     const swiperCardStyle = useCallback(
-        (index: number) =>
+        (index: number): StyleProp<ViewStyle> =>
             index === 0
                 ? SwiperStyle.topCard
                 : data?.length - 1 === index && SwiperStyle.bottomCard,
@@ -59,7 +59,7 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
                     const style = swiperCardStyle(index);
                     return (
                         <SwiperCard
-                            key={card.name}
+                            key={card.email}
                             card={card}
                             cardIndex={index}
                             onCardTouch={onCardTouch}

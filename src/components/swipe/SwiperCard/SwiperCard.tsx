@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View } from 'react-native';
 import {
     State,
@@ -32,26 +32,28 @@ export const SwiperCard = ({
 
     const [pagePosition, setPagePosition] = useState<number>(0);
 
-    const onDoubleTap = (event: TapGestureHandlerGestureEvent) => {
-        if (hasLike) {
-            if (cardIndex < 2) {
-                onCardTouch(card.name);
+    const onDoubleTap = useCallback(
+        (event: TapGestureHandlerGestureEvent) => {
+            if (hasLike) {
+                if (cardIndex < 2) {
+                    onCardTouch(card.email);
+                }
+                // Trigger like event
+                if (event.nativeEvent.state === State.ACTIVE) {
+                    lottiePlay();
+                }
             }
-            // Trigger like event
-            if (event.nativeEvent.state === State.ACTIVE) {
-                lottiePlay();
-            }
-        }
-    };
+        },
+        [card?.email, cardIndex, hasLike, lottiePlay, onCardTouch]
+    );
 
-    const onRemoveLike = () => {
+    const onRemoveLike = useCallback(() => {
         lottieReset();
         console.log('onRemoveLike');
-    };
+    }, [lottieReset]);
 
-    const onPageSelected = (event: ViewPagerOnPageSelectedEvent) => {
+    const onPageSelected = (event: ViewPagerOnPageSelectedEvent) =>
         setPagePosition(event.nativeEvent.position);
-    };
 
     return (
         <TapGestureHandler onHandlerStateChange={onDoubleTap} numberOfTaps={2}>
@@ -60,9 +62,9 @@ export const SwiperCard = ({
                     style={SwiperCardStyle.viewPager}
                     onPageSelected={onPageSelected}
                 >
-                    {card?.images?.map((uri: string, index: number) => (
+                    {card?.photos?.map((uri: string, index: number) => (
                         <SwiperCardItem
-                            key={uri + index.toString()}
+                            key={uri}
                             index={index}
                             item={card}
                             uri={uri}
@@ -79,7 +81,7 @@ export const SwiperCard = ({
                     />
                 )}
                 <DotProgressBar
-                    pagesNumber={card?.images?.length}
+                    pagesNumber={card?.photos?.length}
                     currentPage={pagePosition}
                     style={SwiperCardStyle.dotProgressBar}
                 />

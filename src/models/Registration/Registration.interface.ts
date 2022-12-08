@@ -1,3 +1,5 @@
+import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
+
 export interface ResponseInterface {
     status: string;
     message: string;
@@ -87,6 +89,7 @@ export interface UserResponseInterface {
 }
 
 export interface SwipeGetInterface {
+    email: string;
     distancePreference: number;
     agePreference: string;
     showMe: number;
@@ -97,13 +100,5 @@ export interface SwipeGetInterface {
 export interface SwipeResponseInterface {
     status: string;
     message: string;
-    data?: {
-        email: string;
-        firstname: string;
-        birthday: string;
-        photos: Array<string>;
-        tags: Array<string>;
-        gender: string;
-        showme: string;
-    };
+    data?: Array<CardDataProps>;
 }
