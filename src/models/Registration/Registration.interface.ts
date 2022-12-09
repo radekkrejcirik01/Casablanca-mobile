@@ -102,3 +102,9 @@ export interface SwipeResponseInterface {
     message: string;
     data?: Array<CardDataProps>;
 }
+
+export interface SwipeLikeInterface {
+    email: string;
+    user: string;
+    value: number;
+}

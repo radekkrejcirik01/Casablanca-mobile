@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { View } from 'react-native';
+import { useSelector } from 'react-redux';
 import {
     State,
     TapGestureHandler,
@@ -17,6 +18,13 @@ import { DotProgressBar } from '@components/general/DotProgressBar/DotProgressBa
 import { SwiperCardItem } from '@components/swipe/SwiperCardItem/SwiperCardItem';
 import { Lottie } from '@components/general/Lottie/Lottie';
 import { useLottie } from '@hooks/useLottie';
+import { postRequest } from '@utils/Axios/Axios.service';
+import {
+    ResponseInterface,
+    SwipeLikeInterface
+} from '@models/Registration/Registration.interface';
+import { ReducerProps } from '@store/index.props';
+import { SwiperCardEnum } from '@components/swipe/SwiperCard/SwiperCard.enum';
 
 export const SwiperCard = ({
     card,
@@ -25,12 +33,28 @@ export const SwiperCard = ({
     hasLike,
     style
 }: SwiperCardProps): JSX.Element => {
+    const { email } = useSelector((state: ReducerProps) => state.user);
+
     const { lottieRef, lottiePlay, lottieReset, isLottieActive } = useLottie(
         2,
         30
     );
 
     const [pagePosition, setPagePosition] = useState<number>(0);
+
+    const performLike = useCallback(
+        (value: SwiperCardEnum) => {
+            postRequest<ResponseInterface, SwipeLikeInterface>(
+                'https://cb5fb5ckol.execute-api.eu-central-1.amazonaws.com/swipe/like',
+                {
+                    email,
+                    user: card.email,
+                    value
+                }
+            ).subscribe();
+        },
+        [card.email, email]
+    );
 
     const onDoubleTap = useCallback(
         (event: TapGestureHandlerGestureEvent) => {
@@ -41,16 +65,17 @@ export const SwiperCard = ({
                 // Trigger like event
                 if (event.nativeEvent.state === State.ACTIVE) {
                     lottiePlay();
+                    performLike(SwiperCardEnum.LIKE);
                 }
             }
         },
-        [card?.email, cardIndex, hasLike, lottiePlay, onCardTouch]
+        [card?.email, cardIndex, hasLike, lottiePlay, onCardTouch, performLike]
     );
 
     const onRemoveLike = useCallback(() => {
         lottieReset();
-        console.log('onRemoveLike');
-    }, [lottieReset]);
+        performLike(SwiperCardEnum.REMOVE_LIKE);
+    }, [lottieReset, performLike]);
 
     const onPageSelected = (event: ViewPagerOnPageSelectedEvent) =>
         setPagePosition(event.nativeEvent.position);
