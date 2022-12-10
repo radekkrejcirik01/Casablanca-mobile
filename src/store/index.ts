@@ -5,6 +5,7 @@ import SaveReducer from '@store/SaveReducer';
 import ModalReducer from '@store/ModalReducer';
 import ThemeReducer from '@store/ThemeReducer';
 import BottomBarReducer from '@store/BottomBarReducer';
+import SwiperReducer from '@store/SwiperReducer';
 
 export default configureStore({
     reducer: {
@@ -13,6 +14,7 @@ export default configureStore({
         save: SaveReducer,
         modal: ModalReducer,
         theme: ThemeReducer,
-        bottomBar: BottomBarReducer
+        bottomBar: BottomBarReducer,
+        swiper: SwiperReducer
     }
 });

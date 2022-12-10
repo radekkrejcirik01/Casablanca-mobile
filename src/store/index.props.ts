@@ -5,6 +5,7 @@ export interface ReducerProps {
     modal: Modal;
     theme: Theme;
     bottomBar: BottomBar;
+    swiper: Swiper;
 }
 
 export interface User {
@@ -44,4 +45,9 @@ export interface Theme {
 
 export interface BottomBar {
     isVisible: boolean;
+}
+
+export interface Swiper {
+    swipedUsers: Array<string>;
+    likedUsers: Array<string>;
 }

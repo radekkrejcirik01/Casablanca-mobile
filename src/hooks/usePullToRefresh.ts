@@ -7,7 +7,8 @@ import {
 import { useHaptic } from '@hooks/useHaptic';
 
 export const usePullToRefresh = (
-    index: string
+    index: string,
+    onRefresh: () => void
 ): {
     isAnimation: boolean;
     onPageScroll: (event: ViewPagerOnPageScrollEvent) => void;
@@ -27,10 +28,6 @@ export const usePullToRefresh = (
 
     const { hapticTouch } = useHaptic();
 
-    const onRefresh = () => {
-        console.log('onRefresh');
-    };
-
     useEffect(() => {
         if (
             touchIndex === index &&
@@ -46,13 +43,14 @@ export const usePullToRefresh = (
             setIsScrollDown(false);
         }
     }, [
+        hapticTouch,
+        isAnimation,
         index,
-        touchIndex,
+        isScrollDown,
+        onRefresh,
         scrollOffset,
         scrollPage,
-        isScrollDown,
-        isAnimation,
-        hapticTouch
+        touchIndex
     ]);
 
     useEffect(() => {
