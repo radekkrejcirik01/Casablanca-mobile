@@ -4,10 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { InfoProfileScreenStyle } from '@screens/general/InfoProfileScreen/InfoProfileScreen.style';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { IconButton } from '@components/general/IconButton/IconButton';
-import {
-    InfoProfileScreenDefaultProps,
-    InfoProfileScreenProps
-} from '@screens/general/InfoProfileScreen/InfoProfileScreen.props';
+import { InfoProfileScreenProps } from '@screens/general/InfoProfileScreen/InfoProfileScreen.props';
 import { SwiperCard } from '@components/swipe/SwiperCard/SwiperCard';
 
 export const InfoProfileScreen = ({
@@ -40,5 +37,3 @@ export const InfoProfileScreen = ({
         </SafeAreaView>
     );
 };
-
-InfoProfileScreen.deafultProps = InfoProfileScreenDefaultProps;
