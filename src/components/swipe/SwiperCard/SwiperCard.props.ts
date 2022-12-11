@@ -7,16 +7,14 @@ export interface SwiperCardProps {
     cardIndex?: number;
     onCardTouch?: (name: string) => void;
     hasLike?: boolean;
-    performLike: (user: string, value: SwiperCardEnum) => void;
+    performLike?: (user: string, value: SwiperCardEnum) => void;
     style?: StyleProp<ViewStyle>;
 }
 
-export const SwiperCardDefaultProps: Omit<
-    SwiperCardProps,
-    'card' | 'performLike'
-> = {
+export const SwiperCardDefaultProps: Omit<SwiperCardProps, 'card'> = {
     cardIndex: 0,
-    onCardTouch: () => {},
+    onCardTouch: (name: string) => {},
     hasLike: true,
+    performLike: (user: string, value: SwiperCardEnum) => {},
     style: {}
 };

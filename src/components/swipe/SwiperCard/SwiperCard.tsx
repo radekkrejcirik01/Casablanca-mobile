@@ -37,7 +37,7 @@ export const SwiperCard = ({
     const onDoubleTap = useCallback(
         (event: TapGestureHandlerGestureEvent) => {
             if (hasLike) {
-                if (cardIndex < 2) {
+                if (event.nativeEvent.state === State.BEGAN && cardIndex < 2) {
                     onCardTouch(card.email);
                 }
                 // Trigger like event
@@ -59,7 +59,11 @@ export const SwiperCard = ({
         setPagePosition(event.nativeEvent.position);
 
     return (
-        <TapGestureHandler onHandlerStateChange={onDoubleTap} numberOfTaps={2}>
+        <TapGestureHandler
+            onHandlerStateChange={onDoubleTap}
+            numberOfTaps={2}
+            maxDurationMs={200}
+        >
             <View style={[SwiperCardStyle.container, style]}>
                 <ViewPager
                     style={SwiperCardStyle.viewPager}

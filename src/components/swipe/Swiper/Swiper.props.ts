@@ -3,7 +3,7 @@ export interface SwiperProps {
 }
 
 export interface CardDataProps {
-    email: string;
+    email?: string;
     firstname: string;
     birthday: string;
     about: string;

@@ -21,7 +21,6 @@ import { CheckProfileButton } from '@components/profile/CheckProfileButton/Check
 import { Modal } from '@components/general/Modal/Modal';
 import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 import { InfoProfileScreen } from '@screens/general/InfoProfileScreen/InfoProfileScreen';
-import { getAge } from '@functions/getAge';
 import { PhotoHorizontalList } from '@components/profile/PhotoHorizontalList/PhotoHorizontalList';
 import { ProfileEditStyle } from '@components/profile/ProfileEdit/ProfileEdit.style';
 import { Title } from '@components/general/Title/Title';
@@ -133,14 +132,15 @@ export const ProfileEdit = ({ style }: ProfileEditProps): JSX.Element => {
 
     const InfoModalContent = useCallback((): JSX.Element => {
         const info: CardDataProps = {
-            images: photos,
-            name: firstname,
-            age: getAge(birthday)?.toString(),
+            firstname,
+            birthday,
+            about: aboutValue,
+            photos,
             tags: tagsValue
         };
 
         return <InfoProfileScreen onClose={onCloseModal} info={info} />;
-    }, [birthday, firstname, photos, tagsValue]);
+    }, [aboutValue, birthday, firstname, photos, tagsValue]);
 
     const onCheckProfile = () => {
         setModalVisible(true);

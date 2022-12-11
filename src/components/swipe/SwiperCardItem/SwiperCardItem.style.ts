@@ -4,12 +4,9 @@ import COLORS from '@constants/COLORS';
 export const SwiperCardItemStyle = StyleSheet.create({
     image: {
         width: '100%',
-        height: '100%'
-    },
-    tagView: {
-        marginLeft: 15,
-        marginBottom: 60,
-        flex: 1,
+        height: '100%',
+        paddingBottom: 60,
+        paddingLeft: 15,
         justifyContent: 'flex-end'
     },
     tagInfoView: {
@@ -18,6 +15,7 @@ export const SwiperCardItemStyle = StyleSheet.create({
         paddingHorizontal: 10,
         borderRadius: 20,
         backgroundColor: COLORS.MAIN_BLUE,
+        maxWidth: '75%',
         flexDirection: 'row',
         alignSelf: 'flex-start'
     },
