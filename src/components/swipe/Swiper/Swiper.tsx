@@ -90,10 +90,18 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
     }, [isAnimation, lottiePlay, lottieReset]);
 
     const swiperCardStyle = useCallback(
-        (index: number): StyleProp<ViewStyle> =>
-            index === 0
-                ? SwiperStyle.topCard
-                : data?.length - 1 === index && SwiperStyle.bottomCard,
+        (index: number): StyleProp<ViewStyle> => {
+            if (data?.length === 1) {
+                return [SwiperStyle.topCard, SwiperStyle.bottomCard];
+            }
+            if (index === 0) {
+                return SwiperStyle.topCard;
+            }
+            if (index === data?.length - 1) {
+                return SwiperStyle.bottomCard;
+            }
+            return null;
+        },
         [data?.length]
     );
 
