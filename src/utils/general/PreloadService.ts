@@ -1,3 +1,4 @@
+import messaging from '@react-native-firebase/messaging';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { setIsDarkMode } from '@store/ThemeReducer';
@@ -13,6 +14,17 @@ import THEMES from '@constants/THEMES';
 class PreloadServiceSingleton {
     email: string = null;
 
+    requestUserPermission = async () => {
+        const authStatus = await messaging().requestPermission();
+        const enabled =
+            authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+            authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+        if (enabled) {
+            console.log('Authorization status:', authStatus);
+        }
+    };
+
     init = async () => {
         const token = await PersistStorage.getItem(PersistStorageKeys.TOKEN);
         this.email = token;
@@ -22,6 +34,8 @@ class PreloadServiceSingleton {
         store.dispatch(setIsDarkMode(theme === THEMES.DARK));
 
         this.loadUserObject();
+
+        await this.requestUserPermission();
     };
 
     loadUserObject = () => {

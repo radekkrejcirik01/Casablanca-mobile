@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "455200264822",
+    "project_id": "casablanca-82841",
+    "storage_bucket": "casablanca-82841.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:455200264822:android:67bedbd9f274cb58b08557",
+        "android_client_info": {
+          "package_name": "com.casablanca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "455200264822-r6pro4vga6sr002q2lgob3d5vbsthol8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARyCcG4pu2SjE0-1AgaOY8n9JgrANnBqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "455200264822-r6pro4vga6sr002q2lgob3d5vbsthol8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "455200264822-u8btlmpnajvu6o6ggm0lupfnpa8dkcsn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.name.Casablanca"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

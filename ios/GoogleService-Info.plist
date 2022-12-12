@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>455200264822-u8btlmpnajvu6o6ggm0lupfnpa8dkcsn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.455200264822-u8btlmpnajvu6o6ggm0lupfnpa8dkcsn</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCTVLPIR5PeSYUT2WsB3l5bLMaeaen_QoQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>455200264822</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.name.Casablanca</string>
+	<key>PROJECT_ID</key>
+	<string>casablanca-82841</string>
+	<key>STORAGE_BUCKET</key>
+	<string>casablanca-82841.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:455200264822:ios:498ccce9c09fed6fb08557</string>
+</dict>
+</plist>
