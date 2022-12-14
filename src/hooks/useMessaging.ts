@@ -2,6 +2,11 @@ import { useEffect, useState } from 'react';
 import messaging from '@react-native-firebase/messaging';
 import { useSelector } from 'react-redux';
 import { ReducerProps } from '@store/index.props';
+import { postRequest } from '@utils/Axios/Axios.service';
+import {
+    RegisterDeviceInterface,
+    ResponseInterface
+} from '@models/Registration/Registration.interface';
 
 export const useMessaging = (): {
     requestUserPermission: () => void;
@@ -38,9 +43,15 @@ export const useMessaging = (): {
 
     useEffect(() => {
         if (fcmToken) {
-            // Trigger update token api
+            postRequest<ResponseInterface, RegisterDeviceInterface>(
+                'https://43bblrwkdc.execute-api.eu-central-1.amazonaws.com/pushnotifications/registerDevice',
+                {
+                    email,
+                    deviceToken: fcmToken
+                }
+            ).subscribe();
         }
-    }, [fcmToken]);
+    }, [email, fcmToken]);
 
     return { requestUserPermission };
 };

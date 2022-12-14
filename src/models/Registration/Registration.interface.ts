@@ -108,3 +108,8 @@ export interface SwipeLikeInterface {
     user: string;
     value: number;
 }
+
+export interface RegisterDeviceInterface {
+    email: string;
+    deviceToken: string;
+}
