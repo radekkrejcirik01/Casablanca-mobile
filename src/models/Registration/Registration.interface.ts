@@ -65,6 +65,11 @@ export interface ShowMeInterface {
     showMe: number;
 }
 
+export interface LastActiveInterface {
+    email: string;
+    lastActive: string;
+}
+
 export interface UserGetInterface {
     email: string;
 }

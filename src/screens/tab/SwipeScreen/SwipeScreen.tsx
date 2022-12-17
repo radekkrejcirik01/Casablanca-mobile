@@ -11,6 +11,8 @@ import {
     SwipeResponseInterface
 } from '@models/Registration/Registration.interface';
 import { ReducerProps } from '@store/index.props';
+import { useLastActive } from '@hooks/useLastActive';
+import { useMessaging } from '@hooks/useMessaging';
 
 export const SwipeScreen = (): JSX.Element => {
     const {
@@ -21,6 +23,9 @@ export const SwipeScreen = (): JSX.Element => {
         showMe,
         tags
     } = useSelector((state: ReducerProps) => state.user);
+
+    useLastActive();
+    useMessaging();
 
     const [data, setData] = useState<Array<CardDataProps>>([]);
 
