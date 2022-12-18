@@ -9,4 +9,5 @@ export interface CardDataProps {
     about: string;
     photos: Array<string>;
     tags: Array<string>;
+    lastActive: string;
 }

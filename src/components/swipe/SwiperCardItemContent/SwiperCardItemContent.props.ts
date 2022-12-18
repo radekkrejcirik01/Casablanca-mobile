@@ -1,7 +1,7 @@
 import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 
-export interface SwiperCardItemProps {
+export interface SwiperCardItemContentProps {
     index: number;
     item: CardDataProps;
-    uri: string;
+    pressedContent: boolean;
 }
