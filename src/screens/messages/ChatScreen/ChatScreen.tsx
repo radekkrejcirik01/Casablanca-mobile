@@ -10,6 +10,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ReducerProps } from '@store/index.props';
 import { setModalVisible } from '@store/ModalReducer';
 import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
+import { postRequest } from '@utils/Axios/Axios.service';
+import {
+    NotifyDeviceInterface,
+    ResponseInterface
+} from '@models/Registration/Registration.interface';
 
 export const ChatScreen = (): JSX.Element => {
     const dispatch = useDispatch();
@@ -45,7 +50,7 @@ export const ChatScreen = (): JSX.Element => {
         { sender: 'zuzka@gmail.com', name: 'zuzka', message: 'zprava2' },
         { sender: 'radek@gmail.com', name: 'radek', message: 'zprava' },
         { sender: 'zuzka@gmail.com', name: 'zuzka', message: 'zprava2' },
-        { sender: 'radek@gmail.com', name: 'radek', message: 'zprava' },
+        { sender: 'radek@gmail.com', namer: 'radek', message: 'zprava' },
         { sender: 'zuzka@gmail.com', name: 'zuzka', message: 'zprava2' },
         { sender: 'radek@gmail.com', name: 'radek', message: 'zprava' },
         { sender: 'zuzka@gmail.com', name: 'zuzka', message: 'zprava2' },
@@ -81,7 +86,12 @@ export const ChatScreen = (): JSX.Element => {
     ];
 
     const onSend = (value: string) => {
-        console.log(value);
+        postRequest<ResponseInterface, NotifyDeviceInterface>(
+            'https://43bblrwkdc.execute-api.eu-central-1.amazonaws.com/pushnotifications/notify',
+            {
+                token: 'cqoJ3xrI1Ul7tHF9Mp4jce:APA91bG6b-cKd648nJtuI-4lqljsAdOdMSzMlb-KadkGNs96CA6ZX1ZJliEC5aShDHfjXux-rVRKt6-E4vemMj0f2vyFat3qhfEmC2XQgZgrMIgG8TdA5F57Xj4vjm2UBA0FYvPxZNxX'
+            }
+        ).subscribe();
     };
 
     return (

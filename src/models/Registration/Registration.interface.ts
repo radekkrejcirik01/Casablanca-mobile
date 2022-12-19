@@ -118,3 +118,7 @@ export interface RegisterDeviceInterface {
     email: string;
     deviceToken: string;
 }
+
+export interface NotifyDeviceInterface {
+    token: string;
+}

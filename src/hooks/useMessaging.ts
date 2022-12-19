@@ -13,16 +13,20 @@ export const useMessaging = (): {
 } => {
     const { email } = useSelector((state: ReducerProps) => state.user);
 
+    const [authorizationStatus, setIsAuthorizationStatus] =
+        useState<boolean>(false);
     const [fcmToken, setFcmToken] = useState<string>();
 
     const requestUserPermission = async () => {
-        await messaging().requestPermission();
+        const status = await messaging().requestPermission();
+        setIsAuthorizationStatus(status === 1);
     };
 
     const getDeviceToken = async () => {
         await messaging()
             .getToken()
             .then((token: string) => {
+                console.log(token);
                 setFcmToken(token);
             });
     };
@@ -36,10 +40,15 @@ export const useMessaging = (): {
     useEffect(() => {
         if (email) {
             requestUserPermission().catch();
+        }
+    }, [email]);
+
+    useEffect(() => {
+        if (email && authorizationStatus) {
             getDeviceToken().catch();
             onTokenRefresh();
         }
-    }, [email]);
+    }, [authorizationStatus, email]);
 
     useEffect(() => {
         if (fcmToken) {

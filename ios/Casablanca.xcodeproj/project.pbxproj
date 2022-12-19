@@ -43,6 +43,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Casablanca/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B37ED898EE668B42ACDA10EE /* Pods-Casablanca-CasablancaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Casablanca-CasablancaTests.release.xcconfig"; path = "Target Support Files/Pods-Casablanca-CasablancaTests/Pods-Casablanca-CasablancaTests.release.xcconfig"; sourceTree = "<group>"; };
 		BA1E29522947C395009C7F3C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BABD993A2950FDA100457278 /* Casablanca.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Casablanca.entitlements; path = Casablanca/Casablanca.entitlements; sourceTree = "<group>"; };
 		E47C85E972D4FFA96FEC2E5F /* Pods-Casablanca.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Casablanca.release.xcconfig"; path = "Target Support Files/Pods-Casablanca/Pods-Casablanca.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FD3755DB2ACBA828F79DF6D4 /* Pods-Casablanca-CasablancaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Casablanca-CasablancaTests.debug.xcconfig"; path = "Target Support Files/Pods-Casablanca-CasablancaTests/Pods-Casablanca-CasablancaTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -88,6 +89,7 @@
 		13B07FAE1A68108700A75B9A /* Casablanca */ = {
 			isa = PBXGroup;
 			children = (
+				BABD993A2950FDA100457278 /* Casablanca.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -465,6 +467,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Casablanca/Casablanca.entitlements;
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = QHEV58KVJ8;
 				ENABLE_BITCODE = NO;
@@ -492,6 +495,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Casablanca/Casablanca.entitlements;
 				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = QHEV58KVJ8;
 				INFOPLIST_FILE = Casablanca/Info.plist;

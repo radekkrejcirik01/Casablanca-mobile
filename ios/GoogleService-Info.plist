@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>455200264822-u8btlmpnajvu6o6ggm0lupfnpa8dkcsn.apps.googleusercontent.com</string>
+	<string>455200264822-564fdv6aqufm9j4u96t66ovk4f1debd7.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.455200264822-u8btlmpnajvu6o6ggm0lupfnpa8dkcsn</string>
+	<string>com.googleusercontent.apps.455200264822-564fdv6aqufm9j4u96t66ovk4f1debd7</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCTVLPIR5PeSYUT2WsB3l5bLMaeaen_QoQ</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.name.Casablanca</string>
+	<string>organization.casablanca.com</string>
 	<key>PROJECT_ID</key>
 	<string>casablanca-82841</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:455200264822:ios:498ccce9c09fed6fb08557</string>
+	<string>1:455200264822:ios:6414a34f824d551bb08557</string>
 </dict>
 </plist>
