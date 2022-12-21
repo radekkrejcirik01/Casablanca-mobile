@@ -23,19 +23,61 @@ import { SwiperCardEnum } from '@components/swipe/SwiperCard/SwiperCard.enum';
 import { postRequest } from '@utils/Axios/Axios.service';
 import {
     ResponseInterface,
-    SwipeLikeInterface
+    SwipeGetInterface,
+    SwipeLikeInterface,
+    SwipeResponseInterface
 } from '@models/Registration/Registration.interface';
 
 export const Swiper = ({ data }: SwiperProps): JSX.Element => {
-    const { email } = useSelector((state: ReducerProps) => state.user);
+    const {
+        agePreference,
+        distancePreference,
+        email,
+        filterByTags,
+        showMe,
+        tags
+    } = useSelector((state: ReducerProps) => state.user);
     const { likedUsers, swipedUsers } = useSelector(
         (state: ReducerProps) => state.swiper
     );
     const dispatch = useDispatch();
 
     const [currentUser, setCurrentUser] = useState<string>(null);
+    const [swiperCardData, setSwiperCardData] = useState(data);
+    const [renderSate, setRenderState] = useState(0);
 
     const indexEmail = data[0].email;
+
+    const loadMore = useCallback(() => {
+        postRequest<SwipeResponseInterface, SwipeGetInterface>(
+            'https://cb5fb5ckol.execute-api.eu-central-1.amazonaws.com/swipe/get',
+            {
+                email,
+                distancePreference,
+                agePreference,
+                showMe,
+                filterByTags,
+                tags
+            }
+        ).subscribe((response: SwipeResponseInterface) => {
+            if (response?.status) {
+                const responseData = response.data;
+                responseData.shift();
+                data.push(...responseData);
+                setSwiperCardData(data);
+                setRenderState(renderSate + 1);
+            }
+        });
+    }, [
+        agePreference,
+        data,
+        distancePreference,
+        email,
+        filterByTags,
+        renderSate,
+        showMe,
+        tags
+    ]);
 
     const performLike = useCallback(
         (user: string, value: SwiperCardEnum) => {
@@ -56,9 +98,16 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
                     user,
                     value
                 }
-            ).subscribe();
+            ).subscribe(() => {
+                if (
+                    currentUser ===
+                    swiperCardData[swiperCardData.length - 2].email
+                ) {
+                    loadMore();
+                }
+            });
         },
-        [email, dispatch, likedUsers]
+        [currentUser, dispatch, email, likedUsers, loadMore, swiperCardData]
     );
 
     const swiped = useCallback(() => {
@@ -118,6 +167,20 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
         [currentUser, data, onPageSelected, swiped]
     );
 
+    const items = swiperCardData.map((card: CardDataProps, index: number) => {
+        const style = swiperCardStyle(index);
+        return (
+            <SwiperCard
+                key={card.email}
+                card={card}
+                cardIndex={index}
+                onCardTouch={onCardTouch}
+                performLike={performLike}
+                style={style}
+            />
+        );
+    });
+
     return (
         <View style={SwiperStyle.container}>
             <Lottie
@@ -133,19 +196,7 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
                 onPageSelected={onSwipe}
                 style={SwiperStyle.viewPager}
             >
-                {data.map((card: CardDataProps, index: number) => {
-                    const style = swiperCardStyle(index);
-                    return (
-                        <SwiperCard
-                            key={card.email}
-                            card={card}
-                            cardIndex={index}
-                            onCardTouch={onCardTouch}
-                            performLike={performLike}
-                            style={style}
-                        />
-                    );
-                })}
+                {items}
             </ViewPager>
         </View>
     );
