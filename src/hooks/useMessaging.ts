@@ -26,7 +26,6 @@ export const useMessaging = (): {
         await messaging()
             .getToken()
             .then((token: string) => {
-                console.log(token);
                 setFcmToken(token);
             });
     };

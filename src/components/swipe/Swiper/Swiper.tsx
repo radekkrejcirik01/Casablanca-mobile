@@ -43,6 +43,8 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
     const dispatch = useDispatch();
 
     const [currentUser, setCurrentUser] = useState<string>(null);
+    const [positionUser, setPositionUser] = useState<string>(data[0].email);
+    const [likePerformed, setLikePerformed] = useState<boolean>(false);
     const [swiperCardData, setSwiperCardData] = useState(data);
     const [renderSate, setRenderState] = useState(0);
 
@@ -79,6 +81,16 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
         tags
     ]);
 
+    useEffect(() => {
+        if (
+            likePerformed &&
+            swiperCardData &&
+            positionUser === swiperCardData[swiperCardData.length - 1].email
+        ) {
+            loadMore();
+        }
+    }, [likePerformed, loadMore, positionUser, swiperCardData]);
+
     const performLike = useCallback(
         (user: string, value: SwiperCardEnum) => {
             if (likedUsers.includes(user) && value === SwiperCardEnum.LIKE) {
@@ -99,15 +111,11 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
                     value
                 }
             ).subscribe(() => {
-                if (
-                    currentUser ===
-                    swiperCardData[swiperCardData.length - 2].email
-                ) {
-                    loadMore();
-                }
+                setLikePerformed(true);
+                setLikePerformed(false);
             });
         },
-        [currentUser, dispatch, email, likedUsers, loadMore, swiperCardData]
+        [dispatch, email, likedUsers]
     );
 
     const swiped = useCallback(() => {
@@ -156,11 +164,11 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
 
     const onSwipe = useCallback(
         (event: ViewPagerOnPageSelectedEvent) => {
-            const positionUser = data[event.nativeEvent.position].email;
-            if (currentUser !== positionUser) {
+            const user = data[event.nativeEvent.position].email;
+            setPositionUser(user);
+            if (currentUser !== user) {
                 onPageSelected(event);
-                setCurrentUser(positionUser);
-
+                setCurrentUser(user);
                 swiped();
             }
         },
