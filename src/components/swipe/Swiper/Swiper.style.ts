@@ -9,13 +9,13 @@ export const SwiperStyle = StyleSheet.create({
         overflow: 'hidden'
     },
     lottie: {
+        width: 50,
+        height: 50,
         top: 13,
         alignItems: 'center',
         justifyContent: 'center',
         position: 'absolute',
-        alignSelf: 'center',
-        width: 50,
-        height: 50
+        alignSelf: 'center'
     },
     viewPager: {
         flex: 1

@@ -48,51 +48,59 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
     const [swiperCardData, setSwiperCardData] = useState(data);
     const [renderSate, setRenderState] = useState(0);
 
-    const indexEmail = data[0].email;
-
-    const loadMore = useCallback(() => {
-        postRequest<SwipeResponseInterface, SwipeGetInterface>(
-            'https://cb5fb5ckol.execute-api.eu-central-1.amazonaws.com/swipe/get',
-            {
-                email,
-                distancePreference,
-                agePreference,
-                showMe,
-                filterByTags,
-                tags
-            }
-        ).subscribe((response: SwipeResponseInterface) => {
-            if (response?.status) {
-                const responseData = response.data;
-                responseData.shift();
-                data.push(...responseData);
-                setSwiperCardData(data);
-                setRenderState(renderSate + 1);
-            }
-        });
-    }, [
-        agePreference,
-        data,
-        distancePreference,
-        email,
-        filterByTags,
-        renderSate,
-        showMe,
-        tags
-    ]);
+    const loadData = useCallback(
+        (refresh = false) => {
+            postRequest<SwipeResponseInterface, SwipeGetInterface>(
+                'https://cb5fb5ckol.execute-api.eu-central-1.amazonaws.com/swipe/get',
+                {
+                    email,
+                    distancePreference,
+                    agePreference,
+                    showMe,
+                    filterByTags,
+                    tags
+                }
+            ).subscribe((response: SwipeResponseInterface) => {
+                if (response?.status) {
+                    const dataArray = refresh ? [] : swiperCardData;
+                    const responseData = response.data;
+                    if (!refresh) {
+                        for (let i = 0; i < 3; i += 1) {
+                            responseData.shift();
+                        }
+                    } else {
+                        setCurrentUser(responseData[0]?.email);
+                    }
+                    dataArray.push(...responseData);
+                    setSwiperCardData(dataArray);
+                    setRenderState(renderSate + 1);
+                }
+            });
+        },
+        [
+            agePreference,
+            distancePreference,
+            email,
+            filterByTags,
+            renderSate,
+            showMe,
+            swiperCardData,
+            tags
+        ]
+    );
 
     useEffect(() => {
         if (
             likePerformed &&
-            swiperCardData &&
-            positionUser === swiperCardData[swiperCardData.length - 1].email
+            swiperCardData?.length &&
+            positionUser === swiperCardData[swiperCardData.length - 3]?.email
         ) {
-            loadMore();
+            loadData();
         }
-    }, [likePerformed, loadMore, positionUser, swiperCardData]);
+    }, [likePerformed, loadData, positionUser, swiperCardData]);
 
     const performLike = useCallback(
-        (user: string, value: SwiperCardEnum) => {
+        (user: string, value: SwiperCardEnum, refresh = false) => {
             if (likedUsers.includes(user) && value === SwiperCardEnum.LIKE) {
                 return;
             }
@@ -111,23 +119,30 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
                     value
                 }
             ).subscribe(() => {
-                setLikePerformed(true);
-                setLikePerformed(false);
+                if (refresh) {
+                    loadData(refresh);
+                } else {
+                    setLikePerformed(true);
+                    setLikePerformed(false);
+                }
             });
         },
-        [dispatch, email, likedUsers]
+        [dispatch, email, loadData, likedUsers]
     );
 
-    const swiped = useCallback(() => {
-        if (
-            currentUser &&
-            !swipedUsers.includes(currentUser) &&
-            !likedUsers.includes(currentUser)
-        ) {
-            performLike(currentUser, SwiperCardEnum.REMOVE_LIKE);
-            dispatch(setSwipedUser(currentUser));
-        }
-    }, [currentUser, dispatch, likedUsers, performLike, swipedUsers]);
+    const swiped = useCallback(
+        (refresh = false) => {
+            if (
+                currentUser &&
+                !swipedUsers.includes(currentUser) &&
+                !likedUsers.includes(currentUser)
+            ) {
+                performLike(currentUser, SwiperCardEnum.REMOVE_LIKE, refresh);
+                dispatch(setSwipedUser(currentUser));
+            }
+        },
+        [currentUser, dispatch, likedUsers, performLike, swipedUsers]
+    );
 
     const { lottieRef, lottieReset, lottiePlay } = useLottie(2, 50);
     const {
@@ -136,7 +151,19 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
         onPageScrollStateChanged,
         onPageSelected,
         onCardTouch
-    } = usePullToRefresh(indexEmail, () => swiped());
+    } = usePullToRefresh(swiperCardData[0]?.email, () => {
+        setTimeout(() => {
+            setSwiperCardData([]);
+            if (
+                likedUsers.includes(swiperCardData[0]?.email) ||
+                swipedUsers.includes(swiperCardData[0]?.email)
+            ) {
+                loadData(true);
+            } else {
+                swiped(true);
+            }
+        }, 500);
+    });
 
     useEffect(() => {
         if (isAnimation) {
@@ -148,23 +175,23 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
 
     const swiperCardStyle = useCallback(
         (index: number): StyleProp<ViewStyle> => {
-            if (data?.length === 1) {
+            if (swiperCardData?.length === 1) {
                 return [SwiperStyle.topCard, SwiperStyle.bottomCard];
             }
             if (index === 0) {
                 return SwiperStyle.topCard;
             }
-            if (index === data?.length - 1) {
+            if (index === swiperCardData?.length - 1) {
                 return SwiperStyle.bottomCard;
             }
             return null;
         },
-        [data?.length]
+        [swiperCardData?.length]
     );
 
     const onSwipe = useCallback(
         (event: ViewPagerOnPageSelectedEvent) => {
-            const user = data[event.nativeEvent.position].email;
+            const user = swiperCardData[event.nativeEvent.position].email;
             setPositionUser(user);
             if (currentUser !== user) {
                 onPageSelected(event);
@@ -172,7 +199,7 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
                 swiped();
             }
         },
-        [currentUser, data, onPageSelected, swiped]
+        [currentUser, onPageSelected, swiped, swiperCardData]
     );
 
     const items = swiperCardData.map((card: CardDataProps, index: number) => {
@@ -196,16 +223,18 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
                 source={require('../../../assets/animations/animation.json')}
                 style={SwiperStyle.lottie}
             />
-            <ViewPager
-                orientation="vertical"
-                initialPage={0}
-                onPageScroll={onPageScroll}
-                onPageScrollStateChanged={onPageScrollStateChanged}
-                onPageSelected={onSwipe}
-                style={SwiperStyle.viewPager}
-            >
-                {items}
-            </ViewPager>
+            {swiperCardData?.length ? (
+                <ViewPager
+                    orientation="vertical"
+                    initialPage={0}
+                    onPageScroll={onPageScroll}
+                    onPageScrollStateChanged={onPageScrollStateChanged}
+                    onPageSelected={onSwipe}
+                    style={SwiperStyle.viewPager}
+                >
+                    {items}
+                </ViewPager>
+            ) : null}
         </View>
     );
 };

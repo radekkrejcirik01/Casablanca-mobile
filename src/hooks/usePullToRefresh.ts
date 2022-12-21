@@ -62,7 +62,7 @@ export const usePullToRefresh = (
 
     useEffect(() => {
         if (scrollPage === 0) {
-            setIsScrollDown(false);
+            setIsAnimation(false);
             setIsScrollDown(false);
         }
     }, [scrollPage]);
@@ -71,6 +71,7 @@ export const usePullToRefresh = (
         setScrollOffset(event.nativeEvent.offset);
 
         if (event.nativeEvent.offset > 0.92) {
+            setIsAnimation(false);
             setIsScrollDown(false);
         }
         if (event.nativeEvent.offset < 0.4 && event.nativeEvent.offset > 0) {
