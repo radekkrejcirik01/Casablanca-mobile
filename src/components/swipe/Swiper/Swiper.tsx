@@ -5,10 +5,7 @@ import ViewPager, {
     ViewPagerOnPageSelectedEvent
 } from '@react-native-community/viewpager';
 import { SwiperCard } from '@components/swipe/SwiperCard/SwiperCard';
-import {
-    CardDataProps,
-    SwiperProps
-} from '@components/swipe/Swiper/Swiper.props';
+import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 import { SwiperStyle } from '@components/swipe/Swiper/Swiper.style';
 import { usePullToRefresh } from '@hooks/usePullToRefresh';
 import { useLottie } from '@hooks/useLottie';
@@ -28,7 +25,7 @@ import {
     SwipeResponseInterface
 } from '@models/Registration/Registration.interface';
 
-export const Swiper = ({ data }: SwiperProps): JSX.Element => {
+export const Swiper = (): JSX.Element => {
     const {
         agePreference,
         distancePreference,
@@ -43,9 +40,11 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
     const dispatch = useDispatch();
 
     const [currentUser, setCurrentUser] = useState<string>(null);
-    const [positionUser, setPositionUser] = useState<string>(data[0].email);
+    const [positionUser, setPositionUser] = useState<string>(null);
     const [likePerformed, setLikePerformed] = useState<boolean>(false);
-    const [swiperCardData, setSwiperCardData] = useState(data);
+    const [swiperCardData, setSwiperCardData] = useState<Array<CardDataProps>>(
+        []
+    );
     const [renderSate, setRenderState] = useState(0);
 
     const loadData = useCallback(
@@ -69,7 +68,9 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
                             responseData.shift();
                         }
                     } else {
-                        setCurrentUser(responseData[0]?.email);
+                        const indexEmail = responseData[0]?.email;
+                        setCurrentUser(indexEmail);
+                        setPositionUser(indexEmail);
                     }
                     dataArray.push(...responseData);
                     setSwiperCardData(dataArray);
@@ -88,6 +89,13 @@ export const Swiper = ({ data }: SwiperProps): JSX.Element => {
             tags
         ]
     );
+
+    useEffect(() => {
+        if (email && renderSate === 0) {
+            setRenderState(renderSate + 1);
+            loadData(true);
+        }
+    }, [email, loadData, renderSate]);
 
     useEffect(() => {
         if (
