@@ -21,7 +21,7 @@ export const SwiperCardItem = ({
     return (
         <TouchableOpacity
             activeOpacity={1}
-            delayPressIn={100}
+            delayPressIn={300}
             onPressIn={onPressIn}
             onPressOut={onPressOut}
         >
