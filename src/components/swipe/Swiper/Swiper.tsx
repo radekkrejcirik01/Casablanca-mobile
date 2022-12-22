@@ -100,12 +100,13 @@ export const Swiper = (): JSX.Element => {
     useEffect(() => {
         if (
             likePerformed &&
+            !swipedUsers.includes(positionUser) &&
             swiperCardData?.length &&
             positionUser === swiperCardData[swiperCardData.length - 3]?.email
         ) {
             loadData();
         }
-    }, [likePerformed, loadData, positionUser, swiperCardData]);
+    }, [likePerformed, loadData, positionUser, swipedUsers, swiperCardData]);
 
     const performLike = useCallback(
         (user: string, value: SwiperCardEnum, refresh = false) => {
