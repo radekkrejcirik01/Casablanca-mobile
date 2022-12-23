@@ -24,6 +24,7 @@ import {
     SwipeLikeInterface,
     SwipeResponseInterface
 } from '@models/Registration/Registration.interface';
+import { getNonMatchingObjectValues } from '@functions/getNonMatchingObjectValues';
 
 export const Swiper = (): JSX.Element => {
     const {
@@ -62,12 +63,11 @@ export const Swiper = (): JSX.Element => {
             ).subscribe((response: SwipeResponseInterface) => {
                 if (response?.status) {
                     const dataArray = refresh ? [] : swiperCardData;
-                    const responseData = response.data;
-                    if (!refresh) {
-                        for (let i = 0; i < 3; i += 1) {
-                            responseData.shift();
-                        }
-                    } else {
+                    const responseData = getNonMatchingObjectValues(
+                        dataArray,
+                        response.data
+                    );
+                    if (refresh) {
                         const indexEmail = responseData[0]?.email;
                         setCurrentUser(indexEmail);
                         setPositionUser(indexEmail);
@@ -106,7 +106,34 @@ export const Swiper = (): JSX.Element => {
         ) {
             loadData();
         }
-    }, [likePerformed, loadData, positionUser, swipedUsers, swiperCardData]);
+
+        if (
+            likePerformed &&
+            !likedUsers.includes(positionUser) &&
+            swiperCardData?.length &&
+            positionUser === swiperCardData[swiperCardData.length - 1]?.email
+        ) {
+            loadData();
+        }
+    }, [
+        likePerformed,
+        likedUsers,
+        loadData,
+        positionUser,
+        swipedUsers,
+        swiperCardData
+    ]);
+
+    useEffect(() => {
+        if (
+            (swipedUsers.includes(positionUser) ||
+                likedUsers.includes(positionUser)) &&
+            swiperCardData?.length &&
+            positionUser === swiperCardData[swiperCardData.length - 1]?.email
+        ) {
+            loadData();
+        }
+    }, [likedUsers, loadData, positionUser, swipedUsers, swiperCardData]);
 
     const performLike = useCallback(
         (user: string, value: SwiperCardEnum, refresh = false) => {
