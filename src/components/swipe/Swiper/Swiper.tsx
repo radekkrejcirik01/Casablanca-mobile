@@ -180,14 +180,7 @@ export const Swiper = (): JSX.Element => {
         [currentUser, dispatch, likedUsers, performLike, swipedUsers]
     );
 
-    const { lottieRef, lottieReset, lottiePlay } = useLottie(2, 50);
-    const {
-        isAnimation,
-        onPageScroll,
-        onPageScrollStateChanged,
-        onPageSelected,
-        onCardTouch
-    } = usePullToRefresh(swiperCardData[0]?.email, () => {
+    const onRefresh = useCallback(() => {
         setTimeout(() => {
             setSwiperCardData([]);
             if (
@@ -199,7 +192,16 @@ export const Swiper = (): JSX.Element => {
                 swiped(true);
             }
         }, 500);
-    });
+    }, [likedUsers, loadData, swiped, swipedUsers, swiperCardData]);
+
+    const { lottieRef, lottieReset, lottiePlay } = useLottie(2, 50);
+    const {
+        isAnimation,
+        onPageScroll,
+        onPageScrollStateChanged,
+        onPageSelected,
+        onCardTouch
+    } = usePullToRefresh(swiperCardData[0]?.email, onRefresh);
 
     useEffect(() => {
         if (isAnimation) {
