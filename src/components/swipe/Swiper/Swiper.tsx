@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import ViewPager, {
@@ -46,8 +46,8 @@ export const Swiper = (): JSX.Element => {
     const [swiperCardData, setSwiperCardData] = useState<Array<CardDataProps>>(
         []
     );
-    const [renderSate, setRenderState] = useState(0);
 
+    const data = useRef([]);
     const loadData = useCallback(
         (refresh = false) => {
             postRequest<SwipeResponseInterface, SwipeGetInterface>(
@@ -62,10 +62,10 @@ export const Swiper = (): JSX.Element => {
                 }
             ).subscribe((response: SwipeResponseInterface) => {
                 if (response?.status) {
-                    const dataArray = refresh ? [] : swiperCardData;
+                    const dataArray = refresh ? [] : data?.current;
                     const responseData = getNonMatchingObjectValues(
                         dataArray,
-                        response.data
+                        response?.data
                     );
                     if (refresh) {
                         const indexEmail = responseData[0]?.email;
@@ -74,28 +74,18 @@ export const Swiper = (): JSX.Element => {
                     }
                     dataArray.push(...responseData);
                     setSwiperCardData(dataArray);
-                    setRenderState(renderSate + 1);
+                    data.current = dataArray;
                 }
             });
         },
-        [
-            agePreference,
-            distancePreference,
-            email,
-            filterByTags,
-            renderSate,
-            showMe,
-            swiperCardData,
-            tags
-        ]
+        [agePreference, distancePreference, email, filterByTags, showMe, tags]
     );
 
     useEffect(() => {
-        if (email && renderSate === 0) {
-            setRenderState(renderSate + 1);
+        if (email) {
             loadData(true);
         }
-    }, [email, loadData, renderSate]);
+    }, [email, loadData]);
 
     useEffect(() => {
         if (
@@ -206,9 +196,9 @@ export const Swiper = (): JSX.Element => {
     useEffect(() => {
         if (isAnimation) {
             lottiePlay();
-            return;
+        } else {
+            lottieReset();
         }
-        lottieReset();
     }, [isAnimation, lottiePlay, lottieReset]);
 
     const swiperCardStyle = useCallback(
