@@ -93,12 +93,10 @@ export const Swiper = (): JSX.Element => {
     }, [email, loadData]);
 
     useEffect(() => {
-        if (performInterval) {
-            if (!interval.current) {
-                interval.current = setInterval(() => {
-                    loadData();
-                }, 5000);
-            }
+        if (performInterval && !interval.current) {
+            interval.current = setInterval(() => {
+                loadData();
+            }, 5000);
         } else if (!performInterval && interval.current) {
             clearInterval(interval.current);
             interval.current = null;
