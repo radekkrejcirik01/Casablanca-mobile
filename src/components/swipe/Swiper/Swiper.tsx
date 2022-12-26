@@ -110,7 +110,7 @@ export const Swiper = (): JSX.Element => {
             likePerformed &&
             !swipedUsers.includes(positionUser) &&
             swiperCardData?.length &&
-            positionUser === swiperCardData[swiperCardData.length - 3]?.email
+            positionUser === swiperCardData[swiperCardData?.length - 3]?.email
         ) {
             loadData();
         }
@@ -119,7 +119,7 @@ export const Swiper = (): JSX.Element => {
     useEffect(() => {
         if (
             swiperCardData?.length &&
-            positionUser === swiperCardData[swiperCardData.length - 1]?.email
+            positionUser === swiperCardData[swiperCardData?.length - 1]?.email
         ) {
             setPerformInterval(true);
         }
