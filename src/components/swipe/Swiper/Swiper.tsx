@@ -46,6 +46,9 @@ export const Swiper = (): JSX.Element => {
     const [swiperCardData, setSwiperCardData] = useState<Array<CardDataProps>>(
         []
     );
+    const [performInterval, setPerformInterval] = useState<boolean>(false);
+
+    const interval = useRef(null);
 
     const data = useRef([]);
     const loadData = useCallback(
@@ -67,14 +70,16 @@ export const Swiper = (): JSX.Element => {
                         dataArray,
                         response?.data
                     );
-                    if (refresh) {
-                        const indexEmail = responseData[0]?.email;
-                        setCurrentUser(indexEmail);
-                        setPositionUser(indexEmail);
-                    }
+
                     dataArray.push(...responseData);
                     setSwiperCardData(dataArray);
                     data.current = dataArray;
+
+                    if (responseData?.length) {
+                        setPerformInterval(false);
+                    }
+                } else {
+                    setPerformInterval(true);
                 }
             });
         },
@@ -88,6 +93,19 @@ export const Swiper = (): JSX.Element => {
     }, [email, loadData]);
 
     useEffect(() => {
+        if (performInterval) {
+            if (!interval.current) {
+                interval.current = setInterval(() => {
+                    loadData();
+                }, 5000);
+            }
+        } else if (!performInterval && interval.current) {
+            clearInterval(interval.current);
+            interval.current = null;
+        }
+    }, [loadData, performInterval]);
+
+    useEffect(() => {
         if (
             likePerformed &&
             !swipedUsers.includes(positionUser) &&
@@ -96,34 +114,16 @@ export const Swiper = (): JSX.Element => {
         ) {
             loadData();
         }
-
-        if (
-            likePerformed &&
-            !likedUsers.includes(positionUser) &&
-            swiperCardData?.length &&
-            positionUser === swiperCardData[swiperCardData.length - 1]?.email
-        ) {
-            loadData();
-        }
-    }, [
-        likePerformed,
-        likedUsers,
-        loadData,
-        positionUser,
-        swipedUsers,
-        swiperCardData
-    ]);
+    }, [likePerformed, loadData, positionUser, swipedUsers, swiperCardData]);
 
     useEffect(() => {
         if (
-            (swipedUsers.includes(positionUser) ||
-                likedUsers.includes(positionUser)) &&
             swiperCardData?.length &&
             positionUser === swiperCardData[swiperCardData.length - 1]?.email
         ) {
-            loadData();
+            setPerformInterval(true);
         }
-    }, [likedUsers, loadData, positionUser, swipedUsers, swiperCardData]);
+    }, [positionUser, swiperCardData]);
 
     const performLike = useCallback(
         (user: string, value: SwiperCardEnum, refresh = false) => {
