@@ -170,7 +170,6 @@ export const Swiper = (): JSX.Element => {
 
     const onRefresh = useCallback(() => {
         setTimeout(() => {
-            setSwiperCardData([]);
             if (
                 likedUsers.includes(swiperCardData[0]?.email) ||
                 swipedUsers.includes(swiperCardData[0]?.email)
@@ -179,7 +178,7 @@ export const Swiper = (): JSX.Element => {
             } else {
                 swiped(true);
             }
-        }, 500);
+        }, 750);
     }, [likedUsers, loadData, swiped, swipedUsers, swiperCardData]);
 
     const { lottieRef, lottieReset, lottiePlay } = useLottie(2, 50);
