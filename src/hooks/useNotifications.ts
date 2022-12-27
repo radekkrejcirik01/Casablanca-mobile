@@ -45,7 +45,7 @@ export const useNotifications = (
                         displayMessage(
                             remoteMessage.notification.title,
                             remoteMessage.notification.body,
-                            () => navigateToMessages()
+                            navigateToMessages
                         );
                     }
                 }
