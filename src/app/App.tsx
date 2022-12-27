@@ -1,5 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
+import FlashMessage from 'react-native-flash-message';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import store from '@store/index';
@@ -13,6 +14,7 @@ const App = () => {
     return (
         <SafeAreaProvider>
             <StatusBar animated barStyle={BAR_STYLE} />
+            <FlashMessage position="top" />
             <Provider store={store}>
                 <Navigation />
             </Provider>
