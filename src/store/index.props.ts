@@ -13,6 +13,7 @@ export interface User {
     firstname: string;
     email: string;
     birthday: string;
+    profilePicture: string;
     about: string;
     photos: Array<string>;
     tags: Array<string>;

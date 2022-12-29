@@ -10,7 +10,7 @@ import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/regi
 import { ReducerProps } from '@store/index.props';
 import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
 import { usePhotoPicker } from '@hooks/usePhotoPicker';
-import { setPhotosAction } from '@store/UserReducer';
+import { setPhotosAction, setProfilePictureAction } from '@store/UserReducer';
 
 export const PhotosScreen = (): JSX.Element => {
     const photos = useSelector((state: ReducerProps) => state.user.photos);
@@ -29,11 +29,12 @@ export const PhotosScreen = (): JSX.Element => {
 
     const continuePressed = useCallback(() => {
         if (photos?.length) {
+            dispatch(setProfilePictureAction(photos[0]));
             navigateTo(RegistrationStackNavigatorEnum.TagsScreen);
         } else {
             Alert.alert('Please select at least 1 profile photo');
         }
-    }, [navigateTo, photos?.length]);
+    }, [dispatch, navigateTo, photos]);
 
     return (
         <>

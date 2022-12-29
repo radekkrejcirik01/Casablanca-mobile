@@ -8,6 +8,7 @@ export interface ResponseInterface {
 export interface RegistrationInterface {
     firstname: string;
     birthday: string;
+    profilePicture: string;
     about: string;
     tags: Array<string>;
     photos: Array<string>;

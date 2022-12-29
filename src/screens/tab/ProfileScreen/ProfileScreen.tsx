@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { ProfileScreenStyle } from '@screens/tab/ProfileScreen/ProfileScreen.style';
@@ -13,22 +13,17 @@ import { Screen } from '@components/general/Screen/Screen';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
 
 export const ProfileScreen = (): JSX.Element => {
-    const { birthday, firstname, photos, tags } = useSelector(
+    const { birthday, firstname, profilePicture, tags } = useSelector(
         (state: ReducerProps) => state.user
     );
 
     const ref = useRef(null);
 
-    const source = useMemo(
-        (): string => (photos?.length ? photos[0] : null),
-        [photos]
-    );
-
     const scrollToInfo = () => ref?.current?.scrollToInfo();
 
     return (
         <Screen>
-            <ProfileScrollView ref={ref} source={source}>
+            <ProfileScrollView ref={ref} source={profilePicture}>
                 <ThemeView style={ProfileScreenStyle.themeView}>
                     <TouchableOpacity
                         onPress={scrollToInfo}

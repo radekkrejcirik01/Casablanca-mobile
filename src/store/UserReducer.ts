@@ -6,6 +6,7 @@ const initialState: User = {
     firstname: null,
     email: null,
     birthday: null,
+    profilePicture: null,
     photos: [],
     tags: [],
     about: null,
@@ -33,6 +34,9 @@ export const UserReducer = createSlice({
         },
         setBirthdayAction: (state, action) => {
             state.birthday = action.payload;
+        },
+        setProfilePictureAction: (state, action) => {
+            state.profilePicture = action.payload;
         },
         setPhotosAction: (state, action) => {
             state.photos = action.payload;
@@ -85,6 +89,7 @@ export const {
     setFirstnameAction,
     setEmailAction,
     setBirthdayAction,
+    setProfilePictureAction,
     setPhotosAction,
     addTagAction,
     removeTagAction,

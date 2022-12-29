@@ -9,7 +9,7 @@ import { Screen } from '@components/general/Screen/Screen';
 import { SaveButton } from '@components/general/SaveButton/SaveButton';
 import { isArrayEqual } from '@functions/checking-functions';
 import { setSaveVisible } from '@store/SaveReducer';
-import { setPhotosAction } from '@store/UserReducer';
+import { setPhotosAction, setProfilePictureAction } from '@store/UserReducer';
 import { DoneButton } from '@components/general/DoneButton/DoneButton';
 import { PhotoEditProps } from '@components/profile/PhotoEdit/PhotoEdit.props';
 import { updateRequest } from '@utils/Axios/Axios.service';
@@ -44,6 +44,7 @@ export const PhotoEdit = ({ photos, onClose }: PhotoEditProps): JSX.Element => {
         ).subscribe();
 
         dispatch(setPhotosAction(photosValue));
+        dispatch(setProfilePictureAction(photosValue[0]));
         onClose();
     }, [dispatch, email, onClose, photosValue]);
 
