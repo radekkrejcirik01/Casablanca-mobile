@@ -6,18 +6,18 @@ import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/P
 import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
 import { SwipeStackNavigatorEnum } from '@navigation/StackNavigators/swipe/SwipeStackNavigator.enum';
 
+type ScreenProp =
+    | RootStackNavigatorEnum
+    | ProfileStackNavigatorEnum
+    | SwipeStackNavigatorEnum
+    | MessagesStackNavigatorEnum
+    | RegistrationStackNavigatorEnum;
+
 export const useNavigation = (
     stack?: RootStackNavigatorEnum,
     onFocus?: () => void
 ): {
-    navigateTo: (
-        screen:
-            | RootStackNavigatorEnum
-            | ProfileStackNavigatorEnum
-            | SwipeStackNavigatorEnum
-            | MessagesStackNavigatorEnum
-            | RegistrationStackNavigatorEnum
-    ) => void;
+    navigateTo: (screen: ScreenProp, params?: object) => void;
     navigateBack: () => void;
 } => {
     const navigation = useNavigationModule();
@@ -30,8 +30,14 @@ export const useNavigation = (
     }, [onFocus, navigation]);
 
     const navigateTo = useCallback(
-        (screen: string) => {
-            navigation.navigate(stack as never, { screen } as never);
+        (screen: ScreenProp, params: object) => {
+            navigation.navigate(
+                stack as never,
+                {
+                    screen,
+                    params
+                } as never
+            );
         },
         [navigation, stack]
     );

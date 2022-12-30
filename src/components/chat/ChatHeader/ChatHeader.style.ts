@@ -28,7 +28,7 @@ export const ChatHeaderStyle = StyleSheet.create({
         paddingLeft: 10,
         justifyContent: 'center'
     },
-    name: {
+    title: {
         fontSize: 15,
         color: COLORS.WHITE,
         fontWeight: 'bold'

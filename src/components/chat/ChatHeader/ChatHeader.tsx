@@ -1,6 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { SafeAreaView, StyleProp, Text, View, ViewStyle } from 'react-native';
-import FastImage from 'react-native-fast-image';
+import { useRoute } from '@react-navigation/native';
+import FastImage, { Source } from 'react-native-fast-image';
 import { useDispatch } from 'react-redux';
 import { Icon } from '@components/icon/Icon';
 import { ChatHeaderStyle } from '@components/chat/ChatHeader/ChatHeader.style';
@@ -10,6 +11,7 @@ import { useNavigation } from '@hooks/useNavigation';
 import { setModalVisible } from '@store/ModalReducer';
 import COLORS from '@constants/COLORS';
 import { useTheme } from '@hooks/useTheme';
+import { ChatHeaderParamsProps } from '@components/chat/ChatHeader/ChatHeader.props';
 
 export const ChatHeader = (): JSX.Element => {
     const dispatch = useDispatch();
@@ -17,9 +19,13 @@ export const ChatHeader = (): JSX.Element => {
     const { navigateBack } = useNavigation();
     const { isDarkMode } = useTheme();
 
-    const openProfile = () => {
+    const route: ChatHeaderParamsProps = useRoute();
+
+    const { firstname, profilePicture } = route.params;
+
+    const openProfile = useCallback(() => {
         dispatch(setModalVisible(true));
-    };
+    }, [dispatch]);
 
     const backgroundColor = useMemo(
         (): StyleProp<ViewStyle> => ({
@@ -37,14 +43,24 @@ export const ChatHeader = (): JSX.Element => {
         [isDarkMode]
     );
 
+    const style = useMemo(
+        (): StyleProp<ViewStyle> => [
+            ChatHeaderStyle.container,
+            backgroundColor,
+            borderBottomColor
+        ],
+        [backgroundColor, borderBottomColor]
+    );
+
+    const title = useMemo((): string => firstname, [firstname]);
+
+    const source = useMemo(
+        (): Source => ({ uri: profilePicture }),
+        [profilePicture]
+    );
+
     return (
-        <SafeAreaView
-            style={[
-                ChatHeaderStyle.container,
-                backgroundColor,
-                borderBottomColor
-            ]}
-        >
+        <SafeAreaView style={style}>
             <TouchableOpacity onPress={navigateBack}>
                 <Icon name={IconEnum.BACK} size={20} />
             </TouchableOpacity>
@@ -53,12 +69,9 @@ export const ChatHeader = (): JSX.Element => {
                     onPress={openProfile}
                     style={ChatHeaderStyle.profileContainer}
                 >
-                    <FastImage
-                        source={require('../../../assets/images/profilovka.png')}
-                        style={ChatHeaderStyle.image}
-                    />
+                    <FastImage source={source} style={ChatHeaderStyle.image} />
                     <View style={ChatHeaderStyle.infoContainer}>
-                        <Text style={ChatHeaderStyle.name}>Radek</Text>
+                        <Text style={ChatHeaderStyle.title}>{title}</Text>
                     </View>
                 </TouchableOpacity>
             </View>

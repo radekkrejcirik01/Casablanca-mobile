@@ -22,7 +22,11 @@ export const MessagesList = (): JSX.Element => {
     const [data, setData] = useState<Array<MessagesListDataProps>>([]);
 
     const onPress = (item: MessagesListDataProps) => {
-        navigateTo(MessagesStackNavigatorEnum.ChatScreen);
+        navigateTo(MessagesStackNavigatorEnum.ChatScreen, {
+            user: item.email,
+            firstname: item.firstname,
+            profilePicture: item.profilePicture
+        });
     };
 
     const { getItem, renderItem, getItemCount, keyExtractor, refreshControl } =

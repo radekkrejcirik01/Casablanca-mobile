@@ -1,9 +1,11 @@
-export interface ChatListProps {
-    data: Array<ChatDataProps>;
+export interface ChatDataProps {
+    id: number;
+    sender: string;
+    receiver: string;
+    message: string;
+    time: string;
 }
 
-export interface ChatDataProps {
-    sender: string;
-    name: string;
-    message: string;
+export interface ChatListProps {
+    user: string;
 }

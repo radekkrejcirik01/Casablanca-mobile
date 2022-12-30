@@ -1,6 +1,7 @@
 import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 import { MatchListDataProps } from '@components/messages/MatchList/MatchList.props';
 import { MessagesListDataProps } from '@components/messages/MessagesList/MessagesList.props';
+import { ChatDataProps } from '@components/chat/ChatList/ChatList.props';
 
 export interface ResponseInterface {
     status: string;
@@ -122,10 +123,6 @@ export interface RegisterDeviceInterface {
     deviceToken: string;
 }
 
-export interface NotifyDeviceInterface {
-    token: string;
-}
-
 export interface MatchesGetInterface {
     email: string;
 }
@@ -144,4 +141,15 @@ export interface ConversationsResponseInterface {
     status: string;
     message: string;
     data?: Array<MessagesListDataProps>;
+}
+
+export interface MessagesGetInterface {
+    email: string;
+    user: string;
+}
+
+export interface MessagesResponseInterface {
+    status: string;
+    message: string;
+    data?: Array<ChatDataProps>;
 }
