@@ -1,17 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { VirtualizedList } from 'react-native';
-import { MatchListProps } from '@components/messages/MatchList/MatchList.props';
-import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
+import { useSelector } from 'react-redux';
 import { MatchListStyle } from '@components/messages/MatchList/MatchList.style';
 import { useMatchListRenders } from '@hooks/useMatchListRenders';
+import { MatchListDataProps } from '@components/messages/MatchList/MatchList.props';
+import { postRequest } from '@utils/Axios/Axios.service';
+import {
+    MatchesGetInterface,
+    MatchesResponseInterface
+} from '@models/Registration/Registration.interface';
+import { ReducerProps } from '@store/index.props';
 
-export const MatchList = ({ data }: MatchListProps): JSX.Element => {
-    const onPress = (item: CardDataProps) => {
-        console.log(item.name);
-    };
+export const MatchList = (): JSX.Element => {
+    const { email } = useSelector((state: ReducerProps) => state.user);
+
+    const [data, setData] = useState<Array<MatchListDataProps>>([]);
+
+    const onPress = (item: MatchListDataProps) => {};
 
     const { getItem, renderItem, getItemCount, keyExtractor } =
         useMatchListRenders(data, onPress);
+
+    useEffect(() => {
+        postRequest<MatchesResponseInterface, MatchesGetInterface>(
+            'https://26399civx6.execute-api.eu-central-1.amazonaws.com/messages/get/matches/0',
+            {
+                email
+            }
+        ).subscribe((response: MatchesResponseInterface) => {
+            setData(response.data);
+        });
+    }, [email]);
 
     return (
         <VirtualizedList

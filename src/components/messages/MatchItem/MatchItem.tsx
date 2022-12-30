@@ -4,6 +4,7 @@ import FastImage from 'react-native-fast-image';
 import { MatchItemStyle } from '@components/messages/MatchItem/MatchItem.style';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
 import { MatchItemProps } from '@components/messages/MatchItem/MatchItem.props';
+import { getAge } from '@functions/getAge';
 
 export const MatchItem = ({ item, onPress }: MatchItemProps): JSX.Element => {
     const onPressItem = () => {
@@ -15,11 +16,11 @@ export const MatchItem = ({ item, onPress }: MatchItemProps): JSX.Element => {
             style={MatchItemStyle.container}
         >
             <FastImage
-                source={{ uri: item.images[0] }}
+                source={{ uri: item.profilePicture }}
                 style={MatchItemStyle.image}
             />
             <Text style={MatchItemStyle.text}>
-                {`${item.name}, ${item.age}`}
+                {item.firstname}, {getAge(item.birthday)}
             </Text>
         </TouchableOpacity>
     );

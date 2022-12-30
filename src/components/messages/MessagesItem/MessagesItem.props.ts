@@ -1,6 +1,6 @@
-import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
+import { MessagesListDataProps } from '@components/messages/MessagesList/MessagesList.props';
 
 export interface MessagesItemProps {
-    item: CardDataProps;
-    onPress: (item: CardDataProps) => void;
+    item: MessagesListDataProps;
+    onPress: (item: MessagesListDataProps) => void;
 }

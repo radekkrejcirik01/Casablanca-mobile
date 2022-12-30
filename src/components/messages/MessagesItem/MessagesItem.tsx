@@ -34,23 +34,27 @@ export const MessagesItem = ({
             <View style={MessagesItemStyle.row}>
                 <View>
                     <FastImage
-                        source={{ uri: item.images[0] }}
+                        source={{ uri: item.profilePicture }}
                         style={MessagesItemStyle.image}
                     />
                 </View>
                 <View style={[MessagesItemStyle.box, borderBottomColor]}>
                     <View style={MessagesItemStyle.firstRow}>
-                        <Text style={MessagesItemStyle.text}>{item.name}</Text>
+                        <Text style={MessagesItemStyle.text}>
+                            {item.firstname}
+                        </Text>
                         <Text
                             style={[
                                 MessagesItemStyle.text,
                                 MessagesItemStyle.opacity
                             ]}
                         >
-                            Monday
+                            {item.time}
                         </Text>
                     </View>
-                    <Text style={MessagesItemStyle.message}>message</Text>
+                    <Text style={MessagesItemStyle.message}>
+                        {item.message}
+                    </Text>
                 </View>
             </View>
         </TouchableOpacity>

@@ -1,5 +1,6 @@
-import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
-
-export interface MatchListProps {
-    data: Array<CardDataProps>;
+export interface MatchListDataProps {
+    email: string;
+    firstname: string;
+    birthday: string;
+    profilePicture: string;
 }

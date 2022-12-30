@@ -1,6 +1,6 @@
-import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
+import { MatchListDataProps } from '@components/messages/MatchList/MatchList.props';
 
 export interface MatchItemProps {
-    item: CardDataProps;
-    onPress: (item: CardDataProps) => void;
+    item: MatchListDataProps;
+    onPress: (item: MatchListDataProps) => void;
 }

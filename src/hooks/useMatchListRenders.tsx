@@ -1,33 +1,36 @@
 import React, { useCallback } from 'react';
 import { ListRenderItemInfo } from 'react-native';
-import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 import { MatchItem } from '@components/messages/MatchItem/MatchItem';
+import { MatchListDataProps } from '@components/messages/MatchList/MatchList.props';
 
 export const useMatchListRenders = (
-    data: Array<CardDataProps>,
-    onItemPress: (item: CardDataProps) => void
+    data: Array<MatchListDataProps>,
+    onItemPress: (item: MatchListDataProps) => void
 ): {
-    getItem: (listData: Array<CardDataProps>, index: number) => CardDataProps;
-    renderItem: ({ item }: ListRenderItemInfo<CardDataProps>) => JSX.Element;
+    getItem: (
+        listData: Array<MatchListDataProps>,
+        index: number
+    ) => MatchListDataProps;
+    renderItem: ({
+        item
+    }: ListRenderItemInfo<MatchListDataProps>) => JSX.Element;
     getItemCount: () => number;
-    keyExtractor: (item: CardDataProps, index: number) => string;
+    keyExtractor: (item: MatchListDataProps, index: number) => string;
 } => {
     const getItem = (
-        listData: Array<CardDataProps>,
+        listData: Array<MatchListDataProps>,
         index: number
-    ): CardDataProps => listData[index];
+    ): MatchListDataProps => listData[index];
 
     const renderItem = ({
         item
-    }: ListRenderItemInfo<CardDataProps>): JSX.Element => (
-        <MatchItem key={item.name} item={item} onPress={onItemPress} />
+    }: ListRenderItemInfo<MatchListDataProps>): JSX.Element => (
+        <MatchItem key={item.email} item={item} onPress={onItemPress} />
     );
 
     const getItemCount = useCallback((): number => data?.length, [data]);
 
-    // TODO: change to item's ID
-    const keyExtractor = (item: CardDataProps, index: number): string =>
-        item.name + index;
+    const keyExtractor = (item: MatchListDataProps): string => item.email;
 
     return { getItem, renderItem, getItemCount, keyExtractor };
 };

@@ -1,16 +1,21 @@
 import React, { useCallback, useState } from 'react';
 import { ListRenderItemInfo, RefreshControl } from 'react-native';
-import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 import { MessagesItem } from '@components/messages/MessagesItem/MessagesItem';
+import { MessagesListDataProps } from '@components/messages/MessagesList/MessagesList.props';
 
 export const useMessagesListRenders = (
-    data: Array<CardDataProps>,
-    onItemPress: (item: CardDataProps) => void
+    data: Array<MessagesListDataProps>,
+    onItemPress: (item: MessagesListDataProps) => void
 ): {
-    getItem: (listData: Array<CardDataProps>, index: number) => CardDataProps;
-    renderItem: ({ item }: ListRenderItemInfo<CardDataProps>) => JSX.Element;
+    getItem: (
+        listData: Array<MessagesListDataProps>,
+        index: number
+    ) => MessagesListDataProps;
+    renderItem: ({
+        item
+    }: ListRenderItemInfo<MessagesListDataProps>) => JSX.Element;
     getItemCount: () => number;
-    keyExtractor: (item: CardDataProps, index: number) => string;
+    keyExtractor: (item: MessagesListDataProps, index: number) => string;
     refreshControl: JSX.Element;
 } => {
     const [refreshing, setRefreshing] = useState(false);
@@ -23,21 +28,19 @@ export const useMessagesListRenders = (
     }, []);
 
     const getItem = (
-        listData: Array<CardDataProps>,
+        listData: Array<MessagesListDataProps>,
         index: number
-    ): CardDataProps => listData[index];
+    ): MessagesListDataProps => listData[index];
 
     const renderItem = ({
         item
-    }: ListRenderItemInfo<CardDataProps>): JSX.Element => (
-        <MessagesItem key={item.name} item={item} onPress={onItemPress} />
+    }: ListRenderItemInfo<MessagesListDataProps>): JSX.Element => (
+        <MessagesItem key={item.email} item={item} onPress={onItemPress} />
     );
 
     const getItemCount = useCallback((): number => data?.length, [data]);
 
-    // TODO: change to item's ID
-    const keyExtractor = (item: CardDataProps, index: number): string =>
-        item.name + index;
+    const keyExtractor = (item: MessagesListDataProps): string => item.email;
 
     const refreshControl = (
         <RefreshControl
