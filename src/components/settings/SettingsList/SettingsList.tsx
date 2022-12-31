@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { Linking, View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ListItem } from '@components/general/ListItem/ListItem';
 import { SettingsListStyle } from '@components/settings/SettingsList/SettingsList.style';
 import { useNavigation } from '@hooks/useNavigation';
@@ -17,9 +17,17 @@ import {
     SettingsListProps
 } from '@components/settings/SettingsList/SettingsList.props';
 import { useSettings } from '@hooks/useSettings';
-import { useMessaging } from '@hooks/useMessaging';
+import { postRequest } from '@utils/Axios/Axios.service';
+import {
+    DeleteDeviceInterface,
+    ResponseInterface
+} from '@models/Registration/Registration.interface';
+import { setDeviceTokenAction } from '@store/DeviceReducer';
+import { ReducerProps } from '@store/index.props';
 
 export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
+    const { email } = useSelector((state: ReducerProps) => state.user);
+    const { token } = useSelector((state: ReducerProps) => state.device);
     const dispatch = useDispatch();
 
     const { isDarkMode } = useTheme();
@@ -36,7 +44,6 @@ export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
         showMeDescription,
         openShowMeScreen
     } = useSettings();
-    const { deleteDevice } = useMessaging();
 
     const openAboutScreen = useCallback(() => {
         navigateTo(ProfileStackNavigatorEnum.AboutScreen);
@@ -69,6 +76,20 @@ export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
         },
         [dispatch]
     );
+
+    const deleteDevice = useCallback(() => {
+        postRequest<ResponseInterface, DeleteDeviceInterface>(
+            'https://43bblrwkdc.execute-api.eu-central-1.amazonaws.com/pushnotifications/deleteDevice',
+            {
+                email,
+                deviceToken: token
+            }
+        ).subscribe((response: ResponseInterface) => {
+            if (response?.status) {
+                dispatch(setDeviceTokenAction(null));
+            }
+        });
+    }, [dispatch, email, token]);
 
     const LogOut = useCallback(() => {
         dispatch(resetUserState());

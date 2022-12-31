@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ReducerProps } from '@store/index.props';
 import { postRequest } from '@utils/Axios/Axios.service';
 import {
-    DeleteDeviceInterface,
     RegisterDeviceInterface,
     ResponseInterface
 } from '@models/Registration/Registration.interface';
@@ -12,10 +11,8 @@ import { setDeviceTokenAction } from '@store/DeviceReducer';
 
 export const useMessaging = (): {
     requestUserPermission: () => void;
-    deleteDevice: () => void;
 } => {
     const { email } = useSelector((state: ReducerProps) => state.user);
-    const { token } = useSelector((state: ReducerProps) => state.device);
     const dispatch = useDispatch();
 
     const [authorizationStatus, setIsAuthorizationStatus] =
@@ -62,25 +59,11 @@ export const useMessaging = (): {
     }, [email]);
 
     useEffect(() => {
-        if (email && authorizationStatus && !token) {
+        if (email && authorizationStatus) {
             getDeviceToken().catch();
             onTokenRefresh();
         }
-    }, [authorizationStatus, email, getDeviceToken, onTokenRefresh, token]);
+    }, [authorizationStatus, email, getDeviceToken, onTokenRefresh]);
 
-    const deleteDevice = useCallback(() => {
-        postRequest<ResponseInterface, DeleteDeviceInterface>(
-            'https://43bblrwkdc.execute-api.eu-central-1.amazonaws.com/pushnotifications/deleteDevice',
-            {
-                email,
-                deviceToken: token
-            }
-        ).subscribe((response: ResponseInterface) => {
-            if (response?.status) {
-                dispatch(setDeviceTokenAction(null));
-            }
-        });
-    }, [dispatch, email, token]);
-
-    return { requestUserPermission, deleteDevice };
+    return { requestUserPermission };
 };
