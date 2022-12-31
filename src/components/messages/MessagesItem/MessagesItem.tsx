@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { StyleProp, Text, View, ViewStyle } from 'react-native';
+import { StyleProp, Text, TextStyle, View, ViewStyle } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import moment from 'moment';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
@@ -27,6 +27,11 @@ export const MessagesItem = ({
         [isDarkMode]
     );
 
+    const opacityStyle = useMemo(
+        (): StyleProp<TextStyle> => [{ opacity: item.isRead ? 0.7 : 1 }],
+        [item.isRead]
+    );
+
     return (
         <TouchableOpacity
             onPress={onPressItem}
@@ -44,16 +49,11 @@ export const MessagesItem = ({
                         <Text style={MessagesItemStyle.text}>
                             {item.firstname}
                         </Text>
-                        <Text
-                            style={[
-                                MessagesItemStyle.text,
-                                MessagesItemStyle.opacity
-                            ]}
-                        >
+                        <Text style={[MessagesItemStyle.text, opacityStyle]}>
                             {moment(item.time).fromNow()}
                         </Text>
                     </View>
-                    <Text style={MessagesItemStyle.message}>
+                    <Text style={[MessagesItemStyle.message, opacityStyle]}>
                         {item.message}
                     </Text>
                 </View>

@@ -25,17 +25,14 @@ export const MessagesItemStyle = StyleSheet.create({
         justifyContent: 'space-between'
     },
     text: {
-        color: COLORS.WHITE,
         fontSize: 14,
         paddingBottom: 5,
+        color: COLORS.WHITE,
         fontWeight: 'bold'
-    },
-    opacity: {
-        opacity: 0.75
     },
     message: {
         fontSize: 12,
         color: COLORS.WHITE,
-        fontWeight: '600'
+        fontWeight: 'bold'
     }
 });
