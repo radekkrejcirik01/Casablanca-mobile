@@ -154,6 +154,13 @@ export interface MessagesResponseInterface {
     data?: Array<ChatDataProps>;
 }
 
+export interface SendMessageInterface {
+    sender: string;
+    receiver: string;
+    message: string;
+    time: string;
+}
+
 export interface ChatUserGetInterface {
     user: string;
 }

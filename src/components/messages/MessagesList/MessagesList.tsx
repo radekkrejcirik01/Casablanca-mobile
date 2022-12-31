@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Text, VirtualizedList } from 'react-native';
 import { useSelector } from 'react-redux';
 import { MessagesListStyle } from '@components/messages/MessagesList/MessagesList.style';
@@ -17,22 +17,9 @@ import {
 export const MessagesList = (): JSX.Element => {
     const { email } = useSelector((state: ReducerProps) => state.user);
 
-    const { navigateTo } = useNavigation(RootStackNavigatorEnum.MessagesStack);
-
     const [data, setData] = useState<Array<MessagesListDataProps>>([]);
 
-    const onPress = (item: MessagesListDataProps) => {
-        navigateTo(MessagesStackNavigatorEnum.ChatScreen, {
-            user: item.email,
-            firstname: item.firstname,
-            profilePicture: item.profilePicture
-        });
-    };
-
-    const { getItem, renderItem, getItemCount, keyExtractor, refreshControl } =
-        useMessagesListRenders(data, onPress);
-
-    useEffect(() => {
+    const loadConversations = useCallback(() => {
         postRequest<ConversationsResponseInterface, ConversationsGetInterface>(
             'https://26399civx6.execute-api.eu-central-1.amazonaws.com/messages/get/conversations/0',
             {
@@ -44,6 +31,29 @@ export const MessagesList = (): JSX.Element => {
             }
         });
     }, [email]);
+
+    const { navigateTo } = useNavigation(
+        RootStackNavigatorEnum.MessagesStack,
+        loadConversations
+    );
+
+    const onPress = useCallback(
+        (item: MessagesListDataProps) => {
+            navigateTo(MessagesStackNavigatorEnum.ChatScreen, {
+                user: item.email,
+                firstname: item.firstname,
+                profilePicture: item.profilePicture
+            });
+        },
+        [navigateTo]
+    );
+
+    const onRefresh = useCallback(() => {
+        loadConversations();
+    }, [loadConversations]);
+
+    const { getItem, renderItem, getItemCount, keyExtractor, refreshControl } =
+        useMessagesListRenders(data, onPress, onRefresh);
 
     return (
         <>

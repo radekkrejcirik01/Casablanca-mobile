@@ -1,6 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { StyleProp, Text, View, ViewStyle } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import moment from 'moment';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
 import { MessagesItemProps } from '@components/messages/MessagesItem/MessagesItem.props';
 import { MessagesItemStyle } from '@components/messages/MessagesItem/MessagesItem.style';
@@ -13,9 +14,9 @@ export const MessagesItem = ({
 }: MessagesItemProps): JSX.Element => {
     const { isDarkMode } = useTheme();
 
-    const onPressItem = () => {
+    const onPressItem = useCallback(() => {
         onPress(item);
-    };
+    }, [item, onPress]);
 
     const borderBottomColor = useMemo(
         (): StyleProp<ViewStyle> => ({
@@ -49,7 +50,7 @@ export const MessagesItem = ({
                                 MessagesItemStyle.opacity
                             ]}
                         >
-                            {item.time}
+                            {moment(item.time).fromNow()}
                         </Text>
                     </View>
                     <Text style={MessagesItemStyle.message}>

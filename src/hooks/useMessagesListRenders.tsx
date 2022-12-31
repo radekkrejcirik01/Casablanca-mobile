@@ -5,7 +5,8 @@ import { MessagesListDataProps } from '@components/messages/MessagesList/Message
 
 export const useMessagesListRenders = (
     data: Array<MessagesListDataProps>,
-    onItemPress: (item: MessagesListDataProps) => void
+    onItemPress: (item: MessagesListDataProps) => void,
+    onRefresh: () => void
 ): {
     getItem: (
         listData: Array<MessagesListDataProps>,
@@ -20,12 +21,13 @@ export const useMessagesListRenders = (
 } => {
     const [refreshing, setRefreshing] = useState(false);
 
-    const onRefresh = useCallback(() => {
+    const refresh = useCallback(() => {
         setRefreshing(true);
         setTimeout(() => {
             setRefreshing(false);
+            onRefresh();
         }, 1000);
-    }, []);
+    }, [onRefresh]);
 
     const getItem = (
         listData: Array<MessagesListDataProps>,
@@ -45,7 +47,7 @@ export const useMessagesListRenders = (
     const refreshControl = (
         <RefreshControl
             refreshing={refreshing}
-            onRefresh={onRefresh}
+            onRefresh={refresh}
             tintColor="white"
         />
     );

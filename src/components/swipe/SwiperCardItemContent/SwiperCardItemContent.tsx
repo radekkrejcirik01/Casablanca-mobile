@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Text, View } from 'react-native';
+import moment from 'moment';
 import { PLACE_EMOJIS } from '@components/general/PlaceTag/PlaceTag.const';
 import { SwiperCardItemStyle } from '@components/swipe/SwiperCardItem/SwiperCardItem.style';
 import { getAge } from '@functions/getAge';
-import moment from 'moment';
 import { SwiperCardItemContentProps } from '@components/swipe/SwiperCardItemContent/SwiperCardItemContent.props';
 
 export const SwiperCardItemContent = ({

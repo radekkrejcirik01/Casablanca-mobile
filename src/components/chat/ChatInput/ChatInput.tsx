@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import {
     Keyboard,
     StyleProp,
@@ -19,10 +19,11 @@ export const ChatInput = ({ onSend }: ChatInputProps): JSX.Element => {
 
     const { isDarkMode } = useTheme();
 
-    const onPress = () => {
+    const onPress = useCallback(() => {
         Keyboard.dismiss();
         onSend(value);
-    };
+        setValue(null);
+    }, [onSend, value]);
 
     const containerBorder = useMemo(
         (): StyleProp<ViewStyle> => ({
@@ -37,6 +38,7 @@ export const ChatInput = ({ onSend }: ChatInputProps): JSX.Element => {
                 placeholder="Message..."
                 placeholderTextColor={COLORS.WHITE}
                 onChangeText={setValue}
+                value={value}
                 multiline
                 selectionColor={COLORS.WHITE}
                 style={ChatInputStyle.input}

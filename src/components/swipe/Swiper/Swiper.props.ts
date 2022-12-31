@@ -1,7 +1,3 @@
-export interface SwiperProps {
-    data: Array<CardDataProps>;
-}
-
 export interface CardDataProps {
     email?: string;
     firstname: string;
