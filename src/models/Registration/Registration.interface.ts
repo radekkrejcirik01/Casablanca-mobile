@@ -123,6 +123,11 @@ export interface RegisterDeviceInterface {
     deviceToken: string;
 }
 
+export interface DeleteDeviceInterface {
+    email: string;
+    deviceToken: string;
+}
+
 export interface MatchesGetInterface {
     email: string;
 }
@@ -156,6 +161,7 @@ export interface MessagesResponseInterface {
 
 export interface SendMessageInterface {
     sender: string;
+    senderFirstname: string;
     receiver: string;
     message: string;
     time: string;

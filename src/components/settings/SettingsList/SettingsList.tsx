@@ -17,6 +17,7 @@ import {
     SettingsListProps
 } from '@components/settings/SettingsList/SettingsList.props';
 import { useSettings } from '@hooks/useSettings';
+import { useMessaging } from '@hooks/useMessaging';
 
 export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
     const dispatch = useDispatch();
@@ -35,6 +36,7 @@ export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
         showMeDescription,
         openShowMeScreen
     } = useSettings();
+    const { deleteDevice } = useMessaging();
 
     const openAboutScreen = useCallback(() => {
         navigateTo(ProfileStackNavigatorEnum.AboutScreen);
@@ -71,7 +73,8 @@ export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
     const LogOut = useCallback(() => {
         dispatch(resetUserState());
         PersistStorage.setItem(PersistStorageKeys.TOKEN, '').catch();
-    }, [dispatch]);
+        deleteDevice();
+    }, [deleteDevice, dispatch]);
 
     return (
         <View style={style}>

@@ -3,6 +3,7 @@ export interface ReducerProps {
     user: User;
     save: Save;
     modal: Modal;
+    device: Device;
     theme: Theme;
     bottomBar: BottomBar;
     swiper: Swiper;
@@ -38,6 +39,10 @@ export interface Save {
 
 export interface Modal {
     isModalVisible: boolean;
+}
+
+export interface Device {
+    token: string;
 }
 
 export interface Theme {

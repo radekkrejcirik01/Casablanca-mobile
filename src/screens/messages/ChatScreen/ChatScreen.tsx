@@ -22,7 +22,9 @@ import { getDateAndTime } from '@functions/getDateAndTime';
 export const ChatScreen = ({ route }: ChatScreenProps): JSX.Element => {
     const { user } = route.params;
 
-    const { email } = useSelector((state: ReducerProps) => state.user);
+    const { email, firstname } = useSelector(
+        (state: ReducerProps) => state.user
+    );
 
     const isModalVisible = useSelector(
         (state: ReducerProps) => state.modal.isModalVisible
@@ -63,13 +65,14 @@ export const ChatScreen = ({ route }: ChatScreenProps): JSX.Element => {
                 'https://26399civx6.execute-api.eu-central-1.amazonaws.com/messages/send/message',
                 {
                     sender: email,
+                    senderFirstname: firstname,
                     receiver: user,
                     message,
                     time: getDateAndTime()
                 }
             ).subscribe();
         },
-        [email, user]
+        [firstname, email, user]
     );
 
     return (
