@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { SafeAreaView, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChatScreenStyle } from '@screens/messages/ChatScreen/ChatScreen.style';
@@ -9,8 +9,12 @@ import { Modal } from '@components/general/Modal/Modal';
 import { InfoProfileScreen } from '@screens/general/InfoProfileScreen/InfoProfileScreen';
 import { ReducerProps } from '@store/index.props';
 import { setModalVisible } from '@store/ModalReducer';
-import { CardDataProps } from '@components/swipe/Swiper/Swiper.props';
 import { ChatScreenProps } from '@screens/messages/ChatScreen/ChatScreen.props';
+import { postRequest } from '@utils/Axios/Axios.service';
+import {
+    ChatUserGetInterface,
+    ChatUserResponseInterface
+} from '@models/Registration/Registration.interface';
 
 export const ChatScreen = ({ route }: ChatScreenProps): JSX.Element => {
     const { user } = route.params;
@@ -20,31 +24,33 @@ export const ChatScreen = ({ route }: ChatScreenProps): JSX.Element => {
     );
     const dispatch = useDispatch();
 
-    const loadModalData = useCallback(() => {}, []);
+    const [modalContent, setModalContent] = useState<JSX.Element>();
+
+    const onClose = useCallback(() => {
+        dispatch(setModalVisible(false));
+    }, [dispatch]);
+
+    const loadModalData = useCallback(() => {
+        postRequest<ChatUserResponseInterface, ChatUserGetInterface>(
+            'https://26399civx6.execute-api.eu-central-1.amazonaws.com/messages/get/user',
+            {
+                user
+            }
+        ).subscribe((response: ChatUserResponseInterface) => {
+            if (response?.status) {
+                const { data } = response;
+                setModalContent(
+                    <InfoProfileScreen onClose={onClose} info={data} />
+                );
+            }
+        });
+    }, [onClose, user]);
 
     useEffect(() => {
         if (isModalVisible) {
             loadModalData();
         }
     }, [isModalVisible, loadModalData]);
-
-    const onClose = useCallback(() => {
-        dispatch(setModalVisible(false));
-    }, [dispatch]);
-
-    const modalContent = useMemo((): JSX.Element => {
-        const info: CardDataProps = {
-            photos: [
-                'https://s5.favim.com/orig/69/analog-boy-grunge-hipster-Favim.com-654208.jpg'
-            ],
-            firstname: 'Radek',
-            birthday: '2001-11-11',
-            about: 'a',
-            tags: ['Theatre', 'Cafe']
-        };
-
-        return <InfoProfileScreen onClose={onClose} info={info} />;
-    }, [onClose]);
 
     const onSend = (value: string) => {};
 

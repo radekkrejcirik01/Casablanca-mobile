@@ -153,3 +153,13 @@ export interface MessagesResponseInterface {
     message: string;
     data?: Array<ChatDataProps>;
 }
+
+export interface ChatUserGetInterface {
+    user: string;
+}
+
+export interface ChatUserResponseInterface {
+    status: string;
+    message: string;
+    data?: CardDataProps;
+}

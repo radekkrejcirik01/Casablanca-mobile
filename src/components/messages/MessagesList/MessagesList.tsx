@@ -39,7 +39,9 @@ export const MessagesList = (): JSX.Element => {
                 email
             }
         ).subscribe((response: ConversationsResponseInterface) => {
-            setData(response.data);
+            if (response?.status) {
+                setData(response?.data);
+            }
         });
     }, [email]);
 

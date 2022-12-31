@@ -43,7 +43,9 @@ export const ChatList = ({ user }: ChatListProps): JSX.Element => {
                 user
             }
         ).subscribe((response: MessagesResponseInterface) => {
-            setData(response.data);
+            if (response?.status) {
+                setData(response?.data);
+            }
         });
     }, [email, user]);
 

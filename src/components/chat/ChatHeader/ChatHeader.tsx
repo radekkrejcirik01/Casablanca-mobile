@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
 import { SafeAreaView, StyleProp, Text, View, ViewStyle } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { useRoute } from '@react-navigation/native';
 import FastImage, { Source } from 'react-native-fast-image';
-import { useDispatch } from 'react-redux';
 import { Icon } from '@components/icon/Icon';
 import { ChatHeaderStyle } from '@components/chat/ChatHeader/ChatHeader.style';
 import { IconEnum } from '@components/icon/Icon.enum';

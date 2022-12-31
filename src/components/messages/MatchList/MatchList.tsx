@@ -28,7 +28,9 @@ export const MatchList = (): JSX.Element => {
                 email
             }
         ).subscribe((response: MatchesResponseInterface) => {
-            setData(response.data);
+            if (response?.status) {
+                setData(response?.data);
+            }
         });
     }, [email]);
 

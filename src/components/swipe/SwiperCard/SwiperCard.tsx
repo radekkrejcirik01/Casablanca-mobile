@@ -38,22 +38,22 @@ export const SwiperCard = ({
         (event: TapGestureHandlerGestureEvent) => {
             if (hasLike) {
                 if (event.nativeEvent.state === State.BEGAN && cardIndex < 2) {
-                    onCardTouch(card.email);
+                    onCardTouch(card?.email);
                 }
                 // Trigger like event
                 if (event.nativeEvent.state === State.ACTIVE) {
                     lottiePlay();
-                    performLike(card.email, SwiperCardEnum.LIKE);
+                    performLike(card?.email, SwiperCardEnum.LIKE);
                 }
             }
         },
-        [card.email, cardIndex, hasLike, lottiePlay, onCardTouch, performLike]
+        [card?.email, cardIndex, hasLike, lottiePlay, onCardTouch, performLike]
     );
 
     const onRemoveLike = useCallback(() => {
         lottieReset();
-        performLike(card.email, SwiperCardEnum.REMOVE_LIKE);
-    }, [card.email, lottieReset, performLike]);
+        performLike(card?.email, SwiperCardEnum.REMOVE_LIKE);
+    }, [card?.email, lottieReset, performLike]);
 
     const onPageSelected = (event: ViewPagerOnPageSelectedEvent) =>
         setPagePosition(event.nativeEvent.position);
