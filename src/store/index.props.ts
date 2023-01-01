@@ -2,6 +2,7 @@ export interface ReducerProps {
     birthday: Birthday;
     user: User;
     save: Save;
+    messaging: Messaging;
     modal: Modal;
     device: Device;
     theme: Theme;
@@ -35,6 +36,12 @@ export interface Birthday {
 
 export interface Save {
     isVisible: boolean;
+}
+
+export interface Messaging {
+    chatUser: string;
+    performLoadConversations: boolean;
+    performLoadMatches: boolean;
 }
 
 export interface Modal {

@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { VirtualizedList } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { MatchListStyle } from '@components/messages/MatchList/MatchList.style';
 import { useMatchListRenders } from '@hooks/useMatchListRenders';
 import { MatchListDataProps } from '@components/messages/MatchList/MatchList.props';
@@ -13,9 +13,14 @@ import { ReducerProps } from '@store/index.props';
 import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { MessagesStackNavigatorEnum } from '@navigation/StackNavigators/messages/MessagesStackNavigator.enum';
+import { setPerformLoadMatchesAction } from '@store/MessagingReducer';
 
 export const MatchList = (): JSX.Element => {
     const { email } = useSelector((state: ReducerProps) => state.user);
+    const { performLoadMatches } = useSelector(
+        (state: ReducerProps) => state.messaging
+    );
+    const dispatch = useDispatch();
 
     const [data, setData] = useState<Array<MatchListDataProps>>([]);
 
@@ -31,6 +36,13 @@ export const MatchList = (): JSX.Element => {
             }
         });
     }, [email]);
+
+    useEffect(() => {
+        if (performLoadMatches) {
+            loadMatches();
+            dispatch(setPerformLoadMatchesAction(false));
+        }
+    }, [dispatch, loadMatches, performLoadMatches]);
 
     const { navigateTo } = useNavigation(
         RootStackNavigatorEnum.MessagesStack,

@@ -5,7 +5,7 @@ import {
     NativeSyntheticEvent,
     VirtualizedList
 } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ChatListStyle } from '@components/chat/ChatList/ChatList.style';
 import { useChatListRenders } from '@hooks/useChatListRenders';
 import { useKeyboard } from '@hooks/useKeyboard';
@@ -19,9 +19,12 @@ import {
     MessagesGetInterface,
     MessagesResponseInterface
 } from '@models/Registration/Registration.interface';
+import { setChatUserAction } from '@store/MessagingReducer';
 
 export const ChatList = ({ user }: ChatListProps): JSX.Element => {
     const { email } = useSelector((state: ReducerProps) => state.user);
+    const { chatUser } = useSelector((state: ReducerProps) => state.messaging);
+    const dispatch = useDispatch();
 
     const [data, setData] = useState<Array<ChatDataProps>>([]);
 
@@ -35,7 +38,7 @@ export const ChatList = ({ user }: ChatListProps): JSX.Element => {
 
     const listRef = useRef(null);
 
-    useEffect(() => {
+    const loadMessages = useCallback(() => {
         postRequest<MessagesResponseInterface, MessagesGetInterface>(
             'https://26399civx6.execute-api.eu-central-1.amazonaws.com/messages/get/messages/0',
             {
@@ -48,6 +51,17 @@ export const ChatList = ({ user }: ChatListProps): JSX.Element => {
             }
         });
     }, [email, user]);
+
+    useEffect(() => {
+        if (chatUser === user) {
+            loadMessages();
+            dispatch(setChatUserAction(null));
+        }
+    }, [dispatch, loadMessages, chatUser, user]);
+
+    useEffect(() => {
+        loadMessages();
+    }, [email, loadMessages, user]);
 
     useEffect(() => {
         if (!isKeyboardVisible) {

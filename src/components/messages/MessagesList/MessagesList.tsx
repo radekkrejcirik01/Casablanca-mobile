@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Text, VirtualizedList } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { MessagesListStyle } from '@components/messages/MessagesList/MessagesList.style';
 import { useNavigation } from '@hooks/useNavigation';
 import { useMessagesListRenders } from '@hooks/useMessagesListRenders';
@@ -15,9 +15,14 @@ import {
     ReadMessageInterface,
     ResponseInterface
 } from '@models/Registration/Registration.interface';
+import { setPerformLoadConversationsAction } from '@store/MessagingReducer';
 
 export const MessagesList = (): JSX.Element => {
     const { email } = useSelector((state: ReducerProps) => state.user);
+    const { performLoadConversations } = useSelector(
+        (state: ReducerProps) => state.messaging
+    );
+    const dispatch = useDispatch();
 
     const [data, setData] = useState<Array<MessagesListDataProps>>([]);
 
@@ -33,6 +38,13 @@ export const MessagesList = (): JSX.Element => {
             }
         });
     }, [email]);
+
+    useEffect(() => {
+        if (performLoadConversations) {
+            loadConversations();
+            dispatch(setPerformLoadConversationsAction(false));
+        }
+    }, [dispatch, loadConversations, performLoadConversations]);
 
     const { navigateTo } = useNavigation(
         RootStackNavigatorEnum.MessagesStack,
