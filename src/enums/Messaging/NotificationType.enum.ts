@@ -1,4 +1,4 @@
 export enum NotificationTypeEnum {
-    MATCH = 'Match',
-    MESSAGE = 'Message'
+    MATCH = 'match',
+    MESSAGE = 'message'
 }

@@ -17,7 +17,9 @@ import {
 import { postRequest } from '@utils/Axios/Axios.service';
 import {
     MessagesGetInterface,
-    MessagesResponseInterface
+    MessagesResponseInterface,
+    ReadMessageInterface,
+    ResponseInterface
 } from '@models/Registration/Registration.interface';
 import { setChatUserAction } from '@store/MessagingReducer';
 
@@ -38,26 +40,42 @@ export const ChatList = ({ user }: ChatListProps): JSX.Element => {
 
     const listRef = useRef(null);
 
-    const loadMessages = useCallback(() => {
-        postRequest<MessagesResponseInterface, MessagesGetInterface>(
-            'https://26399civx6.execute-api.eu-central-1.amazonaws.com/messages/get/messages/0',
+    const updateMessageRead = useCallback(() => {
+        postRequest<ResponseInterface, ReadMessageInterface>(
+            'https://26399civx6.execute-api.eu-central-1.amazonaws.com/messages/update/read',
             {
                 email,
                 user
             }
-        ).subscribe((response: MessagesResponseInterface) => {
-            if (response?.status) {
-                setData(response?.data);
-            }
-        });
+        ).subscribe();
     }, [email, user]);
+
+    const loadMessages = useCallback(
+        (read = false) => {
+            postRequest<MessagesResponseInterface, MessagesGetInterface>(
+                'https://26399civx6.execute-api.eu-central-1.amazonaws.com/messages/get/messages/0',
+                {
+                    email,
+                    user
+                }
+            ).subscribe((response: MessagesResponseInterface) => {
+                if (response?.status) {
+                    setData(response?.data);
+                    if (read) {
+                        updateMessageRead();
+                    }
+                }
+            });
+        },
+        [email, updateMessageRead, user]
+    );
 
     useEffect(() => {
         if (chatUser === user) {
-            loadMessages();
+            loadMessages(true);
             dispatch(setChatUserAction(null));
         }
-    }, [dispatch, loadMessages, chatUser, user]);
+    }, [dispatch, loadMessages, chatUser, updateMessageRead, user]);
 
     useEffect(() => {
         loadMessages();

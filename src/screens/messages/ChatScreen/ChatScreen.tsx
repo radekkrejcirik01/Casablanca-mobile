@@ -25,7 +25,6 @@ export const ChatScreen = ({ route }: ChatScreenProps): JSX.Element => {
     const { email, firstname } = useSelector(
         (state: ReducerProps) => state.user
     );
-
     const isModalVisible = useSelector(
         (state: ReducerProps) => state.modal.isModalVisible
     );
