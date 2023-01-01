@@ -11,7 +11,9 @@ import { MessagesListDataProps } from '@components/messages/MessagesList/Message
 import { postRequest } from '@utils/Axios/Axios.service';
 import {
     ConversationsGetInterface,
-    ConversationsResponseInterface
+    ConversationsResponseInterface,
+    ReadMessageInterface,
+    ResponseInterface
 } from '@models/Registration/Registration.interface';
 
 export const MessagesList = (): JSX.Element => {
@@ -37,6 +39,19 @@ export const MessagesList = (): JSX.Element => {
         loadConversations
     );
 
+    const updateMessageRead = useCallback(
+        (user: string) => {
+            postRequest<ResponseInterface, ReadMessageInterface>(
+                'https://26399civx6.execute-api.eu-central-1.amazonaws.com/messages/update/read',
+                {
+                    email,
+                    user
+                }
+            ).subscribe();
+        },
+        [email]
+    );
+
     const onPress = useCallback(
         (item: MessagesListDataProps) => {
             navigateTo(MessagesStackNavigatorEnum.ChatScreen, {
@@ -44,8 +59,12 @@ export const MessagesList = (): JSX.Element => {
                 firstname: item.firstname,
                 profilePicture: item.profilePicture
             });
+
+            if (!item.isRead) {
+                updateMessageRead(item.email);
+            }
         },
-        [navigateTo]
+        [navigateTo, updateMessageRead]
     );
 
     const onRefresh = useCallback(() => {
