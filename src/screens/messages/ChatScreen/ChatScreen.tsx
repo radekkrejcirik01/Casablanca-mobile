@@ -3,7 +3,6 @@ import { SafeAreaView, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChatScreenStyle } from '@screens/messages/ChatScreen/ChatScreen.style';
 import { ChatList } from '@components/chat/ChatList/ChatList';
-import { ChatInput } from '@components/chat/ChatInput/ChatInput';
 import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';
 import { Modal } from '@components/general/Modal/Modal';
 import { InfoProfileScreen } from '@screens/general/InfoProfileScreen/InfoProfileScreen';
@@ -13,18 +12,12 @@ import { ChatScreenProps } from '@screens/messages/ChatScreen/ChatScreen.props';
 import { postRequest } from '@utils/Axios/Axios.service';
 import {
     ChatUserGetInterface,
-    ChatUserResponseInterface,
-    ResponseInterface,
-    SendMessageInterface
+    ChatUserResponseInterface
 } from '@models/Registration/Registration.interface';
-import { getDateAndTime } from '@functions/getDateAndTime';
 
 export const ChatScreen = ({ route }: ChatScreenProps): JSX.Element => {
     const { user } = route.params;
 
-    const { email, firstname } = useSelector(
-        (state: ReducerProps) => state.user
-    );
     const isModalVisible = useSelector(
         (state: ReducerProps) => state.modal.isModalVisible
     );
@@ -58,28 +51,11 @@ export const ChatScreen = ({ route }: ChatScreenProps): JSX.Element => {
         }
     }, [isModalVisible, loadModalData]);
 
-    const onSend = useCallback(
-        (message: string) => {
-            postRequest<ResponseInterface, SendMessageInterface>(
-                'https://26399civx6.execute-api.eu-central-1.amazonaws.com/messages/send/message',
-                {
-                    sender: email,
-                    senderFirstname: firstname,
-                    receiver: user,
-                    message,
-                    time: getDateAndTime()
-                }
-            ).subscribe();
-        },
-        [firstname, email, user]
-    );
-
     return (
         <SafeAreaView>
             <KeyboardAvoidingView keyboardVerticalOffset={50}>
                 <View style={ChatScreenStyle.container}>
                     <ChatList user={user} />
-                    <ChatInput onSend={onSend} />
                 </View>
             </KeyboardAvoidingView>
             <Modal

@@ -1,8 +1,19 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState
+} from 'react';
 import {
     Keyboard,
     NativeScrollEvent,
     NativeSyntheticEvent,
+    StyleProp,
+    Text,
+    TextInput,
+    View,
+    ViewStyle,
     VirtualizedList
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,17 +30,27 @@ import {
     MessagesGetInterface,
     MessagesResponseInterface,
     ReadMessageInterface,
-    ResponseInterface
+    ResponseInterface,
+    SendMessageInterface
 } from '@models/Registration/Registration.interface';
 import { setChatUserAction } from '@store/MessagingReducer';
+import COLORS from '@constants/COLORS';
+import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
+import { ThemeView } from '@components/general/ThemeView/ThemeView';
+import { useTheme } from '@hooks/useTheme';
+import { getDateAndTime } from '@functions/getDateAndTime';
 
 export const ChatList = ({ user }: ChatListProps): JSX.Element => {
-    const { email } = useSelector((state: ReducerProps) => state.user);
+    const { email, firstname } = useSelector(
+        (state: ReducerProps) => state.user
+    );
     const { chatUser } = useSelector((state: ReducerProps) => state.messaging);
     const dispatch = useDispatch();
 
     const [data, setData] = useState<Array<ChatDataProps>>([]);
+    const [messageValue, setMessageValue] = useState<string>();
 
+    const { isDarkMode } = useTheme();
     const { getItem, renderItem, getItemCount, keyExtractor } =
         useChatListRenders(data);
 
@@ -99,21 +120,75 @@ export const ChatList = ({ user }: ChatListProps): JSX.Element => {
         [isKeyboardVisible]
     );
 
+    const sendMessage = useCallback(() => {
+        postRequest<ResponseInterface, SendMessageInterface>(
+            'https://26399civx6.execute-api.eu-central-1.amazonaws.com/messages/send/message',
+            {
+                sender: email,
+                senderFirstname: firstname,
+                receiver: user,
+                message: messageValue,
+                time: getDateAndTime()
+            }
+        ).subscribe();
+    }, [firstname, email, user, messageValue]);
+
+    const onSend = useCallback(() => {
+        Keyboard.dismiss();
+        sendMessage();
+
+        const newMessage: ChatDataProps = {
+            id: data[0].id + 1,
+            sender: email,
+            receiver: user,
+            message: messageValue,
+            time: getDateAndTime()
+        };
+        setData([newMessage, ...data]);
+
+        setMessageValue(null);
+    }, [data, email, messageValue, sendMessage, user]);
+
+    const containerBorder = useMemo(
+        (): StyleProp<ViewStyle> => ({
+            borderColor: isDarkMode ? COLORS.BLACK_200 : COLORS.WHITE
+        }),
+        [isDarkMode]
+    );
+
     return (
-        <VirtualizedList
-            ref={listRef}
-            data={data}
-            getItem={getItem}
-            renderItem={renderItem}
-            getItemCount={getItemCount}
-            keyExtractor={keyExtractor}
-            initialNumToRender={40}
-            showsVerticalScrollIndicator={false}
-            inverted
-            scrollEnabled={scrollEnabled}
-            keyboardShouldPersistTaps="always"
-            onScrollBeginDrag={onScrollBeginDrag}
-            contentContainerStyle={ChatListStyle.contentContainer}
-        />
+        <>
+            <VirtualizedList
+                ref={listRef}
+                data={data}
+                getItem={getItem}
+                renderItem={renderItem}
+                getItemCount={getItemCount}
+                keyExtractor={keyExtractor}
+                initialNumToRender={40}
+                showsVerticalScrollIndicator={false}
+                inverted
+                scrollEnabled={scrollEnabled}
+                keyboardShouldPersistTaps="always"
+                onScrollBeginDrag={onScrollBeginDrag}
+                contentContainerStyle={ChatListStyle.contentContainer}
+            />
+            <ThemeView style={[ChatListStyle.container, containerBorder]}>
+                <TextInput
+                    placeholder="Message..."
+                    placeholderTextColor={COLORS.WHITE}
+                    onChangeText={setMessageValue}
+                    value={messageValue}
+                    multiline
+                    selectionColor={COLORS.WHITE}
+                    style={ChatListStyle.input}
+                />
+                <View style={ChatListStyle.sendView}>
+                    <TouchableOpacity disabled={!messageValue} onPress={onSend}>
+                        <Text style={ChatListStyle.send}>Send</Text>
+                    </TouchableOpacity>
+                </View>
+            </ThemeView>
+        </>
     );
 };
