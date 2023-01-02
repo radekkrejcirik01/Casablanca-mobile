@@ -52,9 +52,9 @@ export const MatchList = (): JSX.Element => {
     const onPress = useCallback(
         (item: MatchListDataProps) => {
             navigateTo(MessagesStackNavigatorEnum.ChatScreen, {
-                user: item.email,
-                firstname: item.firstname,
-                profilePicture: item.profilePicture
+                user: item.user.email,
+                firstname: item.user.firstname,
+                profilePicture: item.user.profilePicture
             });
         },
         [navigateTo]

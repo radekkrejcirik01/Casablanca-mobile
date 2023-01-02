@@ -25,12 +25,12 @@ export const useMatchListRenders = (
     const renderItem = ({
         item
     }: ListRenderItemInfo<MatchListDataProps>): JSX.Element => (
-        <MatchItem key={item.email} item={item} onPress={onItemPress} />
+        <MatchItem key={item.user.email} item={item} onPress={onItemPress} />
     );
 
     const getItemCount = useCallback((): number => data?.length, [data]);
 
-    const keyExtractor = (item: MatchListDataProps): string => item.email;
+    const keyExtractor = (item: MatchListDataProps): string => item.user.email;
 
     return { getItem, renderItem, getItemCount, keyExtractor };
 };

@@ -1,6 +1,9 @@
 export interface MatchListDataProps {
-    email: string;
-    firstname: string;
-    birthday: string;
-    profilePicture: string;
+    user: {
+        email: string;
+        firstname: string;
+        birthday: string;
+        profilePicture: string;
+    };
+    isRead: number;
 }
