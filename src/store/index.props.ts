@@ -39,7 +39,11 @@ export interface Save {
 }
 
 export interface Messaging {
-    chatUser: string;
+    chatUser: {
+        email: string;
+        firstname: string;
+        message: string;
+    };
     performLoadConversations: boolean;
     performLoadMatches: boolean;
 }

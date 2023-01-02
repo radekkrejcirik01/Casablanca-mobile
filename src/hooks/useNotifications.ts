@@ -81,7 +81,12 @@ export const useNotifications = (
                                 NotificationTypeEnum.MESSAGE
                             ) {
                                 dispatch(
-                                    setChatUserAction(remoteMessage.data.sender)
+                                    setChatUserAction({
+                                        email: remoteMessage.data.sender,
+                                        firstname:
+                                            remoteMessage.notification.title,
+                                        message: remoteMessage.notification.body
+                                    })
                                 );
                             }
                             return;

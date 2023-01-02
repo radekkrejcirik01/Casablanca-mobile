@@ -39,6 +39,8 @@ import { TouchableOpacity } from '@components/general/TouchableOpacity/Touchable
 import { ThemeView } from '@components/general/ThemeView/ThemeView';
 import { useTheme } from '@hooks/useTheme';
 import { getDateAndTime } from '@functions/getDateAndTime';
+import { useFlashMessage } from '@hooks/useFlashMessage';
+import { useNavigation } from '@hooks/useNavigation';
 
 export const ChatList = ({ user }: ChatListProps): JSX.Element => {
     const { email, firstname } = useSelector(
@@ -49,15 +51,15 @@ export const ChatList = ({ user }: ChatListProps): JSX.Element => {
 
     const [data, setData] = useState<Array<ChatDataProps>>([]);
     const [messageValue, setMessageValue] = useState<string>();
-
-    const { isDarkMode } = useTheme();
-    const { getItem, renderItem, getItemCount, keyExtractor } =
-        useChatListRenders(data);
-
-    const { isKeyboardVisible } = useKeyboard();
-
     const [scrollEnabled, setScrollEnabled] = useState<boolean>(true);
     const [offset, setOffset] = useState<number>(0);
+
+    const { navigateBack } = useNavigation();
+    const displayMessage = useFlashMessage();
+    const { getItem, renderItem, getItemCount, keyExtractor } =
+        useChatListRenders(data);
+    const { isKeyboardVisible } = useKeyboard();
+    const { isDarkMode } = useTheme();
 
     const listRef = useRef(null);
 
@@ -92,15 +94,23 @@ export const ChatList = ({ user }: ChatListProps): JSX.Element => {
     );
 
     useEffect(() => {
-        if (chatUser === user) {
-            loadMessages(true);
+        if (chatUser?.email) {
+            if (chatUser?.email === user) {
+                loadMessages(true);
+            } else {
+                displayMessage(
+                    chatUser?.firstname,
+                    chatUser?.message,
+                    navigateBack
+                );
+            }
             dispatch(setChatUserAction(null));
         }
-    }, [dispatch, loadMessages, chatUser, updateMessageRead, user]);
+    }, [dispatch, displayMessage, loadMessages, chatUser, navigateBack, user]);
 
     useEffect(() => {
         loadMessages();
-    }, [email, loadMessages, user]);
+    }, [email, loadMessages]);
 
     useEffect(() => {
         if (!isKeyboardVisible) {
