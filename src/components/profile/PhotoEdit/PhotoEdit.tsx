@@ -68,7 +68,7 @@ export const PhotoEdit = ({ photos, onClose }: PhotoEditProps): JSX.Element => {
     );
 
     return (
-        <Screen style={PhotoEditStyle.view}>
+        <Screen isModalScreen style={PhotoEditStyle.screen}>
             <View style={PhotoEditStyle.header}>
                 <Title title="Profile photos" />
                 <SaveButton onPress={onPressSaveButton} />

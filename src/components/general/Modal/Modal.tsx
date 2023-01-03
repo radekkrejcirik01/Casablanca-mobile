@@ -14,8 +14,8 @@ export const Modal = ({
         isVisible={isVisible}
         useNativeDriverForBackdrop
         swipeDirection={['down']}
-        animationInTiming={450}
-        animationOutTiming={450}
+        animationInTiming={400}
+        animationOutTiming={400}
         onBackdropPress={onClose}
         onSwipeComplete={onClose}
         avoidKeyboard
