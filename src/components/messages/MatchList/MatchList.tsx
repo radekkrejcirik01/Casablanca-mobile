@@ -7,7 +7,9 @@ import { MatchListDataProps } from '@components/messages/MatchList/MatchList.pro
 import { postRequest } from '@utils/Axios/Axios.service';
 import {
     MatchesGetInterface,
-    MatchesResponseInterface
+    MatchesResponseInterface,
+    ResponseInterface,
+    SeenMatchInterface
 } from '@models/Registration/Registration.interface';
 import { ReducerProps } from '@store/index.props';
 import { useNavigation } from '@hooks/useNavigation';
@@ -49,6 +51,19 @@ export const MatchList = (): JSX.Element => {
         loadMatches
     );
 
+    const updateMatchSeen = useCallback(
+        (user: string) => {
+            postRequest<ResponseInterface, SeenMatchInterface>(
+                'https://26399civx6.execute-api.eu-central-1.amazonaws.com/messages/update/seen',
+                {
+                    email,
+                    user
+                }
+            ).subscribe();
+        },
+        [email]
+    );
+
     const onPress = useCallback(
         (item: MatchListDataProps) => {
             navigateTo(MessagesStackNavigatorEnum.ChatScreen, {
@@ -56,8 +71,12 @@ export const MatchList = (): JSX.Element => {
                 firstname: item.user.firstname,
                 profilePicture: item.user.profilePicture
             });
+
+            if (!item.isSeen) {
+                updateMatchSeen(item.user.email);
+            }
         },
-        [navigateTo]
+        [navigateTo, updateMatchSeen]
     );
 
     const { getItem, renderItem, getItemCount, keyExtractor } =

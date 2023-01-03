@@ -138,6 +138,11 @@ export interface MatchesResponseInterface {
     data?: Array<MatchListDataProps>;
 }
 
+export interface SeenMatchInterface {
+    email: string;
+    user: string;
+}
+
 export interface ConversationsGetInterface {
     email: string;
 }

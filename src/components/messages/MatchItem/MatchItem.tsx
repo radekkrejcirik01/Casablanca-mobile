@@ -14,9 +14,9 @@ export const MatchItem = ({ item, onPress }: MatchItemProps): JSX.Element => {
     const imageStyle = useMemo(
         (): StyleProp<ImageStyle> => [
             MatchItemStyle.image,
-            !item.isRead && MatchItemStyle.imageBorder
+            !item.isSeen && MatchItemStyle.imageBorder
         ],
-        [item.isRead]
+        [item.isSeen]
     );
 
     return (

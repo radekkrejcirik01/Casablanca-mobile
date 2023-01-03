@@ -5,5 +5,5 @@ export interface MatchListDataProps {
         birthday: string;
         profilePicture: string;
     };
-    isRead: number;
+    isSeen: number;
 }
