@@ -3,36 +3,35 @@ import COLORS from '@constants/COLORS';
 
 export const DeleteAccountScreenStyle = StyleSheet.create({
     container: {
-        paddingTop: 10
+        flex: 1,
+        margin: 10
     },
     title: {
-        paddingHorizontal: 15,
-        fontSize: 25,
-        fontWeight: '600',
-        color: COLORS.WHITE
+        fontSize: 17,
+        color: COLORS.WHITE,
+        fontWeight: '600'
     },
     buttonsContainer: {
-        paddingBottom: 150,
+        marginBottom: 150,
         flex: 1,
         justifyContent: 'flex-end'
     },
     confirm: {
-        fontSize: 14,
-        alignSelf: 'center',
+        fontSize: 17,
         color: COLORS.WHITE,
-        fontWeight: 'bold'
+        fontWeight: '600',
+        alignSelf: 'center'
     },
     notNowContainer: {
         marginTop: 30,
-        paddingVertical: 8,
-        paddingHorizontal: 10,
+        padding: 10,
         borderRadius: 20,
-        alignSelf: 'center',
-        backgroundColor: COLORS.WHITE
+        backgroundColor: COLORS.WHITE,
+        alignSelf: 'center'
     },
     notNow: {
-        fontSize: 18,
+        fontSize: 17,
         color: COLORS.MAIN_BLUE,
-        fontWeight: 'bold'
+        fontWeight: '600'
     }
 });

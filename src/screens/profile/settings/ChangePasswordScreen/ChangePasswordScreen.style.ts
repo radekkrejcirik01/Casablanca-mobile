@@ -3,8 +3,8 @@ import COLORS from '@constants/COLORS';
 
 export const ChangePasswordScreenStyle = StyleSheet.create({
     container: {
-        paddingTop: 10,
-        paddingHorizontal: 15
+        flex: 1,
+        margin: 10
     },
     title: {
         paddingBottom: 10,
@@ -19,9 +19,9 @@ export const ChangePasswordScreenStyle = StyleSheet.create({
         justifyContent: 'center'
     },
     confirm: {
-        fontSize: 14,
-        alignSelf: 'center',
+        fontSize: 17,
         color: COLORS.WHITE,
-        fontWeight: 'bold'
+        alignSelf: 'center',
+        fontWeight: '600'
     }
 });

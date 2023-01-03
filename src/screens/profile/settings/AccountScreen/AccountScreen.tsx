@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { ScrollView } from 'react-native';
 import { ListItem } from '@components/general/ListItem/ListItem';
 import { useNavigation } from '@hooks/useNavigation';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
@@ -18,7 +18,7 @@ export const AccountScreen = (): JSX.Element => {
     };
 
     return (
-        <SafeAreaProvider style={AccountScreenStyle.container}>
+        <ScrollView style={AccountScreenStyle.container}>
             <ListItem
                 title="Change password"
                 hasArrow
@@ -29,6 +29,6 @@ export const AccountScreen = (): JSX.Element => {
                 hasArrow
                 onPress={openDeleteAccount}
             />
-        </SafeAreaProvider>
+        </ScrollView>
     );
 };

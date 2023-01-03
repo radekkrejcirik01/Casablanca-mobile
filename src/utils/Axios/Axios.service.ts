@@ -47,18 +47,3 @@ export const updateRequest = <T, B>(
         map((result: AxiosResponse<T>) => result.data),
         catchError((err: AxiosError) => catchErrorFunction(err))
     );
-
-export const deleteRequest = <T>(
-    endpoint: string,
-    id: number,
-    config?: AxiosRequestConfig
-): Observable<T> =>
-    defer(() =>
-        axiosInstance.delete(
-            `https://w2gdfxt8dc.execute-api.eu-central-1.amazonaws.com/${endpoint}/${id}`,
-            config
-        )
-    ).pipe(
-        map((result: AxiosResponse<T>) => result.data),
-        catchError((err: AxiosError) => catchErrorFunction(err))
-    );

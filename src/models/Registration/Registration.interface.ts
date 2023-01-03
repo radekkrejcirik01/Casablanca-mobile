@@ -74,6 +74,16 @@ export interface LastActiveInterface {
     lastActive: string;
 }
 
+export interface PasswordUpdateInterface {
+    email: string;
+    oldPassword: string;
+    newPassword: string;
+}
+
+export interface AccountDeleteInterface {
+    email: string;
+}
+
 export interface UserGetInterface {
     email: string;
 }

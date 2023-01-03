@@ -5,5 +5,6 @@ import { StackNavigatorStyle } from '@navigation/StackNavigators/StackNavigator.
 export const NavigationScreenHeader: StackNavigationOptions = {
     headerTintColor: COLORS.WHITE,
     headerStyle: StackNavigatorStyle.navigationScreen,
-    headerBackTitle: 'Back'
+    headerBackTitle: 'Back',
+    headerBackTitleStyle: StackNavigatorStyle.headerBackTitle
 };

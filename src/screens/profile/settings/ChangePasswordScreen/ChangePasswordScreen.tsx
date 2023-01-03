@@ -1,22 +1,64 @@
-import React from 'react';
-import { Text } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import React, { useCallback, useState } from 'react';
+import { Alert, Text, View } from 'react-native';
+import { useSelector } from 'react-redux';
 import { Input } from '@components/general/Input/Input';
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import { ChangePasswordScreenStyle } from '@screens/profile/settings/ChangePasswordScreen/ChangePasswordScreen.style';
 import { KeyboardAvoidingView } from '@components/general/KeyboardAvoidingView/KeyboardAvoidingView';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
+import { updateRequest } from '@utils/Axios/Axios.service';
+import {
+    PasswordUpdateInterface,
+    ResponseInterface
+} from '@models/Registration/Registration.interface';
+import { ReducerProps } from '@store/index.props';
 
 export const ChangePasswordScreen = (): JSX.Element => {
-    const confirm = () => {
-        console.log('confirm');
-    };
+    const { email } = useSelector((state: ReducerProps) => state.user);
+
+    const [oldPassword, setOldPassword] = useState<string>(null);
+    const [newPassword, setNewPassword] = useState<string>(null);
+
+    const changePassword = useCallback(() => {
+        if (!oldPassword && !newPassword) {
+            Alert.alert('Please enter passwords');
+            return;
+        }
+        if (!oldPassword) {
+            Alert.alert('Please enter old password');
+            return;
+        }
+        if (!newPassword) {
+            Alert.alert('Please enter new password');
+            return;
+        }
+        if (oldPassword === newPassword) {
+            Alert.alert('Old password is same as new password');
+            return;
+        }
+
+        updateRequest<ResponseInterface, PasswordUpdateInterface>(
+            'user/password/update',
+            {
+                email,
+                oldPassword,
+                newPassword
+            }
+        ).subscribe((response: ResponseInterface) => {
+            if (response?.status) {
+                Alert.alert(response?.message);
+                setOldPassword(null);
+                setNewPassword(null);
+            }
+        });
+    }, [email, newPassword, oldPassword]);
 
     return (
-        <SafeAreaProvider style={ChangePasswordScreenStyle.container}>
+        <View style={ChangePasswordScreenStyle.container}>
             <Text style={ChangePasswordScreenStyle.title}>Old password</Text>
             <Input
-                onChange={(value) => console.log(value)}
+                value={oldPassword}
+                onChange={setOldPassword}
                 inputType={InputTypeEnum.PASSWORD}
                 autoFocus
             />
@@ -29,7 +71,8 @@ export const ChangePasswordScreen = (): JSX.Element => {
                 New password
             </Text>
             <Input
-                onChange={(value) => console.log(value)}
+                value={newPassword}
+                onChange={setNewPassword}
                 inputType={InputTypeEnum.PASSWORD}
             />
             <KeyboardAvoidingView
@@ -37,12 +80,12 @@ export const ChangePasswordScreen = (): JSX.Element => {
                 style={ChangePasswordScreenStyle.keyboardAvoiding}
                 keyboardVerticalOffset={0}
             >
-                <TouchableOpacity onPress={confirm}>
+                <TouchableOpacity onPress={changePassword}>
                     <Text style={ChangePasswordScreenStyle.confirm}>
                         Confirm
                     </Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
-        </SafeAreaProvider>
+        </View>
     );
 };

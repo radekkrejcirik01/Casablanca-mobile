@@ -9,7 +9,7 @@ export const ListItemStyle = StyleSheet.create({
     title: {
         flex: 1,
         paddingVertical: 14,
-        fontSize: 16,
+        fontSize: 17,
         color: COLORS.WHITE,
         fontWeight: '600'
     },

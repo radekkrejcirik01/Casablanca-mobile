@@ -6,6 +6,9 @@ export const StackNavigatorStyle = StyleSheet.create({
         shadowOpacity: 0,
         backgroundColor: COLORS.TRANSPARENT
     },
+    headerBackTitle: {
+        fontWeight: '600'
+    },
     bottomBorder: {
         // borderBottomWidth: 0.25,
         // borderBottomColor: COLORS.MAIN_BLUE_100
