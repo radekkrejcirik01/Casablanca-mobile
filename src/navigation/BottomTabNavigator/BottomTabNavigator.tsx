@@ -14,10 +14,10 @@ import { MessagesScreen } from '@screens/tab/MessagesScreen/MessagesScreen';
 import { CloseFriendsScreen } from '@screens/tab/CloseFriendsScreen/CloseFriendsScreen';
 import {
     BottomTabNavigatorOptions,
+    CloseFriendsTabOptions,
     MessagesTabOptions,
     ProfileTabOptions,
-    SwipeTabOptions,
-    CloseFriendsTabOptions
+    SwipeTabOptions
 } from '@navigation/BottomTabNavigator/BottomTabNavigator.options';
 import { ReducerProps } from '@store/index.props';
 import { useAnimated } from '@hooks/useAnimated';

@@ -108,12 +108,12 @@ export const useProfileScrollView = (): {
     const onScrollEndDrag = () => setIsScrolling(false);
 
     const scrollToInfo = () => {
+        setIsBottomBarVisible(false);
         ref?.current?.scrollTo({
             x: 0,
             y: 800,
             animated: true
         });
-        setIsBottomBarVisible(false);
     };
 
     return {

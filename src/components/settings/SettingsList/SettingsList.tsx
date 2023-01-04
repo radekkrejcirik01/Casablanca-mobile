@@ -7,6 +7,7 @@ import { useNavigation } from '@hooks/useNavigation';
 import { ProfileStackNavigatorEnum } from '@navigation/StackNavigators/profile/ProfileStackNavigator.enum';
 import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
 import { resetUserState } from '@store/UserReducer';
+import { resetBottomBarVisibleState } from '@store/BottomBarReducer';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { setIsDarkMode } from '@store/ThemeReducer';
@@ -93,6 +94,9 @@ export const SettingsList = ({ style }: SettingsListProps): JSX.Element => {
 
     const LogOut = useCallback(() => {
         dispatch(resetUserState());
+        setTimeout(() => {
+            dispatch(resetBottomBarVisibleState());
+        }, 1000);
         PersistStorage.setItem(PersistStorageKeys.TOKEN, '').catch();
         deleteDevice();
     }, [deleteDevice, dispatch]);

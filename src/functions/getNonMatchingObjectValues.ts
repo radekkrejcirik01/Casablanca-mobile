@@ -6,16 +6,19 @@ export const getNonMatchingObjectValues = (
 ): Array<CardDataProps> => {
     const filtered: Array<CardDataProps> = [];
 
-    object2.map((object2Value: CardDataProps) => {
-        const objectExist = object1.find(
-            (object1Value: CardDataProps) =>
-                object2Value.email === object1Value.email
-        );
-        if (!objectExist) {
-            filtered.push(object2Value);
-        }
-        return null;
-    });
+    if (object2?.length) {
+        object2.map((object2Value: CardDataProps) => {
+            const objectExist = object1.find(
+                (object1Value: CardDataProps) =>
+                    object2Value.email === object1Value.email
+            );
+            if (!objectExist) {
+                filtered.push(object2Value);
+            }
+            return null;
+        });
 
-    return filtered;
+        return filtered;
+    }
+    return object1;
 };

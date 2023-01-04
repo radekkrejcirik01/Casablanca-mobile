@@ -14,6 +14,7 @@ import {
 } from '@models/Registration/Registration.interface';
 import { ReducerProps } from '@store/index.props';
 import { resetUserState } from '@store/UserReducer';
+import { resetBottomBarVisibleState } from '@store/BottomBarReducer';
 import { PersistStorage } from '@utils/PersistStorage/PersistStorage';
 import { PersistStorageKeys } from '@utils/PersistStorage/PersistStorage.enum';
 import { setDeviceTokenAction } from '@store/DeviceReducer';
@@ -34,6 +35,9 @@ export const DeleteAccountScreen = (): JSX.Element => {
         ).subscribe((response: ResponseInterface) => {
             if (response?.status) {
                 dispatch(resetUserState());
+                setTimeout(() => {
+                    dispatch(resetBottomBarVisibleState());
+                }, 1000);
                 dispatch(setDeviceTokenAction(null));
                 PersistStorage.setItem(PersistStorageKeys.TOKEN, '').catch();
             }

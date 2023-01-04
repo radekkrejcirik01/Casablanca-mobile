@@ -11,10 +11,12 @@ export const BottomBarReducer = createSlice({
     reducers: {
         setBottomBarVisible: (state, action) => {
             state.isVisible = action.payload;
-        }
+        },
+        resetBottomBarVisibleState: () => initialState
     }
 });
 
-export const { setBottomBarVisible } = BottomBarReducer.actions;
+export const { setBottomBarVisible, resetBottomBarVisibleState } =
+    BottomBarReducer.actions;
 
 export default BottomBarReducer.reducer;
