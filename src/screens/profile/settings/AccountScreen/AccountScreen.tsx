@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { ScrollView } from 'react-native';
 import { ListItem } from '@components/general/ListItem/ListItem';
 import { useNavigation } from '@hooks/useNavigation';
@@ -9,13 +9,13 @@ import { AccountScreenStyle } from '@screens/profile/settings/AccountScreen/Acco
 export const AccountScreen = (): JSX.Element => {
     const { navigateTo } = useNavigation(RootStackNavigatorEnum.ProfileStack);
 
-    const openChangePassword = () => {
+    const openChangePassword = useCallback(() => {
         navigateTo(ProfileStackNavigatorEnum.ChangePasswordScreen);
-    };
+    }, [navigateTo]);
 
-    const openDeleteAccount = () => {
+    const openDeleteAccount = useCallback(() => {
         navigateTo(ProfileStackNavigatorEnum.DeleteAccountScreen);
-    };
+    }, [navigateTo]);
 
     return (
         <ScrollView style={AccountScreenStyle.container}>

@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { StyleProp, Text, TextStyle, View } from 'react-native';
+import { Alert, StyleProp, Text, TextStyle, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { DeleteAccountScreenStyle } from '@screens/profile/settings/DeleteAccountScreen/DeleteAccountScreen.style';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
@@ -40,6 +40,19 @@ export const DeleteAccountScreen = (): JSX.Element => {
         });
     }, [dispatch, email]);
 
+    const onPressDelete = useCallback(() => {
+        Alert.alert('Delete account', 'Account cannot be restored', [
+            {
+                text: 'Cancel'
+            },
+            {
+                text: 'Confirm',
+                onPress: deleteAccount,
+                style: 'destructive'
+            }
+        ]);
+    }, [deleteAccount]);
+
     const textColor = useMemo(
         (): StyleProp<TextStyle> => ({
             color: isDarkMode ? COLORS.WHITE : COLORS.MAIN_BLUE
@@ -54,9 +67,9 @@ export const DeleteAccountScreen = (): JSX.Element => {
                 account?
             </Text>
             <View style={DeleteAccountScreenStyle.buttonsContainer}>
-                <TouchableOpacity onPress={deleteAccount}>
+                <TouchableOpacity onPress={onPressDelete}>
                     <Text style={DeleteAccountScreenStyle.confirm}>
-                        Confirm
+                        Yes, delete
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={navigateBack}>

@@ -33,7 +33,8 @@ export const Swiper = (): JSX.Element => {
         email,
         filterByTags,
         showMe,
-        tags
+        tags,
+        token
     } = useSelector((state: ReducerProps) => state.user);
     const { likedUsers, swipedUsers } = useSelector(
         (state: ReducerProps) => state.swiper
@@ -85,6 +86,12 @@ export const Swiper = (): JSX.Element => {
         },
         [agePreference, distancePreference, email, filterByTags, showMe, tags]
     );
+
+    useEffect(() => {
+        if (!token) {
+            setPerformInterval(false);
+        }
+    }, [token]);
 
     useEffect(() => {
         if (email) {
