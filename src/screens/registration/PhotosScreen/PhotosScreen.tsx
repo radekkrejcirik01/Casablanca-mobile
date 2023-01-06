@@ -1,35 +1,58 @@
-import React from 'react';
-import { View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import COLORS from '@constants/COLORS';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import LinearGradient from 'react-native-linear-gradient';
-import { Continue } from '@components/registration/Continue/Continue';
-import { Title } from '@components/registration/Title/Title';
+import React, { useCallback, useEffect } from 'react';
+import { Alert } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { Title } from '@components/general/Title/Title';
 import { PhotosScreenStyle } from '@screens/registration/PhotosScreen/PhotosScreen.style';
 import { PhotoPlaceholder } from '@components/registration/PhotoPlaceholder/PhotoPlaceholder';
-import { RegisterNavigatorScreens } from '@navigation/navigation.enum';
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
+import { useNavigation } from '@hooks/useNavigation';
+import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
+import { ReducerProps } from '@store/index.props';
+import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
+import { usePhotoPicker } from '@hooks/usePhotoPicker';
+import { setPhotosAction, setProfilePictureAction } from '@store/UserReducer';
 
 export const PhotosScreen = (): JSX.Element => {
-    const navigation = useNavigation();
+    const photos = useSelector((state: ReducerProps) => state.user.photos);
 
-    const continuePressed = () => {
-        navigation.navigate(RegisterNavigatorScreens.FavePlacesScreen);
-    };
+    const dispatch = useDispatch();
+
+    const { navigateTo } = useNavigation(
+        RootStackNavigatorEnum.RegistrationStack
+    );
+
+    const { onPhotoPress, onPhotoRemove, photosValue } = usePhotoPicker(photos);
+
+    useEffect(() => {
+        dispatch(setPhotosAction(photosValue));
+    }, [dispatch, photosValue]);
+
+    const continuePressed = useCallback(() => {
+        if (photos?.length) {
+            dispatch(setProfilePictureAction(photos[0]));
+            navigateTo(RegistrationStackNavigatorEnum.TagsScreen);
+        } else {
+            Alert.alert('Please select at least 1 profile photo');
+        }
+    }, [dispatch, navigateTo, photos]);
 
     return (
-        <SafeAreaProvider>
-            <LinearGradient
-                colors={[COLORS.MAIN_RED, COLORS.MAIN_BLUE]}
-                locations={[0.15, 0.9]}
-                style={PhotosScreenStyle.container}
-            >
-                <Title title="Choose photos" />
-                <View style={PhotosScreenStyle.photoPlaceholderContainer}>
-                    <PhotoPlaceholder />
-                </View>
-                <Continue onPress={continuePressed} />
-            </LinearGradient>
-        </SafeAreaProvider>
+        <>
+            <Title
+                title="Photos for your profile"
+                style={PhotosScreenStyle.title}
+            />
+            <PhotoPlaceholder
+                onPress={onPhotoPress}
+                onRemove={onPhotoRemove}
+                photos={photos}
+                photosNumber={4}
+                style={PhotosScreenStyle.photoPlaceholder}
+            />
+            <ContinueButton
+                onPress={continuePressed}
+                style={PhotosScreenStyle.continue}
+            />
+        </>
     );
 };

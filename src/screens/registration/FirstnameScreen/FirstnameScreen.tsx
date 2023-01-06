@@ -1,67 +1,61 @@
-import React, { createRef, useEffect } from 'react';
-import { Alert, TextInput, View } from 'react-native';
+import React, { createRef, useCallback } from 'react';
+import { Alert, TextInput } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import LinearGradient from 'react-native-linear-gradient';
-import COLORS from '@constants/COLORS';
 import { Icon } from '@components/icon/Icon';
 import { IconEnum } from '@components/icon/Icon.enum';
 import { InputTypeEnum } from '@components/general/Input/Input.enum';
 import { Input } from '@components/general/Input/Input';
 import { FirstnameScreenStyle } from '@screens/registration/FirstnameScreen/FirstnameScreen.style';
-import { Continue } from '@components/registration/Continue/Continue';
-import { RegisterNavigatorScreens } from '@navigation/navigation.enum';
-import { Title } from '@components/registration/Title/Title';
-import { setFirstnameAction } from '@store/RegistrationReducer';
+import { Title } from '@components/general/Title/Title';
+import { setFirstnameAction } from '@store/UserReducer';
 import { ReducerProps } from '@store/index.props';
+import { useNavigation } from '@hooks/useNavigation';
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
+import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
+import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
 
 export const FirstnameScreen = (): JSX.Element => {
     const firstname = useSelector(
-        (state: ReducerProps) => state.registration.firstname
+        (state: ReducerProps) => state.user.firstname
     );
-
     const dispatch = useDispatch();
-    const navigation = useNavigation();
 
     const input = createRef<TextInput>();
 
-    useEffect(() => {
-        const unsubscribe = navigation.addListener('focus', () => {
-            input.current?.focus();
-        });
-        return unsubscribe;
-    }, [navigation, input]);
+    const { navigateTo } = useNavigation(
+        RootStackNavigatorEnum.RegistrationStack,
+        () => input.current?.focus()
+    );
 
-    const continuePressed = () => {
+    const onChange = useCallback(
+        (value: string) => dispatch(setFirstnameAction(value)),
+        [dispatch]
+    );
+
+    const continuePressed = useCallback(() => {
         if (firstname) {
-            navigation.navigate(RegisterNavigatorScreens.EmailScreen);
+            navigateTo(RegistrationStackNavigatorEnum.BirthdayScreen);
         } else {
             Alert.alert('Please select firstname');
         }
-    };
+    }, [firstname, navigateTo]);
 
     return (
-        <SafeAreaProvider>
-            <LinearGradient
-                colors={[COLORS.MAIN_RED, COLORS.MAIN_BLUE]}
-                locations={[0.15, 0.9]}
-                style={FirstnameScreenStyle.container}
-            >
-                <Title title="What is your firstname?" />
-                <View style={FirstnameScreenStyle.inputContainer}>
-                    <Input
-                        ref={input}
-                        inputType={InputTypeEnum.TEXT}
-                        autoFocus
-                        onChange={(value: string) =>
-                            dispatch(setFirstnameAction(value))
-                        }
-                        iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
-                    />
-                </View>
-                <Continue onPress={continuePressed} />
-            </LinearGradient>
-        </SafeAreaProvider>
+        <>
+            <Title
+                title="What is your first name?"
+                style={FirstnameScreenStyle.title}
+            />
+            <Input
+                ref={input}
+                inputType={InputTypeEnum.TEXT}
+                autoFocus
+                onChange={onChange}
+                value={firstname}
+                iconRight={<Icon name={IconEnum.PROFILE} size={25} />}
+                viewStyle={FirstnameScreenStyle.input}
+            />
+            <ContinueButton onPress={continuePressed} />
+        </>
     );
 };

@@ -1,51 +1,56 @@
-import React, { forwardRef, useImperativeHandle, useState } from 'react';
-import { View } from 'react-native';
-import ImagePicker, { ImageOrVideo } from 'react-native-image-crop-picker';
-import FastImage from 'react-native-fast-image';
+import React, { useCallback, useMemo } from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
+import FastImage, { Source } from 'react-native-fast-image';
 import { TouchableOpacity } from '@components/general/TouchableOpacity/TouchableOpacity';
 import { PhotoPlaceholderCardStyle } from '@components/registration/PhotoPlaceholderCard/PhotoPlaceholderCard.style';
 import { Icon } from '@components/icon/Icon';
 import { IconEnum } from '@components/icon/Icon.enum';
-import { PhotoPlaceholderCardProps } from '@components/registration/PhotoPlaceholderCard/PhotoPlaceholderCard.props';
-import { useDispatch } from 'react-redux';
-import { addPhotoAction, removePhotoAction } from '@store/RegistrationReducer';
+import {
+    PhotoPlaceholderCardDefaultProps,
+    PhotoPlaceholderCardProps
+} from '@components/registration/PhotoPlaceholderCard/PhotoPlaceholderCard.props';
 
 export const PhotoPlaceholderCard = ({
-    photo
+    onPress,
+    onRemove,
+    photo,
+    removable,
+    style
 }: PhotoPlaceholderCardProps): JSX.Element => {
-    const dispatch = useDispatch();
+    const pressPhoto = useCallback(() => onPress(photo), [onPress, photo]);
 
-    const onPress = () => {
-        ImagePicker.openPicker({
-            width: 300,
-            height: 400,
-            cropping: true
-        }).then((image: ImageOrVideo) => {
-            dispatch(addPhotoAction(image.path));
-        });
-    };
+    const touchableOpacityStyle = useMemo(
+        (): StyleProp<ViewStyle> =>
+            Object.keys(style).length
+                ? style
+                : PhotoPlaceholderCardStyle.container,
+        [style]
+    );
+
+    const source = useMemo((): Source => ({ uri: photo }), [photo]);
+
+    const removePhoto = useCallback(() => onRemove(photo), [onRemove, photo]);
 
     return (
-        <TouchableOpacity
-            onPress={onPress}
-            style={PhotoPlaceholderCardStyle.container}
-        >
-            {photo && (
-                <TouchableOpacity
-                    style={PhotoPlaceholderCardStyle.closeTouchableOpacity}
-                    onPress={() => {
-                        dispatch(removePhotoAction(photo));
-                    }}
-                >
-                    <View style={PhotoPlaceholderCardStyle.closeView}>
-                        <Icon name={IconEnum.CLOSE} size={15} />
-                    </View>
-                </TouchableOpacity>
-            )}
+        <TouchableOpacity onPress={pressPhoto} style={touchableOpacityStyle}>
             <FastImage
                 style={PhotoPlaceholderCardStyle.photo}
-                source={{ uri: photo }}
+                source={source}
             />
+            {photo && removable && (
+                <TouchableOpacity
+                    style={PhotoPlaceholderCardStyle.closeTouchableOpacity}
+                    onPress={removePhoto}
+                >
+                    <Icon
+                        name={IconEnum.CLOSE}
+                        size={15}
+                        style={PhotoPlaceholderCardStyle.closeIcon}
+                    />
+                </TouchableOpacity>
+            )}
         </TouchableOpacity>
     );
 };
+
+PhotoPlaceholderCard.defaultProps = PhotoPlaceholderCardDefaultProps;

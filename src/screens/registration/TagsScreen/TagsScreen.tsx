@@ -1,35 +1,56 @@
-import React from 'react';
-import { View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import LinearGradient from 'react-native-linear-gradient';
-import COLORS from '@constants/COLORS';
-import { Continue } from '@components/registration/Continue/Continue';
-import { RegisterNavigatorScreens } from '@navigation/navigation.enum';
-import { Title } from '@components/registration/Title/Title';
-import { PlaceTags } from '@components/registration/PlaceTags/PlaceTags';
+import React, { useCallback } from 'react';
+import { Alert } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { Title } from '@components/general/Title/Title';
+import { PlaceTags } from '@components/general/PlaceTags/PlaceTags';
 import { TagsScreenStyle } from '@screens/registration/TagsScreen/TagsScreen.style';
+import { RootStackNavigatorEnum } from '@navigation/RootNavigator/RootStackNavigator.enum';
+import { useNavigation } from '@hooks/useNavigation';
+import { RegistrationStackNavigatorEnum } from '@navigation/StackNavigators/registration/RegistrationStackNavigator.enum';
+import { ReducerProps } from '@store/index.props';
+import { addTagAction, removeTagAction } from '@store/UserReducer';
+import { ContinueButton } from '@components/registration/ContinueButton/ContinueButton';
 
 export const TagsScreen = (): JSX.Element => {
-    const navigation = useNavigation();
+    const tags = useSelector((state: ReducerProps) => state.user.tags);
+    const dispatch = useDispatch();
 
-    const continuePressed = () => {
-        navigation.navigate(RegisterNavigatorScreens.GenderScreen);
-    };
+    const { navigateTo } = useNavigation(
+        RootStackNavigatorEnum.RegistrationStack
+    );
+
+    const onSelect = useCallback(
+        (tag: string) => {
+            if (tags.includes(tag)) {
+                dispatch(removeTagAction(tag));
+            } else {
+                dispatch(addTagAction(tag));
+            }
+        },
+        [dispatch, tags]
+    );
+
+    const continuePressed = useCallback(() => {
+        if (tags?.length) {
+            navigateTo(RegistrationStackNavigatorEnum.GenderScreen);
+        } else {
+            Alert.alert('Please select at least 1 favorite place');
+        }
+    }, [tags?.length, navigateTo]);
 
     return (
-        <SafeAreaProvider>
-            <LinearGradient
-                colors={[COLORS.MAIN_RED, COLORS.MAIN_BLUE]}
-                locations={[0.15, 0.9]}
-                style={TagsScreenStyle.container}
-            >
-                <Title title="Fave places to go" />
-                <View style={TagsScreenStyle.placeTags}>
-                    <PlaceTags />
-                </View>
-                <Continue onPress={continuePressed} />
-            </LinearGradient>
-        </SafeAreaProvider>
+        <>
+            <Title
+                title="What are your to-go places?"
+                style={TagsScreenStyle.title}
+            />
+            <PlaceTags
+                onSelect={onSelect}
+                tags={tags}
+                showAll
+                style={TagsScreenStyle.placeTags}
+            />
+            <ContinueButton onPress={continuePressed} />
+        </>
     );
 };

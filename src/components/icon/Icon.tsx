@@ -5,8 +5,8 @@ import { IconStyle } from '@components/icon/Icon.style';
 import { IconDefaultProps, IconProps } from '@components/icon/Icon.props';
 import { ICONS } from '@components/icon/Icon.enum';
 
-export const Icon = ({ name, size }: IconProps): JSX.Element => (
-    <View style={{ width: size, height: size }}>
+export const Icon = ({ name, size, style }: IconProps): JSX.Element => (
+    <View style={[{ width: size, height: size }, style]}>
         <FastImage style={IconStyle.image} source={ICONS[name]} />
     </View>
 );

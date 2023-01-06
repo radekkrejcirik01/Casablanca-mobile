@@ -1,4 +1,5 @@
 import Back from '@assets/webp/Back.webp';
+import BackRight from '@assets/webp/BackRight.webp';
 import Bell from '@assets/webp/Bell.webp';
 import Camera from '@assets/webp/Camera.webp';
 import ChatFilled from '@assets/webp/ChatFilled.webp';
@@ -27,6 +28,7 @@ import Unlock from '@assets/webp/Unlock.webp';
 
 export enum IconEnum {
     BACK = 'Back',
+    BACK_RIGHT = 'BackRight',
     BELL = 'Bell',
     CAMERA = 'Camera',
     CHAT_FILLED = 'ChatFilled',
@@ -56,6 +58,7 @@ export enum IconEnum {
 
 export const ICONS = {
     [IconEnum.BACK]: Back,
+    [IconEnum.BACK_RIGHT]: BackRight,
     [IconEnum.BELL]: Bell,
     [IconEnum.CAMERA]: Camera,
     [IconEnum.CHAT_FILLED]: ChatFilled,
